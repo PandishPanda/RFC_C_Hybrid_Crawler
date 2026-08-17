@@ -1,0 +1,113 @@
+{
+  "uni_id": "MUPleven",
+  "cookies": {},
+  "sources": {
+    "mu-fees": {
+      "url": "https://mu-pleven.bg/forms/ksk2026/taksi_za_kandidatstvane_obuchenie_2026_2027.pdf",
+      "route": "table-pdf",
+      "join": {
+        "kind": "sectioned-fee-row",
+        "name": "mu",
+        "sections": [
+          {
+            "track": "обучение на български език",
+            "match": "обучение на български език"
+          },
+          {
+            "track": "Обучение на английски език",
+            "match": "Обучение на английски език"
+          },
+          {
+            "track": "чл. 95 (чуждестранни)",
+            "match": "по чл. 95",
+            "foreign": true
+          }
+        ],
+        "fee_pattern": "\\b(\\d{3,4})\\b",
+        "currency_suffix": "евро",
+        "context": {
+          "year": "2026/2027",
+          "currency": "EUR"
+        }
+      }
+    },
+    "mu-sprav": {
+      "url": "https://mu-pleven.bg/forms/ksk2026/Spavochnik%20KSK%202026%20-%2015-12-2025.pdf",
+      "route": "prose-pdf",
+      "join": {
+        "kind": "spravochnik",
+        "name": "mu",
+        "sentence_pattern": "Специалност\\s*[„\"]{alias}[\"”]\\s*[–-]\\s*(?P<degree>ОКС\\s*[„\"][а-я ]+[\"”])\\s*,\\s*редовна форма,?\\s*(?P<duration>срок на обучение \\d+ години)",
+        "admission_pattern": "{alias}[^\\n]*[\\s\\S]{0,600}?Чл\\.\\s*30\\.\\s*За специалностите от този раздел се кандидатства в МУ\\s*-?\\s*Плевен с\\s+(изпит по [^.]+?)\\.",
+        "admission_label": "chl30"
+      }
+    }
+  },
+  "anchors": {
+    "mu-nurse-free": {
+      "source": "https://mu-pleven.bg/index.php/bg/learning/students/2022-07-27-13-03-20/8410-t2026-2027",
+      "pattern": "специалностите „Медицинска сестра“ и „Акушерка“ са включени в списъка на защитените и обучението в тях за новоприетите студенти по държавна поръчка е (безплатно)"
+    }
+  },
+  "programs": [
+    {
+      "id": "mu-med",
+      "name": "Медицина",
+      "page": "https://mu-pleven.bg/index.php/bg/specialities/medicine/479-annotation-of-specialty",
+      "tuition_join": {
+        "source": "mu-fees",
+        "alias_pattern": "Медицина \\(I, II, III и IV курс\\)"
+      },
+      "language_tracks": {
+        "source": "mu-fees",
+        "alias_pattern": "Медицина"
+      },
+      "rsvu_code": "70100013"
+    },
+    {
+      "id": "mu-pharm",
+      "name": "Фармация",
+      "page": "https://mu-pleven.bg/index.php/bg/specialities/farmacy/3602-2016-05-19-07-23-24",
+      "tuition_join": {
+        "source": "mu-fees",
+        "alias_pattern": "Фармация \\(I, II, III и IV курс\\)"
+      },
+      "language_tracks": {
+        "source": "mu-fees",
+        "alias_pattern": "Фармация"
+      },
+      "rsvu_code": "70300023"
+    },
+    {
+      "id": "mu-nurse",
+      "name": "Медицинска сестра",
+      "page": "https://mu-pleven.bg/index.php/bg/specialities/medical-nurse/492-annotation-of-specialty",
+      "language_tracks": {
+        "source": "mu-fees",
+        "alias_pattern": "Медицинска сестра \\(III и IVкурс\\)"
+      },
+      "field_anchors": {
+        "tuition": "mu-nurse-free"
+      },
+      "rsvu_code": "70500042"
+    },
+    {
+      "id": "mu-ap",
+      "name": "Помощник-фармацевт",
+      "page": "https://mu-pleven.bg/index.php/bg/specialities/assistant-pharmacist",
+      "tuition_join": {
+        "source": "mu-fees",
+        "alias_pattern": "Помощник-фармацевт"
+      },
+      "language_tracks": {
+        "source": "mu-fees",
+        "alias_pattern": "Помощник-фармацевт"
+      },
+      "spravochnik": {
+        "source": "mu-sprav"
+      },
+      "rsvu_code": "70500191"
+    }
+  ],
+  "rsvu_id": 121
+}

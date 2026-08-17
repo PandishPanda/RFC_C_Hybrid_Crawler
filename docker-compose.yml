@@ -1,0 +1,9 @@
+# Docling Serve -- the pinned table-pdf renderer (ADR-0002: renderer
+# identity is part of every Artifact). Required only for the table-pdf
+# route; html/prose-pdf/spreadsheet routes run without it.
+services:
+  docling:
+    image: ghcr.io/docling-project/docling-serve-cpu:v1.28.0
+    ports:
+      - "5001:5001"
+    restart: unless-stopped

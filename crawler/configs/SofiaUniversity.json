@@ -1,0 +1,152 @@
+{
+  "uni_id": "SofiaUniversity",
+  "cookies": {},
+  "sources": {
+    "su-fees": {
+      "url": "https://www.uni-sofia.bg/index.php/bul/content/download/357984/2294533/version/3/file/%D0%A2%D0%90%D0%9A%D0%A1%D0%98+2026-2027-%D0%B4%D1%8A%D1%80%D0%B6%D0%B0%D0%B2%D0%BD%D0%B0+%D0%BF%D0%BE%D1%80%D1%8A%D1%87%D0%BA%D0%B0-22-07-2026.pdf",
+      "route": "table-pdf",
+      "join": {
+        "kind": "fee-row",
+        "name": "su",
+        "match_header": "специалност",
+        "value_headers": [
+          "бакалавър",
+          "редовно"
+        ],
+        "value_pattern": "((?:\\d+ EUR)|освободени|няма)",
+        "context": {
+          "form": "редовно",
+          "level": "бакалавър/магистър след средно",
+          "year": "2026/2027"
+        }
+      }
+    },
+    "su-adm": {
+      "url": "https://www.uni-sofia.bg/index.php/bul/content/download/347537/2234056/version/3/file/%D0%9F%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5+2-%D0%B1%D0%B0%D0%BB%D0%BE%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D1%83%D0%B2%D0%B0%D0%BD%D0%B5+2026-%D0%90%D0%A1+%D0%BE%D1%82+28.01.pdf",
+      "route": "prose-pdf",
+      "join": {
+        "kind": "ordinance",
+        "name": "su",
+        "row_pattern": "^\\s*{alias}\\s{2,}Редовна(.{0,400}?)1\\.\\s*(изпит по [а-я ]+?)(?:\\s{3,}|\\n)",
+        "row_value_group": 2,
+        "clause_pattern": "За допускане до участие в класирането за специалност(?:ите)?\\s+{alias}[^:]*условия:\\s*((?:\\s*-\\s*[^\\n]+\\n?){1,4})",
+        "clause_pick_token": "кандидатстудентски изпит"
+      }
+    },
+    "su-compchem": {
+      "url": "https://www.uni-sofia.bg/index.php/bul/content/download/189580/1305727/version/1/file/CompChem_zagl%2BKvalHka_1718.pdf",
+      "route": "prose-pdf"
+    }
+  },
+  "programs": [
+    {
+      "id": "su-kn",
+      "name": "Компютърни науки",
+      "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/kompyut_rni_nauki",
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Компютърни науки"
+      },
+      "admission_join": {
+        "source": "su-adm",
+        "alias": "Компютърни науки"
+      },
+      "rsvu_code": "40600082"
+    },
+    {
+      "id": "su-si",
+      "name": "Софтуерно инженерство",
+      "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/softuerno_inzhenerstvo",
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Софтуерно инженерство"
+      },
+      "admission_join": {
+        "source": "su-adm",
+        "alias": "Софтуерно инженерство"
+      },
+      "rsvu_code": "40600272"
+    },
+    {
+      "id": "su-is",
+      "name": "Информационни системи",
+      "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/informacionni_sistemi",
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Информационни системи"
+      },
+      "admission_join": {
+        "source": "su-adm",
+        "alias": "Информационни системи"
+      },
+      "rsvu_code": "40600282"
+    },
+    {
+      "id": "su-stat",
+      "name": "Статистика",
+      "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_5_matematika/statistika",
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Статистика"
+      },
+      "admission_join": {
+        "source": "su-adm",
+        "alias": "Статистика"
+      },
+      "rsvu_code": "40500042"
+    },
+    {
+      "id": "su-ch",
+      "name": "Компютърна химия",
+      "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/kompyut_rna_himiya",
+      "extra_sources": [
+        "su-compchem"
+      ],
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Компютърна химия"
+      },
+      "rsvu_code": "40200012"
+    },
+    {
+      "id": "su-ih",
+      "name": "Инженерна химия и съвременни материали (с частично обучение на английски език)",
+      "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/inzhenerna_himiya_i_s_vremenni_materiali_s_chastichno_obuchenie_na_anglijski_ezik",
+      "extra_pages": [
+        "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/inzhenerna_himiya_i_s_vremenni_materiali_s_chastichno_obuchenie_na_anglijski_ezik/kvalifikacionna_harakteristika"
+      ],
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Инженерна химия и съвременни материали"
+      }
+    },
+    {
+      "id": "su-psy",
+      "name": "Психология",
+      "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/psihologiya/",
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Психология"
+      },
+      "admission_join": {
+        "source": "su-adm",
+        "alias": "Психология"
+      },
+      "rsvu_code": "30200012"
+    },
+    {
+      "id": "su-phil",
+      "name": "Философия на английски език",
+      "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/filosofiya-na-angliiski-ezik/",
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Философия (на английски език)"
+      },
+      "admission_join": {
+        "source": "su-adm",
+        "alias": "Философия (на английски език)"
+      }
+    }
+  ],
+  "rsvu_id": 195
+}

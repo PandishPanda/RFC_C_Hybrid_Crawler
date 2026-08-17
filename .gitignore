@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+# gathered data -- never committed; the pipeline regenerates it
+crawler-out/
+# local working notes / spike data
+.scratch/
+.playwright-mcp/
+.env*

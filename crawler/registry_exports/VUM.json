@@ -1,0 +1,35 @@
+{
+  "uni_id": "VUM",
+  "rsvu_uni_id": 125,
+  "rsvu_uni_name": "Висше училище по мениджмънт - Варна",
+  "captured_at": "2026-08-15T11:40:00Z",
+  "source": "https://rsvu.mon.bg/#/university-details/125 (Специалности tab), captured by hand via a JS-executing browser session -- see crawler/registry.py module docstring for why this can't be automated with plain requests (Cloudflare managed challenge on rsvu.mon.bg blocks non-browser clients, verified 2026-08-15)",
+  "majors": [
+    {"id": 2588, "name": "Администрация и управление", "code": "307"},
+    {"id": 2592, "name": "Икономика", "code": "308"},
+    {"id": 2686, "name": "Информатика и компютърни науки", "code": "406"},
+    {"id": 2472, "name": "Педагогика на обучението по", "code": "103"},
+    {"id": 2590, "name": "Туризъм", "code": "309"},
+    {"id": 2804, "name": "Хранителни технологии", "code": "512"}
+  ],
+  "rows": [
+    {"id": 2866, "code": "30700011", "name": "Бизнес администрация", "major_id": 2588, "major_name": "Администрация и управление", "degree_code": 4, "degree_name": "Професионален бакалавър", "edu_forms": "редовна - 3"},
+    {"id": 31907, "code": "30702821", "name": "Международен бизнес и мениджмънт", "major_id": 2588, "major_name": "Администрация и управление", "degree_code": 4, "degree_name": "Професионален бакалавър", "edu_forms": "редовна - 3"},
+    {"id": 31370, "code": "30700012", "name": "Бизнес администрация", "major_id": 2588, "major_name": "Администрация и управление", "degree_code": 3, "degree_name": "Бакалавър", "edu_forms": "редовна - 4"},
+    {"id": 31908, "code": "30702822", "name": "Международен бизнес и мениджмънт", "major_id": 2588, "major_name": "Администрация и управление", "degree_code": 3, "degree_name": "Бакалавър", "edu_forms": "редовна - 4"},
+    {"id": 31371, "code": "30700013", "name": "Бизнес администрация", "major_id": 2588, "major_name": "Администрация и управление", "degree_code": 6, "degree_name": "Магистър след висше", "edu_forms": "редовна - 1.5, редовна - 2"},
+    {"id": 2595, "code": "30800361", "name": "Маркетинг и мениджмънт", "major_id": 2592, "major_name": "Икономика", "degree_code": 4, "degree_name": "Професионален бакалавър", "edu_forms": "задочна - 3"},
+    {"id": 11026, "code": "30806933", "name": "Борба с корупцията и конфликта на интереси – правни и икономически аспекти", "major_id": 2592, "major_name": "Икономика", "degree_code": 6, "degree_name": "Магистър след висше", "edu_forms": "задочна - 1.5, задочна - 2"},
+    {"id": 9453, "code": "40600931", "name": "Софтуерни системи и технологии", "major_id": 2686, "major_name": "Информатика и компютърни науки", "degree_code": 4, "degree_name": "Професионален бакалавър", "edu_forms": "редовна - 3"},
+    {"id": 10846, "code": "10302071", "name": "Педагогика на обучението по Икономика и мениджмънт", "major_id": 2472, "major_name": "Педагогика на обучението по", "degree_code": 4, "degree_name": "Професионален бакалавър", "edu_forms": "редовна - 3, задочна - 3"},
+    {"id": 10843, "code": "10302081", "name": "Педагогика на обучението по хотелиерство и ресторантьорство", "major_id": 2472, "major_name": "Педагогика на обучението по", "degree_code": 4, "degree_name": "Професионален бакалавър", "edu_forms": "редовна - 3, задочна - 3"},
+    {"id": 8875, "code": "30900371", "name": "Гастрономия и кулинарни изкуства", "major_id": 2590, "major_name": "Туризъм", "degree_code": 4, "degree_name": "Професионален бакалавър", "edu_forms": "редовна - 3"},
+    {"id": 4146, "code": "30900031", "name": "Маркетинг и управление в хотелиерството и туризма", "major_id": 2590, "major_name": "Туризъм", "degree_code": 4, "degree_name": "Професионален бакалавър", "edu_forms": "задочна - 3"},
+    {"id": 30605, "code": "30900481", "name": "Хотелски мениджмънт", "major_id": 2590, "major_name": "Туризъм", "degree_code": 4, "degree_name": "Професионален бакалавър", "edu_forms": "редовна - 3"},
+    {"id": 30634, "code": "30900412", "name": "Хотелиерство и кулинарни изкуства", "major_id": 2590, "major_name": "Туризъм", "degree_code": 3, "degree_name": "Бакалавър", "edu_forms": "редовна - 4"},
+    {"id": 30603, "code": "30900482", "name": "Хотелски мениджмънт", "major_id": 2590, "major_name": "Туризъм", "degree_code": 3, "degree_name": "Бакалавър", "edu_forms": "редовна - 4"},
+    {"id": 5660, "code": "30900233", "name": "Международен туризъм", "major_id": 2590, "major_name": "Туризъм", "degree_code": 6, "degree_name": "Магистър след висше", "edu_forms": "редовна - 1.5, редовна - 2"},
+    {"id": 31976, "code": "30900014", "name": "Туризъм", "major_id": 2590, "major_name": "Туризъм", "degree_code": 999, "degree_name": "Доктор", "edu_forms": "редовна - 3, задочна - 4, самостоятелна - 3"},
+    {"id": 30673, "code": "51200741", "name": "Хранителни технологии в кулинарните изкуства", "major_id": 2804, "major_name": "Хранителни технологии", "degree_code": 4, "degree_name": "Професионален бакалавър", "edu_forms": "редовна - 3"}
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "uni_id": "SHU",
+  "cookies": {},
+  "sources": {
+    "ksk-grp": {
+      "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fpn/bakalavyr/GRP.pdf",
+      "route": "prose-pdf"
+    },
+    "ksk-tks": {
+      "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/ftn/bakalavyr/TKS.pdf",
+      "route": "prose-pdf"
+    },
+    "ksk-si": {
+      "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fmi/magistyr/SI.pdf",
+      "route": "prose-pdf"
+    },
+    "ksk-rfeotb": {
+      "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fhn/magistyr/RFEOTB-new.pdf",
+      "route": "prose-pdf"
+    },
+    "kv-tks": {
+      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/894-kvalifikaciya-07-20-2026.pdf",
+      "route": "prose-pdf"
+    },
+    "kv-si": {
+      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1103-kvalifikaciya-07-23-2026.pdf",
+      "route": "prose-pdf"
+    },
+    "kv-rfeotb": {
+      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1029-kvalifikaciya-07-22-2026.pdf",
+      "route": "prose-pdf"
+    },
+    "fees-bak-dp": {
+      "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/students/taksi-DP-profBak-i-bak_2026-2027.pdf",
+      "route": "table-pdf",
+      "join": {
+        "kind": "sectioned-fee-row",
+        "name": "shu-bak-dp",
+        "sections": [
+          {
+            "track": "семестриални такси 2026/2027, държавна поръчка",
+            "match": "Семестриални такси 2026/2027"
+          }
+        ],
+        "fee_pattern": "(\\d{2,4}\\.\\d{2}\\s*€)",
+        "context": {
+          "table": "ШУ семестриални такси за обучение по държавна поръчка 2026/2027, бакалаври и проф. бакалаври",
+          "row_reading": "първата такса в реда на специалността; колоните по ред: 1-ви курс редовно, 1-ви курс задочно, 2-ри курс редовно, 2-ри курс задочно, 3-4 курс редовно, 3-4 курс задочно"
+        }
+      }
+    },
+    "fees-mag": {
+      "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/students/taksi-magistri_2026-2027.pdf",
+      "route": "table-pdf",
+      "join": {
+        "kind": "sectioned-fee-row",
+        "name": "shu-mag",
+        "sections": [
+          {
+            "track": "семестриална такса 2026/2027",
+            "match": "Семестриална такса 2026/2027"
+          }
+        ],
+        "fee_pattern": "(\\d{2,4}\\.\\d{2}\\s*€)",
+        "context": {
+          "table": "ШУ семестриални такси магистърски програми 2026/2027",
+          "row_reading": "първата такса в реда на специалността; колоните по ред: държавна поръчка 1-ви курс редовно, платено обучение 1-ви курс задочно, платено обучение 2-ри курс задочно"
+        }
+      }
+    },
+    "fees-phd": {
+      "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/razvitie/as/2025/Syobshteniya/taksi_2025-2026_eur.pdf",
+      "route": "prose-pdf"
+    },
+    "akr-doktor": {
+      "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/razvitie/doktoranti/Akr_DOKTOR_16.03.2026.pdf",
+      "route": "prose-pdf"
+    },
+    "phd-dokumenti": {
+      "url": "https://www.shu.bg/doktoranti/documenti/",
+      "route": "html"
+    }
+  },
+  "anchors": {
+    "grp-degree": {
+      "source": "ksk-grp",
+      "pattern": "Образователно-квалификационна степен:\\s*([А-Яа-я]+)"
+    },
+    "grp-duration": {
+      "source": "ksk-grp",
+      "pattern": "Продължителност на обучението:\\s*(\\d+\\s*години\\s*\\(\\d+\\s*семестъра\\))"
+    },
+    "grp-admission": {
+      "source": "ksk-grp",
+      "pattern": "(Балът за класиране в специалността се образува като сума от [^.]+)"
+    },
+    "tks-duration": {
+      "source": "ksk-tks",
+      "pattern": "Продължителност на обучението:\\s*(\\d+\\s*години\\s*\\(\\d+\\s*семестъра\\))"
+    },
+    "tks-admission": {
+      "source": "ksk-tks",
+      "pattern": "(Балът за класиране в специалността се образува като сума от [^.]+)"
+    },
+    "si-duration": {
+      "source": "ksk-si",
+      "pattern": "Продължителност\\s+(\\d+\\s*семестъра)"
+    },
+    "si-admission": {
+      "source": "ksk-si",
+      "pattern": "(тест\\s+Конкурсен изпит\\s+по софтуерно\\s+–\\s+–\\s+инженерство)"
+    },
+    "rfeotb-degree": {
+      "source": "kv-rfeotb",
+      "pattern": "Образователно-квалификационна степен:\\s*([А-Яа-я]+)"
+    },
+    "rfeotb-duration": {
+      "source": "ksk-rfeotb",
+      "pattern": "Продължителност\\s+–\\s+(\\d+ и \\d+ семестъра)"
+    },
+    "rfeotb-admission": {
+      "source": "ksk-rfeotb",
+      "pattern": "(събеседване\\s+Конкурсен изпит\\s+–\\s+–\\s+по руски език)"
+    },
+    "phd-degree": {
+      "source": "akr-doktor",
+      "pattern": "(ОБРАЗОВАТЕЛНАТА И НАУЧНА СТЕПЕН\\s+[“\"„]ДОКТОР[”\"“])"
+    },
+    "phd-tuition": {
+      "source": "fees-phd",
+      "pattern": "Педагогика на\\s+1\\.3\\.\\s+([\\d.,]+\\s*€)"
+    },
+    "phd-admission": {
+      "source": "phd-dokumenti",
+      "pattern": "(Диплом за придобита образователно-квалификационна степен\\s+[“\"„]магистър[”\"“])"
+    }
+  },
+  "programs": [
+    {
+      "id": "SHU-rsvu9749-BSC-BG",
+      "name": "География и регионална политика",
+      "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fpn/bakalavyr/GRP.pdf",
+      "tuition_join": {
+        "source": "fees-bak-dp",
+        "alias_pattern": "4\\.4\\.1\\.\\s*География и регионална политика"
+      },
+      "field_anchors": {
+        "degree": "grp-degree",
+        "duration": "grp-duration",
+        "admission": "grp-admission"
+      }
+    },
+    {
+      "id": "SHU-rsvu30594-MSC-BG",
+      "name": "Софтуерно инженерство",
+      "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fmi/magistyr/SI.pdf",
+      "extra_sources": ["kv-si"],
+      "tuition_join": {
+        "source": "fees-mag",
+        "alias_pattern": "4\\.6\\.1\\.\\s*Софтуерно инженерство"
+      },
+      "field_anchors": {
+        "duration": "si-duration",
+        "admission": "si-admission"
+      }
+    },
+    {
+      "id": "SHU-rsvu11312-PHD-EN",
+      "name": "Методика на обучението по чужд език (английски език, руски език)",
+      "page": "https://www.shu.bg/?p=47212",
+      "field_anchors": {
+        "degree": "phd-degree",
+        "tuition": "phd-tuition",
+        "admission": "phd-admission"
+      }
+    },
+    {
+      "id": "SHU-rsvu31017-BSC-BG",
+      "name": "Технологии за киберсигурност",
+      "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/ftn/bakalavyr/TKS.pdf",
+      "extra_sources": ["kv-tks"],
+      "tuition_join": {
+        "source": "fees-bak-dp",
+        "alias_pattern": "5\\.3\\.4\\.\\s*Технологии за киберсигурност"
+      },
+      "field_anchors": {
+        "duration": "tks-duration",
+        "admission": "tks-admission"
+      }
+    },
+    {
+      "id": "SHU-rsvu8752-MSC-BG",
+      "name": "Руска филология: Езиково обслужване на туризма и бизнеса",
+      "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fhn/magistyr/RFEOTB-new.pdf",
+      "extra_sources": ["kv-rfeotb"],
+      "tuition_join": {
+        "source": "fees-mag",
+        "alias_pattern": "2\\.1\\.8\\.\\s*Руска филология: Езиково обслужване на туризма и бизнеса"
+      },
+      "field_anchors": {
+        "degree": "rfeotb-degree",
+        "duration": "rfeotb-duration",
+        "admission": "rfeotb-admission"
+      }
+    }
+  ]
+}

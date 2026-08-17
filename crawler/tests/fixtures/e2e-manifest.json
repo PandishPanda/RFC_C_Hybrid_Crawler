@@ -1,0 +1,154 @@
+{
+ "seed": 78,
+ "note": "5 seeded-random registry programs per fresh university; never touched by STA-78 spikes",
+ "universities": {
+  "SHU": {
+   "name": "Шуменски университет \"Епископ Константин Преславски\"",
+   "site": "https://www.shu.bg/",
+   "registry_rows": 213,
+   "programs": [
+    {
+     "program_id": "SHU-rsvu9749-BSC-BG",
+     "rsvu_name": "География и регионална политика",
+     "rsvu_degree_id": 3,
+     "rsvu_edu_forms": "редовна - 4"
+    },
+    {
+     "program_id": "SHU-rsvu30594-MSC-BG",
+     "rsvu_name": "Софтуерно инженерство",
+     "rsvu_degree_id": 6,
+     "rsvu_edu_forms": "редовна - 1, задочна - 1"
+    },
+    {
+     "program_id": "SHU-rsvu11312-PHD-EN",
+     "rsvu_name": "Методика на обучението по чужд език (английски език, руски език)",
+     "rsvu_degree_id": 999,
+     "rsvu_edu_forms": "редовна - 3, задочна - 4, самостоятелна - 3"
+    },
+    {
+     "program_id": "SHU-rsvu31017-BSC-BG",
+     "rsvu_name": "Технологии за киберсигурност",
+     "rsvu_degree_id": 3,
+     "rsvu_edu_forms": "редовна - 4"
+    },
+    {
+     "program_id": "SHU-rsvu8752-MSC-BG",
+     "rsvu_name": "Руска филология: Езиково обслужване на туризма и бизнеса",
+     "rsvu_degree_id": 6,
+     "rsvu_edu_forms": "редовна - 1.5, редовна - 1, задочна - 1, задочна - 1.5"
+    }
+   ]
+  },
+  "TUG": {
+   "name": "Технически университет - Габрово",
+   "site": "https://www.tugab.bg/",
+   "registry_rows": 101,
+   "programs": [
+    {
+     "program_id": "TUG-rsvu30703-PHD-BG",
+     "rsvu_name": "Квантова и оптоелектроника",
+     "rsvu_degree_id": 999,
+     "rsvu_edu_forms": "редовна - 3, задочна - 4"
+    },
+    {
+     "program_id": "TUG-rsvu11362-MSC-BG",
+     "rsvu_name": "Управление на бизнеса",
+     "rsvu_degree_id": 6,
+     "rsvu_edu_forms": "редовна - 1, редовна - 1.5, редовна - 2, задочна - 2, задочна - 1.5, задочна - 1"
+    },
+    {
+     "program_id": "TUG-rsvu31303-MSC-BG",
+     "rsvu_name": "Софтуерно и компютърно инженерство",
+     "rsvu_degree_id": 6,
+     "rsvu_edu_forms": "редовна - 2, редовна - 1.5, редовна - 1, задочна - 1, задочна - 2, задочна - 1.5"
+    },
+    {
+     "program_id": "TUG-rsvu4221-BSC-BG",
+     "rsvu_name": "Мехатроника",
+     "rsvu_degree_id": 3,
+     "rsvu_edu_forms": "редовна - 4, задочна - 4"
+    },
+    {
+     "program_id": "TUG-rsvu7848-BSC-BG",
+     "rsvu_name": "Дизайн,техника и технологии в текстила",
+     "rsvu_degree_id": 3,
+     "rsvu_edu_forms": "редовна - 4, задочна - 4"
+    }
+   ]
+  },
+  "ANIS": {
+   "name": "Академия по национална и информационна сигурност - Пловдив (ВУСИ)",
+   "site": "https://www.vusi.bg/",
+   "registry_rows": 62,
+   "programs": [
+    {
+     "program_id": "ANIS-rsvu8494-MSC-BG",
+     "rsvu_name": "Киберсигурност",
+     "rsvu_degree_id": 6,
+     "rsvu_edu_forms": "задочна - 1.5, задочна - 1"
+    },
+    {
+     "program_id": "ANIS-rsvu2682-BSC-BG",
+     "rsvu_name": "Икономика на туризма",
+     "rsvu_degree_id": 3,
+     "rsvu_edu_forms": "редовна - 4, задочна - 4"
+    },
+    {
+     "program_id": "ANIS-rsvu10329-MSC-BG",
+     "rsvu_name": "Противодействие на тероризма (за специалност от друга специалност)",
+     "rsvu_degree_id": 6,
+     "rsvu_edu_forms": "задочна - 1.5"
+    },
+    {
+     "program_id": "ANIS-rsvu30432-MSC-BG",
+     "rsvu_name": "Мениджмънт на хотелиерството и ресторантьорството",
+     "rsvu_degree_id": 6,
+     "rsvu_edu_forms": "задочна - 1.5"
+    },
+    {
+     "program_id": "ANIS-rsvu9422-MSC-BG",
+     "rsvu_name": "Управление на човешките ресурси (след неикономически специалности)",
+     "rsvu_degree_id": 6,
+     "rsvu_edu_forms": "задочна - 1.5"
+    }
+   ]
+  },
+  "MUVarna": {
+   "name": "Медицински университет \"Проф. д-р Параскев Стоянов\" - Варна",
+   "site": "https://www.mu-varna.bg/",
+   "registry_rows": 104,
+   "programs": [
+    {
+     "program_id": "MUVarna-rsvu29924-PHD-BG",
+     "rsvu_name": "Технология на лекарствените форми и биофармация",
+     "rsvu_degree_id": 999,
+     "rsvu_edu_forms": "редовна - 3, задочна - 4, самостоятелна - 3"
+    },
+    {
+     "program_id": "MUVarna-rsvu11227-PHD-BG",
+     "rsvu_name": "Патофизиология",
+     "rsvu_degree_id": 999,
+     "rsvu_edu_forms": "редовна - 3, задочна - 4, самостоятелна - 3"
+    },
+    {
+     "program_id": "MUVarna-rsvu30580-PHD-BG",
+     "rsvu_name": "Анатомия, хистология и цитология",
+     "rsvu_degree_id": 999,
+     "rsvu_edu_forms": "редовна - 3, задочна - 4, самостоятелна - 3"
+    },
+    {
+     "program_id": "MUVarna-rsvu31893-BSC-BG",
+     "rsvu_name": "Кинезитерапия",
+     "rsvu_degree_id": 3,
+     "rsvu_edu_forms": "редовна - 4"
+    },
+    {
+     "program_id": "MUVarna-rsvu4414-IMSC-BG",
+     "rsvu_name": "Фармация",
+     "rsvu_degree_id": 5,
+     "rsvu_edu_forms": "редовна - 5"
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,85 @@
+{
+  "uni_id": "AUBG",
+  "cookies": {
+    "aubg_location": "bulgaria"
+  },
+  "sources": {
+    "aubg-catalog": {
+      "url": "https://www.aubg.edu/wp-content/uploads/2026/06/AY-2026-27-1st-ed.pdf",
+      "route": "prose-pdf"
+    }
+  },
+  "anchors": {
+    "aubg-ba-degree": {
+      "source": "aubg-catalog",
+      "pattern": "required to earn a (Bachelor of Arts) degree at AUBG"
+    },
+    "aubg-duration": {
+      "source": "https://www.aubg.edu/academics/bachelor-degrees/",
+      "pattern": "The duration of undergraduate education at AUBG is ([a-z]+ semesters)"
+    },
+    "aubg-tuition": {
+      "source": "https://www.aubg.edu/admissions/bachelors/cost-aid/",
+      "pattern": "tuition is (€[\\d,]+/semester)"
+    },
+    "aubg-emba-degree": {
+      "source": "https://www.aubg.edu/academics/executive-mba/",
+      "pattern": "The AUBG (Executive MBA) Program is accredited both in the United States"
+    },
+    "aubg-emba-tuition": {
+      "source": "https://www.aubg.edu/admissions/emba/tuition-and-financing/",
+      "pattern": "The tuition fee for the EMBA program is (€[\\d,]+)"
+    }
+  },
+  "programs": [
+    {
+      "id": "aubg-cs",
+      "name": "BA in Computer Science",
+      "page": "https://www.aubg.edu/academics/bachelor-degrees/computer-science/",
+      "lang_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "adm_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "field_anchors": {
+        "degree": "aubg-ba-degree",
+        "duration": "aubg-duration",
+        "tuition": "aubg-tuition"
+      }
+    },
+    {
+      "id": "aubg-ba",
+      "name": "BA in Business Administration",
+      "page": "https://www.aubg.edu/academics/bachelor-degrees/business-administration/",
+      "lang_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "adm_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "field_anchors": {
+        "degree": "aubg-ba-degree",
+        "duration": "aubg-duration",
+        "tuition": "aubg-tuition"
+      }
+    },
+    {
+      "id": "aubg-econ",
+      "name": "BA in Economics",
+      "page": "https://www.aubg.edu/academics/bachelor-degrees/economics/",
+      "lang_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "adm_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "field_anchors": {
+        "degree": "aubg-ba-degree",
+        "duration": "aubg-duration",
+        "tuition": "aubg-tuition"
+      }
+    },
+    {
+      "id": "aubg-emba",
+      "name": "Executive MBA",
+      "page": "https://www.aubg.edu/academics/executive-mba/",
+      "lang_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "adm_page": "https://www.aubg.edu/admissions/emba/how-to-apply/",
+      "tuition_page": "https://www.aubg.edu/admissions/emba/tuition-and-financing/",
+      "field_anchors": {
+        "degree": "aubg-emba-degree",
+        "tuition": "aubg-emba-tuition"
+      }
+    }
+  ],
+  "rsvu_id": 217
+}

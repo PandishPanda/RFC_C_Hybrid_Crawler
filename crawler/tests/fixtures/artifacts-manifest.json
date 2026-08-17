@@ -1,0 +1,293 @@
+{
+ "docling-tsv-mu-fees": {
+  "renderer_id": "docling-serve-tsv",
+  "renderer_version": "v1.28",
+  "source_ref": "mu-fees.pdf",
+  "cookies": null,
+  "origin": "spikes/a/out/docling/mu-fees/*.tsv",
+  "text_file": "artifacts/docling-tsv-mu-fees.txt",
+  "sha256": "3bc6a43d2b17f2994ba87fa137b3b07fbf12ad72e57bd018dd51b0df87f22dc7"
+ },
+ "docling-tsv-su-fees": {
+  "renderer_id": "docling-serve-tsv",
+  "renderer_version": "v1.28",
+  "source_ref": "su-fees.pdf",
+  "cookies": null,
+  "origin": "spikes/a/out/docling/su-fees/*.tsv",
+  "text_file": "artifacts/docling-tsv-su-fees.txt",
+  "sha256": "fd3221ece6cfbb468b40b4c2df4fbf2af59d44f86342af77a66e6182fd939724"
+ },
+ "html-3602-2016-05-19-07-23-24-0417be59": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://mu-pleven.bg/index.php/bg/specialities/farmacy/3602-2016-05-19-07-23-24",
+  "cookies": null,
+  "origin": "spikes/a/cache/3602-2016-05-19-07-23-24.0417be59d999e44a",
+  "text_file": "artifacts/html-3602-2016-05-19-07-23-24-0417be59.txt",
+  "sha256": "25cdf4b9dfeabcdcc7048f2e43c8718abcf348f4da5869dea3a9ca0d3b15a09e"
+ },
+ "html-479-annotation-of-specialty-9498e7a2": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://mu-pleven.bg/index.php/bg/specialities/medicine/479-annotation-of-specialty",
+  "cookies": null,
+  "origin": "spikes/a/cache/479-annotation-of-specialty.9498e7a2f2f8433e",
+  "text_file": "artifacts/html-479-annotation-of-specialty-9498e7a2.txt",
+  "sha256": "d6bc4e65c0f9161a4a8c4463b861c5258284e72541350449761d072169f84276"
+ },
+ "html-492-annotation-of-specialty-f3294187": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://mu-pleven.bg/index.php/bg/specialities/medical-nurse/492-annotation-of-specialty",
+  "cookies": null,
+  "origin": "spikes/a/cache/492-annotation-of-specialty.f3294187e0cb64b2",
+  "text_file": "artifacts/html-492-annotation-of-specialty-f3294187.txt",
+  "sha256": "e7e271ba7b310367659fd0f8612bc4d2b8db3387466d744fe41aa6a7fd939306"
+ },
+ "html-8410-t2026-2027-1429cd14": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://mu-pleven.bg/index.php/bg/learning/students/2022-07-27-13-03-20/8410-t2026-2027",
+  "cookies": null,
+  "origin": "spikes/a/cache/8410-t2026-2027.1429cd14431edd97",
+  "text_file": "artifacts/html-8410-t2026-2027-1429cd14.txt",
+  "sha256": "f27b898895dd7442d8925e46aa2883b5c34919dc050b9a978f0bd0a0295bbef1"
+ },
+ "html-application-requirement-for-bachelor-degree-programmes-f10c13e7": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://vum.bg/application-requirement-for-bachelor-degree-programmes/",
+  "cookies": null,
+  "origin": "spikes/a/cache/application-requirement-for-bachelor-degree-programmes.f10c13e7ae6daeb9",
+  "text_file": "artifacts/html-application-requirement-for-bachelor-degree-programmes-f10c13e7.txt",
+  "sha256": "44524ef020c7f364b4bd227679ea7e8a69fadaba0d825a007c353254b25282d0"
+ },
+ "html-bachelor-degrees-e06dac7d": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://www.aubg.edu/academics/bachelor-degrees/",
+  "cookies": {
+   "aubg_location": "bulgaria"
+  },
+  "origin": "spikes/a/cache/bachelor-degrees.e06dac7d90209274",
+  "text_file": "artifacts/html-bachelor-degrees-e06dac7d.txt",
+  "sha256": "630336e4c259b891a414d3024a19e3723f19d4cae5f58ec088866678a650ac64"
+ },
+ "html-coruption-7c73f0cf": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://vum.bg/coruption/",
+  "cookies": null,
+  "origin": "spikes/a/cache/coruption.7c73f0cff16124b4",
+  "text_file": "artifacts/html-coruption-7c73f0cf.txt",
+  "sha256": "92b66b7ec33c81701122efe356de0f052f51b17dfa0b7270998ea3bc0722ab76"
+ },
+ "html-cost-aid-70cdb001": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://www.aubg.edu/admissions/bachelors/cost-aid/",
+  "cookies": {
+   "aubg_location": "bulgaria"
+  },
+  "origin": "spikes/a/cache/cost-aid.70cdb0014cb6cffa",
+  "text_file": "artifacts/html-cost-aid-70cdb001.txt",
+  "sha256": "258832fc206fdc68b8af67806adfdab300d223a3f6b14c3b46a233481e2bd838"
+ },
+ "html-executive-mba-e2638e91": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://www.aubg.edu/academics/executive-mba/",
+  "cookies": {
+   "aubg_location": "bulgaria"
+  },
+  "origin": "spikes/a/cache/executive-mba.e2638e91c700a99e",
+  "text_file": "artifacts/html-executive-mba-e2638e91.txt",
+  "sha256": "6d389c312c9bb95792316b6d65584f8bd5a28fb356402af8435ce98dfe874e81"
+ },
+ "html-filosofiya-na-angliiski-ezik-fdb7c372": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/filosofiya-na-angliiski-ezik/",
+  "cookies": null,
+  "origin": "spikes/a/cache/filosofiya-na-angliiski-ezik.fdb7c372f9a945ea",
+  "text_file": "artifacts/html-filosofiya-na-angliiski-ezik-fdb7c372.txt",
+  "sha256": "cd4b4c55720d0761b0a40829fc6d48db59e9568886e998990ad33fbe844a562a"
+ },
+ "html-gastronomy-and-culinary-arts-5a34e9e0": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://vum.bg/gastronomy-and-culinary-arts/",
+  "cookies": null,
+  "origin": "spikes/a/cache/gastronomy-and-culinary-arts.5a34e9e07ae2bfda",
+  "text_file": "artifacts/html-gastronomy-and-culinary-arts-5a34e9e0.txt",
+  "sha256": "f523a3f8648c75aaaf4663cdf9e0e4971cb39e4e26473055d1a03a9c7dcc0dcc"
+ },
+ "html-how-to-apply-5eead72c": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://www.aubg.edu/admissions/emba/how-to-apply/",
+  "cookies": {
+   "aubg_location": "bulgaria"
+  },
+  "origin": "spikes/a/cache/how-to-apply.5eead72c3410b001",
+  "text_file": "artifacts/html-how-to-apply-5eead72c.txt",
+  "sha256": "11b3e0797b2c88ba4cef87e5cd3a889323cafd75d32831261f1dea57d837d4f3"
+ },
+ "html-how-to-apply-92cd4067": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+  "cookies": {
+   "aubg_location": "bulgaria"
+  },
+  "origin": "spikes/a/cache/how-to-apply.92cd40676cc3061f",
+  "text_file": "artifacts/html-how-to-apply-92cd4067.txt",
+  "sha256": "84866d7c43dce4ebff2778471df48fd9b97a60cff8aa3bbcb5407ab166c6a8d6"
+ },
+ "html-informacionni_sistemi-6e86c823": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/informacionni_sistemi",
+  "cookies": null,
+  "origin": "spikes/a/cache/informacionni_sistemi.6e86c8236ca28f2a",
+  "text_file": "artifacts/html-informacionni_sistemi-6e86c823.txt",
+  "sha256": "5a5b75448517c5c4462a02d06f6496ae4d6593a950be5a2753a81e40a5ed81ff"
+ },
+ "html-inzhenerna_himiya_i_s_vremenni_materiali_s_chastichno_obuche-15ea77de": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/inzhenerna_himiya_i_s_vremenni_materiali_s_chastichno_obuchenie_na_anglijski_ezik",
+  "cookies": null,
+  "origin": "spikes/a/cache/inzhenerna_himiya_i_s_vremenni_materiali_s_chastichno_obuche.15ea77de142c424a",
+  "text_file": "artifacts/html-inzhenerna_himiya_i_s_vremenni_materiali_s_chastichno_obuche-15ea77de.txt",
+  "sha256": "163d48bdd987cb16faf0643baca2fc25669d3761a378a15262bb0f6586c7b158"
+ },
+ "html-kompyut_rna_himiya-b637c6bc": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/kompyut_rna_himiya",
+  "cookies": null,
+  "origin": "spikes/a/cache/kompyut_rna_himiya.b637c6bcbe8ea98c",
+  "text_file": "artifacts/html-kompyut_rna_himiya-b637c6bc.txt",
+  "sha256": "7719370ccd987c3dfd303edaa1f984d3f1346086d0a5b4bf5a19a760269e4018"
+ },
+ "html-kompyut_rni_nauki-26469ff3": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/kompyut_rni_nauki",
+  "cookies": null,
+  "origin": "spikes/a/cache/kompyut_rni_nauki.26469ff321aaa680",
+  "text_file": "artifacts/html-kompyut_rni_nauki-26469ff3.txt",
+  "sha256": "cbacbdba92585a031228b007d84900ef6e333e3c979d93f7aaba7578dab7ddba"
+ },
+ "html-kvalifikacionna_harakteristika-2e9e90a0": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/inzhenerna_himiya_i_s_vremenni_materiali_s_chastichno_obuchenie_na_anglijski_ezik/kvalifikacionna_harakteristika",
+  "cookies": null,
+  "origin": "spikes/a/cache/kvalifikacionna_harakteristika.2e9e90a0eb24676b",
+  "text_file": "artifacts/html-kvalifikacionna_harakteristika-2e9e90a0.txt",
+  "sha256": "a99da7f11e806af24a4f9d876bbbd5f340a34a0a116b6fa24d77412677ecbd28"
+ },
+ "html-master-of-business-administration-b4539d94": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://vum.bg/master-of-business-administration/",
+  "cookies": null,
+  "origin": "spikes/a/cache/master-of-business-administration.b4539d946fad80a4",
+  "text_file": "artifacts/html-master-of-business-administration-b4539d94.txt",
+  "sha256": "82276bb6c69802fff00c0cdba73d1bc3a3cd2867a6d7ebc7bda1ce8e2c6a9bb7"
+ },
+ "html-psihologiya-d12facf2": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/psihologiya/",
+  "cookies": null,
+  "origin": "spikes/a/cache/psihologiya.d12facf25411d4ba",
+  "text_file": "artifacts/html-psihologiya-d12facf2.txt",
+  "sha256": "95762670bd014dd0a9bca9c145f4f09036f297e4ce1eda24540a04765deba829"
+ },
+ "html-scholarships-tution-fees-and-funding-62c027ae": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://vum.bg/scholarships-tution-fees-and-funding/",
+  "cookies": null,
+  "origin": "spikes/a/cache/scholarships-tution-fees-and-funding.62c027ae67ddbf09",
+  "text_file": "artifacts/html-scholarships-tution-fees-and-funding-62c027ae.txt",
+  "sha256": "68c80ea3c8e9815f5ffdba32b7871a3976062243dd90053bcf1a12c510f6d18f"
+ },
+ "html-softuerno_inzhenerstvo-16b94e35": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/softuerno_inzhenerstvo",
+  "cookies": null,
+  "origin": "spikes/a/cache/softuerno_inzhenerstvo.16b94e3506370e7a",
+  "text_file": "artifacts/html-softuerno_inzhenerstvo-16b94e35.txt",
+  "sha256": "78d982cac7c1722865d3fcabc325bfbb6c362f8fa19713f6dd78cffe6e4770b0"
+ },
+ "html-software-systems-and-technologies-5b154f9f": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://vum.bg/software-systems-and-technologies/",
+  "cookies": null,
+  "origin": "spikes/a/cache/software-systems-and-technologies.5b154f9f782b6d4e",
+  "text_file": "artifacts/html-software-systems-and-technologies-5b154f9f.txt",
+  "sha256": "d17b262d25ba76c935980cf6965a58150ddf5dfc24f1683d422bfe58c93b9133"
+ },
+ "html-statistika-16c1812c": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_5_matematika/statistika",
+  "cookies": null,
+  "origin": "spikes/a/cache/statistika.16c1812c0555ae0f",
+  "text_file": "artifacts/html-statistika-16c1812c.txt",
+  "sha256": "8a939743e42b12f8505231f168cfba45cbc6f25bd0447041880e4b24bea80e4a"
+ },
+ "html-tuition-and-financing-257cb96e": {
+  "renderer_id": "bs4-lxml-canonical",
+  "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+  "source_ref": "https://www.aubg.edu/admissions/emba/tuition-and-financing/",
+  "cookies": {
+   "aubg_location": "bulgaria"
+  },
+  "origin": "spikes/a/cache/tuition-and-financing.257cb96e9584e4b8",
+  "text_file": "artifacts/html-tuition-and-financing-257cb96e.txt",
+  "sha256": "c39660055dbdd4dcce461e6db7fb641d258f3a80590b64925eea52d5c2e6d30b"
+ },
+ "pdftext-aubg-catalog": {
+  "renderer_id": "pdftotext-flow+layout",
+  "renderer_version": "poppler-26.08.0",
+  "source_ref": "aubg-catalog.pdf",
+  "cookies": null,
+  "origin": "spikes/a/out/pdftext/aubg-catalog.txt",
+  "text_file": "artifacts/pdftext-aubg-catalog.txt",
+  "sha256": "4c58c401cb43da6b979d6b6c48dd06c89c02c2acd942c110012b3e872c7fcee7"
+ },
+ "pdftext-mu-sprav": {
+  "renderer_id": "pdftotext-flow+layout",
+  "renderer_version": "poppler-26.08.0",
+  "source_ref": "mu-sprav.pdf",
+  "cookies": null,
+  "origin": "spikes/a/out/pdftext/mu-sprav.txt",
+  "text_file": "artifacts/pdftext-mu-sprav.txt",
+  "sha256": "fa14df298cc4a1ec8586cba299f4ff076f85b2edf355b2573789fb63908d420d"
+ },
+ "pdftext-su-adm": {
+  "renderer_id": "pdftotext-flow+layout",
+  "renderer_version": "poppler-26.08.0",
+  "source_ref": "su-adm.pdf",
+  "cookies": null,
+  "origin": "spikes/a/out/pdftext/su-adm.txt",
+  "text_file": "artifacts/pdftext-su-adm.txt",
+  "sha256": "823743500103536f7367db65cc0602bef2f48845b4dfb220dee78c2698e121a5"
+ },
+ "pdftext-su-compchem": {
+  "renderer_id": "pdftotext-flow+layout",
+  "renderer_version": "poppler-26.08.0",
+  "source_ref": "su-compchem.pdf",
+  "cookies": null,
+  "origin": "spikes/a/out/pdftext/su-compchem.txt",
+  "text_file": "artifacts/pdftext-su-compchem.txt",
+  "sha256": "2f064ec0ce8c6d0053b9d320c74b04da6ab364cdcdc32909531ae991fceda265"
+ }
+}

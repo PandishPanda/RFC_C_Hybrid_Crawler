@@ -1,0 +1,1235 @@
+{
+ "note": "spike A E3 final records (non-null values only); keys/grades stripped; segments = snippet split on the gate2 join separator",
+ "records": [
+  {
+   "program_id": "su-kn",
+   "uni": "SofiaUniversity",
+   "field": "degree",
+   "value": "ОКС \"бакалавър\"",
+   "segments": [
+    "ща, научни работници и др. Професионално направление: 4.6. Информатика и компютърни науки Степен: ОКС \"бакалавър\" Специалност: МИК010113 Компютърни науки Форма на обучение: редовно Продължителност на обу"
+   ],
+   "artifact": "html-kompyut_rni_nauki-26469ff3",
+   "method": "label:bg-oks-label",
+   "tier": "G",
+   "source": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/kompyut_rni_nauki"
+  },
+  {
+   "program_id": "su-kn",
+   "uni": "SofiaUniversity",
+   "field": "duration",
+   "value": "Продължителност на обучението (брой семестри): 8",
+   "segments": [
+    "тепен: ОКС \"бакалавър\" Специалност: МИК010113 Компютърни науки Форма на обучение: редовно Продължителност на обучението (брой семестри): 8 Професионална квалификация: Бакалавър по компютърни науки Още за специалност Компютърни н"
+   ],
+   "artifact": "html-kompyut_rni_nauki-26469ff3",
+   "method": "label:bg-semestri-label",
+   "tier": "G",
+   "source": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/kompyut_rni_nauki"
+  },
+  {
+   "program_id": "su-kn",
+   "uni": "SofiaUniversity",
+   "field": "tuition",
+   "value": "460 EUR",
+   "segments": [
+    "Информатика и компютърни науки ФМИ Компютърни науки 460 EUR няма 460 EUR няма 920 EUR 460 EUR"
+   ],
+   "artifact": "docling-tsv-su-fees",
+   "method": "fee-join:su",
+   "tier": "F",
+   "source": "su-fees.pdf"
+  },
+  {
+   "program_id": "su-kn",
+   "uni": "SofiaUniversity",
+   "field": "admission",
+   "value": "изпит по математика",
+   "segments": [
+    "Компютърни науки Редовна 1. изпит по математика"
+   ],
+   "artifact": "pdftext-su-adm",
+   "method": "ordinance-join:su-row",
+   "tier": "F",
+   "source": "su-adm.pdf"
+  },
+  {
+   "program_id": "su-si",
+   "uni": "SofiaUniversity",
+   "field": "degree",
+   "value": "ОКС \"бакалавър\"",
+   "segments": [
+    "рматика във висши училища. Професионално направление: 4.6. Информатика и компютърни науки Степен: ОКС \"бакалавър\" Специалност: МИЕ010113 Софтуерно инженерство Форма на обучение: редовно Продължителност н"
+   ],
+   "artifact": "html-softuerno_inzhenerstvo-16b94e35",
+   "method": "label:bg-oks-label",
+   "tier": "G",
+   "source": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/softuerno_inzhenerstvo"
+  },
+  {
+   "program_id": "su-si",
+   "uni": "SofiaUniversity",
+   "field": "duration",
+   "value": "Продължителност на обучението (брой семестри): 8",
+   "segments": [
+    ": ОКС \"бакалавър\" Специалност: МИЕ010113 Софтуерно инженерство Форма на обучение: редовно Продължителност на обучението (брой семестри): 8 Професионална квалификация: Бакалавър по софтуерно инженерство Още за специалност Софтуер"
+   ],
+   "artifact": "html-softuerno_inzhenerstvo-16b94e35",
+   "method": "label:bg-semestri-label",
+   "tier": "G",
+   "source": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/softuerno_inzhenerstvo"
+  },
+  {
+   "program_id": "su-si",
+   "uni": "SofiaUniversity",
+   "field": "tuition",
+   "value": "460 EUR",
+   "segments": [
+    "Информатика и компютърни науки ФМИ Софтуерно инженерство 460 EUR няма 460 EUR няма 920 EUR 460 EUR"
+   ],
+   "artifact": "docling-tsv-su-fees",
+   "method": "fee-join:su",
+   "tier": "F",
+   "source": "su-fees.pdf"
+  },
+  {
+   "program_id": "su-si",
+   "uni": "SofiaUniversity",
+   "field": "admission",
+   "value": "изпит по математика",
+   "segments": [
+    "Софтуерно инженерство Редовна С коефициент 3,25: 1. изпит по математика"
+   ],
+   "artifact": "pdftext-su-adm",
+   "method": "ordinance-join:su-row",
+   "tier": "F",
+   "source": "su-adm.pdf"
+  },
+  {
+   "program_id": "su-is",
+   "uni": "SofiaUniversity",
+   "field": "degree",
+   "value": "ОКС \"бакалавър\"",
+   "segments": [
+    "едства за бизнес развитие. Професионално направление: 4.6. Информатика и компютърни науки Степен: ОКС \"бакалавър\" Специалност: МИБ01011 3 Информационни системи Форма на обучение: редовно Продължителност"
+   ],
+   "artifact": "html-informacionni_sistemi-6e86c823",
+   "method": "label:bg-oks-label",
+   "tier": "G",
+   "source": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/informacionni_sistemi"
+  },
+  {
+   "program_id": "su-is",
+   "uni": "SofiaUniversity",
+   "field": "duration",
+   "value": "Продължителност на обучението (брой семестри): 8",
+   "segments": [
+    "ОКС \"бакалавър\" Специалност: МИБ01011 3 Информационни системи Форма на обучение: редовно Продължителност на обучението (брой семестри): 8 Професионална квалификация: Бакалавър по информационни системи Още за специалност Информа"
+   ],
+   "artifact": "html-informacionni_sistemi-6e86c823",
+   "method": "label:bg-semestri-label",
+   "tier": "G",
+   "source": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/informacionni_sistemi"
+  },
+  {
+   "program_id": "su-is",
+   "uni": "SofiaUniversity",
+   "field": "tuition",
+   "value": "460 EUR",
+   "segments": [
+    "Информатика и компютърни науки ФМИ Информационни системи 460 EUR няма 460 EUR няма 920 EUR 460 EUR"
+   ],
+   "artifact": "docling-tsv-su-fees",
+   "method": "fee-join:su",
+   "tier": "F",
+   "source": "su-fees.pdf"
+  },
+  {
+   "program_id": "su-is",
+   "uni": "SofiaUniversity",
+   "field": "admission",
+   "value": "изпит по математика",
+   "segments": [
+    "Информационни системи Редовна С коефициент 3,25: 1. изпит по математика"
+   ],
+   "artifact": "pdftext-su-adm",
+   "method": "ordinance-join:su-row",
+   "tier": "F",
+   "source": "su-adm.pdf"
+  },
+  {
+   "program_id": "su-stat",
+   "uni": "SofiaUniversity",
+   "field": "degree",
+   "value": "ОКС \"бакалавър\"",
+   "segments": [
+    "и задачи, които се свеждат до анализ на данни. Професионално направление: 4.5. Математика Степен: ОКС \"бакалавър\" Специалност: МИТ010113 Статистика Форма на обучение: редовно Продължителност на обучениет"
+   ],
+   "artifact": "html-statistika-16c1812c",
+   "method": "label:bg-oks-label",
+   "tier": "G",
+   "source": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_5_matematika/statistika"
+  },
+  {
+   "program_id": "su-stat",
+   "uni": "SofiaUniversity",
+   "field": "duration",
+   "value": "Продължителност на обучението (брой семестри): 8",
+   "segments": [
+    "тика Степен: ОКС \"бакалавър\" Специалност: МИТ010113 Статистика Форма на обучение: редовно Продължителност на обучението (брой семестри): 8 Професионална квалификация: Бакалавър по статистика Още за специалност Статистика (редовн"
+   ],
+   "artifact": "html-statistika-16c1812c",
+   "method": "label:bg-semestri-label",
+   "tier": "G",
+   "source": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_5_matematika/statistika"
+  },
+  {
+   "program_id": "su-stat",
+   "uni": "SofiaUniversity",
+   "field": "tuition",
+   "value": "освободени",
+   "segments": [
+    "Математика ФМИ Статистика освободени освободени освободени освободени 920 EUR 460 EUR"
+   ],
+   "artifact": "docling-tsv-su-fees",
+   "method": "fee-join:su",
+   "tier": "F",
+   "source": "su-fees.pdf"
+  },
+  {
+   "program_id": "su-stat",
+   "uni": "SofiaUniversity",
+   "field": "admission",
+   "value": "изпит по математика",
+   "segments": [
+    "Статистика Редовна С коефициент 3,25: 1. изпит по математика"
+   ],
+   "artifact": "pdftext-su-adm",
+   "method": "ordinance-join:su-row",
+   "tier": "F",
+   "source": "su-adm.pdf"
+  },
+  {
+   "program_id": "su-ch",
+   "uni": "SofiaUniversity",
+   "field": "degree",
+   "value": "ОКС „бакалавър”",
+   "segments": [
+    "....... № ............. / ............... Професионално направление: 4.2. Химически науки ОКС „бакалавър” Специалност: Х Ф К 0 4 0 1 1 7 Компютърна химия Форма на обучение: редовно Продължителнос"
+   ],
+   "artifact": "pdftext-su-compchem",
+   "method": "label:bg-oks-inline",
+   "tier": "G",
+   "source": "su-compchem.pdf"
+  },
+  {
+   "program_id": "su-ch",
+   "uni": "SofiaUniversity",
+   "field": "duration",
+   "value": "Продължителност на обучението (брой семестри): осем",
+   "segments": [
+    "3 email: ohks@chem.uni-sofia.bg Квалификационна характеристика Форма на обучение: редовнo Продължителност на обучението (брой семестри): осем УЧЕБЕН ПЛАН Випуск 17/18 Випуск 18/19 и следващи Випуск 2021/2022 и следващи Изм. и доп."
+   ],
+   "artifact": "html-kompyut_rna_himiya-b637c6bc",
+   "method": "label:bg-semestri-label",
+   "tier": "G",
+   "source": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/kompyut_rna_himiya"
+  },
+  {
+   "program_id": "su-ch",
+   "uni": "SofiaUniversity",
+   "field": "tuition",
+   "value": "освободени",
+   "segments": [
+    "Химически науки ФХФ Компютърна химия освободени освободени освободени освободени 460 EUR 260 EUR"
+   ],
+   "artifact": "docling-tsv-su-fees",
+   "method": "fee-join:su",
+   "tier": "F",
+   "source": "su-fees.pdf"
+  },
+  {
+   "program_id": "su-ch",
+   "uni": "SofiaUniversity",
+   "field": "admission",
+   "value": "конкурсен изпит по химия, математика, физика или биология",
+   "segments": [
+    "иране на сложни и динамични системи; Комплексна оценка на промишлени и екологични обекти. Приемът на студенти за специалността „Компютърна химия” се извършва чрез конкурсен изпит по химия, математика, физика или биология, както и с ДЗИ по химия, математика, физика и опазване на околната среда, информатика, ин"
+   ],
+   "artifact": "html-kompyut_rna_himiya-b637c6bc",
+   "method": "label:bg-priemat-chrez",
+   "tier": "G",
+   "source": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/kompyut_rna_himiya"
+  },
+  {
+   "program_id": "su-ih",
+   "uni": "SofiaUniversity",
+   "field": "degree",
+   "value": "БАКАЛАВЪР ПО ИНЖЕНЕРНА ХИМИЯ И СЪВРЕМЕННИ МАТЕРИАЛИ",
+   "segments": [
+    "зик) / Квалификационна характеристика Специалност: ИНЖЕНЕРНА ХИМИЯ И СЪВРЕМЕННИ МАТЕРИАЛИ Придобилите степен БАКАЛАВЪР ПО ИНЖЕНЕРНА ХИМИЯ И СЪВРЕМЕННИ МАТЕРИАЛИ са високо-квалификацирани специалисти химици със задълбочени специфични познания и умения"
+   ],
+   "artifact": "html-kvalifikacionna_harakteristika-2e9e90a0",
+   "method": "label:bg-pridobilite",
+   "tier": "G",
+   "source": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/inzhenerna_himiya_i_s_vremenni_materiali_s_chastichno_obuchenie_na_anglijski_ezik/kvalifikacionna_harakteristika"
+  },
+  {
+   "program_id": "su-ih",
+   "uni": "SofiaUniversity",
+   "field": "duration",
+   "value": "Продължителност на обучението (брой семестри): осем",
+   "segments": [
+    "4 email nhtll@chem.uni-sofia.bg Квалификационна характеристика Форма на обучение: редовнo Продължителност на обучението (брой семестри): осем УЧЕБЕН ПЛАН Випуск 17/18 Випуск 18/19 и следващи Випуск 2021/2022 и следващи Изм. и доп."
+   ],
+   "artifact": "html-inzhenerna_himiya_i_s_vremenni_materiali_s_chastichno_obuche-15ea77de",
+   "method": "label:bg-semestri-label",
+   "tier": "G",
+   "source": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/inzhenerna_himiya_i_s_vremenni_materiali_s_chastichno_obuchenie_na_anglijski_ezik"
+  },
+  {
+   "program_id": "su-ih",
+   "uni": "SofiaUniversity",
+   "field": "language",
+   "value": "с частично обучение на английски език",
+   "segments": [
+    "Инженерна химия и съвременни материали (с частично обучение на английски език) / Факултет по химия и фармация / Бакалавърски програми / Об"
+   ],
+   "artifact": "html-inzhenerna_himiya_i_s_vremenni_materiali_s_chastichno_obuche-15ea77de",
+   "method": "title-language",
+   "tier": "G",
+   "source": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/inzhenerna_himiya_i_s_vremenni_materiali_s_chastichno_obuchenie_na_anglijski_ezik"
+  },
+  {
+   "program_id": "su-ih",
+   "uni": "SofiaUniversity",
+   "field": "tuition",
+   "value": "освободени",
+   "segments": [
+    "Химически науки ФХФ Инженерна химия и съвременни материали освободени освободени 460 EUR"
+   ],
+   "artifact": "docling-tsv-su-fees",
+   "method": "fee-join:su",
+   "tier": "F",
+   "source": "su-fees.pdf"
+  },
+  {
+   "program_id": "su-ih",
+   "uni": "SofiaUniversity",
+   "field": "admission",
+   "value": "успешно преминал приемен изпит или с оценка от държавен зрелостен изпит по Химия и опазване на околната среда , Физика или Математика",
+   "segments": [
+    "изнес в областта на производството и приложенията на съвременните функционални материали. Приемът на студенти за специалността „ Инженерна Химия и Съвременни Материали ” се извършва чрез успешно преминал приемен изпит или с оценка от държавен зрелостен изпит по Химия и опазване на околната среда , Физика или Математика . Също така може да се кандидатства и с оценка от олимпиади и национални състезания по Хим"
+   ],
+   "artifact": "html-inzhenerna_himiya_i_s_vremenni_materiali_s_chastichno_obuche-15ea77de",
+   "method": "label:bg-priemat-chrez",
+   "tier": "G",
+   "source": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/inzhenerna_himiya_i_s_vremenni_materiali_s_chastichno_obuchenie_na_anglijski_ezik"
+  },
+  {
+   "program_id": "su-psy",
+   "uni": "SofiaUniversity",
+   "field": "degree",
+   "value": "Образователно-квалификационна степен \"бакалавър след средно образование\"",
+   "segments": [
+    "такти EN Психология бакалавърска програма Срок на обучение: 8 семестъра (4 учебни години) Образователно-квалификационна степен \"бакалавър след средно образование\" Форма на обучение: редовна Адрес: София 1504, ​бул. \"Цар Освободител\" № 15, Кампус \"Ректо"
+   ],
+   "artifact": "html-psihologiya-d12facf2",
+   "method": "label:bg-okstepen",
+   "tier": "G",
+   "source": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/psihologiya/"
+  },
+  {
+   "program_id": "su-psy",
+   "uni": "SofiaUniversity",
+   "field": "duration",
+   "value": "Срок на обучение: 8 семестъра (4 учебни години)",
+   "segments": [
+    "ционна дейност Проекти Събития и конференции Контакти EN Психология бакалавърска програма Срок на обучение: 8 семестъра (4 учебни години) Образователно-квалификационна степен \"бакалавър след средно образование\" Форма на обучени"
+   ],
+   "artifact": "html-psihologiya-d12facf2",
+   "method": "label:bg-srok-label",
+   "tier": "G",
+   "source": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/psihologiya/"
+  },
+  {
+   "program_id": "su-psy",
+   "uni": "SofiaUniversity",
+   "field": "tuition",
+   "value": "310 EUR",
+   "segments": [
+    "Психология ФФ Психология 310 EUR няма 310 EUR 200 EUR 770 EUR 770 EUR"
+   ],
+   "artifact": "docling-tsv-su-fees",
+   "method": "fee-join:su",
+   "tier": "F",
+   "source": "su-fees.pdf"
+  },
+  {
+   "program_id": "su-psy",
+   "uni": "SofiaUniversity",
+   "field": "admission",
+   "value": "изпит по английски език",
+   "segments": [
+    "Психология Редовна С коефициент 3: Английски език 1. изпит по английски език"
+   ],
+   "artifact": "pdftext-su-adm",
+   "method": "ordinance-join:su-row",
+   "tier": "F",
+   "source": "su-adm.pdf"
+  },
+  {
+   "program_id": "su-phil",
+   "uni": "SofiaUniversity",
+   "field": "degree",
+   "value": "Образователно-квалификационна степен \"бакалавър след средно образование\"",
+   "segments": [
+    "рок на обучение в редовна форма: 8 семестъра (4 учебни години) Форми на обучение: редовна Образователно-квалификационна степен \"бакалавър след средно образование\" Адрес: София 1504; бул. \"Цар Освободител\" 15; Ректорат, Южно крило, ет. 3, каб. 47 Контак"
+   ],
+   "artifact": "html-filosofiya-na-angliiski-ezik-fdb7c372",
+   "method": "label:bg-okstepen",
+   "tier": "G",
+   "source": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/filosofiya-na-angliiski-ezik/"
+  },
+  {
+   "program_id": "su-phil",
+   "uni": "SofiaUniversity",
+   "field": "duration",
+   "value": "Срок на обучение в редовна форма: 8 семестъра (4 учебни години)",
+   "segments": [
+    "оекти Събития и конференции Контакти EN Философия на английски език бакалавърска програма Срок на обучение в редовна форма: 8 семестъра (4 учебни години) Форми на обучение: редовна Образователно-квалификационна степен \"бакалавър след средно об"
+   ],
+   "artifact": "html-filosofiya-na-angliiski-ezik-fdb7c372",
+   "method": "label:bg-srok-label",
+   "tier": "G",
+   "source": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/filosofiya-na-angliiski-ezik/"
+  },
+  {
+   "program_id": "su-phil",
+   "uni": "SofiaUniversity",
+   "field": "language",
+   "value": "на английски език",
+   "segments": [
+    "Философия на английски език - Философски факултет Начало Новини Прием Обучение Бакалавъ"
+   ],
+   "artifact": "html-filosofiya-na-angliiski-ezik-fdb7c372",
+   "method": "title-language",
+   "tier": "G",
+   "source": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/filosofiya-na-angliiski-ezik/"
+  },
+  {
+   "program_id": "su-phil",
+   "uni": "SofiaUniversity",
+   "field": "tuition",
+   "value": "310 EUR",
+   "segments": [
+    "Философия ФФ ФФ Философия Философия (на английски език) 310 EUR 200 EUR 310 EUR 200 EUR 770 EUR 770 EUR"
+   ],
+   "artifact": "docling-tsv-su-fees",
+   "method": "fee-join:su",
+   "tier": "F",
+   "source": "su-fees.pdf"
+  },
+  {
+   "program_id": "su-phil",
+   "uni": "SofiaUniversity",
+   "field": "admission",
+   "value": "успешно издържан кандидатстудентски изпит по английски език",
+   "segments": [
+    "За допускане до участие в класирането за специалност Философия (на английски език) е задължително кандидатите да отговарят на следните условия: - успешно издържан държавен зрелостен изпит (ДЗИ) по английски език - успешно издържан кандидатстудентски изпит по английски език - сертификат за владеене на английски език на равнище минимум В2 по Общата европейска референтна рамка за езици: Cambridge English - Proficiency (CPE);"
+   ],
+   "artifact": "pdftext-su-adm",
+   "method": "ordinance-join:su-clause",
+   "tier": "F",
+   "source": "su-adm.pdf"
+  },
+  {
+   "program_id": "mu-med",
+   "uni": "MUPleven",
+   "field": "degree",
+   "value": "образователно-квалификационна степен “магистър”",
+   "segments": [
+    "тояния и клиничен стаж по желание. Реализация : завършилите придобиват висше образование, образователно-квалификационна степен “магистър”, професионална квалификация “лекар” , който може да бъде: общопрактикуващ лекар; лекар въ"
+   ],
+   "artifact": "html-479-annotation-of-specialty-9498e7a2",
+   "method": "label:bg-okstepen",
+   "tier": "G",
+   "source": "https://mu-pleven.bg/index.php/bg/specialities/medicine/479-annotation-of-specialty"
+  },
+  {
+   "program_id": "mu-med",
+   "uni": "MUPleven",
+   "field": "duration",
+   "value": "6-годишен период на обучение (10 семестъра и 1 година преддипломен стаж)",
+   "segments": [
+    "на форма на обучение, държавна поръчка Конкурс : изпит по биология и по химия. Обучение : 6-годишен период на обучение (10 семестъра и 1 година преддипломен стаж). Обучението на студентите по специалност “Медицина” отговаря на най-високите национални и"
+   ],
+   "artifact": "html-479-annotation-of-specialty-9498e7a2",
+   "method": "label:bg-godishen",
+   "tier": "G",
+   "source": "https://mu-pleven.bg/index.php/bg/specialities/medicine/479-annotation-of-specialty"
+  },
+  {
+   "program_id": "mu-med",
+   "uni": "MUPleven",
+   "field": "language",
+   "value": "обучение на български език; Обучение на английски език",
+   "segments": [
+    "Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро)",
+    "Обучение на английски език (в евро)",
+    "1 Медицина (I, II, III и IV курс) 620 620 310"
+   ],
+   "artifact": "docling-tsv-mu-fees",
+   "method": "fee-join:mu-language",
+   "tier": "F",
+   "source": "mu-fees.pdf"
+  },
+  {
+   "program_id": "mu-med",
+   "uni": "MUPleven",
+   "field": "tuition",
+   "value": "620 евро",
+   "segments": [
+    "Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро)",
+    "1 Медицина (I, II, III и IV курс) 620 620 310"
+   ],
+   "artifact": "docling-tsv-mu-fees",
+   "method": "fee-join:mu",
+   "tier": "F",
+   "source": "mu-fees.pdf"
+  },
+  {
+   "program_id": "mu-med",
+   "uni": "MUPleven",
+   "field": "admission",
+   "value": "изпит по биология и по химия.",
+   "segments": [
+    "тстване : завършено средно образование Прием: редовна форма на обучение, държавна поръчка Конкурс : изпит по биология и по химия. Обучение : 6-годишен период на обучение (10 семестъра и 1 година преддипломен стаж). Обуч"
+   ],
+   "artifact": "html-479-annotation-of-specialty-9498e7a2",
+   "method": "label:bg-konkurs-label",
+   "tier": "G",
+   "source": "https://mu-pleven.bg/index.php/bg/specialities/medicine/479-annotation-of-specialty"
+  },
+  {
+   "program_id": "mu-pharm",
+   "uni": "MUPleven",
+   "field": "degree",
+   "value": "Образователно - квалификационна степен –„ магистър“",
+   "segments": [
+    "ия Анотация на специалността Анотация на специалността Анотация на специалност „Фармация“ Образователно - квалификационна степен –„ магистър“ Условия за кандидатстване : завършено средно образование Прием: редовна форма на обучение"
+   ],
+   "artifact": "html-3602-2016-05-19-07-23-24-0417be59",
+   "method": "label:bg-okstepen",
+   "tier": "G",
+   "source": "https://mu-pleven.bg/index.php/bg/specialities/farmacy/3602-2016-05-19-07-23-24"
+  },
+  {
+   "program_id": "mu-pharm",
+   "uni": "MUPleven",
+   "field": "duration",
+   "value": "5-годишен период на обучение (9 семестъра и 1 семестър преддипломен стаж)",
+   "segments": [
+    "ение, държавна поръчка, окс „магистър“ Конкурс : изпит по биология и по химия. Обучение : 5-годишен период на обучение (9 семестъра и 1 семестър преддипломен стаж). Обучението по специалността „фармация” по време на теоретичната и практическа подготовка"
+   ],
+   "artifact": "html-3602-2016-05-19-07-23-24-0417be59",
+   "method": "label:bg-godishen",
+   "tier": "G",
+   "source": "https://mu-pleven.bg/index.php/bg/specialities/farmacy/3602-2016-05-19-07-23-24"
+  },
+  {
+   "program_id": "mu-pharm",
+   "uni": "MUPleven",
+   "field": "language",
+   "value": "обучение на български език",
+   "segments": [
+    "Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро)",
+    "2 Фармация (I, II, III и IV курс) 620"
+   ],
+   "artifact": "docling-tsv-mu-fees",
+   "method": "fee-join:mu-language",
+   "tier": "F",
+   "source": "mu-fees.pdf"
+  },
+  {
+   "program_id": "mu-pharm",
+   "uni": "MUPleven",
+   "field": "tuition",
+   "value": "620 евро",
+   "segments": [
+    "Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро)",
+    "2 Фармация (I, II, III и IV курс) 620"
+   ],
+   "artifact": "docling-tsv-mu-fees",
+   "method": "fee-join:mu",
+   "tier": "F",
+   "source": "mu-fees.pdf"
+  },
+  {
+   "program_id": "mu-pharm",
+   "uni": "MUPleven",
+   "field": "admission",
+   "value": "изпит по биология и по химия.",
+   "segments": [
+    "ено средно образование Прием: редовна форма на обучение, държавна поръчка, окс „магистър“ Конкурс : изпит по биология и по химия. Обучение : 5-годишен период на обучение (9 семестъра и 1 семестър преддипломен стаж). Обу"
+   ],
+   "artifact": "html-3602-2016-05-19-07-23-24-0417be59",
+   "method": "label:bg-konkurs-label",
+   "tier": "G",
+   "source": "https://mu-pleven.bg/index.php/bg/specialities/farmacy/3602-2016-05-19-07-23-24"
+  },
+  {
+   "program_id": "mu-nurse",
+   "uni": "MUPleven",
+   "field": "degree",
+   "value": "ОКС „Бакалавър”",
+   "segments": [
+    "ция на специалността Анотация на специалността МЕДИЦИНСКА СЕСТРА Прием: държавна поръчка, ОКС „Бакалавър”, 4-годишен период на обучение, редовна форма. Конкурс: Завършилите средно образование пре"
+   ],
+   "artifact": "html-492-annotation-of-specialty-f3294187",
+   "method": "label:bg-oks-inline",
+   "tier": "G",
+   "source": "https://mu-pleven.bg/index.php/bg/specialities/medical-nurse/492-annotation-of-specialty"
+  },
+  {
+   "program_id": "mu-nurse",
+   "uni": "MUPleven",
+   "field": "duration",
+   "value": "4-годишен период на обучение",
+   "segments": [
+    "тта Анотация на специалността МЕДИЦИНСКА СЕСТРА Прием: държавна поръчка, ОКС „Бакалавър”, 4-годишен период на обучение, редовна форма. Конкурс: Завършилите средно образование преди 2008 г. кандидатстват с пол"
+   ],
+   "artifact": "html-492-annotation-of-specialty-f3294187",
+   "method": "label:bg-godishen",
+   "tier": "G",
+   "source": "https://mu-pleven.bg/index.php/bg/specialities/medical-nurse/492-annotation-of-specialty"
+  },
+  {
+   "program_id": "mu-nurse",
+   "uni": "MUPleven",
+   "field": "language",
+   "value": "обучение на български език",
+   "segments": [
+    "Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро)",
+    "5.1 Медицинска сестра (III и IVкурс) 410"
+   ],
+   "artifact": "docling-tsv-mu-fees",
+   "method": "fee-join:mu-language",
+   "tier": "F",
+   "source": "mu-fees.pdf"
+  },
+  {
+   "program_id": "mu-nurse",
+   "uni": "MUPleven",
+   "field": "tuition",
+   "value": "безплатно",
+   "segments": [
+    "ия съвет от 06.06.2025 г. за промяна на ПМС №283/19.08.2021 г. (ДВ бр. 47/10.06.2025 г.), специалностите „Медицинска сестра“ и „Акушерка“ са включени в списъка на защитените и обучението в тях за новоприетите студенти по държавна поръчка е безплатно. Такси за кандидатстване и обучение в МУ-Плевен за учебната 2026/2027 година Разгледайте:"
+   ],
+   "artifact": "html-8410-t2026-2027-1429cd14",
+   "method": "anchor:mu-nurse-free",
+   "tier": "B",
+   "source": "https://mu-pleven.bg/index.php/bg/learning/students/2022-07-27-13-03-20/8410-t2026-2027"
+  },
+  {
+   "program_id": "mu-nurse",
+   "uni": "MUPleven",
+   "field": "admission",
+   "value": "приемен изпит-тест по биология",
+   "segments": [
+    "ършилите средно образование след 2008г.: Положилите държавен зрелостен изпит по биология, могат да кандидатстват по избор с оценката от него или с приемен изпит-тест по биология; Неположилите държавен зрелостен изпит по биология кандидатстват с приемен изпит-тест по"
+   ],
+   "artifact": "html-492-annotation-of-specialty-f3294187",
+   "method": "label:bg-test-po-izbor",
+   "tier": "G",
+   "source": "https://mu-pleven.bg/index.php/bg/specialities/medical-nurse/492-annotation-of-specialty"
+  },
+  {
+   "program_id": "mu-ap",
+   "uni": "MUPleven",
+   "field": "degree",
+   "value": "ОКС „професионален бакалавър”",
+   "segments": [
+    "с реш-е на АС, пр-л № 6/27.10.2025 г.) Специалност „Помощник-фармацевт” – ОКС „професионален бакалавър”, редовна форма срок на обучение 3 години, професионална квалификация „Помощник-ф"
+   ],
+   "artifact": "pdftext-mu-sprav",
+   "method": "spravochnik-join:mu",
+   "tier": "F",
+   "source": "mu-sprav.pdf"
+  },
+  {
+   "program_id": "mu-ap",
+   "uni": "MUPleven",
+   "field": "duration",
+   "value": "срок на обучение 3 години",
+   "segments": [
+    "с реш-е на АС, пр-л № 6/27.10.2025 г.) Специалност „Помощник-фармацевт” – ОКС „професионален бакалавър”, редовна форма срок на обучение 3 години, професионална квалификация „Помощник-ф"
+   ],
+   "artifact": "pdftext-mu-sprav",
+   "method": "spravochnik-join:mu",
+   "tier": "F",
+   "source": "mu-sprav.pdf"
+  },
+  {
+   "program_id": "mu-ap",
+   "uni": "MUPleven",
+   "field": "language",
+   "value": "обучение на български език",
+   "segments": [
+    "Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро)",
+    "5.5 Помощник-фармацевт 410"
+   ],
+   "artifact": "docling-tsv-mu-fees",
+   "method": "fee-join:mu-language",
+   "tier": "F",
+   "source": "mu-fees.pdf"
+  },
+  {
+   "program_id": "mu-ap",
+   "uni": "MUPleven",
+   "field": "tuition",
+   "value": "410 евро",
+   "segments": [
+    "Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро) Български граждани и граждани на ЕС и ЕИП - обучение на български език (в евро)",
+    "5.5 Помощник-фармацевт 410"
+   ],
+   "artifact": "docling-tsv-mu-fees",
+   "method": "fee-join:mu",
+   "tier": "F",
+   "source": "mu-fees.pdf"
+  },
+  {
+   "program_id": "mu-ap",
+   "uni": "MUPleven",
+   "field": "admission",
+   "value": "изпит по биология или оценка от втори ДЗИ",
+   "segments": [
+    "т 34 Раздел III Специалности „Кинезитерапия”, „Опазване и контрол на общественото здраве”, „Медицинска сестра”, „Акушерка”, „Медицински лаборант”, „Рентгенов лаборант”, „Медицинска козметика“, „Помощник-фармацевт” и „Медико-социални дейности“ (изм с реш-е на АС, пр-л № 6/27.10.2025 г.) Чл. 30. За специалностите от този раздел се кандидатства в МУ-Плевен с изпит по биология или оценка от втори ДЗИ."
+   ],
+   "artifact": "pdftext-mu-sprav",
+   "method": "spravochnik-join:mu-chl30",
+   "tier": "F",
+   "source": "mu-sprav.pdf"
+  },
+  {
+   "program_id": "aubg-cs",
+   "uni": "AUBG",
+   "field": "degree",
+   "value": "Bachelor of Arts",
+   "segments": [
+    "ed Major Degree Requirements 72 DEG R EE R EQ UI REMENTS A minimum of 120 credit hours is required to earn a Bachelor of Arts degree at AUBG. Before graduation, each student must complete all General Education requirements and all"
+   ],
+   "artifact": "pdftext-aubg-catalog",
+   "method": "anchor:aubg-ba-degree",
+   "tier": "B",
+   "source": "aubg-catalog.pdf"
+  },
+  {
+   "program_id": "aubg-cs",
+   "uni": "AUBG",
+   "field": "duration",
+   "value": "eight semesters",
+   "segments": [
+    "and your world. Shape its future Home / Academics / Bachelor’s Degrees Bachelor's Degrees The duration of undergraduate education at AUBG is eight semesters. Students may combine up to two majors and two minors at no additional cost. Business Adm"
+   ],
+   "artifact": "html-bachelor-degrees-e06dac7d",
+   "method": "anchor:aubg-duration",
+   "tier": "B",
+   "source": "https://www.aubg.edu/academics/bachelor-degrees/"
+  },
+  {
+   "program_id": "aubg-cs",
+   "uni": "AUBG",
+   "field": "language",
+   "value": "English",
+   "segments": [
+    "at happens if I don’t meet the minimum English language requirements? Classes at AUBG are taught entirely in English so a great command of the language is essential for academic success. AUBG offers the Eng"
+   ],
+   "artifact": "html-how-to-apply-92cd4067",
+   "method": "label:en-taught-in",
+   "tier": "G",
+   "source": "https://www.aubg.edu/admissions/bachelors/how-to-apply/"
+  },
+  {
+   "program_id": "aubg-cs",
+   "uni": "AUBG",
+   "field": "tuition",
+   "value": "€6,900/semester",
+   "segments": [
+    "n. See them here . How much does it cost to attend AUBG? For the 2026-2027 academic year, tuition is €6,900/semester, the student activity fee is €320/semester, and the meal plan is €200/semester. All fees"
+   ],
+   "artifact": "html-cost-aid-70cdb001",
+   "method": "anchor:aubg-tuition",
+   "tier": "B",
+   "source": "https://www.aubg.edu/admissions/bachelors/cost-aid/"
+  },
+  {
+   "program_id": "aubg-cs",
+   "uni": "AUBG",
+   "field": "admission",
+   "value": "recommended minimum GPA for applicants is 3.0 on a 4.0 scale (4.5 out of six 6 on the Bulgarian scale)",
+   "segments": [
+    "ssian. Translations must be completed by a certified translator and verified by a notary. The recommended minimum GPA for applicants is 3.0 on a 4.0 scale (4.5 out of six 6 on the Bulgarian scale). Your transcript should include: a list of all courses taken grades earned a calculated a"
+   ],
+   "artifact": "html-how-to-apply-92cd4067",
+   "method": "label:en-min-gpa",
+   "tier": "G",
+   "source": "https://www.aubg.edu/admissions/bachelors/how-to-apply/"
+  },
+  {
+   "program_id": "aubg-ba",
+   "uni": "AUBG",
+   "field": "degree",
+   "value": "Bachelor of Arts",
+   "segments": [
+    "ed Major Degree Requirements 72 DEG R EE R EQ UI REMENTS A minimum of 120 credit hours is required to earn a Bachelor of Arts degree at AUBG. Before graduation, each student must complete all General Education requirements and all"
+   ],
+   "artifact": "pdftext-aubg-catalog",
+   "method": "anchor:aubg-ba-degree",
+   "tier": "B",
+   "source": "aubg-catalog.pdf"
+  },
+  {
+   "program_id": "aubg-ba",
+   "uni": "AUBG",
+   "field": "duration",
+   "value": "eight semesters",
+   "segments": [
+    "and your world. Shape its future Home / Academics / Bachelor’s Degrees Bachelor's Degrees The duration of undergraduate education at AUBG is eight semesters. Students may combine up to two majors and two minors at no additional cost. Business Adm"
+   ],
+   "artifact": "html-bachelor-degrees-e06dac7d",
+   "method": "anchor:aubg-duration",
+   "tier": "B",
+   "source": "https://www.aubg.edu/academics/bachelor-degrees/"
+  },
+  {
+   "program_id": "aubg-ba",
+   "uni": "AUBG",
+   "field": "language",
+   "value": "English",
+   "segments": [
+    "at happens if I don’t meet the minimum English language requirements? Classes at AUBG are taught entirely in English so a great command of the language is essential for academic success. AUBG offers the Eng"
+   ],
+   "artifact": "html-how-to-apply-92cd4067",
+   "method": "label:en-taught-in",
+   "tier": "G",
+   "source": "https://www.aubg.edu/admissions/bachelors/how-to-apply/"
+  },
+  {
+   "program_id": "aubg-ba",
+   "uni": "AUBG",
+   "field": "tuition",
+   "value": "€6,900/semester",
+   "segments": [
+    "n. See them here . How much does it cost to attend AUBG? For the 2026-2027 academic year, tuition is €6,900/semester, the student activity fee is €320/semester, and the meal plan is €200/semester. All fees"
+   ],
+   "artifact": "html-cost-aid-70cdb001",
+   "method": "anchor:aubg-tuition",
+   "tier": "B",
+   "source": "https://www.aubg.edu/admissions/bachelors/cost-aid/"
+  },
+  {
+   "program_id": "aubg-ba",
+   "uni": "AUBG",
+   "field": "admission",
+   "value": "recommended minimum GPA for applicants is 3.0 on a 4.0 scale (4.5 out of six 6 on the Bulgarian scale)",
+   "segments": [
+    "ssian. Translations must be completed by a certified translator and verified by a notary. The recommended minimum GPA for applicants is 3.0 on a 4.0 scale (4.5 out of six 6 on the Bulgarian scale). Your transcript should include: a list of all courses taken grades earned a calculated a"
+   ],
+   "artifact": "html-how-to-apply-92cd4067",
+   "method": "label:en-min-gpa",
+   "tier": "G",
+   "source": "https://www.aubg.edu/admissions/bachelors/how-to-apply/"
+  },
+  {
+   "program_id": "aubg-econ",
+   "uni": "AUBG",
+   "field": "degree",
+   "value": "Bachelor of Arts",
+   "segments": [
+    "ed Major Degree Requirements 72 DEG R EE R EQ UI REMENTS A minimum of 120 credit hours is required to earn a Bachelor of Arts degree at AUBG. Before graduation, each student must complete all General Education requirements and all"
+   ],
+   "artifact": "pdftext-aubg-catalog",
+   "method": "anchor:aubg-ba-degree",
+   "tier": "B",
+   "source": "aubg-catalog.pdf"
+  },
+  {
+   "program_id": "aubg-econ",
+   "uni": "AUBG",
+   "field": "duration",
+   "value": "eight semesters",
+   "segments": [
+    "and your world. Shape its future Home / Academics / Bachelor’s Degrees Bachelor's Degrees The duration of undergraduate education at AUBG is eight semesters. Students may combine up to two majors and two minors at no additional cost. Business Adm"
+   ],
+   "artifact": "html-bachelor-degrees-e06dac7d",
+   "method": "anchor:aubg-duration",
+   "tier": "B",
+   "source": "https://www.aubg.edu/academics/bachelor-degrees/"
+  },
+  {
+   "program_id": "aubg-econ",
+   "uni": "AUBG",
+   "field": "language",
+   "value": "English",
+   "segments": [
+    "at happens if I don’t meet the minimum English language requirements? Classes at AUBG are taught entirely in English so a great command of the language is essential for academic success. AUBG offers the Eng"
+   ],
+   "artifact": "html-how-to-apply-92cd4067",
+   "method": "label:en-taught-in",
+   "tier": "G",
+   "source": "https://www.aubg.edu/admissions/bachelors/how-to-apply/"
+  },
+  {
+   "program_id": "aubg-econ",
+   "uni": "AUBG",
+   "field": "tuition",
+   "value": "€6,900/semester",
+   "segments": [
+    "n. See them here . How much does it cost to attend AUBG? For the 2026-2027 academic year, tuition is €6,900/semester, the student activity fee is €320/semester, and the meal plan is €200/semester. All fees"
+   ],
+   "artifact": "html-cost-aid-70cdb001",
+   "method": "anchor:aubg-tuition",
+   "tier": "B",
+   "source": "https://www.aubg.edu/admissions/bachelors/cost-aid/"
+  },
+  {
+   "program_id": "aubg-econ",
+   "uni": "AUBG",
+   "field": "admission",
+   "value": "recommended minimum GPA for applicants is 3.0 on a 4.0 scale (4.5 out of six 6 on the Bulgarian scale)",
+   "segments": [
+    "ssian. Translations must be completed by a certified translator and verified by a notary. The recommended minimum GPA for applicants is 3.0 on a 4.0 scale (4.5 out of six 6 on the Bulgarian scale). Your transcript should include: a list of all courses taken grades earned a calculated a"
+   ],
+   "artifact": "html-how-to-apply-92cd4067",
+   "method": "label:en-min-gpa",
+   "tier": "G",
+   "source": "https://www.aubg.edu/admissions/bachelors/how-to-apply/"
+  },
+  {
+   "program_id": "aubg-emba",
+   "uni": "AUBG",
+   "field": "degree",
+   "value": "Executive MBA",
+   "segments": [
+    "Read More https://www.aubg.edu/wp-content/uploads/2022/03/Business-Trip.png Accreditation The AUBG Executive MBA Program is accredited both in the United States, by the New England Commission of Higher Education, and in Bulgaria, by the National Agen"
+   ],
+   "artifact": "html-executive-mba-e2638e91",
+   "method": "anchor:aubg-emba-degree",
+   "tier": "B",
+   "source": "https://www.aubg.edu/academics/executive-mba/"
+  },
+  {
+   "program_id": "aubg-emba",
+   "uni": "AUBG",
+   "field": "duration",
+   "value": "sixteen-month (four-term)",
+   "segments": [
+    "complex global business environment. Impressive Curriculum The Executive MBA program is a sixteen-month (four-term) degree program to help you refine your management style and prepare you for increasingly"
+   ],
+   "artifact": "html-executive-mba-e2638e91",
+   "method": "label:en-nmonth-nterm",
+   "tier": "G",
+   "source": "https://www.aubg.edu/academics/executive-mba/"
+  },
+  {
+   "program_id": "aubg-emba",
+   "uni": "AUBG",
+   "field": "language",
+   "value": "English",
+   "segments": [
+    "at happens if I don’t meet the minimum English language requirements? Classes at AUBG are taught entirely in English so a great command of the language is essential for academic success. AUBG offers the Eng"
+   ],
+   "artifact": "html-how-to-apply-92cd4067",
+   "method": "label:en-taught-in",
+   "tier": "G",
+   "source": "https://www.aubg.edu/admissions/bachelors/how-to-apply/"
+  },
+  {
+   "program_id": "aubg-emba",
+   "uni": "AUBG",
+   "field": "tuition",
+   "value": "€19,100",
+   "segments": [
+    "n Fee The application fee for the EMBA program is €120 and is non-refundable. Tuition Fee The tuition fee for the EMBA program is €19,100 and covers tuition, study materials, participation in Leadership seminars and networking"
+   ],
+   "artifact": "html-tuition-and-financing-257cb96e",
+   "method": "anchor:aubg-emba-tuition",
+   "tier": "B",
+   "source": "https://www.aubg.edu/admissions/emba/tuition-and-financing/"
+  },
+  {
+   "program_id": "aubg-emba",
+   "uni": "AUBG",
+   "field": "admission",
+   "value": "minimum of a bachelor’s degree from an accredited institution of higher education",
+   "segments": [
+    "vidence of leadership through professional and personal experiences. Undergraduate Degree Applicants are required to have obtained a minimum of a bachelor’s degree from an accredited institution of higher education. Students with undergraduate studies in business and related fields, as well as those wit"
+   ],
+   "artifact": "html-how-to-apply-5eead72c",
+   "method": "label:en-required-min",
+   "tier": "G",
+   "source": "https://www.aubg.edu/admissions/emba/how-to-apply/"
+  },
+  {
+   "program_id": "vum-sst",
+   "uni": "VUM",
+   "field": "degree",
+   "value": "accredited Bulgarian Professional Bachelor degree from VUM and the British BSc (Hons) Software Engineering awarded by Cardiff Metropolitan University",
+   "segments": [
+    "earn a British degree in Bulgaria: Eligible full-time students may study towards both an accredited Bulgarian Professional Bachelor degree from VUM and the British BSc (Hons) Software Engineering awarded by Cardiff Metropolitan University. Career opportunities: The programme prepares students for careers in software developmen"
+   ],
+   "artifact": "html-software-systems-and-technologies-5b154f9f",
+   "method": "label:vum-dual-bachelor",
+   "tier": "G",
+   "source": "https://vum.bg/software-systems-and-technologies/"
+  },
+  {
+   "program_id": "vum-sst",
+   "uni": "VUM",
+   "field": "duration",
+   "value": "3 years / 6 semesters",
+   "segments": [
+    "n Varna University of Management, Bulgaria Intakes Route September Intake February Intake Professional Bachelor 3 years / 6 semesters 3.5 years / 6 semesters *February-intake students complete the same number of semesters o"
+   ],
+   "artifact": "html-software-systems-and-technologies-5b154f9f",
+   "method": "label:en-years-sem",
+   "tier": "G",
+   "source": "https://vum.bg/software-systems-and-technologies/"
+  },
+  {
+   "program_id": "vum-sst",
+   "uni": "VUM",
+   "field": "language",
+   "value": "English",
+   "segments": [
+    "pply online Key Facts Programme Software Systems and Technologies Mode of study Full-time Language of instruction English Degree awarded by VUM Professional Bachelor’s degree International award option Cardiff M"
+   ],
+   "artifact": "html-software-systems-and-technologies-5b154f9f",
+   "method": "label:en-lang-label",
+   "tier": "G",
+   "source": "https://vum.bg/software-systems-and-technologies/"
+  },
+  {
+   "program_id": "vum-sst",
+   "uni": "VUM",
+   "field": "tuition",
+   "value": "1500 € per semester for EU and EEA citizens",
+   "segments": [
+    "wledging achievements in extracurricular activities and sports. Tuition Fees per Semester Tuition Fee Bachelor’s Programme *with English language training 1500 € per semester for EU and EEA citizens 1950 € per semester for non EU and EEA citizens Tuition Fee Bachelor’s Programme in Culin"
+   ],
+   "artifact": "html-scholarships-tution-fees-and-funding-62c027ae",
+   "method": "fees-page-section:vum",
+   "tier": "F",
+   "source": "https://vum.bg/scholarships-tution-fees-and-funding/"
+  },
+  {
+   "program_id": "vum-sst",
+   "uni": "VUM",
+   "field": "admission",
+   "value": "State Matriculation Examination (DZI) in English language, provided that the exam corresponds to CEFR level B2 and the final grade is at least Very Good (5.00)",
+   "segments": [
+    "nglish language certificate, must take the online English exam at VUM. Bulgarian citizens may also be admitted based on their result from the State Matriculation Examination (DZI) in English language, provided that the exam corresponds to CEFR level B2 and the final grade is at least Very Good (5.00). Step 3. Acceptance Letter and Place Reservation Applicants who successfully pass the adm"
+   ],
+   "artifact": "html-application-requirement-for-bachelor-degree-programmes-f10c13e7",
+   "method": "label:en-dzi-b2",
+   "tier": "G",
+   "source": "https://vum.bg/application-requirement-for-bachelor-degree-programmes/"
+  },
+  {
+   "program_id": "vum-gca",
+   "uni": "VUM",
+   "field": "degree",
+   "value": "accredited Bulgarian Professional Bachelor degree from VUM and the British BA (Hons) Culinary Arts Management awarded by Cardiff Metropolitan University",
+   "segments": [
+    "sh degree opportunity in Bulgaria: Eligible full-time students may study towards both the accredited Bulgarian Professional Bachelor degree from VUM and the British BA (Hons) Culinary Arts Management awarded by Cardiff Metropolitan University. apply online Key Facts Programme Gastronomy and Culinary Arts Mode of study Full-time La"
+   ],
+   "artifact": "html-gastronomy-and-culinary-arts-5a34e9e0",
+   "method": "label:vum-dual-bachelor",
+   "tier": "G",
+   "source": "https://vum.bg/gastronomy-and-culinary-arts/"
+  },
+  {
+   "program_id": "vum-gca",
+   "uni": "VUM",
+   "field": "duration",
+   "value": "3 years / 6 semesters",
+   "segments": [
+    "n Varna University of Management, Bulgaria Intakes Route September Intake February Intake Professional Bachelor 3 years / 6 semesters 3.5 years / 6 semesters * February-intake students complete the same six-semester program"
+   ],
+   "artifact": "html-gastronomy-and-culinary-arts-5a34e9e0",
+   "method": "label:en-years-sem",
+   "tier": "G",
+   "source": "https://vum.bg/gastronomy-and-culinary-arts/"
+  },
+  {
+   "program_id": "vum-gca",
+   "uni": "VUM",
+   "field": "language",
+   "value": "English",
+   "segments": [
+    "ty. apply online Key Facts Programme Gastronomy and Culinary Arts Mode of study Full-time Language of instruction English Degree awarded by VUM Professional Bachelor International award option Cardiff Metropolit"
+   ],
+   "artifact": "html-gastronomy-and-culinary-arts-5a34e9e0",
+   "method": "label:en-lang-label",
+   "tier": "G",
+   "source": "https://vum.bg/gastronomy-and-culinary-arts/"
+  },
+  {
+   "program_id": "vum-gca",
+   "uni": "VUM",
+   "field": "tuition",
+   "value": "1500 € per semester for EU and EEA citizens",
+   "segments": [
+    "00 € per semester for EU and EEA citizens 1950 € per semester for non EU and EEA citizens Tuition Fee Bachelor’s Programme in Culinary Arts *with English language training 1500 € per semester for EU and EEA citizens 2400 € per semester for non EU and EEA citizens Tuition Fee Bachelor’s Programme – distan"
+   ],
+   "artifact": "html-scholarships-tution-fees-and-funding-62c027ae",
+   "method": "fees-page-section:vum",
+   "tier": "F",
+   "source": "https://vum.bg/scholarships-tution-fees-and-funding/"
+  },
+  {
+   "program_id": "vum-gca",
+   "uni": "VUM",
+   "field": "admission",
+   "value": "State Matriculation Examination (DZI) in English language, provided that the exam corresponds to CEFR level B2 and the final grade is at least Very Good (5.00)",
+   "segments": [
+    "nglish language certificate, must take the online English exam at VUM. Bulgarian citizens may also be admitted based on their result from the State Matriculation Examination (DZI) in English language, provided that the exam corresponds to CEFR level B2 and the final grade is at least Very Good (5.00). Step 3. Acceptance Letter and Place Reservation Applicants who successfully pass the adm"
+   ],
+   "artifact": "html-application-requirement-for-bachelor-degree-programmes-f10c13e7",
+   "method": "label:en-dzi-b2",
+   "tier": "G",
+   "source": "https://vum.bg/application-requirement-for-bachelor-degree-programmes/"
+  },
+  {
+   "program_id": "vum-mba",
+   "uni": "VUM",
+   "field": "degree",
+   "value": "VUM Master’s degree in Business Administration and the Master of Business Administration awarded by Cardiff Metropolitan University",
+   "segments": [
+    "unity to earn a British degree in Bulgaria : Eligible students may study towards both the VUM Master’s degree in Business Administration and the Master of Business Administration awarded by Cardiff Metropolitan University. apply online Key Facts Programme Master of Business Administration – MBA Mode of study F"
+   ],
+   "artifact": "html-master-of-business-administration-b4539d94",
+   "method": "label:vum-dual-master",
+   "tier": "G",
+   "source": "https://vum.bg/master-of-business-administration/"
+  },
+  {
+   "program_id": "vum-mba",
+   "uni": "VUM",
+   "field": "duration",
+   "value": "3 semesters or 4 semesters",
+   "segments": [
+    "ion English Degree awarded by VUM Master’s degree in Business Administration Study routes 3 semesters or 4 semesters, depending on the level and field of the applicant’s previous higher education Internatio"
+   ],
+   "artifact": "html-master-of-business-administration-b4539d94",
+   "method": "label:en-sem-or-sem",
+   "tier": "G",
+   "source": "https://vum.bg/master-of-business-administration/"
+  },
+  {
+   "program_id": "vum-mba",
+   "uni": "VUM",
+   "field": "language",
+   "value": "English",
+   "segments": [
+    "nline Key Facts Programme Master of Business Administration – MBA Mode of study Full-time Language of instruction English Degree awarded by VUM Master’s degree in Business Administration Study routes 3 semesters"
+   ],
+   "artifact": "html-master-of-business-administration-b4539d94",
+   "method": "label:en-lang-label",
+   "tier": "G",
+   "source": "https://vum.bg/master-of-business-administration/"
+  },
+  {
+   "program_id": "vum-mba",
+   "uni": "VUM",
+   "field": "tuition",
+   "value": "1500 € per semester for EU and EEA citizens",
+   "segments": [
+    "00 € per semester for EU and EEA citizens 1500 € per semester for non EU and EEA citizens Tuition Fee MBA Programme *For semesters 1, 2 and 3 1500 € per semester for EU and EEA citizens 2400 € per semester for non EU and EEA citizens Tuition Fee MBA Programme *For semester 4"
+   ],
+   "artifact": "html-scholarships-tution-fees-and-funding-62c027ae",
+   "method": "fees-page-section:vum",
+   "tier": "F",
+   "source": "https://vum.bg/scholarships-tution-fees-and-funding/"
+  },
+  {
+   "program_id": "vum-mba",
+   "uni": "VUM",
+   "field": "admission",
+   "value": "English language proficiency equivalent to IELTS 6.5 or above",
+   "segments": [
+    "istrative, document recognition, legalisation, visa, residence or enrolment requirements. Applicants must demonstrate English language proficiency equivalent to IELTS 6.5 or above in a manner accepted by both VUM and Cardiff Metropolitan University. Accepted forms of e"
+   ],
+   "artifact": "html-master-of-business-administration-b4539d94",
+   "method": "label:en-must-demonstrate",
+   "tier": "G",
+   "source": "https://vum.bg/master-of-business-administration/"
+  },
+  {
+   "program_id": "vum-corr",
+   "uni": "VUM",
+   "field": "degree",
+   "value": "MASTER",
+   "segments": [
+    "professional field and the acquired educational-qualification degree of higher education) Educational qualification degree MASTER Curriculum overview Semester fee: 1100 leva Admission Requirements CAREER DEVELOPMENT The"
+   ],
+   "artifact": "html-coruption-7c73f0cf",
+   "method": "label:en-equal-degree",
+   "tier": "G",
+   "source": "https://vum.bg/coruption/"
+  },
+  {
+   "program_id": "vum-corr",
+   "uni": "VUM",
+   "field": "duration",
+   "value": "3 – 4 semesters",
+   "segments": [
+    "study SOFIA Language of instruction BULGARIAN Beginning of the learning process NOVEMBER Duration of training 3 – 4 semesters (depending on the professional field and the acquired educational-qualification degree of"
+   ],
+   "artifact": "html-coruption-7c73f0cf",
+   "method": "label:en-duration-label",
+   "tier": "G",
+   "source": "https://vum.bg/coruption/"
+  },
+  {
+   "program_id": "vum-corr",
+   "uni": "VUM",
+   "field": "language",
+   "value": "BULGARIAN",
+   "segments": [
+    "sparency and strengthening public trust in institutions apply online Place of study SOFIA Language of instruction BULGARIAN Beginning of the learning process NOVEMBER Duration of training 3 – 4 semesters (dependin"
+   ],
+   "artifact": "html-coruption-7c73f0cf",
+   "method": "label:en-lang-label",
+   "tier": "G",
+   "source": "https://vum.bg/coruption/"
+  },
+  {
+   "program_id": "vum-corr",
+   "uni": "VUM",
+   "field": "tuition",
+   "value": "1100 leva",
+   "segments": [
+    "n degree of higher education) Educational qualification degree MASTER Curriculum overview Semester fee: 1100 leva Admission Requirements CAREER DEVELOPMENT The master’s program “Fight against corruption"
+   ],
+   "artifact": "html-coruption-7c73f0cf",
+   "method": "label:en-semfee-label",
+   "tier": "G",
+   "source": "https://vum.bg/coruption/"
+  },
+  {
+   "program_id": "vum-corr",
+   "uni": "VUM",
+   "field": "admission",
+   "value": "candidates holding a Bachelor’s or Master’s degree from any field of study",
+   "segments": [
+    "ment in which anti-corruption mechanisms operate. Who is this programme for? The Master’s programme is open to candidates holding a Bachelor’s or Master’s degree from any field of study. It is particularly suitable for: Civil servants in national and local government Judges,"
+   ],
+   "artifact": "html-coruption-7c73f0cf",
+   "method": "label:en-open-to",
+   "tier": "G",
+   "source": "https://vum.bg/coruption/"
+  }
+ ]
+}
