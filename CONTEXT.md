@@ -39,3 +39,7 @@ _Avoid_: general info
 
 **Stale-green drift**:
 The failure mode where a university publishes next year's data on a new page while the old page stays live and unchanged (HTTP 200, same content hash), so freshness checks stay green while the data goes stale.
+
+**Attention (item)**:
+One unit of work only a human can advance: a blocked publish, an open repair-queue row, an unresolved CHECK verdict, a pending onboarding proposal, a drift warning. Attention items age from the moment they open; the pipeline never resolves one on its own. The set of open items is the pipeline's whole claim on human time — anything not an Attention item must be safe to leave unwatched.
+_Avoid_: alert, todo, notification (those are delivery mechanisms, not the work itself)
