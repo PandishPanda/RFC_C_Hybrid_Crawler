@@ -236,6 +236,13 @@ LABEL_PATTERNS = {
         ("en-sem-or-sem", r'(\d semesters or \d semesters)'),
     ],
     "language": [
+        # BG structured label first: a page's own «Език на преподаване»
+        # declaration outranks prose mentions like the EN boilerplate
+        # "taught entirely in English" (which mis-fired on a
+        # Bulgarian-taught program, 2026-08-17 VUM benchmark).
+        # captures dual-language declarations whole («БЪЛГАРСКИ ИЛИ
+        # АНГЛИЙСКИ») — truncating one out would be a wrong claim.
+        ("bg-lang-label", r'Език на преподаване(?:\\n| )+((?:БЪЛГАРСКИ|Български|български|АНГЛИЙСКИ|Английски|английски)(?:(?:(?:\\n| )+(?:И|и|ИЛИ|или)(?:\\n| )+)(?:БЪЛГАРСКИ|Български|български|АНГЛИЙСКИ|Английски|английски))?)'),
         ("en-lang-label", r'Language of instruction\s+(English|Bulgarian|ENGLISH|BULGARIAN)'),
         ("en-taught-in", r'taught entirely in (English)'),
     ],
@@ -257,11 +264,20 @@ LABEL_PATTERNS = {
 }
 
 
-def harvest_labels(field, source, max_span=400):
-    # type: (str, TextSource, int) -> Optional[Extraction]
-    """Run the shared label library over one document (tier G)."""
+def harvest_labels(field, source, max_span=400, skip=()):
+    # type: (str, TextSource, int, Sequence[str]) -> Optional[Extraction]
+    """Run the shared label library over one document (tier G).
+
+    skip lists label ids suppressed for this program-field by config
+    (ProgramConfig.suppress_labels) — a human-adjudicated verdict that a
+    verbatim-present value makes a wrong claim (e.g. a stale fee the
+    site's own fees page contradicts). The value stays visible in the
+    snapshot; only this shortcut to it is disabled, so the field falls
+    through to the next mechanism or an honest null."""
     text = norm(source.text)
     for pid, rx in LABEL_PATTERNS[field]:
+        if pid in skip:
+            continue
         m = re.search(rx, text)
         if m and len(m.group(1)) <= max_span:
             return _emit(field, norm(m.group(1)),
@@ -772,7 +788,8 @@ def resolve_field(site, program, field, docs):
                 return r
 
     for source in text_docs:
-        r = harvest_labels(field, source)
+        r = harvest_labels(field, source,
+                           skip=program.suppress_labels.get(field, ()))
         if r:
             return r
 

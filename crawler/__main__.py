@@ -391,6 +391,8 @@ def main(argv=None):
         # TRUE value from a real document -- it is stale, not wrong. Making
         # it fatal would block a publish over data that is still accurate.
         return 0
+
+    if args.command == "labelkit":
         config_path = Path(
             args.configs or runner.DEFAULT_CONFIGS_DIR
         ) / "{0}.json".format(args.uni_id)

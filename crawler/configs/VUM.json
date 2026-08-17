@@ -12,6 +12,16 @@
         "value_pattern": "\\d{3,4} € per semester for EU and EEA citizens",
         "window": 120
       }
+    },
+    "vum-fees-bg": {
+      "url": "https://vum.bg/bg/stipendii-taksi/",
+      "route": "html",
+      "join": {
+        "kind": "fees-page",
+        "name": "vum-bg",
+        "value_pattern": "\\d{3,4} € на семестър за граждани на ЕС и ЕИП",
+        "window": 120
+      }
     }
   },
   "programs": [
@@ -51,31 +61,52 @@
       "id": "vum-corr",
       "name": "Fighting Corruption and Conflict of Interest",
       "rsvu_code": "30806933",
-      "page": "https://vum.bg/coruption/"
+      "page": "https://vum.bg/coruption/",
+      "suppress_labels": {
+        "tuition": [
+          "en-semfee-label"
+        ]
+      }
     },
     {
       "id": "vum-ibm-pb",
       "name": "Международен бизнес и мениджмънт",
       "rsvu_code": "30702821",
-      "page": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/"
+      "page": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/",
+      "fees_section": {
+        "source": "vum-fees-bg",
+        "section_pattern": "Такса за обучение – бакалавърска програма \\*"
+      }
     },
     {
       "id": "vum-ibm-b",
       "name": "Международен бизнес и мениджмънт",
       "rsvu_code": "30702822",
-      "page": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/"
+      "page": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/",
+      "fees_section": {
+        "source": "vum-fees-bg",
+        "section_pattern": "Такса за обучение – бакалавърска програма \\*"
+      }
     },
     {
       "id": "vum-hm-pb",
       "name": "Хотелски мениджмънт",
       "rsvu_code": "30900481",
-      "page": "https://vum.bg/bg/hotelski-menidjmant"
+      "page": "https://vum.bg/bg/hotelski-menidjmant",
+      "fees_section": {
+        "source": "vum-fees-bg",
+        "section_pattern": "Такса за обучение – бакалавърска програма \\*"
+      }
     },
     {
       "id": "vum-hm-b",
       "name": "Хотелски мениджмънт",
       "rsvu_code": "30900482",
-      "page": "https://vum.bg/bg/hotelski-menidjmant"
+      "page": "https://vum.bg/bg/hotelski-menidjmant",
+      "fees_section": {
+        "source": "vum-fees-bg",
+        "section_pattern": "Такса за обучение – бакалавърска програма \\*"
+      }
     },
     {
       "id": "vum-ped-econ",
@@ -93,13 +124,21 @@
       "id": "vum-hce",
       "name": "Хотелиерство и кулинарни изкуства",
       "rsvu_code": "30900412",
-      "page": "https://vum.bg/bg/hotelierstvo-kulinarni-izkustva/"
+      "page": "https://vum.bg/bg/hotelierstvo-kulinarni-izkustva/",
+      "fees_section": {
+        "source": "vum-fees-bg",
+        "section_pattern": "Такса за обучение – бакалавърска програма \\*"
+      }
     },
     {
       "id": "vum-int-tour",
       "name": "Международен туризъм",
       "rsvu_code": "30900233",
-      "page": "https://vum.bg/bg/magistratura-mejdunaroden-turizam/"
+      "page": "https://vum.bg/bg/magistratura-mejdunaroden-turizam/",
+      "fees_section": {
+        "source": "vum-fees-bg",
+        "section_pattern": "Такса за обучение – магистърска програма „Международен туризъм“ \\* ?за семестри 1 и 2"
+      }
     },
     {
       "id": "vum-tour-phd",
@@ -111,13 +150,21 @@
       "id": "vum-food",
       "name": "Хранителни технологии в кулинарните изкуства",
       "rsvu_code": "51200741",
-      "page": "https://vum.bg/bg/hranitelni-tehnologii-kulinarni-izkustva/"
+      "page": "https://vum.bg/bg/hranitelni-tehnologii-kulinarni-izkustva/",
+      "fees_section": {
+        "source": "vum-fees-bg",
+        "section_pattern": "Такса за обучение в бакалавърска програма по: Кулинарни изкуства"
+      }
     },
     {
       "id": "vum-mkt",
       "name": "Маркетинг и мениджмънт",
       "rsvu_code": "30800361",
-      "page": "https://vum.bg/bg/marketing-menidjmant/"
+      "page": "https://vum.bg/bg/marketing-menidjmant/",
+      "fees_section": {
+        "source": "vum-fees-bg",
+        "section_pattern": "Такса за обучение – бакалавърска програма \\*"
+      }
     }
   ]
 }

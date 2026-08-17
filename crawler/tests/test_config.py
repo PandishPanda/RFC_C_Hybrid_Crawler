@@ -76,3 +76,36 @@ class RsvuCodeTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def _prog(**extra):
+    prog = {"id": "x1", "name": "X1", "page": "https://x.example/p"}
+    prog.update(extra)
+    return dict(MINIMAL, programs=[prog])
+
+
+class SuppressLabelsTest(unittest.TestCase):
+    """suppress_labels: human-adjudicated per-program-field label
+    suppression (stale-green verdicts as config data)."""
+
+    def test_defaults_to_empty(self):
+        cfg = parse_site_config(dict(MINIMAL))
+        self.assertEqual(cfg.programs[0].suppress_labels, {})
+
+    def test_accepts_field_to_label_ids(self):
+        cfg = parse_site_config(_prog(
+            suppress_labels={"tuition": ["en-semfee-label"]}))
+        self.assertEqual(cfg.programs[0].suppress_labels,
+                         {"tuition": ("en-semfee-label",)})
+
+    def test_rejects_a_non_field_key(self):
+        with self.assertRaises(ConfigError):
+            parse_site_config(_prog(suppress_labels={"fee": ["x"]}))
+
+    def test_rejects_an_empty_id_list(self):
+        with self.assertRaises(ConfigError):
+            parse_site_config(_prog(suppress_labels={"tuition": []}))
+
+    def test_rejects_a_non_object(self):
+        with self.assertRaises(ConfigError):
+            parse_site_config(_prog(suppress_labels=["en-semfee-label"]))

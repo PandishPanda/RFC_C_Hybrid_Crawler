@@ -47,3 +47,13 @@ reason; an unexplained failure is a bug.
 Issue tracker: local markdown under `.scratch/<feature>/` — see
 docs/agents/issue-tracker.md. Every ticket gets a two-axis review
 (standards + spec) before it is called done.
+
+## Agent skills
+
+### Issue tracker
+
+Local markdown under `.scratch/<feature>/`. See `docs/agents/issue-tracker.md`.
+
+### Domain docs
+
+Single-context — `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.

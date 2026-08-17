@@ -356,6 +356,14 @@ class ProgramConfig:
     language_tracks: Optional[JoinRef] = None
     fees_section: Optional[SectionRef] = None
     field_anchors: Mapping[str, str] = field(default_factory=dict)
+    # {field -> label ids the shared library must NOT apply to this
+    # program}. A human-adjudicated stale-green verdict as config data: a
+    # verbatim-present value whose claim the site itself contradicts
+    # elsewhere (e.g. an outdated fee on the program page vs the current
+    # fees page). Suppression never invents a value — the field falls
+    # through to the next mechanism or an honest null.
+    suppress_labels: Mapping[str, Tuple[str, ...]] = field(
+        default_factory=dict)
     # {offering key -> recipe}. Keyed by FORM, never a list of offerings:
     # the registry enumerates those, so config restating them could drift.
     offerings: Mapping[str, OfferingConfig] = field(default_factory=dict)
@@ -835,7 +843,8 @@ _PROGRAM_KEYS = ("id", "name", "page", "offerings",
                  "extra_pages", "extra_sources",
                  "lang_page", "adm_page", "tuition_page", "tuition_join",
                  "admission_join", "spravochnik", "language_tracks",
-                 "fees_section", "field_anchors", "rsvu_code")
+                 "fees_section", "field_anchors", "suppress_labels",
+                 "rsvu_code")
 
 
 def _build_field_anchors(data, path, anchors):
@@ -850,6 +859,25 @@ def _build_field_anchors(data, path, anchors):
                 "{0}.{1}: {2!r} is not a declared anchor id".format(
                     path, field_name, anchor_id))
     return field_anchors
+
+
+def _build_suppress_labels(data, path):
+    if not isinstance(data, dict):
+        raise ConfigError(path + ": must be an object of "
+                          "{field: [label ids]}")
+    out = {}
+    for field_name, ids in data.items():
+        if field_name not in FIELDS:
+            raise ConfigError(
+                "{0}: {1!r} is not a Program field — one of: {2}".format(
+                    path, field_name, ", ".join(FIELDS)))
+        out[field_name] = tuple(_str_list(
+            ids, "{0}.{1}".format(path, field_name)))
+        if not out[field_name]:
+            raise ConfigError(
+                "{0}.{1}: empty list — remove the key instead".format(
+                    path, field_name))
+    return out
 
 
 def _build_program(data, path, sources, anchors):
@@ -909,6 +937,8 @@ def _build_program(data, path, sources, anchors):
                       if data.get("fees_section") is not None else None),
         field_anchors=_build_field_anchors(data.get("field_anchors", {}),
                                            path + ".field_anchors", anchors),
+        suppress_labels=_build_suppress_labels(
+            data.get("suppress_labels", {}), path + ".suppress_labels"),
         rsvu_code=rsvu_code,
         offerings=_build_offerings(data.get("offerings", {}),
                                    path + ".offerings", sources, rsvu_code),

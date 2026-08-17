@@ -322,9 +322,10 @@ class TestGoldenRegression(unittest.TestCase):
     def golden(self, tiers):
         return [r for r in fx.golden_records() if r["tier"] in tiers]
 
-    def test_label_library_is_27_shared_patterns(self):
+    def test_label_library_is_28_shared_patterns(self):
+        # 28 = 27 + bg-lang-label (2026-08-17 VUM benchmark repair)
         n = sum(len(v) for v in cascade.LABEL_PATTERNS.values())
-        self.assertEqual(n, 27)
+        self.assertEqual(n, 28)
 
     def test_reproduces_every_golden_record(self):
         extractions = benchmark_extractions()
@@ -550,3 +551,37 @@ class TestOrdinanceJoin(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SuppressLabelsHarvestTest(unittest.TestCase):
+    """harvest_labels(skip=...) disables exactly the named label ids."""
+
+    SRC = cascade.TextSource(
+        "html:https://x.example/p",
+        "Curriculum overview Semester fee: 1100 leva Admission")
+
+    def test_unsuppressed_label_still_fires(self):
+        r = cascade.harvest_labels("tuition", self.SRC)
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "1100 leva")
+
+    def test_suppressed_label_yields_none(self):
+        r = cascade.harvest_labels("tuition", self.SRC,
+                                   skip=("en-semfee-label",))
+        self.assertIsNone(r)
+
+
+class BgLanguageLabelTest(unittest.TestCase):
+    """The BG structured label outranks the EN boilerplate prose match
+    (the 2026-08-17 VUM benchmark wrong: a Bulgarian-taught program
+    shipped "English" from leftover EN copy)."""
+
+    def test_bg_label_wins_over_en_boilerplate(self):
+        src = cascade.TextSource(
+            "html:https://x.example/bg",
+            "Език на преподаване \\nБЪЛГАРСКИ\\n Начало на учебния процес "
+            "... The courses are taught entirely in English.")
+        r = cascade.harvest_labels("language", src)
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "БЪЛГАРСКИ")
+        self.assertEqual(r.method, "label:bg-lang-label")
