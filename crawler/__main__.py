@@ -383,7 +383,7 @@ def main(argv=None):
         run_report = json.loads(
             Path(args.run_report).read_text(encoding="utf-8"))
         key = grader.load_frozen_key(args.key)
-        manual = grader.read_manual_verdicts(out_root, args.uni_id)
+        manual = grader.read_manual_verdicts(None, args.uni_id)
         report = grader.grade_report(key, run_report, manual_verdicts=manual)
         print(_summarize_grade(report))
         if report.gate_pass is None:

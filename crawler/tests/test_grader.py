@@ -389,3 +389,21 @@ class KeyDraftTierTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class VerdictsNeverWriteIntoTheRepoTest(unittest.TestCase):
+    """A hardcoded verdicts path once put a unit test's fixture
+    university (uni_id 'X') into a tracked commit. Writes must honour the
+    caller's root."""
+
+    def test_write_honours_the_given_root(self):
+        import tempfile
+        from pathlib import Path as P
+        with tempfile.TemporaryDirectory() as td:
+            write_manual_verdict(td, "X", "p1", "duration", "ok")
+            self.assertTrue((P(td) / "X.json").exists())
+            self.assertFalse(P("benchmark/verdicts/X.json").exists())
+
+    def test_default_root_is_the_tracked_tree(self):
+        from crawler import grader as g
+        self.assertEqual(str(g.verdicts_dir()), "benchmark/verdicts")

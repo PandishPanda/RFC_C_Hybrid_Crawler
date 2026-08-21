@@ -364,13 +364,25 @@ def write_frozen_key(path, entries):
 VERDICTS_DIR = "benchmark/verdicts"
 
 
+def verdicts_dir(out_dir=None):
+    """Where tracked verdicts live. ``out_dir`` overrides the default --
+    tests and alternate checkouts pass their own root so they can never
+    write into the repo's tracked benchmark/ tree (a hardcoded path did
+    exactly that once: a unit test's fixture university landed in a
+    commit)."""
+    return Path(out_dir) if out_dir else Path(VERDICTS_DIR)
+
+
 def _manual_path(out_dir, uni_id):
-    return Path(VERDICTS_DIR) / "{0}.json".format(uni_id)
+    return verdicts_dir(out_dir) / "{0}.json".format(uni_id)
 
 
 def _legacy_manual_path(out_dir, uni_id):
     """Where verdicts lived before they were tracked (crawler-out).
-    Read-only: still honoured so an un-migrated clone keeps its work."""
+    Read-only: still honoured so an un-migrated clone keeps its work.
+    None when no out_dir is given -- there is no legacy tree to consult."""
+    if not out_dir:
+        return None
     return Path(out_dir) / uni_id / MANUAL_VERDICTS_NAME
 
 
@@ -379,7 +391,7 @@ def read_manual_verdicts(out_dir, uni_id):
     path = _manual_path(out_dir, uni_id)
     if not path.exists():
         path = _legacy_manual_path(out_dir, uni_id)
-    if not path.exists():
+    if path is None or not path.exists():
         return {}
     data = json.loads(path.read_text(encoding="utf-8"))
     return {(e["program_id"], e["field"]): e["verdict"] for e in data["verdicts"]}
