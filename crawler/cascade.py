@@ -224,6 +224,13 @@ LABEL_PATTERNS = {
         ("en-equal-degree", r'Educational qualification degree\s+([A-Z]+)'),
         ("vum-dual-bachelor", r'((?:accredited )?(?:Bulgarian )?Professional Bachelor degree from VUM and the British [^.]+? awarded by Cardiff Metropolitan University)'),
         ("vum-dual-master", r"(VUM Master[’']s degree in [^.]+? and the [^.]+? awarded by Cardiff Metropolitan University)"),
+        # Fallback, LAST by design: a catalog page that states the level
+        # only in its title ("<Program> - бакалавърска програма НБУ").
+        # Weaker evidence than any labelled statement above, so it must
+        # never pre-empt one -- but it is a real, verbatim degree-level
+        # claim, and without it such pages ship a null for a field the
+        # page does state.
+        ("bg-programme-level", r'[-–—]\s*(бакалавърска програма|магистърска програма|докторска програма)'),
     ],
     "duration": [
         ("bg-semestri-label", r'(Продължителност на обучението \(брой семестри\):\s*[0-9а-я]+)'),

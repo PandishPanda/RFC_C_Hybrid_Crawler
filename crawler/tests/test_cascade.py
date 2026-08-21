@@ -322,10 +322,11 @@ class TestGoldenRegression(unittest.TestCase):
     def golden(self, tiers):
         return [r for r in fx.golden_records() if r["tier"] in tiers]
 
-    def test_label_library_is_28_shared_patterns(self):
-        # 28 = 27 + bg-lang-label (2026-08-17 VUM benchmark repair)
+    def test_label_library_is_29_shared_patterns(self):
+        # 29 = 27 + bg-lang-label (2026-08-17 VUM benchmark repair)
+        #         + bg-programme-level (2026-08-21 NBU build-out)
         n = sum(len(v) for v in cascade.LABEL_PATTERNS.values())
-        self.assertEqual(n, 28)
+        self.assertEqual(n, 29)
 
     def test_reproduces_every_golden_record(self):
         extractions = benchmark_extractions()
@@ -585,3 +586,24 @@ class BgLanguageLabelTest(unittest.TestCase):
         self.assertIsNotNone(r)
         self.assertEqual(r.value, "БЪЛГАРСКИ")
         self.assertEqual(r.method, "label:bg-lang-label")
+
+
+class ProgrammeLevelLabelTest(unittest.TestCase):
+    """The title-only degree fallback must never pre-empt a real labelled
+    degree statement -- it is weaker evidence and is ordered last."""
+
+    def test_title_level_is_read_when_nothing_else_states_it(self):
+        src = cascade.TextSource(
+            "html:https://ecatalog.example/p",
+            "Анимационно кино - бакалавърска програма НБУ Кратко представяне")
+        r = cascade.harvest_labels("degree", src)
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "бакалавърска програма")
+        self.assertEqual(r.method, "label:bg-programme-level")
+
+    def test_a_labelled_degree_statement_still_wins(self):
+        src = cascade.TextSource(
+            "html:https://ecatalog.example/p",
+            'Нещо - магистърска програма НБУ. Степен: ОКС „магистър"')
+        r = cascade.harvest_labels("degree", src)
+        self.assertEqual(r.method, "label:bg-oks-label")
