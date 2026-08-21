@@ -127,6 +127,27 @@
       "finding": "refusing the 460k-char handbook as a shared source cost NO tuition coverage: the labeller found every fee in the properly-structured fee orders, which per-program joins can reach safely",
       "impact": "the safe choice was also the complete one — recorded so it is not revisited",
       "status": "avoided"
+    },
+    {
+      "uni_id": "MUVarna",
+      "kind": "trust",
+      "finding": "PROVEN wrong-row contamination on a shared page: muv-medicina and muv-rentgenov-laborant shipped the IDENTICAL «ОКС „бакалавър\"» snippet, taken from a sentence about a different program (Организация и управление на военни формирования). Medicine is магистър. Both values are verbatim in the artifact, so the provenance gate passed them",
+      "impact": "2 graded wrong. The gate proves presence, not attribution — on a shared page the first match wins regardless of which program is being resolved. UniRuse and ANIS are also shared-page and NOT yet graded",
+      "status": "open"
+    },
+    {
+      "uni_id": "MUVarna",
+      "kind": "trust",
+      "finding": "first FABRICATION in the benchmark: Патофизиология degree came from an EU-project announcement about dissertation defence — an anchor pointing at an unrelated page",
+      "impact": "1 fabrication in 215 graded cells; a bad anchor can assert what no source states",
+      "status": "open"
+    },
+    {
+      "uni_id": "MUVarna",
+      "kind": "extraction",
+      "finding": "fee join reads a single figure where the source states a per-year progression (Кинезитерапия: shipped «500 евро», source says 500 € first year then 410 €)",
+      "impact": "1 graded wrong; understates multi-year fees",
+      "status": "open"
     }
   ]
 }

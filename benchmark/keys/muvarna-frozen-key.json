@@ -1,0 +1,204 @@
+{
+  "entries": [
+    {
+      "program_id": "MUVarna-rsvu31893-BSC-BG",
+      "field": "degree",
+      "expected_value": "бакалавър",
+      "null_reason": null,
+      "snippet": "бакалавър",
+      "source_url": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "program_id": "MUVarna-rsvu31893-BSC-BG",
+      "field": "duration",
+      "expected_value": "8 семестъра",
+      "null_reason": null,
+      "snippet": "8 семестъра",
+      "source_url": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "program_id": "MUVarna-rsvu31893-BSC-BG",
+      "field": "language",
+      "expected_value": "български",
+      "null_reason": null,
+      "snippet": "български",
+      "source_url": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "program_id": "MUVarna-rsvu31893-BSC-BG",
+      "field": "tuition",
+      "expected_value": "500 € за първи курс, 410 € за втори, трети и четвърти курс",
+      "null_reason": null,
+      "snippet": "500 € за първи курс, 410 € за втори, трети и четвърти курс",
+      "source_url": "https://www.mu-varna.bg/BG/Admission/Documents/2026/Taksi%202026-2027.pdf"
+    },
+    {
+      "program_id": "MUVarna-rsvu31893-BSC-BG",
+      "field": "admission",
+      "expected_value": "Балът за класиране по специалностите „Медицин­ска сестра\", „Акушерка\" и „Кинезитерапия\" (ОКС „бакалавър“)",
+      "null_reason": null,
+      "snippet": "Балът за класиране по специалностите „Медицин­ска сестра\", „Акушерка\" и „Кинезитерапия\" (ОКС „бакалавър“)",
+      "source_url": "https://www.mu-varna.bg/BG/baloobrazuvane"
+    },
+    {
+      "program_id": "muv-medicina",
+      "field": "degree",
+      "expected_value": "МАГИСТЪР",
+      "null_reason": null,
+      "snippet": "МАГИСТЪР",
+      "source_url": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "program_id": "muv-medicina",
+      "field": "duration",
+      "expected_value": "10 семестъра",
+      "null_reason": null,
+      "snippet": "10 семестъра",
+      "source_url": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "program_id": "muv-medicina",
+      "field": "language",
+      "expected_value": "български",
+      "null_reason": null,
+      "snippet": "български",
+      "source_url": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "program_id": "muv-medicina",
+      "field": "tuition",
+      "expected_value": "800 € за първи курс, 720 € от втори до четвърти курс, 620 € от пети до осми курс",
+      "null_reason": null,
+      "snippet": "800 € за първи курс, 720 € от втори до четвърти курс, 620 € от пети до осми курс",
+      "source_url": "https://www.mu-varna.bg/BG/Admission/Documents/2026/Taksi%202026-2027.pdf"
+    },
+    {
+      "program_id": "muv-medicina",
+      "field": "admission",
+      "expected_value": "оценката от държавния зрелостен изпит по български език и литература и утроените оценки от конкурсните изпити по биология и химия в МУ-Варна. Максималният бал е 42,00, а минималният бал за участие в класирането за обучение по държавна поръчка е 25",
+      "null_reason": null,
+      "snippet": "оценката от държавния зрелостен изпит по български език и литература и утроените оценки от конкурсните изпити по биология и химия в МУ-Варна. Максималният бал е 42,00, а минималният бал за участие в класирането за обучение по държавна поръчка е 25",
+      "source_url": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "program_id": "muv-akusherka",
+      "field": "degree",
+      "expected_value": "бакалавър",
+      "null_reason": null,
+      "snippet": "бакалавър",
+      "source_url": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "program_id": "muv-akusherka",
+      "field": "duration",
+      "expected_value": "8 семестъра",
+      "null_reason": null,
+      "snippet": "8 семестъра",
+      "source_url": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "program_id": "muv-akusherka",
+      "field": "language",
+      "expected_value": "български",
+      "null_reason": null,
+      "snippet": "български",
+      "source_url": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "program_id": "muv-akusherka",
+      "field": "tuition",
+      "expected_value": "първи и втори курс - освободени от такса, трети и четвърти курс 410 €",
+      "null_reason": null,
+      "snippet": "първи и втори курс - освободени от такса, трети и четвърти курс 410 €",
+      "source_url": "https://www.mu-varna.bg/BG/Admission/Documents/2026/Taksi%202026-2027.pdf"
+    },
+    {
+      "program_id": "muv-akusherka",
+      "field": "admission",
+      "expected_value": "оценката от държавния зрелостен изпит по български език и литература и утроената оценка от конкурсния изпит тест по биология в МУ-Варна. Максималният бал е 24,00. Кандидат-студентите, които имат оценки от изпита по биология от предварителната и редовна сесия, участват в класирането с по-високата от двете.​",
+      "null_reason": null,
+      "snippet": "оценката от държавния зрелостен изпит по български език и литература и утроената оценка от конкурсния изпит тест по биология в МУ-Варна. Максималният бал е 24,00. Кандидат-студентите, които имат оценки от изпита по биология от предварителната и редовна сесия, участват в класирането с по-високата от двете.​",
+      "source_url": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "program_id": "muv-rentgenov-laborant",
+      "field": "degree",
+      "expected_value": "професионален бакалавър",
+      "null_reason": null,
+      "snippet": "професионален бакалавър",
+      "source_url": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "program_id": "muv-rentgenov-laborant",
+      "field": "duration",
+      "expected_value": "6 семетъра",
+      "null_reason": null,
+      "snippet": "6 семетъра",
+      "source_url": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "program_id": "muv-rentgenov-laborant",
+      "field": "language",
+      "expected_value": "български",
+      "null_reason": null,
+      "snippet": "български",
+      "source_url": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "program_id": "muv-rentgenov-laborant",
+      "field": "tuition",
+      "expected_value": "500 € първи курс, 390 € за втори и трети курс",
+      "null_reason": null,
+      "snippet": "500 € първи курс, 390 € за втори и трети курс",
+      "source_url": "https://www.mu-varna.bg/BG/Admission/Documents/2026/Taksi%202026-2027.pdf"
+    },
+    {
+      "program_id": "muv-rentgenov-laborant",
+      "field": "admission",
+      "expected_value": "балообразуваща е оценката от дипломата за средно образование от ДЗИ по официалния език на държавата, в която дипломата е издадена, а при липса на такава – оценката от курса на обучение. Тези кандидати имат право да бъдат записани за студенти само след успешно полагане на изпит за владеене на български език или преминат подготвителен курс по български език в Департамента по чуждоезиково обучение, комуникации и спорт на МУ-Варна, или след представяне на свидетелство за езикова компетентност по български език – ниво не по-ниско от В2, или удостоверение за положен ДЗИ по БЕЛ",
+      "null_reason": null,
+      "snippet": "балообразуваща е оценката от дипломата за средно образование от ДЗИ по официалния език на държавата, в която дипломата е издадена, а при липса на такава – оценката от курса на обучение. Тези кандидати имат право да бъдат записани за студенти само след успешно полагане на изпит за владеене на български език или преминат подготвителен курс по български език в Департамента по чуждоезиково обучение, комуникации и спорт на МУ-Варна, или след представяне на свидетелство за езикова компетентност по български език – ниво не по-ниско от В2, или удостоверение за положен ДЗИ по БЕЛ",
+      "source_url": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "program_id": "MUVarna-rsvu11227-PHD-BG",
+      "field": "degree",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated for this program on the pages checked",
+      "snippet": null,
+      "source_url": "https://www.mu-varna.bg/BG/Research/obyava-priem-doktoranti"
+    },
+    {
+      "program_id": "MUVarna-rsvu11227-PHD-BG",
+      "field": "duration",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated for this program on the pages checked",
+      "snippet": null,
+      "source_url": "https://www.mu-varna.bg/BG/Research/obyava-priem-doktoranti"
+    },
+    {
+      "program_id": "MUVarna-rsvu11227-PHD-BG",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated for this program on the pages checked",
+      "snippet": null,
+      "source_url": "https://www.mu-varna.bg/BG/Research/obyava-priem-doktoranti"
+    },
+    {
+      "program_id": "MUVarna-rsvu11227-PHD-BG",
+      "field": "tuition",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated for this program on the pages checked",
+      "snippet": null,
+      "source_url": "https://www.mu-varna.bg/BG/Research/obyava-priem-doktoranti"
+    },
+    {
+      "program_id": "MUVarna-rsvu11227-PHD-BG",
+      "field": "admission",
+      "expected_value": "Кандидатите за докторанти полагат изпит по специалността и по един избран от тях чужд език",
+      "null_reason": null,
+      "snippet": "Кандидатите за докторанти полагат изпит по специалността и по един избран от тях чужд език",
+      "source_url": "https://www.mu-varna.bg/BG/Research/Pages/Прием-на-редовни-документи.aspx"
+    }
+  ]
+}

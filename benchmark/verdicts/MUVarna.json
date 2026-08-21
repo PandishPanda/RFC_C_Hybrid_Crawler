@@ -1,0 +1,46 @@
+{
+  "verdicts": [
+    {
+      "program_id": "muv-medicina",
+      "field": "degree",
+      "verdict": "wrong",
+      "note": "labeller 2026-08-21: wrong-row / unrelated-page value"
+    },
+    {
+      "program_id": "muv-rentgenov-laborant",
+      "field": "degree",
+      "verdict": "wrong",
+      "note": "labeller 2026-08-21: wrong-row / unrelated-page value"
+    },
+    {
+      "program_id": "MUVarna-rsvu11227-PHD-BG",
+      "field": "degree",
+      "verdict": "wrong",
+      "note": "labeller 2026-08-21: wrong-row / unrelated-page value"
+    },
+    {
+      "program_id": "MUVarna-rsvu31893-BSC-BG",
+      "field": "admission",
+      "verdict": "ok",
+      "note": "labeller 2026-08-21: ruled acceptable when amending the key"
+    },
+    {
+      "program_id": "MUVarna-rsvu11227-PHD-BG",
+      "field": "admission",
+      "verdict": "ok",
+      "note": "labeller 2026-08-21: ruled acceptable when amending the key"
+    },
+    {
+      "program_id": "MUVarna-rsvu31893-BSC-BG",
+      "field": "duration",
+      "verdict": "ok",
+      "note": "labeller 2026-08-21: same duration, different phrasing"
+    },
+    {
+      "program_id": "MUVarna-rsvu31893-BSC-BG",
+      "field": "tuition",
+      "verdict": "wrong",
+      "note": "labeller 2026-08-21: shipped first-year fee only; the source states a per-year progression"
+    }
+  ]
+}

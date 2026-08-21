@@ -16,4 +16,4 @@ whether what shipped truthfully answers "what is the admission requirement?"
 - source: https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/Spravochnici/Spravochnik%202026%20g..pdf
 - your key: тест по география; ДЗИ по география и икономика; тест по физика; ДЗИ по физика и астрономия; тест по химия; ДЗИ по химия и опазване на околната среда; тест по биология; ДЗИ по биология и здравно образование; тест по български език и литература; ДЗИ по български език и литература; състезание по химия
 - shipped:  Балът за класиране в специалността се образува като сума от утроената оценка от конкурсен изпит или ДЗИ и оценката от дипломата за средно образование
-- verdict: SHIPPED
+- verdict: SHIPPED  
