@@ -79,6 +79,66 @@
     "phd-dokumenti": {
       "url": "https://www.shu.bg/doktoranti/documenti/",
       "route": "html"
+    },
+    "kv-311": {
+      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/311-kvalifikaciya-07-20-2026.pdf",
+      "route": "prose-pdf"
+    },
+    "kv-907": {
+      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/907-kvalifikaciya-07-07-2026.pdf",
+      "route": "prose-pdf"
+    },
+    "kv-122": {
+      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/122-kvalifikaciya-07-07-2026.pdf",
+      "route": "prose-pdf"
+    },
+    "kv-216": {
+      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/216-kvalifikaciya-07-22-2026.pdf",
+      "route": "prose-pdf"
+    },
+    "kv-1159": {
+      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1159-kvalifikaciya-07-22-2026.pdf",
+      "route": "prose-pdf"
+    },
+    "kv-1003": {
+      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1003-kvalifikaciya-07-22-2026.pdf",
+      "route": "prose-pdf"
+    },
+    "kv-88": {
+      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/88-kvalifikaciya-08-07-2026.pdf",
+      "route": "prose-pdf"
+    },
+    "kv-540": {
+      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/540-kvalifikaciya-2024.pdf",
+      "route": "prose-pdf"
+    },
+    "kv-1047": {
+      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1047-kvalifikaciya-08-07-2026.pdf",
+      "route": "prose-pdf"
+    },
+    "kv-1173": {
+      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1173-kvalifikaciya-07-20-2026.pdf",
+      "route": "prose-pdf"
+    },
+    "kv-402": {
+      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/402-kvalifikaciya-07-20-2026.pdf",
+      "route": "prose-pdf"
+    },
+    "kv-1147": {
+      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1147-kvalifikaciya-07-20-2026.pdf",
+      "route": "prose-pdf"
+    },
+    "kv-1111": {
+      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1111-kvalifikaciya-08-04-2026.pdf",
+      "route": "prose-pdf"
+    },
+    "kv-1113": {
+      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1113-kvalifikaciya-08-04-2026.pdf",
+      "route": "prose-pdf"
+    },
+    "kv-276": {
+      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/276-kvalifikaciya-02-27-2025.pdf",
+      "route": "prose-pdf"
     }
   },
   "anchors": {
@@ -154,7 +214,9 @@
       "id": "SHU-rsvu30594-MSC-BG",
       "name": "Софтуерно инженерство",
       "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fmi/magistyr/SI.pdf",
-      "extra_sources": ["kv-si"],
+      "extra_sources": [
+        "kv-si"
+      ],
       "tuition_join": {
         "source": "fees-mag",
         "alias_pattern": "4\\.6\\.1\\.\\s*Софтуерно инженерство"
@@ -178,7 +240,9 @@
       "id": "SHU-rsvu31017-BSC-BG",
       "name": "Технологии за киберсигурност",
       "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/ftn/bakalavyr/TKS.pdf",
-      "extra_sources": ["kv-tks"],
+      "extra_sources": [
+        "kv-tks"
+      ],
       "tuition_join": {
         "source": "fees-bak-dp",
         "alias_pattern": "5\\.3\\.4\\.\\s*Технологии за киберсигурност"
@@ -192,7 +256,9 @@
       "id": "SHU-rsvu8752-MSC-BG",
       "name": "Руска филология: Езиково обслужване на туризма и бизнеса",
       "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fhn/magistyr/RFEOTB-new.pdf",
-      "extra_sources": ["kv-rfeotb"],
+      "extra_sources": [
+        "kv-rfeotb"
+      ],
       "tuition_join": {
         "source": "fees-mag",
         "alias_pattern": "2\\.1\\.8\\.\\s*Руска филология: Езиково обслужване на туризма и бизнеса"
@@ -202,6 +268,81 @@
         "duration": "rfeotb-duration",
         "admission": "rfeotb-admission"
       }
+    },
+    {
+      "id": "shu-311",
+      "name": "Бизнес математика",
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/311-kvalifikaciya-07-20-2026.pdf"
+    },
+    {
+      "id": "shu-907",
+      "name": "Дигитални технологии и изкуствен интелект",
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/907-kvalifikaciya-07-07-2026.pdf"
+    },
+    {
+      "id": "shu-122",
+      "name": "Икономика",
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/122-kvalifikaciya-07-07-2026.pdf"
+    },
+    {
+      "id": "shu-216",
+      "name": "Английска филология",
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/216-kvalifikaciya-07-22-2026.pdf"
+    },
+    {
+      "id": "shu-1159",
+      "name": "Английска филология: Езиково обслужване на туризма и бизнеса",
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1159-kvalifikaciya-07-22-2026.pdf"
+    },
+    {
+      "id": "shu-1003",
+      "name": "Английска филология: Лингвистика и превод",
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1003-kvalifikaciya-07-22-2026.pdf"
+    },
+    {
+      "id": "shu-88",
+      "name": "Астрономия",
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/88-kvalifikaciya-08-07-2026.pdf"
+    },
+    {
+      "id": "shu-540",
+      "name": "Астрономия и метеорология",
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/540-kvalifikaciya-2024.pdf"
+    },
+    {
+      "id": "shu-1047",
+      "name": "Астрофизика",
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1047-kvalifikaciya-08-07-2026.pdf"
+    },
+    {
+      "id": "shu-1173",
+      "name": "Административна и организационна сигурност",
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1173-kvalifikaciya-07-20-2026.pdf"
+    },
+    {
+      "id": "shu-402",
+      "name": "Геодезия",
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/402-kvalifikaciya-07-20-2026.pdf"
+    },
+    {
+      "id": "shu-1147",
+      "name": "Геоматика",
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1147-kvalifikaciya-07-20-2026.pdf"
+    },
+    {
+      "id": "shu-1111",
+      "name": "Иновации в началното образование",
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1111-kvalifikaciya-08-04-2026.pdf"
+    },
+    {
+      "id": "shu-1113",
+      "name": "Иновации в предучилищното и началното образование",
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1113-kvalifikaciya-08-04-2026.pdf"
+    },
+    {
+      "id": "shu-276",
+      "name": "Информатика и информационни технологии, гр. Добрич",
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/276-kvalifikaciya-02-27-2025.pdf"
     }
   ]
 }
