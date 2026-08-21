@@ -79,6 +79,174 @@
         "degree": "aubg-emba-degree",
         "tuition": "aubg-emba-tuition"
       }
+    },
+    {
+      "id": "aubg-sustainability-stu",
+      "name": "BA in Sustainability Studies",
+      "page": "https://www.aubg.edu/academics/bachelor-degrees/sustainability-studies/",
+      "lang_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "adm_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "field_anchors": {
+        "degree": "aubg-ba-degree",
+        "duration": "aubg-duration",
+        "tuition": "aubg-tuition"
+      }
+    },
+    {
+      "id": "aubg-self-designed-majo",
+      "name": "Self-Designed Major",
+      "page": "https://www.aubg.edu/academics/bachelor-degrees/self-designed-major/",
+      "lang_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "adm_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "field_anchors": {
+        "degree": "aubg-ba-degree",
+        "duration": "aubg-duration",
+        "tuition": "aubg-tuition"
+      }
+    },
+    {
+      "id": "aubg-creative-writing",
+      "name": "BA in Creative Writing",
+      "page": "https://www.aubg.edu/academics/bachelor-degrees/creative-writing/",
+      "lang_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "adm_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "field_anchors": {
+        "degree": "aubg-ba-degree",
+        "duration": "aubg-duration",
+        "tuition": "aubg-tuition"
+      }
+    },
+    {
+      "id": "aubg-psychology",
+      "name": "BA in Psychology",
+      "page": "https://www.aubg.edu/academics/bachelor-degrees/psychology/",
+      "lang_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "adm_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "field_anchors": {
+        "degree": "aubg-ba-degree",
+        "duration": "aubg-duration",
+        "tuition": "aubg-tuition"
+      }
+    },
+    {
+      "id": "aubg-literature",
+      "name": "BA in Literature",
+      "page": "https://www.aubg.edu/academics/bachelor-degrees/literature/",
+      "lang_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "adm_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "field_anchors": {
+        "degree": "aubg-ba-degree",
+        "duration": "aubg-duration",
+        "tuition": "aubg-tuition"
+      }
+    },
+    {
+      "id": "aubg-physics",
+      "name": "BA in Physics",
+      "page": "https://www.aubg.edu/academics/bachelor-degrees/physics/",
+      "lang_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "adm_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "field_anchors": {
+        "degree": "aubg-ba-degree",
+        "duration": "aubg-duration",
+        "tuition": "aubg-tuition"
+      }
+    },
+    {
+      "id": "aubg-political-science",
+      "name": "BA in Political Science and International Relations",
+      "page": "https://www.aubg.edu/academics/bachelor-degrees/political-science-and-international-relations/",
+      "lang_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "adm_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "field_anchors": {
+        "degree": "aubg-ba-degree",
+        "duration": "aubg-duration",
+        "tuition": "aubg-tuition"
+      }
+    },
+    {
+      "id": "aubg-modern-languages-a",
+      "name": "BA in Modern Languages and Cultures",
+      "page": "https://www.aubg.edu/academics/bachelor-degrees/modern-languages-and-cultures/",
+      "lang_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "adm_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "field_anchors": {
+        "degree": "aubg-ba-degree",
+        "duration": "aubg-duration",
+        "tuition": "aubg-tuition"
+      }
+    },
+    {
+      "id": "aubg-mathematics",
+      "name": "BA in Mathematics",
+      "page": "https://www.aubg.edu/academics/bachelor-degrees/mathematics/",
+      "lang_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "adm_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "field_anchors": {
+        "degree": "aubg-ba-degree",
+        "duration": "aubg-duration",
+        "tuition": "aubg-tuition"
+      }
+    },
+    {
+      "id": "aubg-information-system",
+      "name": "BA in Information Systems",
+      "page": "https://www.aubg.edu/academics/bachelor-degrees/information-systems/",
+      "lang_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "adm_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "field_anchors": {
+        "degree": "aubg-ba-degree",
+        "duration": "aubg-duration",
+        "tuition": "aubg-tuition"
+      }
+    },
+    {
+      "id": "aubg-european-studies",
+      "name": "BA in European Studies",
+      "page": "https://www.aubg.edu/academics/bachelor-degrees/european-studies/",
+      "lang_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "adm_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "field_anchors": {
+        "degree": "aubg-ba-degree",
+        "duration": "aubg-duration",
+        "tuition": "aubg-tuition"
+      }
+    },
+    {
+      "id": "aubg-film-and-creative",
+      "name": "BA in Film and Creative Media",
+      "page": "https://www.aubg.edu/academics/bachelor-degrees/film-and-creative-media/",
+      "lang_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "adm_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "field_anchors": {
+        "degree": "aubg-ba-degree",
+        "duration": "aubg-duration",
+        "tuition": "aubg-tuition"
+      }
+    },
+    {
+      "id": "aubg-journalism-and-mas",
+      "name": "BA in Journalism and Mass Communications",
+      "page": "https://www.aubg.edu/academics/bachelor-degrees/journalism-and-mass-communications/",
+      "lang_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "adm_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "field_anchors": {
+        "degree": "aubg-ba-degree",
+        "duration": "aubg-duration",
+        "tuition": "aubg-tuition"
+      }
+    },
+    {
+      "id": "aubg-history-and-civili",
+      "name": "BA in History and Civilization",
+      "page": "https://www.aubg.edu/academics/bachelor-degrees/history-and-civilization/",
+      "lang_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "adm_page": "https://www.aubg.edu/admissions/bachelors/how-to-apply/",
+      "field_anchors": {
+        "degree": "aubg-ba-degree",
+        "duration": "aubg-duration",
+        "tuition": "aubg-tuition"
+      }
     }
   ]
 }
