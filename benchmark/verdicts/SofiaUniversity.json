@@ -1,0 +1,40 @@
+{
+  "verdicts": [
+    {
+      "program_id": "su-kn",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "su-ch",
+      "field": "duration",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "su-ch",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "su-psy",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "su-inf",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "su-cult",
+      "field": "tuition",
+      "verdict": "wrong",
+      "note": ""
+    }
+  ]
+}

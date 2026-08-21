@@ -1,0 +1,232 @@
+{
+  "verdicts": [
+    {
+      "program_id": "vum-sst",
+      "field": "degree",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-sst",
+      "field": "duration",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-sst",
+      "field": "language",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-sst",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-sst",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-gca",
+      "field": "degree",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-gca",
+      "field": "duration",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-gca",
+      "field": "language",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-gca",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-gca",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-mba",
+      "field": "degree",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-mba",
+      "field": "duration",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-mba",
+      "field": "language",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-mba",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-mba",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-corr",
+      "field": "degree",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-corr",
+      "field": "duration",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-corr",
+      "field": "language",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-corr",
+      "field": "tuition",
+      "verdict": "wrong",
+      "note": ""
+    },
+    {
+      "program_id": "vum-corr",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-ibm-pb",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-ibm-b",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-ped-econ",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-int-tour",
+      "field": "degree",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-food",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-ibm-pb",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-ibm-b",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-hm-pb",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-hm-pb",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-hm-b",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-hm-b",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-ped-hosp",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-hce",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-int-tour",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-int-tour",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-food",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-mkt",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "vum-mkt",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    }
+  ]
+}

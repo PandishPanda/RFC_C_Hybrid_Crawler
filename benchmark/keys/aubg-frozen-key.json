@@ -1,0 +1,164 @@
+{
+  "entries": [
+    {
+      "program_id": "aubg-cs",
+      "field": "degree",
+      "expected_value": "Major",
+      "null_reason": null,
+      "snippet": "Major",
+      "source_url": "https://www.aubg.edu/academics/bachelor-degrees/computer-science/"
+    },
+    {
+      "program_id": "aubg-cs",
+      "field": "duration",
+      "expected_value": "eight semesters",
+      "null_reason": null,
+      "snippet": "The duration of undergraduate education at AUBG is eight semesters",
+      "source_url": "https://www.aubg.edu/academics/bachelor-degrees/"
+    },
+    {
+      "program_id": "aubg-cs",
+      "field": "language",
+      "expected_value": "English",
+      "null_reason": null,
+      "snippet": "English",
+      "source_url": "https://www.aubg.edu/admissions/bachelors/how-to-apply/"
+    },
+    {
+      "program_id": "aubg-cs",
+      "field": "tuition",
+      "expected_value": "€6,900",
+      "null_reason": null,
+      "snippet": "€6,900",
+      "source_url": "https://www.aubg.edu/academics/bachelor-degrees/computer-science/"
+    },
+    {
+      "program_id": "aubg-cs",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT admission process",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://www.aubg.edu/admissions/bachelors/how-to-apply/"
+    },
+    {
+      "program_id": "aubg-ba",
+      "field": "degree",
+      "expected_value": "Major",
+      "null_reason": null,
+      "snippet": "Major",
+      "source_url": "https://www.aubg.edu/academics/bachelor-degrees/business-administration/"
+    },
+    {
+      "program_id": "aubg-ba",
+      "field": "duration",
+      "expected_value": "eight semesters",
+      "null_reason": null,
+      "snippet": "The duration of undergraduate education at AUBG is eight semesters",
+      "source_url": "https://www.aubg.edu/academics/bachelor-degrees/"
+    },
+    {
+      "program_id": "aubg-ba",
+      "field": "language",
+      "expected_value": "English",
+      "null_reason": null,
+      "snippet": "English",
+      "source_url": "https://www.aubg.edu/admissions/bachelors/how-to-apply/"
+    },
+    {
+      "program_id": "aubg-ba",
+      "field": "tuition",
+      "expected_value": "€6,900",
+      "null_reason": null,
+      "snippet": "€6,900",
+      "source_url": "https://www.aubg.edu/academics/bachelor-degrees/business-administration/"
+    },
+    {
+      "program_id": "aubg-ba",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT admission process",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://www.aubg.edu/admissions/bachelors/how-to-apply/"
+    },
+    {
+      "program_id": "aubg-econ",
+      "field": "degree",
+      "expected_value": "Major",
+      "null_reason": null,
+      "snippet": "Major",
+      "source_url": "https://www.aubg.edu/academics/bachelor-degrees/economics/"
+    },
+    {
+      "program_id": "aubg-econ",
+      "field": "duration",
+      "expected_value": "eight semesters",
+      "null_reason": null,
+      "snippet": "The duration of undergraduate education at AUBG is eight semesters",
+      "source_url": "https://www.aubg.edu/academics/bachelor-degrees/"
+    },
+    {
+      "program_id": "aubg-econ",
+      "field": "language",
+      "expected_value": "English",
+      "null_reason": null,
+      "snippet": "English",
+      "source_url": "https://www.aubg.edu/admissions/bachelors/how-to-apply/"
+    },
+    {
+      "program_id": "aubg-econ",
+      "field": "tuition",
+      "expected_value": "€6,900",
+      "null_reason": null,
+      "snippet": "€6,900",
+      "source_url": "https://www.aubg.edu/academics/bachelor-degrees/economics/"
+    },
+    {
+      "program_id": "aubg-econ",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT admission process",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://www.aubg.edu/admissions/bachelors/how-to-apply/"
+    },
+    {
+      "program_id": "aubg-emba",
+      "field": "degree",
+      "expected_value": "Executive MBA",
+      "null_reason": null,
+      "snippet": "The AUBG Executive MBA Program",
+      "source_url": "https://www.aubg.edu/academics/executive-mba/"
+    },
+    {
+      "program_id": "aubg-emba",
+      "field": "duration",
+      "expected_value": "sixteen-month (four-term)",
+      "null_reason": null,
+      "snippet": "The Executive MBA program is a sixteen-month (four-term) degree program",
+      "source_url": "https://www.aubg.edu/academics/executive-mba/"
+    },
+    {
+      "program_id": "aubg-emba",
+      "field": "language",
+      "expected_value": "English",
+      "null_reason": null,
+      "snippet": "English",
+      "source_url": "https://www.aubg.edu/admissions/bachelors/how-to-apply/"
+    },
+    {
+      "program_id": "aubg-emba",
+      "field": "tuition",
+      "expected_value": "€19,100",
+      "null_reason": null,
+      "snippet": "€19,100",
+      "source_url": "https://www.aubg.edu/admissions/emba/tuition-and-financing/"
+    },
+    {
+      "program_id": "aubg-emba",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT admission process",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://www.aubg.edu/admissions/emba/how-to-apply/"
+    }
+  ]
+}

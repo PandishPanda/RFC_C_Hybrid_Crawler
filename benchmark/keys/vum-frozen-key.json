@@ -1,0 +1,604 @@
+{
+  "entries": [
+    {
+      "program_id": "vum-sst",
+      "field": "degree",
+      "expected_value": "Професионален бакалавър",
+      "null_reason": null,
+      "snippet": "Професионален бакалавър",
+      "source_url": "https://vum.bg/software-systems-and-technologies/"
+    },
+    {
+      "program_id": "vum-sst",
+      "field": "duration",
+      "expected_value": "3 години / 6 семестъра",
+      "null_reason": null,
+      "snippet": "3 години / 6 семестъра",
+      "source_url": "https://vum.bg/software-systems-and-technologies/"
+    },
+    {
+      "program_id": "vum-sst",
+      "field": "language",
+      "expected_value": "Английски",
+      "null_reason": null,
+      "snippet": "Английски",
+      "source_url": "https://vum.bg/software-systems-and-technologies/"
+    },
+    {
+      "program_id": "vum-sst",
+      "field": "tuition",
+      "expected_value": "1500 € на семестър за граждани на ЕС и ЕИП / 1950 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "null_reason": null,
+      "snippet": "1500 € на семестър за граждани на ЕС и ЕИП / 1950 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "source_url": "https://vum.bg/software-systems-and-technologies/"
+    },
+    {
+      "program_id": "vum-sst",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT кандидатстване процес",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://vum.bg/application-requirement-for-bachelor-degree-programmes/"
+    },
+    {
+      "program_id": "vum-gca",
+      "field": "degree",
+      "expected_value": "Професионален бакалавър",
+      "null_reason": null,
+      "snippet": "Професионален бакалавър",
+      "source_url": "https://vum.bg/gastronomy-and-culinary-arts/"
+    },
+    {
+      "program_id": "vum-gca",
+      "field": "duration",
+      "expected_value": "3 години / 6 семестъра",
+      "null_reason": null,
+      "snippet": "3 години / 6 семестъра",
+      "source_url": "https://vum.bg/gastronomy-and-culinary-arts/"
+    },
+    {
+      "program_id": "vum-gca",
+      "field": "language",
+      "expected_value": "Английски",
+      "null_reason": null,
+      "snippet": "Английски",
+      "source_url": "https://vum.bg/gastronomy-and-culinary-arts/"
+    },
+    {
+      "program_id": "vum-gca",
+      "field": "tuition",
+      "expected_value": "1500 € на семестър за граждани на ЕС и ЕИП / 2400 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "null_reason": null,
+      "snippet": "1500 € на семестър за граждани на ЕС и ЕИП / 2400 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "source_url": "https://vum.bg/bg/stipendii-taksi/"
+    },
+    {
+      "program_id": "vum-gca",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT кандидатстване процес",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://vum.bg/application-requirement-for-bachelor-degree-programmes/"
+    },
+    {
+      "program_id": "vum-mba",
+      "field": "degree",
+      "expected_value": "Магистър по „Бизнес администрация“",
+      "null_reason": null,
+      "snippet": "Магистър по „Бизнес администрация“",
+      "source_url": "https://vum.bg/master-of-business-administration/"
+    },
+    {
+      "program_id": "vum-mba",
+      "field": "duration",
+      "expected_value": "1,5 години / 3 семестъра",
+      "null_reason": null,
+      "snippet": "1,5 години / 3 семестъра",
+      "source_url": "https://vum.bg/master-of-business-administration/"
+    },
+    {
+      "program_id": "vum-mba",
+      "field": "language",
+      "expected_value": "Английски",
+      "null_reason": null,
+      "snippet": "Английски",
+      "source_url": "https://vum.bg/master-of-business-administration/"
+    },
+    {
+      "program_id": "vum-mba",
+      "field": "tuition",
+      "expected_value": "1500 € на семестър за граждани на ЕС и ЕИП / 2400 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "null_reason": null,
+      "snippet": "1500 € на семестър за граждани на ЕС и ЕИП / 2400 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "source_url": "https://vum.bg/bg/stipendii-taksi/"
+    },
+    {
+      "program_id": "vum-mba",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT кандидатстване процес",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://vum.bg/bg/iziskwaniq-za-magistar/"
+    },
+    {
+      "program_id": "vum-corr",
+      "field": "degree",
+      "expected_value": "Магистър",
+      "null_reason": null,
+      "snippet": "Магистър",
+      "source_url": "https://vum.bg/coruption/"
+    },
+    {
+      "program_id": "vum-corr",
+      "field": "duration",
+      "expected_value": "3 – 4 семестъра",
+      "null_reason": null,
+      "snippet": "3 – 4 семестъра",
+      "source_url": "https://vum.bg/coruption/"
+    },
+    {
+      "program_id": "vum-corr",
+      "field": "language",
+      "expected_value": "Английски",
+      "null_reason": null,
+      "snippet": "Английски",
+      "source_url": "https://vum.bg/coruption/"
+    },
+    {
+      "program_id": "vum-corr",
+      "field": "tuition",
+      "expected_value": "1500 € на семестър за граждани на ЕС и ЕИП / 1950 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "null_reason": null,
+      "snippet": "1500 € на семестър за граждани на ЕС и ЕИП / 1950 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "source_url": "https://vum.bg/bg/stipendii-taksi/"
+    },
+    {
+      "program_id": "vum-corr",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT кандидатстване процес",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://vum.bg/bg/iziskwaniq-za-magistar/"
+    },
+    {
+      "program_id": "vum-ibm-pb",
+      "field": "degree",
+      "expected_value": "Професионален бакалавър",
+      "null_reason": null,
+      "snippet": "Професионален бакалавър",
+      "source_url": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/"
+    },
+    {
+      "program_id": "vum-ibm-pb",
+      "field": "duration",
+      "expected_value": "3 години / 6 семестъра",
+      "null_reason": null,
+      "snippet": "3 години / 6 семестъра",
+      "source_url": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/"
+    },
+    {
+      "program_id": "vum-ibm-pb",
+      "field": "language",
+      "expected_value": "Английски",
+      "null_reason": null,
+      "snippet": "Английски",
+      "source_url": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/"
+    },
+    {
+      "program_id": "vum-ibm-pb",
+      "field": "tuition",
+      "expected_value": "1500 € на семестър за граждани на ЕС и ЕИП / 1950 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "null_reason": null,
+      "snippet": "1500 € на семестър за граждани на ЕС и ЕИП / 1950 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "source_url": "https://vum.bg/bg/stipendii-taksi/"
+    },
+    {
+      "program_id": "vum-ibm-pb",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT кандидатстване процес",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://vum.bg/bg/usloviq-za-bakalavri/"
+    },
+    {
+      "program_id": "vum-ibm-b",
+      "field": "degree",
+      "expected_value": "бакалавър",
+      "null_reason": null,
+      "snippet": "бакалавър",
+      "source_url": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/"
+    },
+    {
+      "program_id": "vum-ibm-b",
+      "field": "duration",
+      "expected_value": "4 години / 8 семестъра",
+      "null_reason": null,
+      "snippet": "4 години / 8 семестъра",
+      "source_url": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/"
+    },
+    {
+      "program_id": "vum-ibm-b",
+      "field": "language",
+      "expected_value": "Английски",
+      "null_reason": null,
+      "snippet": "Английски",
+      "source_url": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/"
+    },
+    {
+      "program_id": "vum-ibm-b",
+      "field": "tuition",
+      "expected_value": "1500 € на семестър за граждани на ЕС и ЕИП / 1950 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "null_reason": null,
+      "snippet": "1500 € на семестър за граждани на ЕС и ЕИП / 1950 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "source_url": "https://vum.bg/bg/stipendii-taksi/"
+    },
+    {
+      "program_id": "vum-ibm-b",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT кандидатстване процес",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://vum.bg/bg/usloviq-za-bakalavri/"
+    },
+    {
+      "program_id": "vum-hm-pb",
+      "field": "degree",
+      "expected_value": "Професионален бакалавър",
+      "null_reason": null,
+      "snippet": "Професионален бакалавър",
+      "source_url": "https://vum.bg/bg/hotelski-menidjmant"
+    },
+    {
+      "program_id": "vum-hm-pb",
+      "field": "duration",
+      "expected_value": "3 години / 6 семестъра",
+      "null_reason": null,
+      "snippet": "3 години / 6 семестъра",
+      "source_url": "https://vum.bg/bg/hotelski-menidjmant"
+    },
+    {
+      "program_id": "vum-hm-pb",
+      "field": "language",
+      "expected_value": "Английски",
+      "null_reason": null,
+      "snippet": "Английски",
+      "source_url": "https://vum.bg/bg/hotelski-menidjmant"
+    },
+    {
+      "program_id": "vum-hm-pb",
+      "field": "tuition",
+      "expected_value": "1500 € на семестър за граждани на ЕС и ЕИП / 1950 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "null_reason": null,
+      "snippet": "1500 € на семестър за граждани на ЕС и ЕИП / 1950 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "source_url": "https://vum.bg/bg/stipendii-taksi/"
+    },
+    {
+      "program_id": "vum-hm-pb",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT кандидатстване процес",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://vum.bg/bg/usloviq-za-bakalavri/"
+    },
+    {
+      "program_id": "vum-hm-b",
+      "field": "degree",
+      "expected_value": "Бакалавър",
+      "null_reason": null,
+      "snippet": "Бакалавър",
+      "source_url": "https://vum.bg/bg/hotelski-menidjmant"
+    },
+    {
+      "program_id": "vum-hm-b",
+      "field": "duration",
+      "expected_value": "4 години / 8 семестъра",
+      "null_reason": null,
+      "snippet": "4 години / 8 семестъра",
+      "source_url": "https://vum.bg/bg/hotelski-menidjmant"
+    },
+    {
+      "program_id": "vum-hm-b",
+      "field": "language",
+      "expected_value": "Английски",
+      "null_reason": null,
+      "snippet": "Английски",
+      "source_url": "https://vum.bg/bg/hotelski-menidjmant"
+    },
+    {
+      "program_id": "vum-hm-b",
+      "field": "tuition",
+      "expected_value": "1500 € на семестър за граждани на ЕС и ЕИП / 1950 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "null_reason": null,
+      "snippet": "1500 € на семестър за граждани на ЕС и ЕИП / 1950 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "source_url": "https://vum.bg/bg/stipendii-taksi/"
+    },
+    {
+      "program_id": "vum-hm-b",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT кандидатстване процес",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://vum.bg/bg/usloviq-za-bakalavri/"
+    },
+    {
+      "program_id": "vum-ped-econ",
+      "field": "degree",
+      "expected_value": "ПРОФЕСИОНАЛЕН БАКАЛАВЪР",
+      "null_reason": null,
+      "snippet": "ПРОФЕСИОНАЛЕН БАКАЛАВЪР",
+      "source_url": "https://vum.bg/bg/pedagogika-obuchenieto-ikonomika-menidjmant/"
+    },
+    {
+      "program_id": "vum-ped-econ",
+      "field": "duration",
+      "expected_value": "3 ГОДИНИ (6 СЕМЕСТЪРА)",
+      "null_reason": null,
+      "snippet": "3 ГОДИНИ (6 СЕМЕСТЪРА)",
+      "source_url": "https://vum.bg/bg/pedagogika-obuchenieto-ikonomika-menidjmant/"
+    },
+    {
+      "program_id": "vum-ped-econ",
+      "field": "language",
+      "expected_value": "Български",
+      "null_reason": null,
+      "snippet": "Български",
+      "source_url": "https://vum.bg/bg/pedagogika-obuchenieto-ikonomika-menidjmant/"
+    },
+    {
+      "program_id": "vum-ped-econ",
+      "field": "tuition",
+      "expected_value": "750 евро",
+      "null_reason": null,
+      "snippet": "750 евро",
+      "source_url": "https://vum.bg/bg/pedagogika-obuchenieto-ikonomika-menidjmant/"
+    },
+    {
+      "program_id": "vum-ped-econ",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT кандидатстване процес",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://vum.bg/bg/usloviq-za-bakalavri/"
+    },
+    {
+      "program_id": "vum-ped-hosp",
+      "field": "degree",
+      "expected_value": "ПРОФЕСИОНАЛЕН БАКАЛАВЪР",
+      "null_reason": null,
+      "snippet": "ПРОФЕСИОНАЛЕН БАКАЛАВЪР",
+      "source_url": "https://vum.bg/bg/pedagogika-obuchenieto-hotelierstvo-restorantiorstvo/"
+    },
+    {
+      "program_id": "vum-ped-hosp",
+      "field": "duration",
+      "expected_value": "3 ГОДИНИ (6 СЕМЕСТЪРА)",
+      "null_reason": null,
+      "snippet": "3 ГОДИНИ (6 СЕМЕСТЪРА)",
+      "source_url": "https://vum.bg/bg/pedagogika-obuchenieto-hotelierstvo-restorantiorstvo/"
+    },
+    {
+      "program_id": "vum-ped-hosp",
+      "field": "language",
+      "expected_value": "Български",
+      "null_reason": null,
+      "snippet": "Български",
+      "source_url": "https://vum.bg/bg/pedagogika-obuchenieto-hotelierstvo-restorantiorstvo/"
+    },
+    {
+      "program_id": "vum-ped-hosp",
+      "field": "tuition",
+      "expected_value": "750 евро",
+      "null_reason": null,
+      "snippet": "750 евро",
+      "source_url": "https://vum.bg/bg/pedagogika-obuchenieto-hotelierstvo-restorantiorstvo/"
+    },
+    {
+      "program_id": "vum-ped-hosp",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT кандидатстване процес",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://vum.bg/bg/usloviq-za-bakalavri/"
+    },
+    {
+      "program_id": "vum-hce",
+      "field": "degree",
+      "expected_value": "Бакалавър",
+      "null_reason": null,
+      "snippet": "Бакалавър",
+      "source_url": "https://vum.bg/bg/hotelierstvo-kulinarni-izkustva/"
+    },
+    {
+      "program_id": "vum-hce",
+      "field": "duration",
+      "expected_value": "4 години / 8 семестъра",
+      "null_reason": null,
+      "snippet": "4 години / 8 семестъра",
+      "source_url": "https://vum.bg/bg/hotelierstvo-kulinarni-izkustva/"
+    },
+    {
+      "program_id": "vum-hce",
+      "field": "language",
+      "expected_value": "Английски",
+      "null_reason": null,
+      "snippet": "Английски",
+      "source_url": "https://vum.bg/bg/hotelierstvo-kulinarni-izkustva/"
+    },
+    {
+      "program_id": "vum-hce",
+      "field": "tuition",
+      "expected_value": "1500 € на семестър за граждани на ЕС и ЕИП / 1950 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "null_reason": null,
+      "snippet": "1500 € на семестър за граждани на ЕС и ЕИП / 1950 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "source_url": "https://vum.bg/bg/stipendii-taksi/"
+    },
+    {
+      "program_id": "vum-hce",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT кандидатстване процес",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://vum.bg/bg/usloviq-za-bakalavri/"
+    },
+    {
+      "program_id": "vum-int-tour",
+      "field": "degree",
+      "expected_value": "Магистър по „Международен туризъм“",
+      "null_reason": null,
+      "snippet": "Магистър по „Международен туризъм“",
+      "source_url": "https://vum.bg/bg/magistratura-mejdunaroden-turizam/"
+    },
+    {
+      "program_id": "vum-int-tour",
+      "field": "duration",
+      "expected_value": "3 семестъра",
+      "null_reason": null,
+      "snippet": "3 семестъра",
+      "source_url": "https://vum.bg/bg/magistratura-mejdunaroden-turizam/"
+    },
+    {
+      "program_id": "vum-int-tour",
+      "field": "language",
+      "expected_value": "Английски",
+      "null_reason": null,
+      "snippet": "Английски",
+      "source_url": "https://vum.bg/bg/magistratura-mejdunaroden-turizam/"
+    },
+    {
+      "program_id": "vum-int-tour",
+      "field": "tuition",
+      "expected_value": "1500 € на семестър за граждани на ЕС и ЕИП / 1950 € на семестър за граждани на страни извън ЕС и ЕИП / 900 € на семестър",
+      "null_reason": null,
+      "snippet": "1500 € на семестър за граждани на ЕС и ЕИП / 1950 € на семестър за граждани на страни извън ЕС и ЕИП / 900 € на семестър",
+      "source_url": "https://vum.bg/bg/stipendii-taksi/"
+    },
+    {
+      "program_id": "vum-int-tour",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT кандидатстване процес",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://vum.bg/bg/iziskwaniq-za-magistar/"
+    },
+    {
+      "program_id": "vum-tour-phd",
+      "field": "degree",
+      "expected_value": "Доктор",
+      "null_reason": null,
+      "snippet": "Доктор",
+      "source_url": "https://vum.bg/bg/doktorska-programa-turizam/"
+    },
+    {
+      "program_id": "vum-tour-phd",
+      "field": "duration",
+      "expected_value": "Редовна и самостоятелна форма на обучение – 3 години",
+      "null_reason": null,
+      "snippet": "Редовна и самостоятелна форма на обучение – 3 години",
+      "source_url": "https://vum.bg/bg/doktorska-programa-turizam/"
+    },
+    {
+      "program_id": "vum-tour-phd",
+      "field": "language",
+      "expected_value": "Английски",
+      "null_reason": null,
+      "snippet": "Английски",
+      "source_url": "https://vum.bg/bg/doktorska-programa-turizam/"
+    },
+    {
+      "program_id": "vum-tour-phd",
+      "field": "tuition",
+      "expected_value": "Годишна такса за граждани на страни от ЕС и ЕИП – 2400 € / Годишна такса за граждани на страни извън ЕС и ЕИП 4800 € / Такса за защита на дисертационен труд – 1500 €",
+      "null_reason": null,
+      "snippet": "Годишна такса за граждани на страни от ЕС и ЕИП – 2400 € / Годишна такса за граждани на страни извън ЕС и ЕИП 4800 € / Такса за защита на дисертационен труд – 1500 €",
+      "source_url": "https://vum.bg/bg/doktorska-programa-turizam/"
+    },
+    {
+      "program_id": "vum-tour-phd",
+      "field": "admission",
+      "expected_value": "Подаване на Заявление до ректора на ВУМ-Варна за желаната форма на обучение",
+      "null_reason": null,
+      "snippet": "Подаване на Заявление до ректора на ВУМ-Варна за желаната форма на обучение",
+      "source_url": "https://vum.bg/bg/doktorska-programa-turizam/"
+    },
+    {
+      "program_id": "vum-food",
+      "field": "degree",
+      "expected_value": "ПРОФЕСИОНАЛЕН БАКАЛАВЪР",
+      "null_reason": null,
+      "snippet": "ПРОФЕСИОНАЛЕН БАКАЛАВЪР",
+      "source_url": "https://vum.bg/bg/hranitelni-tehnologii-kulinarni-izkustva/"
+    },
+    {
+      "program_id": "vum-food",
+      "field": "duration",
+      "expected_value": "3 ГОДИНИ (6 СЕМЕСТЪРА)",
+      "null_reason": null,
+      "snippet": "3 ГОДИНИ (6 СЕМЕСТЪРА)",
+      "source_url": "https://vum.bg/bg/hranitelni-tehnologii-kulinarni-izkustva/"
+    },
+    {
+      "program_id": "vum-food",
+      "field": "language",
+      "expected_value": "Български",
+      "null_reason": null,
+      "snippet": "Български",
+      "source_url": "https://vum.bg/bg/hranitelni-tehnologii-kulinarni-izkustva/"
+    },
+    {
+      "program_id": "vum-food",
+      "field": "tuition",
+      "expected_value": "1500 € на семестър за граждани на ЕС и ЕИП / 2400 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "null_reason": null,
+      "snippet": "1500 € на семестър за граждани на ЕС и ЕИП / 2400 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "source_url": "https://vum.bg/bg/stipendii-taksi/"
+    },
+    {
+      "program_id": "vum-food",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT кандидатстване процес",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://vum.bg/bg/usloviq-za-bakalavri/"
+    },
+    {
+      "program_id": "vum-mkt",
+      "field": "degree",
+      "expected_value": "БАКАЛАВЪР",
+      "null_reason": null,
+      "snippet": "БАКАЛАВЪР",
+      "source_url": "https://vum.bg/bg/marketing-menidjmant/"
+    },
+    {
+      "program_id": "vum-mkt",
+      "field": "duration",
+      "expected_value": "3 години (6 семестъра)",
+      "null_reason": null,
+      "snippet": "3 години (6 семестъра)",
+      "source_url": "https://vum.bg/bg/marketing-menidjmant/"
+    },
+    {
+      "program_id": "vum-mkt",
+      "field": "language",
+      "expected_value": "Български",
+      "null_reason": null,
+      "snippet": "Български",
+      "source_url": "https://vum.bg/bg/marketing-menidjmant/"
+    },
+    {
+      "program_id": "vum-mkt",
+      "field": "tuition",
+      "expected_value": "1500 € на семестър за граждани на ЕС и ЕИП / 1950 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "null_reason": null,
+      "snippet": "1500 € на семестър за граждани на ЕС и ЕИП / 1950 € на семестър за граждани на страни извън ЕС и ЕИП",
+      "source_url": "https://vum.bg/bg/stipendii-taksi/"
+    },
+    {
+      "program_id": "vum-mkt",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT кандидатстване процес",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://vum.bg/bg/usloviq-za-bakalavri/"
+    }
+  ]
+}

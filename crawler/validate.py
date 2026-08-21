@@ -31,9 +31,9 @@ __all__ = ["run_checks", "render_scorecard", "write_archive", "MARK"]
 MARK = {"PASS": "✓", "FAIL": "✗", "PROXY": "≈",
         "PENDING": "…", "INFO": "·"}
 
-BASELINE = Path(".scratch/pipeline-validation/baseline.json")
-VERDICTS = Path(".scratch/pipeline-validation/sample-verdicts.json")
-FINDINGS = Path(".scratch/pipeline-validation/site-findings.json")
+BASELINE = Path("benchmark/baseline.json")
+VERDICTS = Path("benchmark/sample-verdicts.json")
+FINDINGS = Path("benchmark/site-findings.json")
 STABILITY_DIR = "crawler-out/hash-stability/snapshots"
 OUT_DIR = Path("crawler-out/validation")
 

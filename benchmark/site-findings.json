@@ -1,0 +1,118 @@
+{
+  "date": "2026-08-21",
+  "note": "Per-university negative findings observed during the 8x20 build-out. These are DURABLE records of what each site cost us -- read by `crawler validate`, never recomputed. A finding is retired only by fixing it, not by a later run happening to look fine.",
+  "findings": [
+    {
+      "uni_id": "SofiaUniversity",
+      "kind": "discovery",
+      "finding": "fragmented faculty subsites — no single program index; three seeds needed (FMI, PHLS, chemistry) and each faculty is a separate host/path shape",
+      "impact": "onboarding survey works, but seeds are hand-found per faculty",
+      "status": "accepted"
+    },
+    {
+      "uni_id": "SofiaUniversity",
+      "kind": "extraction",
+      "finding": "language is stated on the program pages but no shared label matches it — measured, not assumed: all 5 graded programs keyed «Български» and shipped nothing",
+      "impact": "6 of SU's 25 graded cells are MISS; a fixable label gap, not a missing fact",
+      "status": "open"
+    },
+    {
+      "uni_id": "UniRuse",
+      "kind": "freshness",
+      "finding": "fee source still states the 2025/2026 cycle; the year-lag check fires on every run (20 values)",
+      "impact": "publish blocks every time; promoted only by standing human clear",
+      "status": "accepted-by-owner"
+    },
+    {
+      "uni_id": "UniRuse",
+      "kind": "extraction",
+      "finding": "many programs share one faculty page, so per-program field resolution is weak",
+      "impact": "36/100 fields extract",
+      "status": "open"
+    },
+    {
+      "uni_id": "ANIS",
+      "kind": "discovery",
+      "finding": "every program lives on one admissions page; the onboarding link survey has nothing to propose (0 proposals, $0.35 spent to learn it)",
+      "impact": "programs enumerated by hand from page text",
+      "status": "open"
+    },
+    {
+      "uni_id": "ANIS",
+      "kind": "extraction",
+      "finding": "shared admissions page yields few per-program values",
+      "impact": "24/90 fields extract",
+      "status": "open"
+    },
+    {
+      "uni_id": "AUBG",
+      "kind": "discovery",
+      "finding": "site redirects browser-like user agents to a /region-selector/ interstitial; our fetcher sends a real browser UA by design, so link discovery saw 1 link on a 99-link page. Region choices are JS-rendered, so no cookie can be lifted",
+      "impact": "discovery only possible via sitemap.xml",
+      "status": "mitigated"
+    },
+    {
+      "uni_id": "AUBG",
+      "kind": "coverage",
+      "finding": "17 bachelor majors + 1 EMBA is the whole degree catalogue; the rest of /bachelor-degrees/ are minors and short courses",
+      "impact": "18 programs, not 20 — padding would ship non-degrees as Programs",
+      "status": "accepted"
+    },
+    {
+      "uni_id": "MUVarna",
+      "kind": "discovery",
+      "finding": "sitemap carries no program pages; all programs named on one shared specialties page",
+      "impact": "enumerated by hand; 15 programs is all the page lists",
+      "status": "accepted"
+    },
+    {
+      "uni_id": "MUVarna",
+      "kind": "extraction",
+      "finding": "shared specialties page carries little per-program data",
+      "impact": "26/75 fields extract",
+      "status": "open"
+    },
+    {
+      "uni_id": "MUPleven",
+      "kind": "extraction",
+      "finding": "three programs have no row in the fee order (Медицинска рехабилитация, Медико-социални дейности, Обществено здраве и здравен мениджмънт)",
+      "impact": "tuition ships as an honest null for those three",
+      "status": "accepted"
+    },
+    {
+      "uni_id": "SHU",
+      "kind": "discovery",
+      "finding": "site is a catch-all — /, /specialnosti/ and /kandidatstudentski-kampanii/ return byte-identical HTML; the 4,819-URL sitemap holds news and projects but no program pages",
+      "impact": "programs found only via per-faculty specialnosti pages linking per-program PDFs",
+      "status": "mitigated"
+    },
+    {
+      "uni_id": "SHU",
+      "kind": "trust",
+      "finding": "a 460k-char candidate handbook names every program and was REJECTED as a shared page: all 20 programs would extract the same first-match values, verbatim-present and therefore invisible to the provenance gate",
+      "impact": "would have manufactured 20 confidently wrong programs; per-program PDFs used instead",
+      "status": "avoided"
+    },
+    {
+      "uni_id": "NBU",
+      "kind": "extraction",
+      "finding": "only `degree` is server-rendered (stated in the e-catalog page title); duration, language, tuition and admission are JS-loaded on tabs that return general-info content on a direct fetch",
+      "impact": "20/100 fields extract, 80 honest nulls — the fetch-route limit RFC-C section 7 named",
+      "status": "open"
+    },
+    {
+      "uni_id": "NBU",
+      "kind": "discovery",
+      "finding": "on-site program index is JS-loaded and the 74 gzipped sub-sitemaps carry no programmes; only the separate e-catalog serves static per-programme pages",
+      "impact": "discovery via ecatalog.nbu.bg only",
+      "status": "mitigated"
+    },
+    {
+      "uni_id": "SofiaUniversity",
+      "kind": "trust",
+      "finding": "Docling merged a fee row's cells: «освободени 310 EUR» came out as ONE cell and the row lost columns, so the join read «освободени» where the labeller read 310 EUR (su-cult)",
+      "impact": "1 graded wrong; a merged cell can silently flip a fee between exempt and charged",
+      "status": "open"
+    }
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "entries": [
+    {
+      "program_id": "su-kn",
+      "field": "degree",
+      "expected_value": "бакалавър",
+      "null_reason": null,
+      "snippet": "бакалавър",
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/kompyut_rni_nauki"
+    },
+    {
+      "program_id": "su-kn",
+      "field": "duration",
+      "expected_value": "8 семестъра",
+      "null_reason": null,
+      "snippet": "8 семестъра",
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/kompyut_rni_nauki"
+    },
+    {
+      "program_id": "su-kn",
+      "field": "language",
+      "expected_value": "Български",
+      "null_reason": null,
+      "snippet": "Български",
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/kompyut_rni_nauki"
+    },
+    {
+      "program_id": "su-kn",
+      "field": "tuition",
+      "expected_value": "460 EUR",
+      "null_reason": null,
+      "snippet": "460 EUR",
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/priem/godishni_taksi_za_uchebnata_2026_2027_g"
+    },
+    {
+      "program_id": "su-kn",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT балообразуване",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/priem/.../baloobrazuvane"
+    },
+    {
+      "program_id": "su-inf",
+      "field": "degree",
+      "expected_value": "Бакалавър",
+      "null_reason": null,
+      "snippet": "Бакалавър",
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/informatika"
+    },
+    {
+      "program_id": "su-inf",
+      "field": "duration",
+      "expected_value": "8 семестъра",
+      "null_reason": null,
+      "snippet": "8 семестъра",
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/informatika"
+    },
+    {
+      "program_id": "su-inf",
+      "field": "language",
+      "expected_value": "Български",
+      "null_reason": null,
+      "snippet": "Български",
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/informatika"
+    },
+    {
+      "program_id": "su-inf",
+      "field": "tuition",
+      "expected_value": "460 EUR",
+      "null_reason": null,
+      "snippet": "460 EUR",
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/priem/godishni_taksi_za_uchebnata_2026_2027_g"
+    },
+    {
+      "program_id": "su-inf",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT балообразуване",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/priem/.../baloobrazuvane"
+    },
+    {
+      "program_id": "su-psy",
+      "field": "degree",
+      "expected_value": "Бакалавър",
+      "null_reason": null,
+      "snippet": "Бакалавър",
+      "source_url": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/psihologiya/"
+    },
+    {
+      "program_id": "su-psy",
+      "field": "duration",
+      "expected_value": "8 семестъра",
+      "null_reason": null,
+      "snippet": "8 семестъра",
+      "source_url": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/psihologiya/"
+    },
+    {
+      "program_id": "su-psy",
+      "field": "language",
+      "expected_value": "Български",
+      "null_reason": null,
+      "snippet": "Български",
+      "source_url": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/psihologiya/"
+    },
+    {
+      "program_id": "su-psy",
+      "field": "tuition",
+      "expected_value": "310 EUR",
+      "null_reason": null,
+      "snippet": "310 EUR",
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/priem/godishni_taksi_za_uchebnata_2026_2027_g"
+    },
+    {
+      "program_id": "su-psy",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT балообразуване",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/priem/.../baloobrazuvane"
+    },
+    {
+      "program_id": "su-cult",
+      "field": "degree",
+      "expected_value": "Бакалавър",
+      "null_reason": null,
+      "snippet": "Бакалавър",
+      "source_url": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/kulturologiya/"
+    },
+    {
+      "program_id": "su-cult",
+      "field": "duration",
+      "expected_value": "8 семестъра",
+      "null_reason": null,
+      "snippet": "8 семестъра",
+      "source_url": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/kulturologiya/"
+    },
+    {
+      "program_id": "su-cult",
+      "field": "language",
+      "expected_value": "Български",
+      "null_reason": null,
+      "snippet": "Български",
+      "source_url": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/kulturologiya/"
+    },
+    {
+      "program_id": "su-cult",
+      "field": "tuition",
+      "expected_value": "310 EUR",
+      "null_reason": null,
+      "snippet": "310 EUR",
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/priem/godishni_taksi_za_uchebnata_2026_2027_g"
+    },
+    {
+      "program_id": "su-cult",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT балообразуване",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/priem/.../baloobrazuvane"
+    },
+    {
+      "program_id": "su-ch",
+      "field": "degree",
+      "expected_value": "Бакалавър",
+      "null_reason": null,
+      "snippet": "Бакалавър",
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/kompyut_rna_himiya"
+    },
+    {
+      "program_id": "su-ch",
+      "field": "duration",
+      "expected_value": "8 семестъра",
+      "null_reason": null,
+      "snippet": "8 семестъра",
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/kompyut_rna_himiya"
+    },
+    {
+      "program_id": "su-ch",
+      "field": "language",
+      "expected_value": "Български",
+      "null_reason": null,
+      "snippet": "Български",
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/kompyut_rna_himiya"
+    },
+    {
+      "program_id": "su-ch",
+      "field": "tuition",
+      "expected_value": "освободени",
+      "null_reason": null,
+      "snippet": "освободени",
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/priem/godishni_taksi_za_uchebnata_2026_2027_g"
+    },
+    {
+      "program_id": "su-ch",
+      "field": "admission",
+      "expected_value": "Приемът на студенти за специалността „Компютърна химия” се извършва чрез конкурсен изпит по химия, математика, физика или биология, както и с ДЗИ по химия, математика, физика и опазване на околната среда, информатика, информационни технологии, биология и здравно образование или български език.",
+      "null_reason": null,
+      "snippet": "Приемът на студенти за специалността „Компютърна химия” се извършва чрез конкурсен изпит по химия, математика, физика или биология, както и с ДЗИ по химия, математика, физика и опазване на околната среда, информатика, информационни технологии, биология и здравно образование или български език.",
+      "source_url": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/kompyut_rna_himiya"
+    }
+  ]
+}

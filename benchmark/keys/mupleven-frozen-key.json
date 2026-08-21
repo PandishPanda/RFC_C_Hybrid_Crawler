@@ -1,0 +1,164 @@
+{
+  "entries": [
+    {
+      "program_id": "mu-med",
+      "field": "degree",
+      "expected_value": "МАГИСТЪР",
+      "null_reason": null,
+      "snippet": "МАГИСТЪР",
+      "source_url": "https://mu-pleven.bg/index.php/bg/specialities/medicine/479-annotation-of-specialty"
+    },
+    {
+      "program_id": "mu-med",
+      "field": "duration",
+      "expected_value": "6-годишен период на обучение (10 семестъра и 1 година преддипломен стаж).",
+      "null_reason": null,
+      "snippet": "6-годишен период на обучение (10 семестъра и 1 година преддипломен стаж).",
+      "source_url": "https://mu-pleven.bg/index.php/bg/specialities/medicine/479-annotation-of-specialty"
+    },
+    {
+      "program_id": "mu-med",
+      "field": "language",
+      "expected_value": "Български",
+      "null_reason": null,
+      "snippet": "Български",
+      "source_url": "https://mu-pleven.bg/index.php/bg/specialities/medicine/479-annotation-of-specialty"
+    },
+    {
+      "program_id": "mu-med",
+      "field": "tuition",
+      "expected_value": "620€ / семестър от 1 до 4ти семестър, 565€ за 5ти и 6ти семестър",
+      "null_reason": null,
+      "snippet": "620€ / семестър от 1 до 4ти семестър, 565€ за 5ти и 6ти семестър",
+      "source_url": "https://mu-pleven.bg/forms/ksk2026/taksi_za_kandidatstvane_obuchenie_2026_2027.pdf"
+    },
+    {
+      "program_id": "mu-med",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT кандидатстване процес",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://mu-pleven.bg/forms/ksk2026/Spavochnik%20KSK%202026%20-%2015-12-2025.pdf"
+    },
+    {
+      "program_id": "mu-pharm",
+      "field": "degree",
+      "expected_value": "МАГИСТЪР",
+      "null_reason": null,
+      "snippet": "МАГИСТЪР",
+      "source_url": "https://mu-pleven.bg/index.php/bg/specialities/farmacy/3602-2016-05-19-07-23-24"
+    },
+    {
+      "program_id": "mu-pharm",
+      "field": "duration",
+      "expected_value": "5-годишен период на обучение (9 семестъра и 1 семестър преддипломен стаж).",
+      "null_reason": null,
+      "snippet": "5-годишен период на обучение (9 семестъра и 1 семестър преддипломен стаж).",
+      "source_url": "https://mu-pleven.bg/index.php/bg/specialities/farmacy/3602-2016-05-19-07-23-24"
+    },
+    {
+      "program_id": "mu-pharm",
+      "field": "language",
+      "expected_value": "Български",
+      "null_reason": null,
+      "snippet": "Български",
+      "source_url": "https://mu-pleven.bg/index.php/bg/specialities/farmacy/3602-2016-05-19-07-23-24"
+    },
+    {
+      "program_id": "mu-pharm",
+      "field": "tuition",
+      "expected_value": "620€ / семестър от 1 до 4ти, 565€ 5ти семестър",
+      "null_reason": null,
+      "snippet": "620€ / семестър от 1 до 4ти, 565€ 5ти семестър",
+      "source_url": "https://mu-pleven.bg/forms/ksk2026/taksi_za_kandidatstvane_obuchenie_2026_2027.pdf"
+    },
+    {
+      "program_id": "mu-pharm",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT кандидатстване процес",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://mu-pleven.bg/forms/ksk2026/Spavochnik%20KSK%202026%20-%2015-12-2025.pdf"
+    },
+    {
+      "program_id": "mu-nurse",
+      "field": "degree",
+      "expected_value": "Бакалавър",
+      "null_reason": null,
+      "snippet": "Бакалавър",
+      "source_url": "https://mu-pleven.bg/index.php/bg/specialities/medical-nurse/492-annotation-of-specialty"
+    },
+    {
+      "program_id": "mu-nurse",
+      "field": "duration",
+      "expected_value": "4-годишен период на обучение",
+      "null_reason": null,
+      "snippet": "4-годишен период на обучение",
+      "source_url": "https://mu-pleven.bg/index.php/bg/specialities/medical-nurse/492-annotation-of-specialty"
+    },
+    {
+      "program_id": "mu-nurse",
+      "field": "language",
+      "expected_value": "Български",
+      "null_reason": null,
+      "snippet": "Български",
+      "source_url": "https://mu-pleven.bg/index.php/bg/specialities/medical-nurse/492-annotation-of-specialty"
+    },
+    {
+      "program_id": "mu-nurse",
+      "field": "tuition",
+      "expected_value": "410 € / семестър",
+      "null_reason": null,
+      "snippet": "410 € / семестър",
+      "source_url": "https://mu-pleven.bg/forms/ksk2026/taksi_za_kandidatstvane_obuchenie_2026_2027.pdf"
+    },
+    {
+      "program_id": "mu-nurse",
+      "field": "admission",
+      "expected_value": "Положилите държавен зрелостен изпит по биология, могат да кандидатстват по избор с оценката от него или с приемен изпит-тест по биология; Неположилите държавен зрелостен изпит по биология кандидатстват с приемен изпит-тест по биология;",
+      "null_reason": null,
+      "snippet": "Положилите държавен зрелостен изпит по биология, могат да кандидатстват по избор с оценката от него или с приемен изпит-тест по биология; Неположилите държавен зрелостен изпит по биология кандидатстват с приемен изпит-тест по биология;",
+      "source_url": "https://mu-pleven.bg/forms/ksk2026/Spavochnik%20KSK%202026%20-%2015-12-2025.pdf"
+    },
+    {
+      "program_id": "mu-ap",
+      "field": "degree",
+      "expected_value": "ОКС „професионален бакалавър”",
+      "null_reason": null,
+      "snippet": "Специалност „Помощник-фармацевт” – ОКС „професионален бакалавър”",
+      "source_url": "https://mu-pleven.bg/forms/ksk2026/Spavochnik%20KSK%202026%20-%2015-12-2025.pdf"
+    },
+    {
+      "program_id": "mu-ap",
+      "field": "duration",
+      "expected_value": "срок на обучение 3 години",
+      "null_reason": null,
+      "snippet": "редовна форма срок на обучение 3 години",
+      "source_url": "https://mu-pleven.bg/forms/ksk2026/Spavochnik%20KSK%202026%20-%2015-12-2025.pdf"
+    },
+    {
+      "program_id": "mu-ap",
+      "field": "language",
+      "expected_value": "Български",
+      "null_reason": null,
+      "snippet": "Български",
+      "source_url": "https://mu-pleven.bg/index.php/bg/specialities/assistant-pharmacist"
+    },
+    {
+      "program_id": "mu-ap",
+      "field": "tuition",
+      "expected_value": "410 / семестър",
+      "null_reason": null,
+      "snippet": "410 / семестър",
+      "source_url": "https://mu-pleven.bg/forms/ksk2026/taksi_za_kandidatstvane_obuchenie_2026_2027.pdf"
+    },
+    {
+      "program_id": "mu-ap",
+      "field": "admission",
+      "expected_value": "SENTINEL-MANUAL-VERDICT кандидатстване процес",
+      "null_reason": null,
+      "snippet": null,
+      "source_url": "https://mu-pleven.bg/forms/ksk2026/Spavochnik%20KSK%202026%20-%2015-12-2025.pdf"
+    }
+  ]
+}

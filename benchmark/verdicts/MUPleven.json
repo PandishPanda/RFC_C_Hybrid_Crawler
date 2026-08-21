@@ -1,0 +1,52 @@
+{
+  "verdicts": [
+    {
+      "program_id": "mu-nurse",
+      "field": "tuition",
+      "verdict": "wrong",
+      "note": ""
+    },
+    {
+      "program_id": "mu-med",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "mu-med",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "mu-pharm",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "mu-pharm",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "mu-nurse",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "mu-ap",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": ""
+    },
+    {
+      "program_id": "mu-ap",
+      "field": "admission",
+      "verdict": "ok",
+      "note": ""
+    }
+  ]
+}

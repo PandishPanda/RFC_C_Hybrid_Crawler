@@ -1,0 +1,10 @@
+{
+  "verdicts": [
+    {
+      "program_id": "p1",
+      "field": "duration",
+      "verdict": "wrong",
+      "note": "different program's duration"
+    }
+  ]
+}

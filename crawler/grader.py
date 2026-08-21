@@ -355,13 +355,30 @@ def write_frozen_key(path, entries):
 
 
 # --------------------------------------------------------- manual verdicts
+# Manual verdicts are ORIGINAL HUMAN JUDGMENT, not gathered output: a
+# human decided a CHECK entry was ok or wrong, and by the Phase-0
+# protocol that decision can never be regenerated (re-judging after
+# seeing results is the contamination the blind key exists to prevent).
+# They therefore live in the TRACKED benchmark/ tree, not under the
+# gitignored, wipe-at-will crawler-out/.
+VERDICTS_DIR = "benchmark/verdicts"
+
+
 def _manual_path(out_dir, uni_id):
+    return Path(VERDICTS_DIR) / "{0}.json".format(uni_id)
+
+
+def _legacy_manual_path(out_dir, uni_id):
+    """Where verdicts lived before they were tracked (crawler-out).
+    Read-only: still honoured so an un-migrated clone keeps its work."""
     return Path(out_dir) / uni_id / MANUAL_VERDICTS_NAME
 
 
 def read_manual_verdicts(out_dir, uni_id):
     # type: (str, str) -> Dict[Tuple[str, str], str]
     path = _manual_path(out_dir, uni_id)
+    if not path.exists():
+        path = _legacy_manual_path(out_dir, uni_id)
     if not path.exists():
         return {}
     data = json.loads(path.read_text(encoding="utf-8"))
