@@ -25,7 +25,7 @@ this rate is the SAME value, not a plausibility outlier.
 import re
 import time
 from dataclasses import dataclass, field
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 from crawler.ledger import infer_academic_year
 
@@ -115,22 +115,61 @@ def _year_start(academic_year):
 
 # --------------------------------------------------------------- summarize
 def summarize(report):
-    """Per-run metrics expectation checks compare across runs."""
+    """Per-run metrics expectation checks compare across runs.
+
+    ``per_program`` carries the same metrics keyed by program_id so a
+    later run can compare like with like. Without it, adding programs
+    to a university is indistinguishable from the data getting worse:
+    every new program starts unconfigured, which lowers coverage and
+    raises the null rate exactly as a regression would (measured across
+    the 2026-08-21 build-out — nearly every university tripped these
+    checks purely by growing).
+    """
     programs = report["programs"]
     covered = sum(1 for p in programs
                  if any(f["status"] == "PASS" for f in p["fields"].values()))
     denom = len(programs) or 1
     key_total = key_null = 0
+    per_program = {}
     for p in programs:
+        p_total = p_null = 0
         for name, f in p["fields"].items():
             if name in KEY_FIELDS:
                 key_total += 1
+                p_total += 1
                 if f["status"] == "NULL_OK":
                     key_null += 1
+                    p_null += 1
+        per_program[p["program_id"]] = {
+            "covered": any(f["status"] == "PASS"
+                           for f in p["fields"].values()),
+            "key_null": p_null,
+            "key_total": p_total,
+        }
     return {
         "programs": len(programs),
         "covered_programs": covered,
         "coverage": covered / denom,
+        "key_field_null_rate": (key_null / key_total) if key_total else 0.0,
+        "per_program": per_program,
+    }
+
+
+def _subset_metrics(summary, program_ids):
+    # type: (dict, set) -> Optional[dict]
+    """coverage/null-rate recomputed over PROGRAM_IDS only, or None when
+    the summary predates per_program (older run summaries stay readable)."""
+    per = summary.get("per_program")
+    if per is None:
+        return None
+    rows = [per[pid] for pid in program_ids if pid in per]
+    if not rows:
+        return None
+    key_total = sum(r["key_total"] for r in rows)
+    key_null = sum(r["key_null"] for r in rows)
+    return {
+        "programs": len(rows),
+        "coverage": sum(1 for r in rows if r["covered"]) / len(rows),
         "key_field_null_rate": (key_null / key_total) if key_total else 0.0,
     }
 
@@ -142,6 +181,12 @@ class ExpectationResult:
     reasons: List[str] = field(default_factory=list)
     current: dict = field(default_factory=dict)
     previous: Optional[dict] = None
+    # Program-set change since the previous promoted run. added/removed
+    # are program ids; compared_on is how many programs the delta checks
+    # actually ran over (the stable intersection).
+    added: Tuple[str, ...] = ()
+    removed: Tuple[str, ...] = ()
+    compared_on: Optional[int] = None
 
 
 def check(report, previous_summary=None, *, today=None,
@@ -157,25 +202,67 @@ def check(report, previous_summary=None, *, today=None,
     current = summarize(report)
     reasons = []
 
+    added = removed = ()
+    compared_on = None
     if previous_summary is not None:
-        drop = previous_summary["coverage"] - current["coverage"]
+        cur_ids = set(current.get("per_program") or {})
+        prev_ids = set(previous_summary.get("per_program") or {})
+        if cur_ids and prev_ids:
+            added = tuple(sorted(cur_ids - prev_ids))
+            removed = tuple(sorted(prev_ids - cur_ids))
+            stable = cur_ids & prev_ids
+        else:
+            stable = set()
+
+        # Compare like with like: the delta checks run over the programs
+        # BOTH runs contain. A program added since the last promoted run
+        # has no history to regress against, and counting it as a
+        # regression is what made every expansion in the 2026-08-21
+        # build-out look like data loss.
+        cur_cmp = _subset_metrics(current, stable) if stable else None
+        prev_cmp = _subset_metrics(previous_summary, stable) if stable else None
+        if cur_cmp is None or prev_cmp is None:
+            # No per_program on one side (a summary written before this
+            # existed): fall back to whole-run comparison rather than
+            # silently skipping the gate.
+            cur_cmp, prev_cmp = current, previous_summary
+        else:
+            compared_on = cur_cmp["programs"]
+
+        scope = ("" if compared_on is None
+                 else " [on {0} program(s) present in both runs".format(
+                     compared_on)
+                     + ("; {0} added".format(len(added)) if added else "")
+                     + ("; {0} removed".format(len(removed)) if removed else "")
+                     + "]")
+
+        drop = prev_cmp["coverage"] - cur_cmp["coverage"]
         if drop > COVERAGE_DROP_THRESHOLD:
             reasons.append(
                 "coverage dropped {0:.1%} -> {1:.1%} ({2:.1%} drop, "
-                "threshold {3:.0%})".format(
-                    previous_summary["coverage"], current["coverage"],
-                    drop, COVERAGE_DROP_THRESHOLD))
+                "threshold {3:.0%}){4}".format(
+                    prev_cmp["coverage"], cur_cmp["coverage"],
+                    drop, COVERAGE_DROP_THRESHOLD, scope))
 
-        spike = current["key_field_null_rate"] - previous_summary["key_field_null_rate"]
+        spike = cur_cmp["key_field_null_rate"] - prev_cmp["key_field_null_rate"]
         if spike > NULL_RATE_SPIKE_THRESHOLD:
             reasons.append(
                 "key-field null rate spiked {0:.1%} -> {1:.1%} ({2:.1%} "
-                "rise, threshold {3:.0%})".format(
-                    previous_summary["key_field_null_rate"],
-                    current["key_field_null_rate"], spike,
-                    NULL_RATE_SPIKE_THRESHOLD))
+                "rise, threshold {3:.0%}){4}".format(
+                    prev_cmp["key_field_null_rate"],
+                    cur_cmp["key_field_null_rate"], spike,
+                    NULL_RATE_SPIKE_THRESHOLD, scope))
 
-        if current["programs"] < previous_summary["programs"]:
+        # Programs DISAPPEARING is still a regression worth blocking on --
+        # but a falling total is not, when the set was deliberately
+        # changed. Fire on what actually vanished.
+        if removed:
+            reasons.append(
+                "{0} program(s) present in the last promoted run are "
+                "missing: {1}{2}".format(
+                    len(removed), ", ".join(removed[:5]),
+                    ", ..." if len(removed) > 5 else ""))
+        elif not prev_ids and current["programs"] < previous_summary["programs"]:
             reasons.append(
                 "row count fell {0} -> {1}".format(
                     previous_summary["programs"], current["programs"]))
@@ -201,4 +288,6 @@ def check(report, previous_summary=None, *, today=None,
                 + (", ..." if len(lagging) > 5 else "")))
 
     return ExpectationResult(blocked=bool(reasons), reasons=reasons,
-                             current=current, previous=previous_summary)
+                             current=current, previous=previous_summary,
+                             added=added, removed=removed,
+                             compared_on=compared_on)

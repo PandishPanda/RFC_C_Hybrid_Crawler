@@ -226,11 +226,15 @@ class ExpectationChecksTest(unittest.TestCase):
         self.assertTrue(any("null rate spiked" in r for r in result.reasons))
 
     def test_falling_row_count_blocks(self):
+        # Now reported by WHICH programs vanished rather than by a bare
+        # count -- a count can also fall because the set was deliberately
+        # changed, and only a disappearance is a regression.
         prev = expectations.summarize(FULL_COVERAGE)  # 2 programs
         fewer = make_report({"p1": FULL_COVERAGE["programs"][0]["fields"]})
         result = expectations.check(fewer, prev)
         self.assertTrue(result.blocked)
-        self.assertTrue(any("row count fell" in r for r in result.reasons))
+        self.assertTrue(any("missing" in r for r in result.reasons))
+        self.assertEqual(result.removed, ("p2",))
 
     def test_valid_for_lag_after_july_blocks(self):
         stale = make_report({
@@ -317,3 +321,65 @@ class PublishTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ProgramSetChangeTest(unittest.TestCase):
+    """Growth must not read as regression. The delta checks compare the
+    programs BOTH runs contain; a program with no history has nothing to
+    regress against (2026-08-21 build-out: nearly every university
+    tripped these checks purely by adding programs)."""
+
+    def _covered(self, pid):
+        return {pid: {"degree": field_record("PASS", "бакалавър"),
+                      "tuition": field_record("PASS", "460 EUR"),
+                      "admission": field_record("PASS", "изпит")}}
+
+    def _bare(self, pid):
+        return {pid: {"degree": field_record("NULL_OK"),
+                      "tuition": field_record("NULL_OK"),
+                      "admission": field_record("NULL_OK")}}
+
+    def test_adding_unconfigured_programs_does_not_block(self):
+        prev_report = make_report({**self._covered("p1"), **self._covered("p2")})
+        prev = expectations.summarize(prev_report)
+        grown = dict(self._covered("p1"))
+        grown.update(self._covered("p2"))
+        for i in range(3, 14):          # 11 new, entirely unconfigured
+            grown.update(self._bare("p{0}".format(i)))
+        result = expectations.check(make_report(grown), prev)
+        self.assertFalse(result.blocked, result.reasons)
+        self.assertEqual(result.compared_on, 2)
+        self.assertEqual(len(result.added), 11)
+
+    def test_a_real_regression_on_stable_programs_still_blocks(self):
+        prev_report = make_report({**self._covered("p1"), **self._covered("p2")})
+        prev = expectations.summarize(prev_report)
+        # p1 and p2 both stop resolving, while new programs are added --
+        # growth must not mask the regression on the programs we had.
+        worse = dict(self._bare("p1"))
+        worse.update(self._bare("p2"))
+        for i in range(3, 10):
+            worse.update(self._covered("p{0}".format(i)))
+        result = expectations.check(make_report(worse), prev)
+        self.assertTrue(result.blocked)
+        self.assertTrue(any("coverage dropped" in r for r in result.reasons))
+        self.assertTrue(any("present in both runs" in r for r in result.reasons))
+
+    def test_a_disappearing_program_blocks(self):
+        prev_report = make_report({**self._covered("p1"), **self._covered("p2")})
+        prev = expectations.summarize(prev_report)
+        result = expectations.check(make_report(self._covered("p1")), prev)
+        self.assertTrue(result.blocked)
+        self.assertTrue(any("missing" in r for r in result.reasons))
+        self.assertEqual(result.removed, ("p2",))
+
+    def test_summary_without_per_program_falls_back_not_skips(self):
+        # A run summary written before per_program existed must still be
+        # gated, not silently waved through.
+        prev = expectations.summarize(
+            make_report({**self._covered("p1"), **self._covered("p2")}))
+        prev.pop("per_program")
+        worse = dict(self._bare("p1"))
+        worse.update(self._bare("p2"))
+        result = expectations.check(make_report(worse), prev)
+        self.assertTrue(result.blocked)

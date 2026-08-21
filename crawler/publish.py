@@ -74,6 +74,11 @@ def publish(uni_id, *, configs_dir=None, out_dir=None, replay_dir=None,
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "promoted": promoted,
         "blocked_reasons": result.reasons,
+        "program_set_change": {
+            "added": list(result.added),
+            "removed": list(result.removed),
+            "compared_on": result.compared_on,
+        },
         "summary": result.current,
         "previous_summary": result.previous,
         "cost": {

@@ -95,6 +95,15 @@ def _summarize_publish(pr):
     lines.append("coverage:  {0:.1%} ({1}/{2} programs)".format(
         pr["summary"]["coverage"], pr["summary"]["covered_programs"],
         pr["summary"]["programs"]))
+    ch = pr.get("program_set_change") or {}
+    if ch.get("added") or ch.get("removed"):
+        lines.append("program set: +{0} added, -{1} removed"
+                     "{2}".format(
+                         len(ch.get("added") or []),
+                         len(ch.get("removed") or []),
+                         " (delta checks compared {0} program(s) present "
+                         "in both runs)".format(ch["compared_on"])
+                         if ch.get("compared_on") is not None else ""))
     d = pr["value_diff_summary"]
     lines.append("value diff vs {0}: +{1} added, -{2} removed, "
                  "~{3} changed, {4} currency-only".format(
