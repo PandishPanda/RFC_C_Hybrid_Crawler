@@ -103,6 +103,159 @@
       "spravochnik": {
         "source": "mu-sprav"
       }
+    },
+    {
+      "id": "mu-midwife",
+      "name": "Акушерка",
+      "page": "https://mu-pleven.bg/index.php/bg/specialities/midwife",
+      "spravochnik": {
+        "source": "mu-sprav",
+        "alias": "Акушерка"
+      },
+      "tuition_join": {
+        "source": "mu-fees",
+        "alias_pattern": "Акушерка \\(III и IVкурс\\)"
+      }
+    },
+    {
+      "id": "mu-veterinary-medicine",
+      "name": "Ветеринарна медицина",
+      "page": "https://mu-pleven.bg/index.php/bg/specialities/veterinary-medicine",
+      "spravochnik": {
+        "source": "mu-sprav",
+        "alias": "Ветеринарна медицина"
+      },
+      "tuition_join": {
+        "source": "mu-fees",
+        "alias_pattern": "Ветеринарна медицина \\(I курс\\)"
+      }
+    },
+    {
+      "id": "mu-medical-rehabilitation-and-o",
+      "name": "Кинезитерапия - Бакалавър",
+      "page": "https://mu-pleven.bg/index.php/bg/specialities/medical-rehabilitation-and-occupational-therapy-bachelor-2",
+      "spravochnik": {
+        "source": "mu-sprav",
+        "alias": "Кинезитерапия"
+      },
+      "tuition_join": {
+        "source": "mu-fees",
+        "alias_pattern": "Кинезитерапия"
+      }
+    },
+    {
+      "id": "mu-social-activities",
+      "name": "Медико - социални дейности",
+      "page": "https://mu-pleven.bg/index.php/bg/specialities/social-activities",
+      "spravochnik": {
+        "source": "mu-sprav",
+        "alias": "Медико"
+      }
+    },
+    {
+      "id": "mu-medical-cosmetics",
+      "name": "Медицинска козметика",
+      "page": "https://mu-pleven.bg/index.php/bg/specialities/medical-cosmetics",
+      "spravochnik": {
+        "source": "mu-sprav",
+        "alias": "Медицинска козметика"
+      },
+      "tuition_join": {
+        "source": "mu-fees",
+        "alias_pattern": "Медицинска козметика"
+      }
+    },
+    {
+      "id": "mu-medical-rehabilitation-and-o-2",
+      "name": "Медицинска рехабилитация и ерготерапия - Бакалавър",
+      "page": "https://mu-pleven.bg/index.php/bg/specialities/medical-rehabilitation-and-occupational-therapy-bachelor",
+      "spravochnik": {
+        "source": "mu-sprav",
+        "alias": "Медицинска рехабилитация и ерготерапия"
+      }
+    },
+    {
+      "id": "mu-medical-laboratory-assistant",
+      "name": "Медицински лаборант",
+      "page": "https://mu-pleven.bg/index.php/bg/specialities/medical-laboratory-assistant",
+      "spravochnik": {
+        "source": "mu-sprav",
+        "alias": "Медицински лаборант"
+      },
+      "tuition_join": {
+        "source": "mu-fees",
+        "alias_pattern": "Медицински лаборант"
+      }
+    },
+    {
+      "id": "mu-public-health-and-health-man",
+      "name": "Обществено здраве и здравен мениджмънт",
+      "page": "https://mu-pleven.bg/index.php/bg/specialities/public-health-and-health-management",
+      "spravochnik": {
+        "source": "mu-sprav",
+        "alias": "Обществено здраве и здравен мениджмънт"
+      }
+    },
+    {
+      "id": "mu-protection-and-control-of-pu",
+      "name": "Опазване и контрол на общественото здраве",
+      "page": "https://mu-pleven.bg/index.php/bg/specialities/protection-and-control-of-public-health",
+      "spravochnik": {
+        "source": "mu-sprav",
+        "alias": "Опазване и контрол на общественото здраве"
+      },
+      "tuition_join": {
+        "source": "mu-fees",
+        "alias_pattern": "Опазване и контрол на общественото здраве"
+      }
+    },
+    {
+      "id": "mu-x-ray-laboratory-assistant",
+      "name": "Рентгенов лаборант",
+      "page": "https://mu-pleven.bg/index.php/bg/specialities/x-ray-laboratory-assistant",
+      "spravochnik": {
+        "source": "mu-sprav",
+        "alias": "Рентгенов лаборант"
+      },
+      "tuition_join": {
+        "source": "mu-fees",
+        "alias_pattern": "Рентгенов лаборант"
+      }
+    },
+    {
+      "id": "mu-social-activities-in-healthc",
+      "name": "Социални дейности в здравеопазването – Бакалавър",
+      "page": "https://mu-pleven.bg/index.php/bg/specialities/social-activities-in-healthcare-bachelor",
+      "spravochnik": {
+        "source": "mu-sprav",
+        "alias": "Социални дейности в здравеопазването"
+      }
+    },
+    {
+      "id": "mu-health-care-management-bache",
+      "name": "Управление на здравните грижи - Бакалавър",
+      "page": "https://mu-pleven.bg/index.php/bg/specialities/health-care-management-bachelor",
+      "spravochnik": {
+        "source": "mu-sprav",
+        "alias": "Управление на здравните грижи"
+      },
+      "tuition_join": {
+        "source": "mu-fees",
+        "alias_pattern": "Управление на здравните грижи"
+      }
+    },
+    {
+      "id": "mu-health-care-management-maste",
+      "name": "Управление на здравните грижи - Магистър",
+      "page": "https://mu-pleven.bg/index.php/bg/specialities/health-care-management-master",
+      "spravochnik": {
+        "source": "mu-sprav",
+        "alias": "Управление на здравните грижи"
+      },
+      "tuition_join": {
+        "source": "mu-fees",
+        "alias_pattern": "Управление на здравните грижи"
+      }
     }
   ]
 }

@@ -151,6 +151,56 @@
         "degree": "phd-degree-mobility",
         "admission": "phd-adm-exams"
       }
+    },
+    {
+      "id": "muv-medicina",
+      "name": "Медицина",
+      "page": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "id": "muv-medicinska-sestra",
+      "name": "Медицинска сестра",
+      "page": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "id": "muv-medicinsko-osiguryavane-na",
+      "name": "Медицинско осигуряване на въоръжените сили",
+      "page": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "id": "muv-akusherka",
+      "name": "Акушерка",
+      "page": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "id": "muv-logopediya",
+      "name": "Логопедия",
+      "page": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "id": "muv-upravlenie-na-zdravnite-gr",
+      "name": "Управление на здравните грижи",
+      "page": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "id": "muv-pomoshtnikfarmacevt",
+      "name": "Помощник-фармацевт",
+      "page": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "id": "muv-rehabilitator",
+      "name": "Рехабилитатор",
+      "page": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "id": "muv-inspektor-po-obshtestveno",
+      "name": "Инспектор по обществено здраве",
+      "page": "https://www.mu-varna.bg/BG/specialnosti"
+    },
+    {
+      "id": "muv-rentgenov-laborant",
+      "name": "Рентгенов лаборант",
+      "page": "https://www.mu-varna.bg/BG/specialnosti"
     }
   ]
 }
