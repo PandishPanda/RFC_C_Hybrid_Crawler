@@ -33,6 +33,7 @@ MARK = {"PASS": "✓", "FAIL": "✗", "PROXY": "≈",
 
 BASELINE = Path(".scratch/pipeline-validation/baseline.json")
 VERDICTS = Path(".scratch/pipeline-validation/sample-verdicts.json")
+FINDINGS = Path(".scratch/pipeline-validation/site-findings.json")
 STABILITY_DIR = "crawler-out/hash-stability/snapshots"
 OUT_DIR = Path("crawler-out/validation")
 
@@ -155,6 +156,50 @@ def _check_frozen_acceptance(rows):
         "1 SNAPSHOT→ARTIFACT", "doc failures (benchmark replay)",
         str(docfails), "0", "PASS" if docfails == 0 else "FAIL",
         source="same re-run"))
+
+
+# Findings that describe a site limit we chose to live with are INFO;
+# findings still costing us data are FAIL-worthy in spirit but must not
+# flip the harness exit code, which belongs to the mechanical checks --
+# so open ones print as PROXY: a visible, unmeasured cost, not a pass.
+_FINDING_VERDICT = {
+    "open": "PROXY",
+    "accepted": "INFO",
+    "accepted-by-owner": "INFO",
+    "mitigated": "INFO",
+    "avoided": "INFO",
+}
+
+
+def _read_site_findings(rows):
+    """Per-university negative findings -- what each site cost us.
+
+    Durable evidence, never recomputed: a finding is retired by fixing
+    the site handling, not by a later run happening to look fine."""
+    if not FINDINGS.exists():
+        rows.append(_row("8 SITE FINDINGS", "per-university negatives",
+                         "not recorded", "every uni accounted for",
+                         "PENDING", source="missing site-findings.json"))
+        return
+    data = json.loads(FINDINGS.read_text(encoding="utf-8"))
+    items = data.get("findings", [])
+    by_uni = {}
+    for f in items:
+        by_uni.setdefault(f["uni_id"], []).append(f)
+    open_count = sum(1 for f in items if f.get("status") == "open")
+    rows.append(_row(
+        "8 SITE FINDINGS", "recorded",
+        "{0} finding(s) across {1} universit(ies); {2} still open".format(
+            len(items), len(by_uni), open_count),
+        "every uni accounted for", "INFO",
+        source="site-findings.json " + data.get("date", "")))
+    for uni in sorted(by_uni):
+        for f in by_uni[uni]:
+            rows.append(_row(
+                "8 SITE FINDINGS", "{0} · {1}".format(uni, f["kind"]),
+                f["finding"], f.get("impact", "—"),
+                _FINDING_VERDICT.get(f.get("status"), "INFO"),
+                source="status: {0}".format(f.get("status", "?"))))
 
 
 def _read_sample_verdicts(rows):
@@ -281,6 +326,7 @@ def run_checks():
     _check_costs(rows)
     _check_onboarding_discipline(rows)
     _read_sample_verdicts(rows)
+    _read_site_findings(rows)
     return rows
 
 

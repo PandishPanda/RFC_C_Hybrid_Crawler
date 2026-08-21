@@ -170,3 +170,63 @@ class Tier2RowTest(unittest.TestCase):
         row = next(r for r in self._rows_for(500, 0)
                    if "tier-2" in r["metric"])
         self.assertEqual(row["verdict"], "PASS")
+
+
+class SiteFindingsTest(unittest.TestCase):
+    """Per-university negative findings are durable evidence: recorded
+    once, retired only by fixing the site handling."""
+
+    def _rows_for(self, payload):
+        rows = []
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "f.json"
+            path.write_text(json.dumps(payload), encoding="utf-8")
+            original = validate.FINDINGS
+            validate.FINDINGS = path
+            try:
+                validate._read_site_findings(rows)
+            finally:
+                validate.FINDINGS = original
+        return rows
+
+    PAYLOAD = {"date": "2026-08-21", "findings": [
+        {"uni_id": "NBU", "kind": "extraction", "finding": "JS-only fields",
+         "impact": "20/100", "status": "open"},
+        {"uni_id": "AUBG", "kind": "coverage", "finding": "18 is the catalogue",
+         "impact": "no padding", "status": "accepted"},
+    ]}
+
+    def test_missing_file_is_pending_never_pass(self):
+        rows = []
+        original = validate.FINDINGS
+        validate.FINDINGS = Path("/nonexistent/f.json")
+        try:
+            validate._read_site_findings(rows)
+        finally:
+            validate.FINDINGS = original
+        self.assertEqual([r["verdict"] for r in rows], ["PENDING"])
+
+    def test_each_finding_becomes_a_row(self):
+        rows = self._rows_for(self.PAYLOAD)
+        metrics = [r["metric"] for r in rows]
+        self.assertIn("NBU · extraction", metrics)
+        self.assertIn("AUBG · coverage", metrics)
+
+    def test_open_findings_are_proxy_not_info(self):
+        rows = self._rows_for(self.PAYLOAD)
+        nbu = next(r for r in rows if r["metric"] == "NBU · extraction")
+        aubg = next(r for r in rows if r["metric"] == "AUBG · coverage")
+        self.assertEqual(nbu["verdict"], "PROXY")
+        self.assertEqual(aubg["verdict"], "INFO")
+
+    def test_summary_row_counts_open_findings(self):
+        rows = self._rows_for(self.PAYLOAD)
+        head = next(r for r in rows if r["metric"] == "recorded")
+        self.assertIn("2 finding(s)", head["value"])
+        self.assertIn("1 still open", head["value"])
+
+    def test_findings_never_flip_the_harness_exit_code(self):
+        # exit code belongs to the mechanical checks; a recorded negative
+        # must be visible without failing the scorecard.
+        rows = self._rows_for(self.PAYLOAD)
+        self.assertNotIn("FAIL", [r["verdict"] for r in rows])
