@@ -96,8 +96,8 @@
     {
       "uni_id": "NBU",
       "kind": "extraction",
-      "finding": "only `degree` is server-rendered (stated in the e-catalog page title); duration, language, tuition and admission are JS-loaded on tabs that return general-info content on a direct fetch",
-      "impact": "20/100 fields extract, 80 honest nulls — the fetch-route limit RFC-C section 7 named",
+      "finding": "MEASURED (5-program graded sample): duration and admission are visible to a human browser but unreachable by the fetch route — 9 of 25 cells. language and tuition are NOT on the programme pages at all: the labeller confirmed them absent, so those nulls are honest, not losses",
+      "impact": "JS gap costs 36% of graded cells (9/25); 44% (11/25) of nulls are genuinely-absent data. Every shipped degree graded correct (5/5)",
       "status": "open"
     },
     {

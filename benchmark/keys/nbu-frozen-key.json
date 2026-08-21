@@ -1,0 +1,204 @@
+{
+  "entries": [
+    {
+      "program_id": "nbu-2520",
+      "field": "degree",
+      "expected_value": "Бакалавър",
+      "null_reason": null,
+      "snippet": "Бакалавър",
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2520&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-2520",
+      "field": "duration",
+      "expected_value": "8 семестъра",
+      "null_reason": null,
+      "snippet": "8 семестъра",
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2520&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-2520",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated anywhere on the programme's pages",
+      "snippet": null,
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2520&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-2520",
+      "field": "tuition",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated anywhere on the programme's pages",
+      "snippet": null,
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2520&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-2520",
+      "field": "admission",
+      "expected_value": "завършилите средно образование - с полагане на кандидатстудентски изпит тест за общообразователна подготовка (ТОП) и представяне на диплома за средно образование;",
+      "null_reason": null,
+      "snippet": "завършилите средно образование - с полагане на кандидатстудентски изпит тест за общообразователна подготовка (ТОП) и представяне на диплома за средно образование;",
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2520&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-1835",
+      "field": "degree",
+      "expected_value": "Бакалавър",
+      "null_reason": null,
+      "snippet": "Бакалавър",
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=1835&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-1835",
+      "field": "duration",
+      "expected_value": "8 семестъра",
+      "null_reason": null,
+      "snippet": "8 семестъра",
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=1835&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-1835",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated anywhere on the programme's pages",
+      "snippet": null,
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=1835&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-1835",
+      "field": "tuition",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated anywhere on the programme's pages",
+      "snippet": null,
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=1835&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-1835",
+      "field": "admission",
+      "expected_value": "завършилите средно образование - с полагане на кандидатстудентски изпит тест за общообразователна подготовка (ТОП) и представяне на диплома за средно образование;",
+      "null_reason": null,
+      "snippet": "завършилите средно образование - с полагане на кандидатстудентски изпит тест за общообразователна подготовка (ТОП) и представяне на диплома за средно образование;",
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=1835&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-821",
+      "field": "degree",
+      "expected_value": "Бакалавър",
+      "null_reason": null,
+      "snippet": "Бакалавър",
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=821&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-821",
+      "field": "duration",
+      "expected_value": "8 семестъра",
+      "null_reason": null,
+      "snippet": "8 семестъра",
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=821&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-821",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated anywhere on the programme's pages",
+      "snippet": null,
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=821&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-821",
+      "field": "tuition",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated anywhere on the programme's pages",
+      "snippet": null,
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=821&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-821",
+      "field": "admission",
+      "expected_value": "завършилите средно образование - с полагане на кандидатстудентски изпит тест за общообразователна подготовка (ТОП) и представяне на диплома за средно образование;",
+      "null_reason": null,
+      "snippet": "завършилите средно образование - с полагане на кандидатстудентски изпит тест за общообразователна подготовка (ТОП) и представяне на диплома за средно образование;",
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=821&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-2539",
+      "field": "degree",
+      "expected_value": "Бакалавър",
+      "null_reason": null,
+      "snippet": "Бакалавър",
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2539&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-2539",
+      "field": "duration",
+      "expected_value": "8 семестъра",
+      "null_reason": null,
+      "snippet": "8 семестъра",
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2539&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-2539",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated anywhere on the programme's pages",
+      "snippet": null,
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2539&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-2539",
+      "field": "tuition",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated anywhere on the programme's pages",
+      "snippet": null,
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2539&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-2539",
+      "field": "admission",
+      "expected_value": "завършилите средно образование - с полагане на кандидатстудентски изпит тест за общообразователна подготовка (ТОП) и представяне на диплома за средно образование;",
+      "null_reason": null,
+      "snippet": "завършилите средно образование - с полагане на кандидатстудентски изпит тест за общообразователна подготовка (ТОП) и представяне на диплома за средно образование;",
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2539&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-3185",
+      "field": "degree",
+      "expected_value": "Бакалавър",
+      "null_reason": null,
+      "snippet": "Бакалавър",
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=3185&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-3185",
+      "field": "duration",
+      "expected_value": "8 семестъра",
+      "null_reason": null,
+      "snippet": "8 семестъра",
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=3185&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-3185",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated anywhere on the programme's pages",
+      "snippet": null,
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=3185&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-3185",
+      "field": "tuition",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated anywhere on the programme's pages",
+      "snippet": null,
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=3185&TabIndex=1&l=0"
+    },
+    {
+      "program_id": "nbu-3185",
+      "field": "admission",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated anywhere on the programme's pages",
+      "snippet": null,
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=3185&TabIndex=1&l=0"
+    }
+  ]
+}
