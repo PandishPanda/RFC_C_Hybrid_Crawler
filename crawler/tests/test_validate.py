@@ -106,3 +106,67 @@ class ArchiveTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class UpperBoundTest(unittest.TestCase):
+    """The generalized Clopper-Pearson bound. The k=0 closed form is the
+    regression anchor; nonzero k must widen the bound, not reuse it (the
+    scorecard used to quote the k=0 bound beside a nonzero wrong count)."""
+
+    def test_k_zero_matches_the_closed_form(self):
+        for n in (7, 33, 115):
+            self.assertAlmostEqual(validate._upper_bound_k(n, 0),
+                                   100.0 * (1.0 - 0.05 ** (1.0 / n)),
+                                   places=6)
+
+    def test_nonzero_k_widens_the_bound(self):
+        self.assertGreater(validate._upper_bound_k(115, 5),
+                           validate._upper_bound_k(115, 0))
+
+    def test_bound_falls_as_n_grows_at_a_fixed_rate(self):
+        # same 4% observed rate, more evidence -> tighter bound
+        self.assertGreater(validate._upper_bound_k(25, 1),
+                           validate._upper_bound_k(250, 10))
+
+    def test_all_wrong_is_a_hundred_percent(self):
+        self.assertEqual(validate._upper_bound_k(10, 10), 100.0)
+        self.assertEqual(validate._upper_bound_k(0, 0), 100.0)
+
+
+class Tier2RowTest(unittest.TestCase):
+    """tier-2 was hardcoded PENDING and could never leave that state
+    however large n grew -- permanently-green-by-omission."""
+
+    def _rows_for(self, n, wrong):
+        rows = []
+        payload = {"steps": {
+            "6-grader": {"blind_grade_n33": {
+                "date": "d", "n": n, "wrong": wrong, "fabrications": 0}},
+            "3-llm-tail": {"fill": {"value": {}, "reproduce": "r"}},
+            "4-onboarding": {}}}
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "b.json"
+            path.write_text(json.dumps(payload), encoding="utf-8")
+            original = validate.BASELINE
+            validate.BASELINE = path
+            try:
+                validate._read_baseline(rows)
+            finally:
+                validate.BASELINE = original
+        return rows
+
+    def test_below_the_population_it_is_pending(self):
+        row = next(r for r in self._rows_for(75, 1)
+                   if "tier-2" in r["metric"])
+        self.assertEqual(row["verdict"], "PENDING")
+
+    def test_at_the_population_it_measures(self):
+        row = next(r for r in self._rows_for(115, 5)
+                   if "tier-2" in r["metric"])
+        self.assertIn(row["verdict"], ("PASS", "FAIL"))
+        self.assertNotEqual(row["verdict"], "PENDING")
+
+    def test_a_clean_large_run_passes_tier_2(self):
+        row = next(r for r in self._rows_for(500, 0)
+                   if "tier-2" in r["metric"])
+        self.assertEqual(row["verdict"], "PASS")

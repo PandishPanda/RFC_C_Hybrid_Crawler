@@ -20,6 +20,7 @@ bound the population supports. Precision rows are batch-scoped, never
 university-named (Alexander's format reaction, 2026-08-17).
 """
 import json
+import math
 import time
 from pathlib import Path
 
@@ -46,9 +47,36 @@ def _row(step, metric, value, bar, verdict, cost="—", source=""):
             "verdict": verdict, "cost": cost, "source": source}
 
 
+def _binom_cdf(k, n, p):
+    # P(X <= k) for X ~ Binomial(n, p). n is benchmark-sized (hundreds),
+    # so the exact sum is cheap and avoids a scipy dependency (stdlib only).
+    return sum(math.comb(n, i) * p ** i * (1.0 - p) ** (n - i)
+               for i in range(k + 1))
+
+
+def _upper_bound_k(n, k):
+    # One-sided 95% Clopper-Pearson upper bound on the wrong rate given k
+    # wrong out of n: the largest p whose P(X <= k) is still >= 0.05.
+    # Bisection rather than a closed form because only k=0 has one -- and
+    # quoting the k=0 bound beside a nonzero wrong count (what this used
+    # to do) understates the real uncertainty.
+    if not n:
+        return 100.0
+    if k >= n:
+        return 100.0
+    lo, hi = k / float(n), 1.0
+    for _ in range(200):
+        mid = (lo + hi) / 2.0
+        if _binom_cdf(k, n, mid) > 0.05:
+            lo = mid
+        else:
+            hi = mid
+    return 100.0 * hi
+
+
 def _upper_bound(n):
     # one-sided 95% Clopper-Pearson upper bound on the wrong rate, 0 wrong
-    return 100.0 * (1.0 - 0.05 ** (1.0 / n)) if n else 100.0
+    return _upper_bound_k(n, 0)
 
 
 def _check_hash_stability(rows):
@@ -141,7 +169,7 @@ def _read_sample_verdicts(rows):
         items = [i for i in data["items"] if i["sheet"] == sheet]
         wrong = [i for i in items if i["verdict"] != "ok"]
         n = len(items)
-        bound = _upper_bound(n)
+        bound = _upper_bound_k(n, len(wrong))
         verdict = "PASS" if not wrong else "FAIL"
         rows.append(_row(
             step, name,
@@ -161,11 +189,11 @@ def _read_baseline(rows):
     base = json.loads(BASELINE.read_text(encoding="utf-8"))
     graded = base["steps"]["6-grader"]["blind_grade_n33"]
     n, wrong = graded["n"], graded["wrong"]
-    bound = _upper_bound(n)
+    bound = _upper_bound_k(n, wrong)
     rows.append(_row(
         "6 GRADER (oracle)", "graded accuracy tier-1",
         "{0} wrong / {1} ⇒ ≤{2:.1f}% @95%".format(wrong, n, bound),
-        "≤8.7%", "PASS" if (wrong == 0 and bound <= 8.7) else "FAIL",
+        "≤8.7%", "PASS" if bound <= 8.7 else "FAIL",
         cost="~90 min human (key)",
         source="ARCHIVED " + graded["date"]))
     rows.append(_row(
@@ -173,10 +201,22 @@ def _read_baseline(rows):
         str(graded.get("fabrications", "?")), "0",
         "PASS" if graded.get("fabrications") == 0 else "FAIL",
         source="ARCHIVED " + graded["date"]))
-    rows.append(_row(
-        "6 GRADER (oracle)", "graded accuracy tier-2",
-        "n={0} of 100 needed".format(n), "≤3.0%", "PENDING",
-        source="grows via VUM blind key (map ticket 07)"))
+    if n < 100:
+        rows.append(_row(
+            "6 GRADER (oracle)", "graded accuracy tier-2",
+            "n={0} of 100 needed".format(n), "≤3.0%", "PENDING",
+            source="grows via per-uni blind keys"))
+    else:
+        # n has reached the tier-2 population: this row MEASURES now.
+        # It used to be hardcoded PENDING, so it could never leave that
+        # state however large n grew -- a permanently-green-by-omission
+        # row of exactly the kind this scorecard exists to prevent.
+        rows.append(_row(
+            "6 GRADER (oracle)", "graded accuracy tier-2",
+            "{0} wrong / {1} ⇒ ≤{2:.1f}% @95%".format(wrong, n, bound),
+            "≤3.0%", "PASS" if bound <= 3.0 else "FAIL",
+            cost="~90 min human per uni key",
+            source="ARCHIVED " + graded["date"]))
     fill = base["steps"]["3-llm-tail"]["fill"]["value"]
     rows.append(_row(
         "3 LLM TAIL", "fill on prose pages",
