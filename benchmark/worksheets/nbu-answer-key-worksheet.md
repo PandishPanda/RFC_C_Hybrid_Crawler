@@ -50,7 +50,7 @@ Page: https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_
 - field: duration
   value: 8 семестъра
 - field: language
-  value: NOT STATED
+  value: NOT STATED 
 - field: tuition
   value: NOT STATED
 - field: admission

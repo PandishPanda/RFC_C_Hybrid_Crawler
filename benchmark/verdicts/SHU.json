@@ -1,0 +1,16 @@
+{
+  "verdicts": [
+    {
+      "program_id": "SHU-rsvu9749-BSC-BG",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": "labeller 2026-08-21: accepted the shipped value"
+    },
+    {
+      "program_id": "SHU-rsvu9749-BSC-BG",
+      "field": "admission",
+      "verdict": "ok",
+      "note": "labeller 2026-08-21: accepted the shipped value"
+    }
+  ]
+}

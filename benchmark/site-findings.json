@@ -113,6 +113,20 @@
       "finding": "Docling merged a fee row's cells: «освободени 310 EUR» came out as ONE cell and the row lost columns, so the join read «освободени» where the labeller read 310 EUR (su-cult)",
       "impact": "1 graded wrong; a merged cell can silently flip a fee between exempt and charged",
       "status": "open"
+    },
+    {
+      "uni_id": "SHU",
+      "kind": "coverage",
+      "finding": "MEASURED: the 15 programs added in the build-out have no fee or admission joins wired, so duration/tuition/admission ship null. shu-122 (Икономика) ships NOTHING at all — even degree — while every other program manages it",
+      "impact": "12 of 25 graded cells are MISS; all are unwired config, not extraction errors",
+      "status": "open"
+    },
+    {
+      "uni_id": "SHU",
+      "kind": "trust",
+      "finding": "refusing the 460k-char handbook as a shared source cost NO tuition coverage: the labeller found every fee in the properly-structured fee orders, which per-program joins can reach safely",
+      "impact": "the safe choice was also the complete one — recorded so it is not revisited",
+      "status": "avoided"
     }
   ]
 }

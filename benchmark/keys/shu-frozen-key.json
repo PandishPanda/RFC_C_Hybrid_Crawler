@@ -1,0 +1,204 @@
+{
+  "entries": [
+    {
+      "program_id": "SHU-rsvu9749-BSC-BG",
+      "field": "degree",
+      "expected_value": "Бакалавър",
+      "null_reason": null,
+      "snippet": "Бакалавър",
+      "source_url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fpn/bakalavyr/GRP.pdf"
+    },
+    {
+      "program_id": "SHU-rsvu9749-BSC-BG",
+      "field": "duration",
+      "expected_value": "8 семестъра",
+      "null_reason": null,
+      "snippet": "8 семестъра",
+      "source_url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fpn/bakalavyr/GRP.pdf"
+    },
+    {
+      "program_id": "SHU-rsvu9749-BSC-BG",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated in the programme PDF, fee orders or Справочник",
+      "snippet": null,
+      "source_url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fpn/bakalavyr/GRP.pdf"
+    },
+    {
+      "program_id": "SHU-rsvu9749-BSC-BG",
+      "field": "tuition",
+      "expected_value": "175 €",
+      "null_reason": null,
+      "snippet": "175 €",
+      "source_url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/students/taksi-DP-profBak-i-bak_2026-2027.pdf"
+    },
+    {
+      "program_id": "SHU-rsvu9749-BSC-BG",
+      "field": "admission",
+      "expected_value": "тест по география; ДЗИ по география и икономика; тест по физика; ДЗИ по физика и астрономия; тест по химия; ДЗИ по химия и опазване на околната среда; тест по биология; ДЗИ по биология и здравно образование; тест по български език и литература; ДЗИ по български език и литература; състезание по химия; състезание по география; състезание по физика; състезание по биология.",
+      "null_reason": null,
+      "snippet": "тест по география; ДЗИ по география и икономика; тест по физика; ДЗИ по физика и астрономия; тест по химия; ДЗИ по химия и опазване на околната среда; тест по биология; ДЗИ по биология и здравно образование; тест по български език и литература; ДЗИ по български език и литература; състезание по химия; състезание по география; състезание по физика; състезание по биология.",
+      "source_url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/Spravochnici/Spravochnik%202026%20g..pdf"
+    },
+    {
+      "program_id": "shu-122",
+      "field": "degree",
+      "expected_value": "Бакалавър",
+      "null_reason": null,
+      "snippet": "Бакалавър",
+      "source_url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/122-kvalifikaciya-07-07-2026.pdf"
+    },
+    {
+      "program_id": "shu-122",
+      "field": "duration",
+      "expected_value": "8 семестъра",
+      "null_reason": null,
+      "snippet": "8 семестъра",
+      "source_url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/122-kvalifikaciya-07-07-2026.pdf"
+    },
+    {
+      "program_id": "shu-122",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated in the programme PDF, fee orders or Справочник",
+      "snippet": null,
+      "source_url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/122-kvalifikaciya-07-07-2026.pdf"
+    },
+    {
+      "program_id": "shu-122",
+      "field": "tuition",
+      "expected_value": "175 €",
+      "null_reason": null,
+      "snippet": "175 €",
+      "source_url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/students/taksi-DP-profBak-i-bak_2026-2027.pdf"
+    },
+    {
+      "program_id": "shu-122",
+      "field": "admission",
+      "expected_value": "тест по икономика; тест по география; ДЗИ по география и икономика; тест по математика; ДЗИ по математика; тест по български език и литература; ДЗИ по български език и литература; състезание по икономика; състезание по математика.",
+      "null_reason": null,
+      "snippet": "тест по икономика; тест по география; ДЗИ по география и икономика; тест по математика; ДЗИ по математика; тест по български език и литература; ДЗИ по български език и литература; състезание по икономика; състезание по математика.",
+      "source_url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/Spravochnici/Spravochnik%202026%20g..pdf"
+    },
+    {
+      "program_id": "shu-216",
+      "field": "degree",
+      "expected_value": "Бакалавър",
+      "null_reason": null,
+      "snippet": "Бакалавър",
+      "source_url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/216-kvalifikaciya-07-22-2026.pdf"
+    },
+    {
+      "program_id": "shu-216",
+      "field": "duration",
+      "expected_value": "8 семестъра",
+      "null_reason": null,
+      "snippet": "8 семестъра",
+      "source_url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/216-kvalifikaciya-07-22-2026.pdf"
+    },
+    {
+      "program_id": "shu-216",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated in the programme PDF, fee orders or Справочник",
+      "snippet": null,
+      "source_url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/216-kvalifikaciya-07-22-2026.pdf"
+    },
+    {
+      "program_id": "shu-216",
+      "field": "tuition",
+      "expected_value": "165€",
+      "null_reason": null,
+      "snippet": "165€",
+      "source_url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/students/taksi-DP-profBak-i-bak_2026-2027.pdf"
+    },
+    {
+      "program_id": "shu-216",
+      "field": "admission",
+      "expected_value": "тест по английски език; ДЗИ по английски език; сертификати за владеене на английски език на В1, В2, С1 или С2; международни сертификати (IELTS, TOEFL, FCE, CAE, CPE или SAT); класиране на областен или национален кръг на олимпиада по английски език.",
+      "null_reason": null,
+      "snippet": "тест по английски език; ДЗИ по английски език; сертификати за владеене на английски език на В1, В2, С1 или С2; международни сертификати (IELTS, TOEFL, FCE, CAE, CPE или SAT); класиране на областен или национален кръг на олимпиада по английски език.",
+      "source_url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/Spravochnici/Spravochnik%202026%20g..pdf"
+    },
+    {
+      "program_id": "shu-88",
+      "field": "degree",
+      "expected_value": "Бакалавър",
+      "null_reason": null,
+      "snippet": "Бакалавър",
+      "source_url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/88-kvalifikaciya-08-07-2026.pdf"
+    },
+    {
+      "program_id": "shu-88",
+      "field": "duration",
+      "expected_value": "8 семестъра",
+      "null_reason": null,
+      "snippet": "8 семестъра",
+      "source_url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/88-kvalifikaciya-08-07-2026.pdf"
+    },
+    {
+      "program_id": "shu-88",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated in the programme PDF, fee orders or Справочник",
+      "snippet": null,
+      "source_url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/88-kvalifikaciya-08-07-2026.pdf"
+    },
+    {
+      "program_id": "shu-88",
+      "field": "tuition",
+      "expected_value": "165€",
+      "null_reason": null,
+      "snippet": "165€",
+      "source_url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/students/taksi-DP-profBak-i-bak_2026-2027.pdf"
+    },
+    {
+      "program_id": "shu-88",
+      "field": "admission",
+      "expected_value": "тест по физика; ДЗИ по физика и астрономия; тест по математика; ДЗИ по математика; тест по химия; ДЗИ по химия и опазване на околната среда; тест по български език и литература; ДЗИ по български език и литература; състезание по химия; състезание по физика.",
+      "null_reason": null,
+      "snippet": "тест по физика; ДЗИ по физика и астрономия; тест по математика; ДЗИ по математика; тест по химия; ДЗИ по химия и опазване на околната среда; тест по български език и литература; ДЗИ по български език и литература; състезание по химия; състезание по физика.",
+      "source_url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/Spravochnici/Spravochnik%202026%20g..pdf"
+    },
+    {
+      "program_id": "shu-1111",
+      "field": "degree",
+      "expected_value": "Магистър",
+      "null_reason": null,
+      "snippet": "Магистър",
+      "source_url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1111-kvalifikaciya-08-04-2026.pdf"
+    },
+    {
+      "program_id": "shu-1111",
+      "field": "duration",
+      "expected_value": "4 семестъра",
+      "null_reason": null,
+      "snippet": "4 семестъра",
+      "source_url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1111-kvalifikaciya-08-04-2026.pdf"
+    },
+    {
+      "program_id": "shu-1111",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated in the programme PDF, fee orders or Справочник",
+      "snippet": null,
+      "source_url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1111-kvalifikaciya-08-04-2026.pdf"
+    },
+    {
+      "program_id": "shu-1111",
+      "field": "tuition",
+      "expected_value": "489 €",
+      "null_reason": null,
+      "snippet": "489 €",
+      "source_url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/students/taksi-magistri_2026-2027.pdf"
+    },
+    {
+      "program_id": "shu-1111",
+      "field": "admission",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-21: not stated in the programme PDF, fee orders or Справочник",
+      "snippet": null,
+      "source_url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/Spravochnici/Spravochnik%202026%20g..pdf"
+    }
+  ]
+}
