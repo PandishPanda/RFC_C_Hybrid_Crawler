@@ -431,3 +431,33 @@ def run_onboarding_with_fakes(uni_id, seeds, seed_pages, *, configs_dir,
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SeedFailureTest(unittest.TestCase):
+    """A dead seed URL must be reported, not silently swallowed: three
+    404 seeds once read as a clean 'model declined' at zero cost."""
+
+    def test_failed_seed_is_recorded(self):
+        failures = []
+        fetch_links(["https://uni.example/gone"], FakeLinkFetcher({}),
+                    failures=failures)
+        self.assertEqual(len(failures), 1)
+        self.assertEqual(failures[0]["seed"], "https://uni.example/gone")
+
+    def test_good_seeds_record_no_failure(self):
+        failures = []
+        links = fetch_links(["https://uni.example/a"],
+                            FakeLinkFetcher({"https://uni.example/a":
+                                             b'<a href="/p1">P1</a>'}),
+                            failures=failures)
+        self.assertEqual(failures, [])
+        self.assertEqual(len(links), 1)
+
+    def test_report_carries_seed_failures(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "configs").mkdir()
+            report = run_onboarding_with_fakes(
+                "X", ["https://uni.example/dead"], {},
+                configs_dir=root / "configs", out_dir=root / "out")
+        self.assertEqual(len(report.seed_failures), 1)

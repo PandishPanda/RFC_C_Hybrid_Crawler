@@ -100,14 +100,28 @@ def discover_links(html_bytes, base_url, *, same_domain=True):
     return links
 
 
-def fetch_links(seed_urls, fetcher, *, cookies=None, same_domain=True):
-    # type: (List[str], object, Optional[Mapping], bool) -> List[Tuple[str, str]]
-    """Fetch every seed page and union their discovered links, deduped."""
+def fetch_links(seed_urls, fetcher, *, cookies=None, same_domain=True,
+                failures=None):
+    # type: (List[str], object, Optional[Mapping], bool, Optional[list]) -> List[Tuple[str, str]]
+    """Fetch every seed page and union their discovered links, deduped.
+
+    A seed that fails to fetch is appended to ``failures`` (when given) as
+    {seed, status, error}. Silently skipping it made a dead seed URL
+    indistinguishable from "the model found nothing" -- both surfaced as
+    zero proposals at zero cost (measured live on ANIS, 2026-08-21: three
+    404 seeds read as a clean decline). A seed that 404s is an operator
+    error to fix, not a finding about the university.
+    """
     found = {}
     for seed in seed_urls:
         snap = fetcher.fetch(seed, {"cookies": cookies or {},
                                     "label": "onboarding-discovery"})
         if not snap.ok:
+            if failures is not None:
+                failures.append({
+                    "seed": seed,
+                    "status": getattr(snap, "status", None),
+                    "error": getattr(snap, "error", None)})
             continue
         for url, text in discover_links(snap.read_bytes(), seed,
                                         same_domain=same_domain):
@@ -278,6 +292,7 @@ class OnboardingReport:
     total_cost_usd: float
     draft_config_valid: Optional[bool]
     draft_config_error: Optional[str]
+    seed_failures: Tuple[dict, ...] = ()   # seeds that never fetched
 
 
 def write_proposal(out_dir, uni_id, proposals):
@@ -360,9 +375,11 @@ def run_onboarding(uni_id, seed_urls, adapter, *, configs_dir=None,
         uni_id, out_dir=out_root, replay_dir=replay_dir,
         docling_url=docling_url)
 
+    seed_failures = []
     candidate_links = [
         (url, text)
-        for url, text in fetch_links(seed_urls, fetcher, cookies=cookies)
+        for url, text in fetch_links(seed_urls, fetcher, cookies=cookies,
+                                     failures=seed_failures)
         if url not in configured_pages
     ]
     proposals, total_cost = propose_onboarding(
@@ -372,4 +389,5 @@ def run_onboarding(uni_id, seed_urls, adapter, *, configs_dir=None,
     valid, error = validate_as_draft_config(uni_id, proposals)
     return OnboardingReport(uni_id=uni_id, proposals=tuple(proposals),
                             total_cost_usd=total_cost, draft_config_valid=valid,
-                            draft_config_error=error)
+                            draft_config_error=error,
+                            seed_failures=tuple(seed_failures))

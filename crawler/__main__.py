@@ -113,7 +113,15 @@ def _draft_config_summary(report):
 
 def _summarize_onboarding(report):
     adapter_errors = sum(1 for p in report.proposals if p.adapter_error)
-    lines = [
+    lines = []
+    if getattr(report, "seed_failures", ()):
+        lines.append("SEED FETCH FAILURES ({0}) — fix these before reading "
+                     "the result below:".format(len(report.seed_failures)))
+        for f in report.seed_failures:
+            lines.append("  ! {0} -> HTTP {1}{2}".format(
+                f["seed"], f["status"],
+                " ({0})".format(f["error"]) if f["error"] else ""))
+    lines += [
         "{0} candidate proposals ({1} with a proposed page, {2} adapter "
         "error -- worth a retry, not a decline)".format(
             len(report.proposals),

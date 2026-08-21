@@ -59,6 +59,81 @@
         "duration": "msc-duration-header",
         "admission": "msc-admission-2026"
       }
+    },
+    {
+      "id": "anis-m01",
+      "name": "Национална сигурност",
+      "page": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "id": "anis-m02",
+      "name": "Противодействие на престъпността и опазване на обществения ред",
+      "page": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "id": "anis-m03",
+      "name": "Криминалистика",
+      "page": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "id": "anis-m04",
+      "name": "Митническо разузнаване и разследване",
+      "page": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "id": "anis-m05",
+      "name": "Сигурност и софтуерни технологии",
+      "page": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "id": "anis-m06",
+      "name": "Сигурност и изкуствен интелект",
+      "page": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "id": "anis-m07",
+      "name": "Сигурност и криминална психология",
+      "page": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "id": "anis-m08",
+      "name": "Икономическа сигурност",
+      "page": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "id": "anis-m09",
+      "name": "Продоволствена сигурност",
+      "page": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "id": "anis-m10",
+      "name": "Счетоводство и контрол",
+      "page": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "id": "anis-m11",
+      "name": "Финанси",
+      "page": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "id": "anis-m12",
+      "name": "Дигитален маркетинг",
+      "page": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "id": "anis-m13",
+      "name": "Валутен, митнически и данъчен контрол",
+      "page": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "id": "anis-m14",
+      "name": "Финансово-счетоводен мениджмънт и застраховане",
+      "page": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "id": "anis-m15",
+      "name": "Стопанско управление",
+      "page": "https://www.vusi.bg/priem-3/priem-magister/"
     }
   ]
 }

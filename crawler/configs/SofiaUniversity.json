@@ -140,6 +140,162 @@
         "source": "su-adm",
         "alias": "Философия (на английски език)"
       }
+    },
+    {
+      "id": "su-data",
+      "name": "Анализ на данни",
+      "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_5_matematika/analiz_na_danni",
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Анализ на данни"
+      },
+      "admission_join": {
+        "source": "su-adm",
+        "alias": "Анализ на данни"
+      }
+    },
+    {
+      "id": "su-math",
+      "name": "Математика",
+      "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_5_matematika/matematika",
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Математика"
+      },
+      "admission_join": {
+        "source": "su-adm",
+        "alias": "Математика"
+      }
+    },
+    {
+      "id": "su-appmath",
+      "name": "Приложна математика",
+      "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_5_matematika/prilozhna_matematika",
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Приложна математика"
+      },
+      "admission_join": {
+        "source": "su-adm",
+        "alias": "Приложна математика"
+      }
+    },
+    {
+      "id": "su-inf",
+      "name": "Информатика",
+      "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/informatika",
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Информатика"
+      },
+      "admission_join": {
+        "source": "su-adm",
+        "alias": "Информатика"
+      }
+    },
+    {
+      "id": "su-mathinf",
+      "name": "Математика и информатика",
+      "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/1_3_pedagogika_na_obuchenieto_po/matematika_i_informatika",
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Математика и информатика"
+      },
+      "admission_join": {
+        "source": "su-adm",
+        "alias": "Математика и информатика"
+      }
+    },
+    {
+      "id": "su-philo",
+      "name": "Философия",
+      "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/filosofiya/",
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Философия"
+      },
+      "admission_join": {
+        "source": "su-adm",
+        "alias": "Философия"
+      }
+    },
+    {
+      "id": "su-socio",
+      "name": "Социология",
+      "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/sociologiya/",
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Социология"
+      },
+      "admission_join": {
+        "source": "su-adm",
+        "alias": "Социология"
+      }
+    },
+    {
+      "id": "su-polit",
+      "name": "Политология",
+      "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/politologiya/",
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Политология"
+      },
+      "admission_join": {
+        "source": "su-adm",
+        "alias": "Политология"
+      }
+    },
+    {
+      "id": "su-pubadm",
+      "name": "Публична администрация",
+      "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/publichna-administraciya/",
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Публична администрация"
+      },
+      "admission_join": {
+        "source": "su-adm",
+        "alias": "Публична администрация"
+      }
+    },
+    {
+      "id": "su-cult",
+      "name": "Културология",
+      "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/kulturologiya/",
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Културология"
+      },
+      "admission_join": {
+        "source": "su-adm",
+        "alias": "Културология"
+      }
+    },
+    {
+      "id": "su-euro",
+      "name": "Европеистика",
+      "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/evropeistika/",
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Европеистика"
+      },
+      "admission_join": {
+        "source": "su-adm",
+        "alias": "Европеистика"
+      }
+    },
+    {
+      "id": "su-pis",
+      "name": "Публични информационни системи",
+      "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/publichni-informacionni-sistemi/",
+      "tuition_join": {
+        "source": "su-fees",
+        "alias": "Публични информационни системи"
+      },
+      "admission_join": {
+        "source": "su-adm",
+        "alias": "Публични информационни системи"
+      }
     }
   ]
 }

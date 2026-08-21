@@ -199,6 +199,87 @@
       "field_anchors": {
         "degree": "uniruse-socialwork-plan-degree"
       }
+    },
+    {
+      "id": "uniruse-se",
+      "name": "Софтуерно инженерство",
+      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
+      "tuition_join": {
+        "source": "fees-state-redovno",
+        "alias": "Софтуерно инженерство"
+      }
+    },
+    {
+      "id": "uniruse-cs",
+      "name": "Компютърни науки",
+      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
+      "tuition_join": {
+        "source": "fees-state-redovno",
+        "alias": "Компютърни науки"
+      }
+    },
+    {
+      "id": "uniruse-finmath",
+      "name": "Финансова математика",
+      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
+      "tuition_join": {
+        "source": "fees-state-redovno",
+        "alias": "Финансова математика"
+      }
+    },
+    {
+      "id": "uniruse-socped",
+      "name": "Социална педагогика",
+      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
+      "tuition_join": {
+        "source": "fees-state-redovno",
+        "alias": "Социална педагогика"
+      }
+    },
+    {
+      "id": "uniruse-law",
+      "name": "Право",
+      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-law-studies",
+      "tuition_join": {
+        "source": "fees-state-redovno",
+        "alias": "Право"
+      }
+    },
+    {
+      "id": "uniruse-mecheng",
+      "name": "Машинно инженерство",
+      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-mechanical-and-manufacturing-engineering",
+      "tuition_join": {
+        "source": "fees-state-redovno",
+        "alias": "Машинно инженерство"
+      }
+    },
+    {
+      "id": "uniruse-transport",
+      "name": "Транспортна техника и технологии",
+      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-automotive-and-transport-engineering",
+      "tuition_join": {
+        "source": "fees-state-redovno",
+        "alias": "Транспортна техника и технологии"
+      }
+    },
+    {
+      "id": "uniruse-agritech",
+      "name": "Земеделска техника и технологии",
+      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-agricultural-mechanisation",
+      "tuition_join": {
+        "source": "fees-state-redovno",
+        "alias": "Земеделска техника и технологии"
+      }
+    },
+    {
+      "id": "uniruse-design",
+      "name": "Дизайн",
+      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-agricultural-mechanisation",
+      "tuition_join": {
+        "source": "fees-state-redovno",
+        "alias": "Дизайн"
+      }
     }
   ],
   "anchors": {
