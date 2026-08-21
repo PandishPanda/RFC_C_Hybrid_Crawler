@@ -1,12 +1,10 @@
-"""Onboarding agent-proposer flow (ticket 06, DEC-2).
+"""Onboarding agent-proposer flow (ticket 06, DEC-2; reshaped by ADR-0006).
 
-Ticket 05 proved the real bottleneck: a Program only counts as Covered
-via ``ProgramConfig.rsvu_code`` (an exact registry-row match) or a
-gate-PASSed field extraction. `propose_enrolling`'s name-match found 0/14
-of VUM's uncovered rows because those rows have no configured page at
-all. So onboarding's unit of work is "find the page for THIS registry
-row" -- the worklist is registry rows (crawler.registry.RegistryRow),
-not a from-scratch homepage crawl into an LLM-guessed program list.
+With the RSVU registry dropped (ADR-0006), onboarding's unit of work is no
+longer "find the page for THIS registry row" — it is "find the degree-
+program pages on THIS university's site." The worklist is the candidate
+links discovered from the seed page(s); the proposer judges which of them
+are degree-program pages and names each one.
 
 Two DIFFERENT kinds of claim come out of this module, and they must never
 be presented as the same kind of thing:
@@ -16,14 +14,13 @@ be presented as the same kind of thing:
      crawler.provenance.gate() every other tier feeds (ADR-0002). This is
      real signal: "this page has extractable program data."
 
-  2. proposed_url / the row<->page ASSIGNMENT itself -- a cross-language
-     semantic judgment ("Софтуерни системи и технологии" IS "Software
-     Systems and Technologies"). There is no verbatim source text to
-     quote for "this page documents THIS registry row" -- gate()
-     structurally cannot check it. ``ProposedProgram.assignment_verified``
-     is ALWAYS False; this is the thing a human confirms before promoting
-     anything into crawler/configs/. Nothing here writes to that
-     directory -- only to <out_dir>/<UniID>/onboarding-proposal.json.
+  2. proposed_url + proposed_name -- the judgment that a page IS a
+     degree-program page, and what the program is called. That is a
+     semantic judgment with no verbatim source text gate() could check.
+     ``ProposedProgram.assignment_verified`` is ALWAYS False; this is the
+     thing a human confirms before promoting anything into
+     crawler/configs/. Nothing here writes to that directory -- only to
+     <out_dir>/<UniID>/onboarding-proposal.json (ADR-0003).
 
 Verification only runs tier G (crawler.cascade.harvest_labels) against
 the proposed page -- a fresh candidate has no site config yet, so tiers
@@ -32,15 +29,10 @@ a fully-configured page could extract; it is real signal about THIS page,
 not a ceiling on the eventual Program once a human writes real config for
 it.
 
-Ticket 06's original scope also asked for agent-proposed renderer routing
-and join/alias recipes (tier F config) -- deliberately not built here.
-ADR-0003 records why: join/alias CORRESPONDENCE (which table row belongs
-to which program) is a hard, measured gate() limit (RFC v2 SS3 Q4's
-wrong-row/column blind spot), not a lesser priority, and table-pdf
-ROUTING is structurally circular for gate() to check (it would need an
-Artifact that doesn't exist until the routing question is already
-answered). Both stay human-authored, after a human confirms proposed_url
--- the same moment a human is already reading the real page.
+Agent-proposed renderer routing and join/alias recipes stay deliberately
+NOT built (ADR-0003): correspondence and routing are human-authored,
+after a human confirms proposed_url -- the same moment a human is already
+reading the real page.
 """
 import json
 from dataclasses import dataclass
@@ -51,11 +43,9 @@ from urllib.parse import urljoin, urlparse
 import bs4
 
 from crawler import cascade
-from crawler.adjudication import covered_codes
 from crawler.config import ConfigError, load_site_config, parse_site_config
 from crawler.llm_tail import HAIKU
 from crawler.provenance import Status, gate
-from crawler.registry import RegistryRow, load_captured_export
 from crawler.render import ROUTE_HTML
 from crawler.runner import (
     DEFAULT_CONFIGS_DIR,
@@ -73,12 +63,14 @@ __all__ = [
 PROPOSAL_NAME = "onboarding-proposal.json"
 
 SYSTEM_PROMPT = (
-    "You are matching a Bulgarian university registry program to the "
-    "correct page on that university's own website, from a list of "
-    "candidate pages (URL + the link text that pointed to it). Pick "
-    "EXACTLY ONE url that most likely documents this exact program, or "
-    "null if none of the candidates look like a confident match. Do not "
-    "guess -- a wrong match is worse than no match.")
+    "You are surveying a Bulgarian university's website to find its "
+    "DEGREE-PROGRAM pages, from a list of candidate pages (URL + the "
+    "link text that pointed to it). Select ONLY urls that most likely "
+    "document one specific degree program (bachelor's/master's/PhD), and "
+    "give each its program name as the site states it. Do not guess -- "
+    "a wrong page in the list is worse than a missing one. News, staff, "
+    "faculty-overview, admission-procedure and generic pages are not "
+    "program pages.")
 
 
 # --------------------------------------------------------------- discovery
@@ -128,21 +120,30 @@ def build_schema(candidate_urls):
     return {
         "type": "object",
         "properties": {
-            "url": {"type": ["string", "null"],
-                   "enum": [None] + list(candidate_urls)},
-            "reasoning": {"type": "string"},
+            "programs": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "url": {"type": "string",
+                               "enum": list(candidate_urls)},
+                        "name": {"type": "string"},
+                        "reasoning": {"type": "string"},
+                    },
+                    "required": ["url", "name", "reasoning"],
+                    "additionalProperties": False,
+                },
+            },
         },
-        "required": ["url", "reasoning"],
+        "required": ["programs"],
         "additionalProperties": False,
     }
 
 
-def build_prompt(row, candidates):
-    # type: (RegistryRow, List[Tuple[str, str]]) -> str
+def build_prompt(uni_id, candidates):
+    # type: (str, List[Tuple[str, str]]) -> str
     lines = [
-        "Registry program: {0!r}".format(row.name),
-        "Professional field: {0!r}".format(row.major_name),
-        "Degree level: {0!r}".format(row.degree_name),
+        "University: {0}".format(uni_id),
         "",
         "Candidate pages on the university's website:",
     ]
@@ -154,25 +155,20 @@ def build_prompt(row, candidates):
 @dataclass(frozen=True)
 class ProposedProgram:
     """assignment_verified is a computed property, not a field -- there is
-    no constructor argument that could ever set it True. The row<->page
-    assignment is a cross-language semantic judgment gate() structurally
+    no constructor argument that could ever set it True. "This page IS a
+    degree program named X" is a semantic judgment gate() structurally
     cannot check (ADR-0002); this makes "always unverified" hold by
     construction, not by every call site remembering to pass False.
 
-    adapter_error is set ONLY when the ranking call itself failed
+    adapter_error is set ONLY when the survey call itself failed
     (timeout, transport error, malformed response) -- distinct from a
     normal decline, where the model looked at the candidates and
-    affirmatively returned no url. Found live 2026-08-15: a 180s
-    adapter timeout recorded identically to every genuine "no confident
-    match" reasoning string, indistinguishable to a human reviewing
-    onboarding-proposal.json. proposed_url is always None when this is
-    set; match_reasoning still carries a human-readable copy of the
-    error for context, but adapter_error is the field to check
+    affirmatively selected nothing. proposed_url is always None when
+    this is set; match_reasoning still carries a human-readable copy of
+    the error for context, but adapter_error is the field to check
     programmatically -- "worth a retry" vs "the model declined for a
     real reason" are different questions."""
-    row_id: int
-    row_code: str
-    row_name: str
+    proposed_name: str
     proposed_url: Optional[str]
     match_reasoning: str
     gate_verified_fields: Mapping[str, Mapping]
@@ -184,19 +180,18 @@ class ProposedProgram:
         return False
 
 
-def verify_page(store, url, row_name, *, cookies=None):
-    # type: (ArtifactStore, str, str, Optional[Mapping]) -> Tuple[object, Mapping]
+def verify_page(store, url, program_name, *, cookies=None):
+    # type: (object, str, str, Optional[Mapping]) -> Tuple[object, Mapping]
     """Resolve URL as a real Artifact and run tier G against it -- the
     only tier that needs no bespoke site config. Tier G is the label
     library (harvest_labels) PLUS the title-language rule
-    (language_from_name, cascade.py's own definition) -- ROW_NAME is the
-    registry's program title, the same input language_from_name reads on
-    a configured Program. Returns (doc, fields) where fields is
+    (language_from_name, cascade.py's own definition) -- PROGRAM_NAME is
+    the proposer's name for the page, the same input language_from_name
+    reads on a configured Program. Returns (doc, fields) where fields is
     {field: {value, segments, source_url, retrieved_at, artifact_ref,
     method}} for every gate-PASSed extraction (never anything gate
-    rejected) -- shaped like adjudication.Resolution so a human can
-    independently re-check it without knowing artifact_store.py's ref
-    convention."""
+    rejected) -- so a human can independently re-check it without
+    knowing artifact_store.py's ref convention."""
     doc = store.resolve(url, ROUTE_HTML, cookies=cookies or {},
                         label="onboarding-verify")
     source = cascade.TextSource(ref=doc.ref, text=doc.artifact.text)
@@ -205,7 +200,7 @@ def verify_page(store, url, row_name, *, cookies=None):
     for field in cascade.LABEL_PATTERNS:
         extraction = cascade.harvest_labels(field, source)
         if extraction is None and field == "language":
-            extraction = cascade.language_from_name(row_name, source)
+            extraction = cascade.language_from_name(program_name, source)
         if extraction is None:
             continue
         verdict = gate(extraction.value, list(extraction.segments), artifact)
@@ -221,36 +216,37 @@ def verify_page(store, url, row_name, *, cookies=None):
     return doc, verified
 
 
-def propose_onboarding(uni_id, rows, candidate_links, adapter, store, *,
-                       cookies=None, tag_prefix=""):
-    # type: (str, List[RegistryRow], List[Tuple[str, str]], object, object, Optional[Mapping], str) -> Tuple[List[ProposedProgram], float]
-    """Returns (proposals, total_cost_usd) -- cost is summed from every
-    adapter.call()'s usage dict (ticket 06: "measure... proposer token
-    cost per uni"), 0.0 for adapters that don't report cost (FakeAdapter)."""
+def propose_onboarding(uni_id, candidate_links, adapter, store, *,
+                       cookies=None, tag_prefix="", max_pages=None):
+    # type: (str, List[Tuple[str, str]], object, object, Optional[Mapping], str, Optional[int]) -> Tuple[List[ProposedProgram], float]
+    """Returns (proposals, total_cost_usd) -- cost is summed from the
+    adapter.call()'s usage dict, 0.0 for adapters that don't report cost
+    (FakeAdapter). One survey call per university; max_pages caps how
+    many selected pages are verified (each verify is a real fetch)."""
     urls = [url for url, _ in candidate_links]
+    if not urls:
+        return [], 0.0
     url_set = set(urls)
     schema = build_schema(urls)
+    prompt = build_prompt(uni_id, candidate_links)
+    tag = "{0}survey".format(tag_prefix)
+    try:
+        structured, usage = adapter.call(prompt, schema, HAIKU, tag)
+        total_cost = usage.get("cost_usd") or 0.0
+    except Exception as exc:  # noqa: BLE001 -- adapter/transport failure
+        return [ProposedProgram(
+            "(survey failed)", None,
+            "adapter error: {0}".format(exc), {}, 0,
+            adapter_error=str(exc))], 0.0
+
     proposals = []
-    total_cost = 0.0
-    for row in rows:
-        if not urls:
-            proposals.append(ProposedProgram(
-                row.id, row.code, row.name, None,
-                "no candidate pages discovered", {}, 0))
-            continue
-        prompt = build_prompt(row, candidate_links)
-        tag = "{0}{1}".format(tag_prefix, row.id)
-        try:
-            structured, usage = adapter.call(prompt, schema, HAIKU, tag)
-            total_cost += usage.get("cost_usd") or 0.0
-        except Exception as exc:  # noqa: BLE001 -- adapter/transport failure
-            proposals.append(ProposedProgram(
-                row.id, row.code, row.name, None,
-                "adapter error: {0}".format(exc), {}, 0,
-                adapter_error=str(exc)))
-            continue
-        url = structured.get("url")
-        reasoning = structured.get("reasoning") or ""
+    selected = structured.get("programs") or []
+    if max_pages is not None:
+        selected = selected[:max_pages]
+    for item in selected:
+        url = item.get("url")
+        name = item.get("name") or "(unnamed)"
+        reasoning = item.get("reasoning") or ""
         if url is not None and url not in url_set:
             # Schema enforcement should make this impossible, but a fresh
             # network fetch is real I/O -- never trust the enum alone to
@@ -261,14 +257,14 @@ def propose_onboarding(uni_id, rows, candidate_links, adapter, store, *,
         verified_fields = {}
         if url is not None:
             try:
-                _doc, verified_fields = verify_page(store, url, row.name,
+                _doc, verified_fields = verify_page(store, url, name,
                                                     cookies=cookies)
             except Exception as exc:  # noqa: BLE001 -- fetch/render failure
                 reasoning += " (page verify failed: {0})".format(exc)
                 url = None
         proposals.append(ProposedProgram(
-            row_id=row.id, row_code=row.code, row_name=row.name,
-            proposed_url=url, match_reasoning=reasoning,
+            proposed_name=name, proposed_url=url,
+            match_reasoning=reasoning,
             gate_verified_fields=verified_fields,
             field_pass_count=len(verified_fields)))
     return proposals, total_cost
@@ -290,14 +286,13 @@ def write_proposal(out_dir, uni_id, proposals):
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = {
         "uni_id": uni_id,
-        "note": ("row_name is the registry's Bulgarian program title. "
-                 "proposed_url is an UNVERIFIED row<->page assignment "
-                 "(assignment_verified is always false) -- a human must "
-                 "confirm it before anything here is promoted into "
-                 "crawler/configs/. gate_verified_fields are real "
-                 "gate-PASSed extractions."),
+        "note": ("proposed_name/proposed_url is an UNVERIFIED "
+                 "page-is-a-program judgment (assignment_verified is "
+                 "always false) -- a human must confirm it before "
+                 "anything here is promoted into crawler/configs/. "
+                 "gate_verified_fields are real gate-PASSed extractions."),
         "proposals": [
-            dict(row_id=p.row_id, row_code=p.row_code, row_name=p.row_name,
+            dict(proposed_name=p.proposed_name,
                 proposed_url=p.proposed_url,
                 assignment_verified=p.assignment_verified,
                 match_reasoning=p.match_reasoning,
@@ -313,17 +308,15 @@ def write_proposal(out_dir, uni_id, proposals):
 
 
 def validate_as_draft_config(uni_id, proposals):
-    # type: (str, List[ProposedProgram]) -> Tuple[bool, Optional[str]]
+    # type: (str, List[ProposedProgram]) -> Tuple[Optional[bool], Optional[str]]
     """Free structural smoke-check: would the shape a human eventually
-    hand-writes actually load? Deliberately omits rsvu_code -- the
-    row<->page assignment is unverified and must not look like config
-    data. Never written to crawler/configs/; (True, None) on a clean
-    parse, (False, message) on a ConfigError, (None, None) if there is
-    nothing to validate yet."""
+    hand-writes actually load? Never written to crawler/configs/;
+    (True, None) on a clean parse, (False, message) on a ConfigError,
+    (None, None) if there is nothing to validate yet."""
     programs = [
-        {"id": "row-{0}".format(p.row_id), "name": p.row_name,
+        {"id": "proposal-{0}".format(i), "name": p.proposed_name,
          "page": p.proposed_url}
-        for p in proposals if p.proposed_url is not None
+        for i, p in enumerate(proposals) if p.proposed_url is not None
     ]
     if not programs:
         return None, None
@@ -338,44 +331,43 @@ def validate_as_draft_config(uni_id, proposals):
 # ------------------------------------------------------------ orchestration
 def run_onboarding(uni_id, seed_urls, adapter, *, configs_dir=None,
                    out_dir=None, replay_dir=None, docling_url=None,
-                   registry_exports_dir=None, cookies=None, max_rows=None):
+                   cookies=None, max_pages=None):
     # type: (...) -> OnboardingReport
-    """Discover candidate pages from SEED_URLS, propose+verify a page for
-    every registry row not already config-covered (all of them, for a
-    university with no config yet), write the proposal, and smoke-check
-    the shape a human would eventually write by hand.
+    """Discover candidate pages from SEED_URLS, survey them for degree-
+    program pages (one LLM call), tier-G-verify each selected page, write
+    the proposal, and smoke-check the shape a human would eventually
+    write by hand.
 
-    max_rows caps how many uncovered rows are proposed for -- each one is
-    a real, non-trivial-cost LLM call (measured ~$0.15/call mean on the
-    2026-08-15 live smoke test), so a fresh university's full registry
-    (dozens of rows) is a real-money command, not a free one. None means
-    no cap; the CLI defaults this to a small number for exactly that
-    reason."""
+    max_pages caps how many selected pages get the verify fetch -- the
+    survey call itself is one call, but each verify is a real fetch and
+    render. Pages already configured for this uni are excluded from the
+    candidate list so re-running onboarding proposes only NEW pages."""
     out_root = out_dir or DEFAULT_OUT_ROOT
-    registry = load_captured_export(uni_id, exports_dir=registry_exports_dir)
 
     config_path = Path(configs_dir or DEFAULT_CONFIGS_DIR) / "{0}.json".format(uni_id)
     # Load ONLY this uni's own config file directly -- load_configs_dir()
     # loads every *.json in the directory and would raise (and get
     # swallowed here) on an unrelated SIBLING config's parse error,
-    # silently treating THIS uni as unconfigured and re-proposing rows
+    # silently treating THIS uni as unconfigured and re-proposing pages
     # it already covers. A missing file is legitimately "no config yet";
     # a malformed file for THIS uni must still raise loudly (config.py's
     # own stated philosophy).
     site = load_site_config(config_path) if config_path.exists() else None
-    codes = covered_codes(site) if site is not None else set()
-    rows = [r for r in registry.rows if r.code not in codes]
-    if max_rows is not None:
-        rows = rows[:max_rows]
+    configured_pages = ({p.page for p in site.programs}
+                        if site is not None else set())
 
     fetcher, store = build_fetcher_and_store(
         uni_id, out_dir=out_root, replay_dir=replay_dir,
         docling_url=docling_url)
 
-    candidate_links = fetch_links(seed_urls, fetcher, cookies=cookies)
+    candidate_links = [
+        (url, text)
+        for url, text in fetch_links(seed_urls, fetcher, cookies=cookies)
+        if url not in configured_pages
+    ]
     proposals, total_cost = propose_onboarding(
-        uni_id, rows, candidate_links, adapter, store, cookies=cookies,
-        tag_prefix=uni_id + ":")
+        uni_id, candidate_links, adapter, store, cookies=cookies,
+        tag_prefix=uni_id + ":", max_pages=max_pages)
     write_proposal(out_root, uni_id, proposals)
     valid, error = validate_as_draft_config(uni_id, proposals)
     return OnboardingReport(uni_id=uni_id, proposals=tuple(proposals),

@@ -11,11 +11,10 @@ CONTEXT.md for the ubiquitous language, docs/adr/ for the decisions.
 ```mermaid
 flowchart TB
     subgraph onboardG["Onboard (proposal-only, ADR-0003)"]
-        onboard["crawler onboard --seed URL"] --> proposal["row↔page proposals"]
+        onboard["crawler onboard --seed URL"] --> proposal["program-page proposals"]
         proposal --> promote{"human promotes"}
     end
     promote --> config["Site config (DATA, strictly validated)<br/>sources · fees-page joins · anchors<br/>field_anchors · suppress_labels"]
-    registry["RSVU registry export<br/>rows + Offerings (ADR-0004)"]
 
     subgraph spine["Extraction spine — crawler run [--tail]"]
         fetch["Snapshot store<br/>polite fetch · content-addressed · append-only"]
@@ -29,7 +28,6 @@ flowchart TB
         tail -- "value+snippet" --> gate
     end
     config --> fetch
-    registry --> cascade
 
     report["run-report.json<br/>PASS · NULL_OK · REJECT_*"]
     gate -- pass --> report
@@ -46,8 +44,6 @@ flowchart TB
     end
     report --> ledger
 
-    adjudicate["crawler adjudicate<br/>registry rows ↔ configured Programs<br/>coverage % + repair queue"]
-    registry --> adjudicate
 
     subgraph benchG["Blind benchmark — the accuracy loop"]
         labelkit["crawler labelkit<br/>blank Phase-0 worksheet"]

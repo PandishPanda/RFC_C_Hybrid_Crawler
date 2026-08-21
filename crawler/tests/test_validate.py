@@ -20,8 +20,8 @@ class VerdictLogicTest(unittest.TestCase):
     def test_a_wrong_sample_verdict_fails_the_row(self):
         rows = []
         data = {"date": "d", "judge": "j", "items": [
-            {"sheet": "A", "verdict": "ok"},
-            {"sheet": "A", "verdict": "wrong"}]}
+            {"sheet": "B", "verdict": "ok"},
+            {"sheet": "B", "verdict": "wrong"}]}
         with tempfile.TemporaryDirectory() as td:
             path = Path(td) / "v.json"
             path.write_text(json.dumps(data), encoding="utf-8")
@@ -31,8 +31,8 @@ class VerdictLogicTest(unittest.TestCase):
                 validate._read_sample_verdicts(rows)
             finally:
                 validate.VERDICTS = original
-        sheet_a = next(r for r in rows if "resolution" in r["metric"])
-        self.assertEqual(sheet_a["verdict"], "FAIL")
+        fee_row = next(r for r in rows if "fee" in r["metric"])
+        self.assertEqual(fee_row["verdict"], "FAIL")
 
     def test_missing_verdicts_file_is_pending_never_pass(self):
         rows = []

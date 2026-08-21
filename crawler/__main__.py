@@ -2,13 +2,11 @@
 
     python3 -m crawler run <UniID> [--replay DIR] [--configs DIR]
                                    [--out DIR] [--docling-url URL] [--tail]
-    python3 -m crawler publish <UniID> [same flags] [--registry-rows N]
+    python3 -m crawler publish <UniID> [same flags]
                                        [--academic-year YYYY/YYYY]
-    python3 -m crawler adjudicate <UniID> [--replay DIR] [--configs DIR]
-                                          [--out DIR] [--registry-exports DIR]
     python3 -m crawler onboard <UniID> --seed URL [--seed URL ...]
                                        [--replay DIR] [--configs DIR]
-                                       [--out DIR] [--registry-exports DIR]
+                                       [--out DIR] [--max-pages N]
     python3 -m crawler grade <UniID> --run-report PATH --key PATH [--out DIR]
     python3 -m crawler labelkit <UniID> [--configs DIR] [--out-file PATH]
     python3 -m crawler check-pins <UniID> [--configs DIR] [--list-html PATH]
@@ -30,21 +28,12 @@ cost/tokens land in <out>/<UniID>/llm-usage.jsonl. Without --tail a
 cascade-nulled field ships an explicit null, same as before ticket 02
 existed — zero LLM calls, ticket 01's original property.
 
-``adjudicate`` (ticket 05) matches RSVU registry rows to configured
-Programs (ProgramConfig.rsvu_code), proposes "enrolling" for any unmatched
-row whose name is found verbatim in an already-fetched page (gate-checked,
-ADR-0002), and writes everything else to
-<out>/<UniID>/repair-queue.json for onboarding (ticket 06) or a human
-call (crawler.adjudication.resolve_repair_entry). Needs a captured RSVU
-export at crawler/registry_exports/<UniID>.json — see crawler/registry.py
-for why the live API can't be hit directly from this CLI.
-
-``onboard`` (ticket 06) discovers candidate program pages from --seed
-URLs, proposes a page for each registry row not already config-covered
-(the LLM's row<->page judgment — always UNVERIFIED, ADR-0002 can't check
-a cross-language semantic match), verifies each proposed page for real
-gate-PASSed field values (tier G only, no bespoke config exists yet), and
-writes <out>/<UniID>/onboarding-proposal.json. Never writes to
+``onboard`` (ticket 06, reshaped by ADR-0006) discovers candidate pages
+from --seed URLs, surveys them for degree-program pages (the LLM's
+page-is-a-program judgment — always UNVERIFIED, ADR-0002 can't check a
+semantic match), verifies each selected page for real gate-PASSed field
+values (tier G only, no bespoke config exists yet), and writes
+<out>/<UniID>/onboarding-proposal.json. Never writes to
 crawler/configs/ — a human reviews the proposal and promotes by hand.
 
 ``grade`` (ticket 07) grades an existing run-report.json against a frozen
@@ -68,7 +57,7 @@ import json
 import sys
 from pathlib import Path
 
-from crawler import adjudication, grader, labelkit, llm_tail, onboarding, publish as publish_mod, runner, staleness, validate as validate_mod
+from crawler import grader, labelkit, llm_tail, onboarding, publish as publish_mod, runner, staleness, validate as validate_mod
 from crawler.config import load_site_config
 
 
@@ -88,15 +77,6 @@ def _summarize(report):
             summary["tier_counts"], ensure_ascii=False)),
         "  gate failures:      {0}".format(summary["gate_failures"]),
     ]
-    comp = summary.get("offering_completeness") or {}
-    if comp:
-        lines.append("  offerings:          {0} enumerated".format(
-            summary.get("offerings", 0)))
-        for form, c in comp.items():
-            lines.append("    {0:16} {1}/{2} priced (FLOOR — an unpriced "
-                         "offering may be genuinely unpriced or merely "
-                         "unconfigured)".format(
-                             form, c["stated"], c["enumerated"]))
     if summary.get("tail_calls"):
         lines.append("  tail calls:          {0} ({1} escalated to Sonnet)"
                      .format(summary["tail_calls"], summary["tail_escalations"]))
@@ -123,23 +103,6 @@ def _summarize_publish(pr):
     return "\n".join(lines)
 
 
-def _summarize_adjudication(report):
-    lines = [
-        "{0} registry rows: {1} config-covered, {2} resolved, {3} queued "
-        "for repair".format(
-            report.total_rows, len(report.covered_by_config),
-            len(report.resolved), len(report.queue)),
-        "coverage: {0:.1%} ({1}/{2})".format(
-            report.coverage, report.covered_count, report.total_rows),
-    ]
-    if report.queue:
-        lines.append("open repair-queue entries:")
-        for e in report.queue:
-            lines.append("  - [{0}] {1} ({2})".format(
-                e.row_id, e.row_name, e.row_code))
-    return "\n".join(lines)
-
-
 def _draft_config_summary(report):
     if report.draft_config_valid is None:
         return "n/a (nothing proposed)"
@@ -161,16 +124,16 @@ def _summarize_onboarding(report):
     ]
     for p in report.proposals:
         if p.proposed_url:
-            lines.append("  [{0}] {1} -> {2} ({3} field(s) gate-verified, "
+            lines.append("  {0} -> {1} ({2} field(s) gate-verified, "
                          "UNCONFIRMED assignment)".format(
-                             p.row_id, p.row_name, p.proposed_url,
+                             p.proposed_name, p.proposed_url,
                              p.field_pass_count))
         elif p.adapter_error:
-            lines.append("  [{0}] {1} -> ADAPTER ERROR, retry ({2})".format(
-                p.row_id, p.row_name, p.adapter_error))
+            lines.append("  {0} -> ADAPTER ERROR, retry ({1})".format(
+                p.proposed_name, p.adapter_error))
         else:
-            lines.append("  [{0}] {1} -> no match ({2})".format(
-                p.row_id, p.row_name, p.match_reasoning))
+            lines.append("  {0} -> no match ({1})".format(
+                p.proposed_name, p.match_reasoning))
     return "\n".join(lines)
 
 
@@ -246,40 +209,18 @@ def main(argv=None):
         "publish", help="run + ledger + expectation checks + pointer move")
     _add_run_args(publish_parser)
     publish_parser.add_argument(
-        "--registry-rows", type=int, default=None,
-        help="true RSVU registry row count for this uni (coverage's real "
-             "denominator, CONTEXT.md) — defaults to this run's own "
-             "configured program count when not given (ticket 05 not "
-             "landed yet, so this is a self-relative check, not the "
-             "true Coverage metric)")
-    publish_parser.add_argument(
         "--academic-year", metavar="YYYY/YYYY", default=None,
         help="declared cycle for values that don't state their own year "
              "(default: computed from today's date)")
 
-    adjudicate_parser = subparsers.add_parser(
-        "adjudicate", help="match registry rows to config, propose status "
-                           "for the rest, write the repair queue")
-    adjudicate_parser.add_argument(
-        "uni_id", help="university id — a crawler/configs/<UniID>.json")
-    adjudicate_parser.add_argument("--replay", metavar="DIR", default=None)
-    adjudicate_parser.add_argument("--configs", metavar="DIR", default=None)
-    adjudicate_parser.add_argument("--out", metavar="DIR", default=None)
-    adjudicate_parser.add_argument("--docling-url", metavar="URL", default=None)
-    adjudicate_parser.add_argument(
-        "--registry-exports", metavar="DIR", default=None,
-        help="dir of hand-captured RSVU exports (default: "
-             "crawler/registry_exports)")
-
     onboard_parser = subparsers.add_parser(
-        "onboard", help="propose pages for a university's unmatched "
-                        "registry rows (nothing is written to "
+        "onboard", help="survey a university's site for degree-program "
+                        "pages (nothing is written to "
                         "crawler/configs/ -- human review only)")
     onboard_parser.add_argument(
-        "uni_id", help="university id (needs crawler/registry_exports/"
-                       "<UniID>.json; a crawler/configs/<UniID>.json is "
-                       "optional -- if present, its rsvu_code-matched "
-                       "rows are skipped)")
+        "uni_id", help="university id (a crawler/configs/<UniID>.json is "
+                       "optional -- if present, its already-configured "
+                       "pages are skipped)")
     onboard_parser.add_argument(
         "--seed", metavar="URL", action="append", required=True,
         help="a page to discover candidate program-page links from "
@@ -289,13 +230,10 @@ def main(argv=None):
     onboard_parser.add_argument("--out", metavar="DIR", default=None)
     onboard_parser.add_argument("--docling-url", metavar="URL", default=None)
     onboard_parser.add_argument(
-        "--registry-exports", metavar="DIR", default=None)
-    onboard_parser.add_argument(
-        "--max-rows", type=int, default=5,
-        help="cap on uncovered registry rows to propose for -- each is a "
-             "real LLM call with non-trivial cost (measured ~$0.15/call "
-             "mean); pass a higher number (or a large one) deliberately "
-             "once you're ready to spend more (default: 5)")
+        "--max-pages", type=int, default=10,
+        help="cap on surveyed pages to verify -- each verify is a real "
+             "fetch and render; pass a higher number deliberately once "
+             "you're ready to spend more (default: 10)")
 
     grade_parser = subparsers.add_parser(
         "grade", help="grade a run-report.json against a frozen answer "
@@ -343,7 +281,7 @@ def main(argv=None):
 
     args = parser.parse_args(argv)
 
-    if args.command not in ("run", "publish", "adjudicate", "onboard",
+    if args.command not in ("run", "publish", "onboard",
                             "grade", "labelkit", "check-pins", "validate"):
         parser.print_help()
         return 2
@@ -407,17 +345,6 @@ def main(argv=None):
             print(worksheet)
         return 0
 
-    if args.command == "adjudicate":
-        report = adjudication.run_adjudication(
-            args.uni_id, configs_dir=args.configs, out_dir=args.out,
-            replay_dir=args.replay, docling_url=args.docling_url,
-            registry_exports_dir=args.registry_exports)
-        print(_summarize_adjudication(report))
-        out_root = args.out or runner.DEFAULT_OUT_ROOT
-        print("repair queue: {0}/{1}/{2}".format(
-            out_root, args.uni_id, adjudication.QUEUE_NAME))
-        return 0
-
     if args.command == "onboard":
         out_root = args.out or runner.DEFAULT_OUT_ROOT
         usage_ledger = llm_tail.UsageLedger(
@@ -428,8 +355,7 @@ def main(argv=None):
             args.uni_id, args.seed, adapter, configs_dir=args.configs,
             out_dir=args.out, replay_dir=args.replay,
             docling_url=args.docling_url,
-            registry_exports_dir=args.registry_exports,
-            max_rows=args.max_rows)
+            max_pages=args.max_pages)
         print(_summarize_onboarding(report))
         print("proposal: {0}/{1}/{2}".format(
             out_root, args.uni_id, onboarding.PROPOSAL_NAME))
@@ -463,7 +389,7 @@ def main(argv=None):
     pr = publish_mod.publish(
         args.uni_id, configs_dir=args.configs, out_dir=args.out,
         replay_dir=args.replay, docling_url=args.docling_url, tail=tail,
-        registry_rows=args.registry_rows, academic_year=args.academic_year)
+        academic_year=args.academic_year)
     print(_summarize_publish(pr))
     print("publish report: {0}/{1}/{2}".format(
         args.out or runner.DEFAULT_OUT_ROOT, args.uni_id,

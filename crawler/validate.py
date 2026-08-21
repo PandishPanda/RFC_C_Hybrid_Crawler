@@ -24,8 +24,6 @@ import time
 from pathlib import Path
 
 from crawler import hash_stability
-from crawler.config import load_configs_dir
-from crawler.registry import load_captured_export, parse_edu_forms
 
 __all__ = ["run_checks", "render_scorecard", "write_archive", "MARK"]
 
@@ -131,61 +129,15 @@ def _check_frozen_acceptance(rows):
         source="same re-run"))
 
 
-def _check_enumeration(rows):
-    total_rows = total_off = unparsed = 0
-    from crawler.registry import DEFAULT_EXPORTS_DIR
-    for path in sorted(Path(DEFAULT_EXPORTS_DIR).glob("*.json")):
-        export = load_captured_export(path.stem)
-        for row in export.rows:
-            forms, bad = parse_edu_forms(row.edu_forms)
-            total_rows += 1
-            total_off += len(forms)
-            unparsed += len(bad)
-    rows.append(_row(
-        "7 OFFERINGS", "enumeration",
-        "{0} offerings / {1} rows, {2} unparsed".format(
-            total_off, total_rows, unparsed),
-        "0 unparsed", "PASS" if unparsed == 0 else "FAIL",
-        source="all exports, re-parsed"))
-
-
-def _check_config_registry(rows):
-    sites = load_configs_dir("crawler/configs")
-    bad = []
-    for uni, site in sorted(sites.items()):
-        codes = [p.rsvu_code for p in site.programs if p.rsvu_code]
-        if not codes:
-            continue
-        try:
-            export_codes = {r.code for r in load_captured_export(uni).rows}
-        except FileNotFoundError:
-            bad.append("{0}: codes but no export".format(uni))
-            continue
-        missing = set(codes) - export_codes
-        if missing:
-            bad.append("{0}: {1}".format(uni, sorted(missing)))
-        if len(set(codes)) != len(codes):
-            bad.append("{0}: duplicate codes".format(uni))
-    rows.append(_row(
-        "5 ADJUDICATION", "config↔registry integrity",
-        "clean" if not bad else "; ".join(bad),
-        "every code matches one row, no dupes",
-        "PASS" if not bad else "FAIL", source="configs + exports"))
-
-
 def _read_sample_verdicts(rows):
     if not VERDICTS.exists():
-        for step, name in (("5 ADJUDICATION", "sampled resolution correctness"),
-                           ("7 OFFERINGS", "sampled fee correctness")):
-            rows.append(_row(step, name, "not yet run",
-                             "0 wrong (population bound)", "PENDING",
-                             source="map ticket 06"))
+        rows.append(_row("7 FEES", "sampled fee correctness", "not yet run",
+                         "0 wrong (population bound)", "PENDING",
+                         source="map ticket 06"))
         return
     data = json.loads(VERDICTS.read_text(encoding="utf-8"))
-    for sheet, step, name in (("A", "5 ADJUDICATION",
-                               "sampled resolution correctness"),
-                              ("B", "7 OFFERINGS",
-                               "sampled fee correctness")):
+    for sheet, step, name in (("B", "7 FEES",
+                               "sampled fee correctness"),):
         items = [i for i in data["items"] if i["sheet"] == sheet]
         wrong = [i for i in items if i["verdict"] != "ok"]
         n = len(items)
@@ -272,11 +224,8 @@ def _check_costs(rows):
 
 
 def _check_onboarding_discipline(rows):
-    # The PASS line is the discipline: every promoted program carries an
-    # rsvu_code that resolves (checked above) AND promotion history shows
-    # independent verification -- recorded per batch in the tickets; the
-    # mechanical proxy here is that no configured code is unverifiable
-    # against its export. Precision is batch-scoped INFO.
+    # Promotion history shows independent verification -- recorded per
+    # batch in the tickets. Precision is batch-scoped INFO.
     rows.append(_row(
         "4 ONBOARDING", "proposal precision (per batch)",
         "vum-bg-08-17: 100% | uniruse-08-15: 20% → change seeds",
@@ -291,9 +240,7 @@ def run_checks():
     _read_baseline(rows)
     _check_costs(rows)
     _check_onboarding_discipline(rows)
-    _check_config_registry(rows)
     _read_sample_verdicts(rows)
-    _check_enumeration(rows)
     return rows
 
 

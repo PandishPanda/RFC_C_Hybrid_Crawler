@@ -154,8 +154,7 @@
         "degree": "dttt-degree",
         "duration": "dttt-duration",
         "admission": "bsc-admission"
-      },
-      "rsvu_code": "50100872"
+      }
     },
     {
       "id": "TUG-rsvu31303-MSC-BG",
@@ -183,8 +182,7 @@
         "degree": "ub-degree",
         "duration": "ub-duration",
         "admission": "msc-admission-paid"
-      },
-      "rsvu_code": "30711083"
+      }
     },
     {
       "id": "TUG-rsvu30703-PHD-BG",
@@ -196,9 +194,7 @@
       },
       "field_anchors": {
         "degree": "koe-degree"
-      },
-      "rsvu_code": "50200714"
+      }
     }
-  ],
-  "rsvu_id": 210
+  ]
 }

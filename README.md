@@ -1,8 +1,8 @@
 # RFC_C_Hybrid_Crawler
 
 Extraction pipeline for Bulgarian university degree-program data
-(tuition, admission, degree, duration, language), sourced from the RSVU
-registry and 51 heterogeneous university websites, with verbatim
+(tuition, admission, degree, duration, language), sourced from 51
+heterogeneous university websites (ADR-0006: no external registry), with verbatim
 provenance on every shipped value.
 
 Design (ADR-0001): a **deterministic extraction cascade** carries the
@@ -25,7 +25,6 @@ flowchart TB
         human --> config["crawler/configs/&lt;UniID&gt;.json<br/>typed per-site config"]
     end
 
-    registry["RSVU registry export<br/>crawler/registry_exports/&lt;UniID&gt;.json<br/>programs + offerings (edu_forms, ADR-0004)"]
 
     subgraph run["Extraction spine — python3 -m crawler run (zero LLM calls without --tail)"]
         fetch["1 · Snapshot store<br/>polite plain-HTTP fetch (or --replay, fully offline)<br/>content-addressed, append-only"]
@@ -40,7 +39,6 @@ flowchart TB
     end
 
     config --> fetch
-    registry --> cascadeStep
 
     report["run-report.json<br/>PASS · NULL_OK · REJECT_* / PARSE_FAILURE"]
     repair["gate_failures / repair-queue.json<br/>rejected values are nulled, never shipped"]
@@ -59,8 +57,6 @@ flowchart TB
 
     report --> ledgerStep
 
-    adjudicate["python3 -m crawler adjudicate<br/>registry rows ↔ configured Programs"]
-    registry --> adjudicate --> repair
     repair --> human
 
     staleness["Freshness: evidence inside documents only<br/>valid_for year + year-patterned URL probes<br/>never HTTP metadata (stale-green drift)"]
@@ -89,7 +85,6 @@ docker compose up -d   # pins ghcr.io/docling-project/docling-serve-cpu:v1.28.0
 ```bash
 python3 -m crawler run <UniID> [--replay DIR] [--tail]     # store → render → cascade → gate → run-report.json
 python3 -m crawler publish <UniID> [--academic-year YYYY/YYYY]  # run + ledger + expectations → publish-report.json
-python3 -m crawler adjudicate <UniID>                      # match RSVU rows ↔ Programs, fill repair queue
 python3 -m crawler onboard <UniID> --seed URL              # propose a site config (never auto-promoted)
 python3 -m crawler grade <UniID> --run-report P --key P    # score a run against a benchmark key
 python3 -m crawler labelkit <UniID>                        # label-collection worksheet for a config
@@ -125,6 +120,6 @@ CONTEXT.md          domain language — read before touching anything
 - Table values are never free-read by an LLM — the deterministic
   column resolver decides, even when an LLM proposed the row.
 - Onboarding proposes; a human promotes (ADR-0003). Offerings are
-  registry-enumerated, never restated in config (ADR-0004).
+- Programs are hand-authored config entries — the unit of identity (ADR-0006).
 - Freshness trusts only evidence inside documents (`valid_for`,
   year-patterned successor URLs) — never HTTP 200s or byte hashes.

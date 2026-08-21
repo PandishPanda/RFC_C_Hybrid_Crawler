@@ -1,4 +1,4 @@
-"""crawler.onboarding suite (ticket 06) -- zero network.
+"""crawler.onboarding suite (ticket 06, reshaped by ADR-0006) -- zero network.
 
 FakeAdapter (from llm_tail, same pattern as test_llm_tail.py) + fake
 fetcher/store doubles. Real crawler.provenance.gate() throughout --
@@ -26,14 +26,6 @@ from crawler.onboarding import (  # noqa: E402
     write_proposal,
 )
 from crawler.provenance import Artifact  # noqa: E402
-from crawler.registry import RegistryRow  # noqa: E402
-
-
-def make_row(id, code, name, major_id=1, major_name="Направление",
-            degree_code=3, degree_name="Бакалавър"):
-    return RegistryRow(id=id, code=code, name=name, major_id=major_id,
-                       major_name=major_name, degree_code=degree_code,
-                       degree_name=degree_name)
 
 
 class DiscoverLinksTest(unittest.TestCase):
@@ -116,15 +108,15 @@ class FetchLinksTest(unittest.TestCase):
 
 
 class SchemaPromptTest(unittest.TestCase):
-    def test_schema_restricts_url_to_candidates_plus_null(self):
+    def test_schema_restricts_urls_to_the_candidate_list(self):
         schema = build_schema(["https://x/a", "https://x/b"])
-        self.assertEqual(schema["properties"]["url"]["enum"],
-                         [None, "https://x/a", "https://x/b"])
+        item = schema["properties"]["programs"]["items"]
+        self.assertEqual(item["properties"]["url"]["enum"],
+                         ["https://x/a", "https://x/b"])
 
-    def test_prompt_includes_row_identity_and_candidates(self):
-        row = make_row(1, "AAA", "Софтуерни системи и технологии")
-        prompt = build_prompt(row, [("https://x/a", "CS Programme")])
-        self.assertIn("Софтуерни системи и технологии", prompt)
+    def test_prompt_includes_uni_and_candidates(self):
+        prompt = build_prompt("X", [("https://x/a", "CS Programme")])
+        self.assertIn("X", prompt)
         self.assertIn("https://x/a", prompt)
         self.assertIn("CS Programme", prompt)
 
@@ -172,7 +164,7 @@ class VerifyPageTest(unittest.TestCase):
         doc, verified = verify_page(store, "https://x/p", "Нещо")
         self.assertEqual(verified, {})
 
-    def test_title_language_rule_fires_via_the_row_name(self):
+    def test_title_language_rule_fires_via_the_proposed_name(self):
         # cascade.py defines tier G as harvest_labels PLUS the
         # title-language rule (language_from_name) -- verify_page must
         # exercise both, not just the label library. language_from_name's
@@ -181,81 +173,76 @@ class VerifyPageTest(unittest.TestCase):
         # heading showing the full title, e.g.) -- a name implying English
         # instruction that the page text never actually states must NOT
         # pass (that would be exactly the fabrication ADR-0002 forbids).
-        row_name = "Информатика (с частично обучение на английски език)"
+        name = "Информатика (с частично обучение на английски език)"
         text = ("Учебен план за студенти от специалност Информатика "
                "(с частично обучение на английски език).")
         store = FakeVerifyStore({"https://x/p": text})
-        doc, verified = verify_page(store, "https://x/p", row_name)
+        doc, verified = verify_page(store, "https://x/p", name)
         self.assertIn("language", verified)
         self.assertEqual(verified["language"]["method"], "title-language")
 
     def test_title_language_rule_does_not_fabricate_when_page_text_lacks_it(self):
-        row_name = "Информатика (с частично обучение на английски език)"
+        name = "Информатика (с частично обучение на английски език)"
         text = "Учебен план за студенти от специалност Информатика."
         store = FakeVerifyStore({"https://x/p": text})
-        doc, verified = verify_page(store, "https://x/p", row_name)
+        doc, verified = verify_page(store, "https://x/p", name)
         self.assertNotIn("language", verified)
 
 
 class ProposeOnboardingTest(unittest.TestCase):
-    def test_no_candidates_skips_the_adapter_and_queues_reason(self):
-        row = make_row(1, "AAA", "Специалност А")
+    def test_no_candidates_skips_the_adapter_entirely(self):
         proposals, cost = propose_onboarding(
-            "X", [row], [], FakeAdapter({}), FakeVerifyStore({}))
-        self.assertEqual(len(proposals), 1)
-        p = proposals[0]
-        self.assertIsNone(p.proposed_url)
-        self.assertFalse(p.assignment_verified)
-        self.assertIn("no candidate pages", p.match_reasoning)
+            "X", [], FakeAdapter({}), FakeVerifyStore({}))
+        self.assertEqual(proposals, [])
         self.assertEqual(cost, 0.0)
 
     def test_assignment_verified_is_always_false_even_on_a_confident_match(self):
-        row = make_row(1, "40600931", "Софтуерни системи и технологии")
         text = 'Степен: ОКС "Бакалавър" по Софтуерни системи и технологии.'
         adapter = FakeAdapter({
-            "X:1": {"url": "https://x/cs", "reasoning": "exact name match"},
+            "X:survey": {"programs": [
+                {"url": "https://x/cs",
+                 "name": "Софтуерни системи и технологии",
+                 "reasoning": "program page"}]},
         })
         store = FakeVerifyStore({"https://x/cs": text})
         proposals, _cost = propose_onboarding(
-            "X", [row], [("https://x/cs", "CS")], adapter, store,
+            "X", [("https://x/cs", "CS")], adapter, store,
             tag_prefix="X:")
         p = proposals[0]
         self.assertEqual(p.proposed_url, "https://x/cs")
         self.assertFalse(p.assignment_verified,
-                         "row<->page assignment must NEVER be marked verified")
+                         "page-is-a-program judgment must NEVER be verified")
         self.assertGreater(p.field_pass_count, 0)
         self.assertIn("degree", p.gate_verified_fields)
 
     def test_assignment_verified_has_no_way_to_be_set_true(self):
         # Structural check: assignment_verified is a property, not a
         # constructor field -- there is no argument that could flip it.
-        p = ProposedProgram(1, "A", "Спец А", "https://x/p", "match", {}, 0)
+        p = ProposedProgram("Спец А", "https://x/p", "match", {}, 0)
         self.assertFalse(p.assignment_verified)
         with self.assertRaises(TypeError):
-            ProposedProgram(1, "A", "Спец А", "https://x/p", True,
-                            "match", {}, 0, None,
-                            "extra")  # extra positional -> TypeError
+            ProposedProgram("Спец А", "https://x/p", True, "match", {}, 0,
+                            None, "extra")  # extra positional -> TypeError
 
-    def test_model_returning_null_url_is_respected(self):
-        row = make_row(1, "AAA", "Специалност А")
-        adapter = FakeAdapter({"X:1": {"url": None, "reasoning": "no confident match"}})
+    def test_model_selecting_nothing_is_respected(self):
+        adapter = FakeAdapter({"X:survey": {"programs": []}})
         proposals, _cost = propose_onboarding(
-            "X", [row], [("https://x/other", "Other")], adapter,
+            "X", [("https://x/other", "Other")], adapter,
             FakeVerifyStore({}), tag_prefix="X:")
-        self.assertIsNone(proposals[0].proposed_url)
+        self.assertEqual(proposals, [])
 
     def test_a_url_outside_the_candidate_list_is_ignored_and_never_fetched(self):
         # Defense-in-depth: even if the schema enum somehow failed to
         # constrain the model, propose_onboarding must not let an
         # off-list URL trigger a real fetch.
-        row = make_row(1, "AAA", "Специалност А")
         adapter = FakeAdapter({
-            "X:1": {"url": "https://evil.example/not-a-candidate",
-                   "reasoning": "hallucinated"},
+            "X:survey": {"programs": [
+                {"url": "https://evil.example/not-a-candidate",
+                 "name": "Evil", "reasoning": "hallucinated"}]},
         })
         store = FakeVerifyStore({"https://evil.example/not-a-candidate": "text"})
         proposals, _cost = propose_onboarding(
-            "X", [row], [("https://x/real", "Real")], adapter, store,
+            "X", [("https://x/real", "Real")], adapter, store,
             tag_prefix="X:")
         self.assertIsNone(proposals[0].proposed_url)
         self.assertIn("outside the candidate list", proposals[0].match_reasoning)
@@ -263,87 +250,69 @@ class ProposeOnboardingTest(unittest.TestCase):
                          "an off-list URL must never be fetched")
 
     def test_adapter_error_is_caught_and_recorded_not_raised(self):
-        row = make_row(1, "AAA", "Специалност А")
         def boom(prompt, schema, model, tag):
             raise RuntimeError("CLI timeout")
         adapter = FakeAdapter({})
         adapter.call = boom
         proposals, _cost = propose_onboarding(
-            "X", [row], [("https://x/a", "A")], adapter, FakeVerifyStore({}),
+            "X", [("https://x/a", "A")], adapter, FakeVerifyStore({}),
             tag_prefix="X:")
+        self.assertEqual(len(proposals), 1)
         self.assertIsNone(proposals[0].proposed_url)
         self.assertIn("adapter error", proposals[0].match_reasoning)
+        self.assertIsNotNone(proposals[0].adapter_error,
+                             "a transport failure must be programmatically "
+                             "distinguishable from a genuine decline")
 
-    def test_adapter_error_is_distinguishable_from_a_genuine_decline(self):
-        # Regression: found live on UniRuse 2026-08-15 -- a 180s adapter
-        # timeout was recorded byte-identical in SHAPE to a genuine "no
-        # confident match" decline, both just free-text match_reasoning.
-        # adapter_error is the field a human/summarizer should check to
-        # tell "worth a retry" apart from "the model looked and declined".
-        row_timeout = make_row(1, "AAA", "Тайм-аут ред")
-        row_decline = make_row(2, "BBB", "Специалност Б")
-
-        def flaky(prompt, schema, model, tag):
-            if tag == "X:1":
-                raise TimeoutError("adapter timed out after 180s")
-            return {"url": None, "reasoning": "no confident match"}, {}
-
-        adapter = FakeAdapter({})
-        adapter.call = flaky
-        proposals, _cost = propose_onboarding(
-            "X", [row_timeout, row_decline], [("https://x/a", "A")],
-            adapter, FakeVerifyStore({}), tag_prefix="X:")
-
-        timeout_proposal, decline_proposal = proposals
-        self.assertIsNone(timeout_proposal.proposed_url)
-        self.assertIsNotNone(timeout_proposal.adapter_error)
-        self.assertIn("180s", timeout_proposal.adapter_error)
-
-        self.assertIsNone(decline_proposal.proposed_url)
-        self.assertIsNone(decline_proposal.adapter_error,
-                         "a genuine decline must not look like an error")
-
-    def test_verify_failure_on_the_proposed_url_falls_back_to_no_match(self):
-        row = make_row(1, "AAA", "Специалност А")
+    def test_verify_failure_on_a_selected_url_falls_back_to_no_match(self):
         adapter = FakeAdapter({
-            "X:1": {"url": "https://x/broken", "reasoning": "looked right"},
+            "X:survey": {"programs": [
+                {"url": "https://x/broken", "name": "Broken",
+                 "reasoning": "looked right"}]},
         })
         proposals, _cost = propose_onboarding(
-            "X", [row], [("https://x/broken", "Broken")], adapter,
+            "X", [("https://x/broken", "Broken")], adapter,
             FakeVerifyStore({}),  # page not in store -> resolve() raises
             tag_prefix="X:")
         self.assertIsNone(proposals[0].proposed_url)
         self.assertIn("verify failed", proposals[0].match_reasoning)
 
-    def test_cost_is_summed_across_calls(self):
-        row1 = make_row(1, "AAA", "Спец А")
-        row2 = make_row(2, "BBB", "Спец Б")
+    def test_max_pages_caps_how_many_selections_are_verified(self):
         adapter = FakeAdapter({
-            "X:1": lambda prompt: {"url": None, "reasoning": "no match"},
-            "X:2": lambda prompt: {"url": None, "reasoning": "no match"},
+            "X:survey": {"programs": [
+                {"url": "https://x/p{0}".format(i),
+                 "name": "P{0}".format(i), "reasoning": "r"}
+                for i in range(1, 6)]},
         })
-        # FakeAdapter always reports cost_usd=0.0; patch usage via a
-        # wrapping fake that reports a fixed nonzero cost per call.
+        store = FakeVerifyStore({"https://x/p{0}".format(i): "no labels"
+                                 for i in range(1, 6)})
+        proposals, _cost = propose_onboarding(
+            "X", [("https://x/p{0}".format(i), "P") for i in range(1, 6)],
+            adapter, store, tag_prefix="X:", max_pages=2)
+        self.assertEqual(len(proposals), 2)
+
+    def test_cost_comes_from_the_single_survey_call(self):
+        adapter = FakeAdapter({"X:survey": {"programs": []}})
         real_call = adapter.call
         def call_with_cost(prompt, schema, model, tag):
             structured, usage = real_call(prompt, schema, model, tag)
             return structured, dict(usage, cost_usd=0.05)
         adapter.call = call_with_cost
         _proposals, cost = propose_onboarding(
-            "X", [row1, row2], [("https://x/a", "A")], adapter,
+            "X", [("https://x/a", "A")], adapter,
             FakeVerifyStore({}), tag_prefix="X:")
-        self.assertAlmostEqual(cost, 0.10)
+        self.assertAlmostEqual(cost, 0.05)
 
 
 class ValidateAsDraftConfigTest(unittest.TestCase):
     def test_no_proposed_urls_returns_none_none(self):
-        p = ProposedProgram(1, "A", "Спец А", None, "no match", {}, 0)
+        p = ProposedProgram("Спец А", None, "no match", {}, 0)
         valid, error = validate_as_draft_config("X", [p])
         self.assertIsNone(valid)
         self.assertIsNone(error)
 
     def test_a_valid_proposed_url_parses_clean(self):
-        p = ProposedProgram(1, "A", "Спец А", "https://x/p", "match", {}, 0)
+        p = ProposedProgram("Спец А", "https://x/p", "match", {}, 0)
         valid, error = validate_as_draft_config("X", [p])
         self.assertTrue(valid)
         self.assertIsNone(error)
@@ -351,7 +320,7 @@ class ValidateAsDraftConfigTest(unittest.TestCase):
 
 class WriteProposalTest(unittest.TestCase):
     def test_writes_readable_json_with_the_unverified_note(self):
-        p = ProposedProgram(1, "A", "Спец А", "https://x/p", "match",
+        p = ProposedProgram("Спец А", "https://x/p", "match",
                             {"degree": {"value": "v"}}, 1)
         with tempfile.TemporaryDirectory() as tmp:
             path = write_proposal(tmp, "X", [p])
@@ -362,7 +331,7 @@ class WriteProposalTest(unittest.TestCase):
         self.assertIsNone(data["proposals"][0]["adapter_error"])
 
     def test_adapter_error_round_trips_through_the_written_json(self):
-        p = ProposedProgram(1, "A", "Спец А", None, "adapter error: boom",
+        p = ProposedProgram("Спец А", None, "adapter error: boom",
                             {}, 0, adapter_error="boom")
         with tempfile.TemporaryDirectory() as tmp:
             path = write_proposal(tmp, "X", [p])
@@ -370,100 +339,94 @@ class WriteProposalTest(unittest.TestCase):
         self.assertEqual(data["proposals"][0]["adapter_error"], "boom")
 
 
-class FakeOnboardAdapter:
-    """Always proposes no match -- run_onboarding tests only care about
-    the config<->registry skip logic, not the proposal content."""
+class FakeSurveyAdapter:
+    """Selects every candidate as a program page, named by link text."""
 
     def call(self, prompt, schema, model, tag):
-        return {"url": None, "reasoning": "n/a"}, {"cost_usd": 0.0}
+        urls = schema["properties"]["programs"]["items"][
+            "properties"]["url"]["enum"]
+        return {"programs": [
+            {"url": u, "name": "Prog " + u.rsplit("/", 1)[-1],
+             "reasoning": "n/a"} for u in urls
+        ]}, {"cost_usd": 0.0}
 
 
 class RunOnboardingTest(unittest.TestCase):
     """Regression coverage for the config-loading bug found in review:
     run_onboarding used to load_configs_dir() the WHOLE directory, so an
     unrelated broken sibling config made it treat the target uni as
-    unconfigured (silently re-proposing rows it already covers)."""
+    unconfigured (silently re-proposing pages it already covers)."""
 
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.root = Path(self.tmp.name)
         self.configs_dir = self.root / "configs"
-        self.exports_dir = self.root / "exports"
         self.out_dir = self.root / "out"
         self.configs_dir.mkdir()
-        self.exports_dir.mkdir()
 
     def tearDown(self):
         self.tmp.cleanup()
 
-    def _write_export(self, uni_id, rows):
-        (self.exports_dir / "{0}.json".format(uni_id)).write_text(
-            json.dumps({
-                "uni_id": uni_id, "rsvu_uni_id": 1, "rsvu_uni_name": "",
-                "captured_at": "2026-08-15T00:00:00Z", "source": "test",
-                "rows": rows,
-            }), encoding="utf-8")
-
-    def test_covered_row_is_skipped_even_with_a_broken_sibling_config(self):
+    def test_configured_page_is_skipped_even_with_a_broken_sibling_config(self):
         (self.configs_dir / "TARGET.json").write_text(json.dumps({
             "uni_id": "TARGET", "sources": {}, "programs": [
-                {"id": "p1", "name": "P1", "page": "https://x/p1",
-                 "rsvu_code": "AAA"},
+                {"id": "p1", "name": "P1",
+                 "page": "https://uni.example/p1"},
             ],
         }), encoding="utf-8")
         (self.configs_dir / "ZZZ_BROKEN.json").write_text(
             "{not valid json", encoding="utf-8")
-        self._write_export("TARGET", [
-            {"id": 1, "code": "AAA", "name": "Спец А", "major_id": 1,
-             "major_name": "M", "degree_code": 3, "degree_name": "Бакалавър"},
-            {"id": 2, "code": "BBB", "name": "Спец Б", "major_id": 1,
-             "major_name": "M", "degree_code": 3, "degree_name": "Бакалавър"},
-        ])
-        report = run_onboarding(
-            "TARGET", [], FakeOnboardAdapter(),
-            configs_dir=self.configs_dir, out_dir=self.out_dir,
-            registry_exports_dir=self.exports_dir)
-        proposed_ids = {p.row_id for p in report.proposals}
-        self.assertNotIn(1, proposed_ids,
-                         "row AAA is config-covered and must be skipped")
-        self.assertIn(2, proposed_ids)
+        seed_pages = {
+            "https://uni.example/seed":
+                b'<a href="/p1">P1</a><a href="/p2">P2</a>',
+        }
+        report = run_onboarding_with_fakes(
+            "TARGET", ["https://uni.example/seed"], seed_pages,
+            configs_dir=self.configs_dir, out_dir=self.out_dir)
+        urls = {p.proposed_url for p in report.proposals}
+        self.assertNotIn("https://uni.example/p1", urls,
+                         "an already-configured page must be skipped")
+        self.assertIn("https://uni.example/p2", urls)
 
-    def test_no_config_file_at_all_proposes_for_every_row(self):
-        self._write_export("FRESH", [
-            {"id": 1, "code": "AAA", "name": "Спец А", "major_id": 1,
-             "major_name": "M", "degree_code": 3, "degree_name": "Бакалавър"},
-        ])
-        report = run_onboarding(
-            "FRESH", [], FakeOnboardAdapter(),
-            configs_dir=self.configs_dir, out_dir=self.out_dir,
-            registry_exports_dir=self.exports_dir)
-        self.assertEqual({p.row_id for p in report.proposals}, {1})
+    def test_no_config_file_at_all_proposes_for_every_selected_page(self):
+        seed_pages = {
+            "https://uni.example/seed": b'<a href="/p1">P1</a>',
+        }
+        report = run_onboarding_with_fakes(
+            "FRESH", ["https://uni.example/seed"], seed_pages,
+            configs_dir=self.configs_dir, out_dir=self.out_dir)
+        self.assertEqual({p.proposed_url for p in report.proposals},
+                         {"https://uni.example/p1"})
 
     def test_target_uni_s_own_malformed_config_still_raises(self):
         (self.configs_dir / "TARGET.json").write_text(
             "{not valid json", encoding="utf-8")
-        self._write_export("TARGET", [
-            {"id": 1, "code": "AAA", "name": "Спец А", "major_id": 1,
-             "major_name": "M", "degree_code": 3, "degree_name": "Бакалавър"},
-        ])
         with self.assertRaises(Exception):
-            run_onboarding(
-                "TARGET", [], FakeOnboardAdapter(),
-                configs_dir=self.configs_dir, out_dir=self.out_dir,
-                registry_exports_dir=self.exports_dir)
+            run_onboarding_with_fakes(
+                "TARGET", ["https://uni.example/seed"], {},
+                configs_dir=self.configs_dir, out_dir=self.out_dir)
 
-    def test_max_rows_caps_the_worklist(self):
-        self._write_export("FRESH", [
-            {"id": i, "code": "C{0}".format(i), "name": "Спец {0}".format(i),
-             "major_id": 1, "major_name": "M", "degree_code": 3,
-             "degree_name": "Бакалавър"}
-            for i in range(1, 6)
-        ])
-        report = run_onboarding(
-            "FRESH", [], FakeOnboardAdapter(),
-            configs_dir=self.configs_dir, out_dir=self.out_dir,
-            registry_exports_dir=self.exports_dir, max_rows=2)
-        self.assertEqual(len(report.proposals), 2)
+
+def run_onboarding_with_fakes(uni_id, seeds, seed_pages, *, configs_dir,
+                              out_dir):
+    """run_onboarding with the network swapped out: the link fetcher and
+    the verify store are both fakes (verify always fails, which is fine —
+    these tests care about candidate selection, not verification)."""
+    import crawler.onboarding as onboarding_mod
+
+    fetcher = FakeLinkFetcher(seed_pages)
+    store = FakeVerifyStore({
+        "https://uni.example/p1": "plain page text",
+        "https://uni.example/p2": "plain page text",
+    })
+    real = onboarding_mod.build_fetcher_and_store
+    onboarding_mod.build_fetcher_and_store = (
+        lambda *a, **k: (fetcher, store))
+    try:
+        return run_onboarding(uni_id, seeds, FakeSurveyAdapter(),
+                              configs_dir=configs_dir, out_dir=out_dir)
+    finally:
+        onboarding_mod.build_fetcher_and_store = real
 
 
 if __name__ == "__main__":

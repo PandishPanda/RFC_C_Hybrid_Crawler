@@ -8,7 +8,6 @@ flowchart LR
     subgraph IN["INPUTS (data, never code)"]
         direction TB
         CFG["Site config<br/>joins · anchors · suppress_labels"]
-        REG["RSVU registry export<br/>rows + Offerings"]
         ONB["onboard → proposals<br/>human promotes (ADR-0003)"] -.-> CFG
     end
 
@@ -34,14 +33,11 @@ flowchart LR
 
     subgraph QA["QUALITY LOOP"]
         direction TB
-        ADJ["adjudicate<br/>Coverage + repair queue"]
         GRD["blind grade vs frozen key<br/>+ human verdicts<br/>fab=0 · wrong ≤3%"]
         VAL["validate scorecard<br/>stability · baseline"]
     end
 
     CFG --> FETCH
-    REG --> CASC
-    REG --> ADJ
     CASC -- values --> GATE
     TAIL -- values --> GATE
     GATE -- pass --> LED
@@ -58,7 +54,7 @@ flowchart LR
 | 1 | No per-site code; site knowledge is strictly-validated config data | ADR-0001, `config.py` |
 | 2 | Every shipped value carries verbatim, gate-checked Provenance — no human exemption | ADR-0002, `provenance.py` |
 | 3 | Onboarding proposes; only humans promote configs | ADR-0003, `onboarding.py` |
-| 4 | Offerings are registry-enumerated; config never restates them | ADR-0004 |
+| 4 | No external registry: config program entries are the unit of identity | ADR-0006 |
 | 5 | "Can't determine" ships as null — never a plausible value | gate + `suppress_labels` |
 | 6 | Snapshots append-only; re-extraction from snapshots is cheap (shadow runs) | `store.py`, `publish(report=)` |
 | 7 | The gate proves presence, not truth — semantic wrongs are caught by the blind key + human verdicts | `grader.py` |

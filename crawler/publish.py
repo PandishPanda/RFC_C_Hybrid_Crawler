@@ -20,7 +20,7 @@ PUBLISH_REPORT_NAME = "publish-report.json"
 
 
 def publish(uni_id, *, configs_dir=None, out_dir=None, replay_dir=None,
-           docling_url=None, tail=None, ledger_dir=None, registry_rows=None,
+           docling_url=None, tail=None, ledger_dir=None,
            academic_year=None, today=None, report=None):
     # type: (...) -> dict
     """Run the extraction spine (unless ``report`` is already supplied —
@@ -47,8 +47,7 @@ def publish(uni_id, *, configs_dir=None, out_dir=None, replay_dir=None,
     previous_run_id = ledger.read_current(ledger_root, uni_id)
     previous_summary = ledger.read_run_summary(ledger_root, uni_id, previous_run_id)
 
-    result = expectations.check(report, previous_summary,
-                                registry_rows=registry_rows, today=today,
+    result = expectations.check(report, previous_summary, today=today,
                                 academic_year=academic_year)
 
     ledger.append_run(ledger_root, uni_id, run_id, report, academic_year)

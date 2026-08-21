@@ -51,18 +51,7 @@ Schema (JSON key = dataclass field, snake_case):
                         language_tracks? (JoinRef: source + alias|alias_pattern),
                         fees_section? (SectionRef: source + section_pattern),
                         field_anchors? ({field: anchor_id} into site anchors),
-                        rsvu_code?, offerings?
-  offerings             {offering key: OfferingConfig} — the per-form recipe
-                        map (ADR-0004). The KEY is an attendance form
-                        ("редовна") or a form with one duration specialised
-                        ("задочна - 4.5"), always from ATTENDANCE_FORMS;
-                        config never lists the offerings themselves, since
-                        the registry row enumerates them and a second list
-                        could drift. Requires the Program to carry rsvu_code.
-  OfferingConfig        tuition_join? (JoinRef), curriculum? (CurriculumRef)
-  CurriculumRef         url, form_phrase (REQUIRED — the gate-able claim
-                        that a fetched plan is THIS offering's), code?,
-                        version?
+                        suppress_labels? ({field: [label ids]})
 
 All regexes (alias_pattern, join patterns) are compile-checked at load time;
 join pattern templates carry a literal "{alias}" placeholder that the cascade
@@ -95,9 +84,6 @@ __all__ = [
     "JoinRef",
     "SectionRef",
     "ProgramConfig",
-    "OfferingConfig",
-    "CurriculumRef",
-    "ATTENDANCE_FORMS",
     "SiteConfig",
     "parse_site_config",
     "load_site_config",
@@ -270,76 +256,6 @@ class SectionRef:
 
 
 # ------------------------------------------------------------------ programs
-# The attendance forms the RSVU registry actually states, measured across
-# every committed export (274 rows, 628 items, 2026-08-16). Config is
-# CLOSED over this list while registry.parse_edu_forms stays open: the
-# registry may legitimately name a form no config may yet declare, and
-# that Offering then simply has no recipe. Closing config is what catches
-# "редовно" -- the neuter adjective the FEE TABLE uses -- being pasted in
-# where the registry says "редовна", which would attach a recipe to an
-# Offering that can never match.
-ATTENDANCE_FORMS = ("редовна", "задочна", "дистанционна", "самостоятелна")
-
-# An offering key is either a bare form ("редовна", matching every duration
-# the registry states for it) or a form with one duration specialised
-# ("задочна - 4.5"). Must stay equal to crawler.registry.EduForm.key, which
-# FORMATS what this PARSES -- not imported, for the same reason ROUTES is
-# not imported from crawler.render: config is a leaf schema module, and
-# crawler.registry carries an HTTP adapter this module must not depend on.
-# The form must start with a LETTER: "\w" alone would make "4" and "_"
-# look like addressable forms and surface as "unknown attendance form".
-_OFFERING_FORM_RX = re.compile(r"^[^\W\d_][\w\s]*$", re.UNICODE)
-_OFFERING_KEY_RX = re.compile(
-    r"^([^\W\d_][^-]*?)\s*-\s*(\d+(?:\.\d+)?)$", re.UNICODE)
-
-
-def _split_offering_key(key):
-    # type: (str) -> Optional[Tuple[str, Optional[str]]]
-    """(form, duration or None), or None if KEY is not an offering key."""
-    if not key or not key.strip():
-        return None
-    text = key.strip()
-    if "-" not in text:
-        return (text, None) if _OFFERING_FORM_RX.match(text) else None
-    m = _OFFERING_KEY_RX.match(text)
-    return (m.group(1).strip(), m.group(2)) if m else None
-
-
-@dataclass(frozen=True)
-class CurriculumRef:
-    """A per-Offering curriculum plan, with the attestation that binds it.
-
-    form_phrase is REQUIRED and is the gate-able claim: a plan page states
-    its own form ("Редовно") in its breadcrumb, so a fetched plan can be
-    checked to be THIS Offering's rather than assumed. A reference without
-    it proves nothing about what was fetched (ADR-0004).
-
-    Schema only in ticket 18 -- nothing reads this at runtime yet, and the
-    binding CHECK is ticket 21, gated behind a real captured plan.
-    """
-    url: str
-    form_phrase: str
-    code: Optional[str] = None      # both appear in the plan URL itself
-    version: Optional[str] = None   # (?code=CB3.7.4.1&version=5)
-    program_name: Optional[str] = None   # extra breadcrumb segments; when
-    degree_phrase: Optional[str] = None  # present they anchor form_phrase
-    # to the breadcrumb (see runner._curriculum_binding) instead of letting
-    # one generic word match anywhere on the page. Restored 2026-08-17: they
-    # were dropped in ticket 18 review as schema for an unobserved page;
-    # the page is now captured, and its breadcrumb states all three.
-
-
-@dataclass(frozen=True)
-class OfferingConfig:
-    """What config attaches to ONE (form, duration) the registry states.
-
-    Never the Offering itself -- the registry enumerates those. This is
-    only the recipe for reading that Offering's values.
-    """
-    tuition_join: Optional[JoinRef] = None
-    curriculum: Optional[CurriculumRef] = None
-
-
 @dataclass(frozen=True)
 class ProgramConfig:
     id: str
@@ -364,12 +280,6 @@ class ProgramConfig:
     # through to the next mechanism or an honest null.
     suppress_labels: Mapping[str, Tuple[str, ...]] = field(
         default_factory=dict)
-    # {offering key -> recipe}. Keyed by FORM, never a list of offerings:
-    # the registry enumerates those, so config restating them could drift.
-    offerings: Mapping[str, OfferingConfig] = field(default_factory=dict)
-    rsvu_code: Optional[str] = None  # the RSVU registry row this Program
-    # corresponds to (ticket 05's covered_codes()) -- durable site data,
-    # set by hand once someone has matched the two; None until then.
 
 
 @dataclass(frozen=True)
@@ -379,9 +289,6 @@ class SiteConfig:
     programs: Tuple[ProgramConfig, ...]
     cookies: Mapping[str, str] = field(default_factory=dict)
     anchors: Mapping[str, AnchorConfig] = field(default_factory=dict)
-    rsvu_id: Optional[int] = None  # this uni's numeric id in the RSVU
-    # registry API (rsvu.mon.bg) -- durable site knowledge (ticket 05),
-    # not a per-run flag; None until someone looks it up and records it.
     program_markers: Tuple[str, ...] = ()  # words THIS site uses to
     # announce "a program we offer" ("Специалност", "Programme", ...),
     # read by adjudication.propose_enrolling to tell a real declaration
@@ -678,103 +585,6 @@ def _build_source(source_id, data, path):
     )
 
 
-def _build_curriculum(data, path):
-    _reject_unknown(data, ("url", "form_phrase", "code", "version",
-                           "program_name", "degree_phrase"), path)
-    form_phrase = _str(_require(data, "form_phrase", path),
-                       path + ".form_phrase")
-    if not form_phrase.strip():
-        raise ConfigError(
-            path + ".form_phrase: must not be blank -- it is the only "
-            "gate-able attestation that a fetched plan is THIS offering's")
-    def opt_str(key):
-        value = data.get(key)
-        return None if value is None else _str(value, path + "." + key)
-
-    url = _str(_require(data, "url", path), path + ".url")
-    code = opt_str("code")
-    version = opt_str("version")
-    # A stated code/version must MATCH the URL's own query parameters --
-    # otherwise a config typo ships a false attestation ("code": "WRONG"
-    # reported as bound). Checked here so it breaks at load, visibly.
-    from urllib.parse import parse_qs, urlsplit
-    q = parse_qs(urlsplit(url).query)
-    for label, stated in (("code", code), ("version", version)):
-        in_url = (q.get(label) or [None])[0]
-        if stated is not None and in_url is not None and stated != in_url:
-            raise ConfigError(
-                "{0}.{1}: {2!r} contradicts the url's own {1}={3!r} -- an "
-                "attestation must not disagree with the document it "
-                "names".format(path, label, stated, in_url))
-    return CurriculumRef(
-        url=url, form_phrase=form_phrase, code=code, version=version,
-        program_name=opt_str("program_name"),
-        degree_phrase=opt_str("degree_phrase"))
-
-
-def _build_offering(key, data, path, sources):
-    split = _split_offering_key(key)
-    if split is None:
-        raise ConfigError(
-            "{0}: {1!r} is not an offering key -- expected a form "
-            "(\"редовна\") or a form with one duration specialised "
-            "(\"задочна - 4.5\")".format(path, key))
-    form, duration = split
-    if form not in ATTENDANCE_FORMS:
-        raise ConfigError(
-            "{0}: unknown attendance form {1!r} -- one of: {2}. (The fee "
-            "tables use neuter adjectives like \"редовно\"; the registry "
-            "states feminine ones, and this key addresses the "
-            "REGISTRY.)".format(path, form, ", ".join(ATTENDANCE_FORMS)))
-    _reject_unknown(data, ("tuition_join", "curriculum"), path)
-    if not data:
-        raise ConfigError(
-            path + ": empty offering recipe -- an offering key with nothing "
-            "to do is a half-finished edit, not an intent to configure "
-            "nothing")
-    tuition_join = data.get("tuition_join")
-    curriculum = data.get("curriculum")
-    # fee-row ONLY. An Offering is a (form, duration) pair and its fee is
-    # a COLUMN of a fee table; sectioned-fee-row selects by SECTION (a
-    # language track) and carries no value_headers at all, so it cannot
-    # express "this attendance form's fee". Admitting it also admitted
-    # the one alias shape no resolver can use: cascade.sectioned_fee_join
-    # compiles alias_pattern as a regex, while a JoinRef built here takes
-    # a literal alias.
-    offering = OfferingConfig(
-        tuition_join=(_build_join_ref(
-            tuition_join, path + ".tuition_join", sources,
-            ("fee-row",), "alias")
-            if tuition_join is not None else None),
-        curriculum=(_build_curriculum(curriculum, path + ".curriculum")
-                    if curriculum is not None else None))
-    # Canonical spelling, so a stray space or a missing one around the
-    # separator cannot produce a key EduForm.key can never match.
-    canonical = form if duration is None else "{0} - {1}".format(form, duration)
-    return canonical, offering
-
-
-def _build_offerings(data, path, sources, rsvu_code):
-    if not isinstance(data, dict):
-        raise ConfigError("{0}: expected a JSON object keyed by attendance "
-                          "form, got {1}".format(path, type(data).__name__))
-    if data and rsvu_code is None:
-        raise ConfigError(
-            path + ": offerings are enumerated from this Program's REGISTRY "
-            "row, so the Program must carry an rsvu_code naming that row")
-    built = {}
-    for key, value in data.items():
-        node = "{0}[{1!r}]".format(path, key)
-        canonical, offering = _build_offering(key, value, node, sources)
-        if canonical in built:
-            raise ConfigError(
-                "{0}: {1!r} names the same offering as an earlier key -- "
-                "both read as {2!r}. Two recipes for one offering is "
-                "ambiguous, not additive.".format(node, key, canonical))
-        built[canonical] = offering
-    return built
-
-
 def _build_join_ref(data, path, sources, want_kinds, alias_mode):
     """alias_mode: 'alias' | 'alias_pattern' | 'optional-alias'."""
     _reject_unknown(data, ("source", "alias", "alias_pattern"), path)
@@ -839,12 +649,11 @@ def _build_anchor(anchor_id, data, path, sources):
     return AnchorConfig(id=anchor_id, source=source, pattern=pattern)
 
 
-_PROGRAM_KEYS = ("id", "name", "page", "offerings",
+_PROGRAM_KEYS = ("id", "name", "page",
                  "extra_pages", "extra_sources",
                  "lang_page", "adm_page", "tuition_page", "tuition_join",
                  "admission_join", "spravochnik", "language_tracks",
-                 "fees_section", "field_anchors", "suppress_labels",
-                 "rsvu_code")
+                 "fees_section", "field_anchors", "suppress_labels")
 
 
 def _build_field_anchors(data, path, anchors):
@@ -915,7 +724,6 @@ def _build_program(data, path, sources, anchors):
         tuition_join = _build_join_ref(data["tuition_join"], ref_path,
                                        sources, want, mode)
 
-    rsvu_code = opt_str("rsvu_code")
     program = ProgramConfig(
         id=_str(_require(data, "id", path), path + ".id"),
         name=_str(_require(data, "name", path), path + ".name"),
@@ -939,9 +747,6 @@ def _build_program(data, path, sources, anchors):
                                            path + ".field_anchors", anchors),
         suppress_labels=_build_suppress_labels(
             data.get("suppress_labels", {}), path + ".suppress_labels"),
-        rsvu_code=rsvu_code,
-        offerings=_build_offerings(data.get("offerings", {}),
-                                   path + ".offerings", sources, rsvu_code),
     )
     return program
 
@@ -956,11 +761,9 @@ def parse_site_config(data, origin="<config>"):
     mis-wiring. origin (usually the file path) prefixes every error.
     """
     _reject_unknown(data, ("uni_id", "cookies", "sources", "programs",
-                           "anchors", "rsvu_id", "program_markers"), origin)
+                           "anchors", "program_markers"), origin)
     uni_id = _str(_require(data, "uni_id", origin), origin + ".uni_id")
     cookies = _str_dict(data.get("cookies", {}), origin + ".cookies")
-    rsvu_id = (_int(data["rsvu_id"], origin + ".rsvu_id")
-              if "rsvu_id" in data else None)
     program_markers = tuple(_str_list(data.get("program_markers", []),
                                       origin + ".program_markers"))
 
@@ -999,7 +802,7 @@ def parse_site_config(data, origin="<config>"):
         seen.add(p.id)
 
     return SiteConfig(uni_id=uni_id, cookies=cookies, sources=sources,
-                      programs=programs, anchors=anchors, rsvu_id=rsvu_id,
+                      programs=programs, anchors=anchors,
                       program_markers=program_markers)
 
 

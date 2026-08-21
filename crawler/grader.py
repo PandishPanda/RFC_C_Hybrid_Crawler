@@ -373,7 +373,7 @@ def write_manual_verdict(out_dir, uni_id, program_id, field, verdict, *, note=""
     """verdict is "ok" or "wrong" -- a human's resolution of a CHECK
     entry grade_field couldn't auto-classify. Appends/replaces (keyed by
     program_id+field), durable across re-runs, mirroring
-    crawler.adjudication's resolutions.json pattern."""
+    the durable-resolution file pattern."""
     if verdict not in ("ok", "wrong"):
         raise ValueError(
             "verdict must be 'ok' or 'wrong', got {0!r}".format(verdict))

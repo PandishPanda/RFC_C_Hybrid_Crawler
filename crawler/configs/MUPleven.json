@@ -61,8 +61,7 @@
       "language_tracks": {
         "source": "mu-fees",
         "alias_pattern": "Медицина"
-      },
-      "rsvu_code": "70100013"
+      }
     },
     {
       "id": "mu-pharm",
@@ -75,8 +74,7 @@
       "language_tracks": {
         "source": "mu-fees",
         "alias_pattern": "Фармация"
-      },
-      "rsvu_code": "70300023"
+      }
     },
     {
       "id": "mu-nurse",
@@ -88,8 +86,7 @@
       },
       "field_anchors": {
         "tuition": "mu-nurse-free"
-      },
-      "rsvu_code": "70500042"
+      }
     },
     {
       "id": "mu-ap",
@@ -105,9 +102,7 @@
       },
       "spravochnik": {
         "source": "mu-sprav"
-      },
-      "rsvu_code": "70500191"
+      }
     }
-  ],
-  "rsvu_id": 121
+  ]
 }

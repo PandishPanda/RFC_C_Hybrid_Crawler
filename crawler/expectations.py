@@ -12,13 +12,11 @@ Checks (ticket 03's exact list):
   4. valid_for year-lag after 1 July (any value's academic_year behind
      the upcoming admission cycle)
 
-Coverage's true denominator is the RSVU registry row count (CONTEXT.md);
-that integration is ticket 05/06 (v0.2), not built yet. Absent an explicit
-``registry_rows``, coverage is computed against this run's own configured
-program count — a self-consistent relative check (it still catches "6 of
-8 programs stopped resolving") but NOT the true registry-denominator
-Coverage metric CONTEXT.md defines. Pass registry_rows once ticket 05
-lands to get the real number.
+"coverage" here is SELF-RELATIVE by design (ADR-0006): extracted share
+of this run's configured programs. It is a delta brake ("6 of 8 programs
+stopped resolving"), not a completeness claim against any external
+enumeration — no such denominator exists since the RSVU registry was
+dropped.
 
 Euro rules: BGN_EUR_RATE is Bulgaria's currency-board peg (also the euro-
 changeover conversion rate) — a value restated from BGN to EUR at exactly
@@ -116,12 +114,12 @@ def _year_start(academic_year):
 
 
 # --------------------------------------------------------------- summarize
-def summarize(report, registry_rows=None):
+def summarize(report):
     """Per-run metrics expectation checks compare across runs."""
     programs = report["programs"]
     covered = sum(1 for p in programs
                  if any(f["status"] == "PASS" for f in p["fields"].values()))
-    denom = registry_rows or len(programs) or 1
+    denom = len(programs) or 1
     key_total = key_null = 0
     for p in programs:
         for name, f in p["fields"].items():
@@ -133,7 +131,6 @@ def summarize(report, registry_rows=None):
         "programs": len(programs),
         "covered_programs": covered,
         "coverage": covered / denom,
-        "registry_rows": denom,
         "key_field_null_rate": (key_null / key_total) if key_total else 0.0,
     }
 
@@ -147,9 +144,9 @@ class ExpectationResult:
     previous: Optional[dict] = None
 
 
-def check(report, previous_summary=None, *, registry_rows=None, today=None,
+def check(report, previous_summary=None, *, today=None,
          academic_year=None):
-    # type: (dict, Optional[dict], Optional[int], Optional[object], Optional[str]) -> ExpectationResult
+    # type: (dict, Optional[dict], Optional[object], Optional[str]) -> ExpectationResult
     """Gate the pointer move for one run. previous_summary is the
     summarize() output of the last PROMOTED run (None on a university's
     first-ever run — nothing to regress against, so nothing can block).
@@ -157,7 +154,7 @@ def check(report, previous_summary=None, *, registry_rows=None, today=None,
     ledger.append_run uses when no value states its own year — pass the
     same value to both so the ledger and this check agree."""
     academic_year = academic_year or expected_academic_year(today)
-    current = summarize(report, registry_rows=registry_rows)
+    current = summarize(report)
     reasons = []
 
     if previous_summary is not None:

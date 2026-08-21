@@ -1,6 +1,5 @@
 {
   "uni_id": "VUM",
-  "rsvu_id": 125,
   "cookies": {},
   "sources": {
     "vum-fees": {
@@ -28,7 +27,6 @@
     {
       "id": "vum-sst",
       "name": "Software Systems and Technologies",
-      "rsvu_code": "40600931",
       "page": "https://vum.bg/software-systems-and-technologies/",
       "fees_section": {
         "source": "vum-fees",
@@ -39,7 +37,6 @@
     {
       "id": "vum-gca",
       "name": "Gastronomy and Culinary Arts",
-      "rsvu_code": "30900371",
       "page": "https://vum.bg/gastronomy-and-culinary-arts/",
       "fees_section": {
         "source": "vum-fees",
@@ -50,7 +47,6 @@
     {
       "id": "vum-mba",
       "name": "Master of Business Administration",
-      "rsvu_code": "30700013",
       "page": "https://vum.bg/master-of-business-administration/",
       "fees_section": {
         "source": "vum-fees",
@@ -60,7 +56,6 @@
     {
       "id": "vum-corr",
       "name": "Fighting Corruption and Conflict of Interest",
-      "rsvu_code": "30806933",
       "page": "https://vum.bg/coruption/",
       "suppress_labels": {
         "tuition": [
@@ -71,7 +66,6 @@
     {
       "id": "vum-ibm-pb",
       "name": "Международен бизнес и мениджмънт",
-      "rsvu_code": "30702821",
       "page": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/",
       "fees_section": {
         "source": "vum-fees-bg",
@@ -81,7 +75,6 @@
     {
       "id": "vum-ibm-b",
       "name": "Международен бизнес и мениджмънт",
-      "rsvu_code": "30702822",
       "page": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/",
       "fees_section": {
         "source": "vum-fees-bg",
@@ -91,7 +84,6 @@
     {
       "id": "vum-hm-pb",
       "name": "Хотелски мениджмънт",
-      "rsvu_code": "30900481",
       "page": "https://vum.bg/bg/hotelski-menidjmant",
       "fees_section": {
         "source": "vum-fees-bg",
@@ -101,7 +93,6 @@
     {
       "id": "vum-hm-b",
       "name": "Хотелски мениджмънт",
-      "rsvu_code": "30900482",
       "page": "https://vum.bg/bg/hotelski-menidjmant",
       "fees_section": {
         "source": "vum-fees-bg",
@@ -111,19 +102,16 @@
     {
       "id": "vum-ped-econ",
       "name": "Педагогика на обучението по Икономика и мениджмънт",
-      "rsvu_code": "10302071",
       "page": "https://vum.bg/bg/pedagogika-obuchenieto-ikonomika-menidjmant/"
     },
     {
       "id": "vum-ped-hosp",
       "name": "Педагогика на обучението по хотелиерство и ресторантьорство",
-      "rsvu_code": "10302081",
       "page": "https://vum.bg/bg/pedagogika-obuchenieto-hotelierstvo-restorantiorstvo/"
     },
     {
       "id": "vum-hce",
       "name": "Хотелиерство и кулинарни изкуства",
-      "rsvu_code": "30900412",
       "page": "https://vum.bg/bg/hotelierstvo-kulinarni-izkustva/",
       "fees_section": {
         "source": "vum-fees-bg",
@@ -133,7 +121,6 @@
     {
       "id": "vum-int-tour",
       "name": "Международен туризъм",
-      "rsvu_code": "30900233",
       "page": "https://vum.bg/bg/magistratura-mejdunaroden-turizam/",
       "fees_section": {
         "source": "vum-fees-bg",
@@ -143,13 +130,11 @@
     {
       "id": "vum-tour-phd",
       "name": "Туризъм",
-      "rsvu_code": "30900014",
       "page": "https://vum.bg/bg/doktorska-programa-turizam/"
     },
     {
       "id": "vum-food",
       "name": "Хранителни технологии в кулинарните изкуства",
-      "rsvu_code": "51200741",
       "page": "https://vum.bg/bg/hranitelni-tehnologii-kulinarni-izkustva/",
       "fees_section": {
         "source": "vum-fees-bg",
@@ -159,7 +144,6 @@
     {
       "id": "vum-mkt",
       "name": "Маркетинг и мениджмънт",
-      "rsvu_code": "30800361",
       "page": "https://vum.bg/bg/marketing-menidjmant/",
       "fees_section": {
         "source": "vum-fees-bg",

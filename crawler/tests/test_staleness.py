@@ -110,8 +110,15 @@ class ShippedConfigTest(unittest.TestCase):
         # the exposure visible rather than remembered.
         site = load_configs_dir("crawler/configs")["UniRuse"]
         found = staleness.pinned_sources(site)
-        self.assertEqual(len(found), 11)
-        self.assertTrue(all(w.startswith("anchors[") for w, _, _, _ in found))
+        # 13 = the 11 degree anchors + 2 curriculum plan URLs migrated to
+        # extra_pages when ADR-0006 dropped Offerings (the pins the
+        # offerings' CurriculumRefs used to carry).
+        self.assertEqual(len(found), 13)
+        wheres = [w for w, _, _, _ in found]
+        self.assertEqual(sum(1 for w in wheres if w.startswith("anchors[")),
+                         11)
+        self.assertEqual(
+            sum(1 for w in wheres if w.endswith(".extra_pages")), 2)
 
     def test_no_other_shipped_config_pins_a_version_today(self):
         sites = load_configs_dir("crawler/configs")

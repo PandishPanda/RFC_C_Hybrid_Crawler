@@ -86,16 +86,13 @@ def append_run(ledger_dir, uni_id, run_id, report, academic_year):
     ledger_path = Path(ledger_dir) / uni_id / LEDGER_NAME
     ledger_path.parent.mkdir(parents=True, exist_ok=True)
 
-    def entries_of(program_id, fields, scope, offering_key=None):
+    def entries_of(program_id, fields, scope):
         for field_name, rec in fields.items():
             if rec["status"] != "PASS":
                 continue
             prov = rec.get("provenance", {})
             entry = {
                 "run_id": run_id,
-                # program_id means exactly one thing. An Offering is
-                # distinguished by offering_key, part of the ledger key
-                # itself -- NOT by encoding two entities into one string.
                 "program_id": program_id,
                 "field": field_name,
                 "academic_year": infer_academic_year(
@@ -109,8 +106,6 @@ def append_run(ledger_dir, uni_id, run_id, report, academic_year):
                 "recorded_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                 "scope": scope,
             }
-            if offering_key is not None:
-                entry["offering_key"] = offering_key
             yield entry
 
     with open(ledger_path, "a", encoding="utf-8") as f:
@@ -118,22 +113,16 @@ def append_run(ledger_dir, uni_id, run_id, report, academic_year):
             for entry in entries_of(program["program_id"],
                                     program["fields"], "program"):
                 f.write(json.dumps(entry, ensure_ascii=False) + "\n")
-            for offering in program.get("offerings") or ():
-                for entry in entries_of(
-                        program["program_id"], offering["fields"],
-                        "offering", offering["offering_key"]):
-                    f.write(json.dumps(entry, ensure_ascii=False) + "\n")
     return ledger_path
 
 
 def load_run_values(ledger_dir, uni_id, run_id):
     # type: (str, str, str) -> Dict[tuple, dict]
-    """{(program_id, field, academic_year, offering_key): entry}.
+    """{(program_id, field, academic_year, None): entry}.
 
-    offering_key is None for a Program-level value and the Offering's own
-    key ("задочна - 4.5") for an Offering-level one, so the two coexist
-    without either shadowing the other and program_id keeps meaning
-    exactly one thing.
+    The fourth key slot is historical (it held the Offering key before
+    ADR-0006 dropped Offerings enumeration); kept as a literal None so
+    ledgers written before the change still load and diff cleanly.
     """
     ledger_path = Path(ledger_dir) / uni_id / LEDGER_NAME
     out = {}
@@ -153,12 +142,12 @@ def diff_runs(ledger_dir, uni_id, run_id_a, run_id_b):
     # type: (str, str, Optional[str], str) -> List[dict]
     """Value-level diff of run_id_b against run_id_a (None = no prior
     run — every value in b is reported as 'new'). One entry per
-    (program_id, field, academic_year, offering_key) that changed, was
+    (program_id, field, academic_year, None) that changed, was
     added, or was removed."""
     a = load_run_values(ledger_dir, uni_id, run_id_a) if run_id_a else {}
     b = load_run_values(ledger_dir, uni_id, run_id_b)
     changes = []
-    # offering_key is None for Program-level values, and Python 3 refuses
+    # the historical fourth key slot is None, and Python 3 refuses
     # to order None against str -- sort on a total-order projection rather
     # than on the raw key.
     for key in sorted(set(a) | set(b),

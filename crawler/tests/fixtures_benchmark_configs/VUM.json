@@ -1,6 +1,5 @@
 {
   "uni_id": "VUM",
-  "rsvu_id": 125,
   "cookies": {},
   "sources": {
     "vum-fees": {
@@ -18,7 +17,6 @@
     {
       "id": "vum-sst",
       "name": "Software Systems and Technologies",
-      "rsvu_code": "40600931",
       "page": "https://vum.bg/software-systems-and-technologies/",
       "fees_section": {
         "source": "vum-fees",
@@ -29,7 +27,6 @@
     {
       "id": "vum-gca",
       "name": "Gastronomy and Culinary Arts",
-      "rsvu_code": "30900371",
       "page": "https://vum.bg/gastronomy-and-culinary-arts/",
       "fees_section": {
         "source": "vum-fees",
@@ -40,7 +37,6 @@
     {
       "id": "vum-mba",
       "name": "Master of Business Administration",
-      "rsvu_code": "30700013",
       "page": "https://vum.bg/master-of-business-administration/",
       "fees_section": {
         "source": "vum-fees",
@@ -50,7 +46,6 @@
     {
       "id": "vum-corr",
       "name": "Fighting Corruption and Conflict of Interest",
-      "rsvu_code": "30806933",
       "page": "https://vum.bg/coruption/"
     }
   ]

@@ -1,6 +1,5 @@
 {
   "uni_id": "UniRuse",
-  "rsvu_id": 172,
   "cookies": {},
   "sources": {
     "fees-state-redovno": {
@@ -68,7 +67,6 @@
     {
       "id": "uniruse-bizmgmt",
       "name": "Бизнес мениджмънт",
-      "rsvu_code": "30701182",
       "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
       "tuition_join": {
         "source": "fees-state-redovno",
@@ -77,41 +75,14 @@
       "field_anchors": {
         "degree": "uniruse-bizmgmt-plan-degree"
       },
-      "offerings": {
-        "редовна": {
-          "tuition_join": {
-            "source": "fees-state-redovno",
-            "alias": "Бизнес мениджмънт"
-          },
-          "curriculum": {
-            "url": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.7.4.1&version=5",
-            "form_phrase": "Редовно",
-            "code": "CB3.7.4.1",
-            "version": "5",
-            "program_name": "Бизнес мениджмънт",
-            "degree_phrase": "ОКС \"Бакалавър\""
-          }
-        },
-        "дистанционна": {
-          "tuition_join": {
-            "source": "fees-paid-distancionna",
-            "alias": "Бизнес мениджмънт"
-          },
-          "curriculum": {
-            "url": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CBD3.7.4.11&version=1",
-            "form_phrase": "Дистанционно",
-            "code": "CBD3.7.4.11",
-            "version": "1",
-            "program_name": "Бизнес мениджмънт",
-            "degree_phrase": "ОКС \"Бакалавър\""
-          }
-        }
-      }
+      "extra_pages": [
+        "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.7.4.1&version=5",
+        "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CBD3.7.4.11&version=1"
+      ]
     },
     {
       "id": "uniruse-digmgmt",
       "name": "Дигитален мениджмънт и иновации",
-      "rsvu_code": "30710822",
       "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
       "tuition_join": {
         "source": "fees-paid-distancionna",
@@ -124,7 +95,6 @@
     {
       "id": "uniruse-pubadmin",
       "name": "Публична администрация",
-      "rsvu_code": "30700062",
       "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
       "tuition_join": {
         "source": "fees-state-zadochno",
@@ -137,7 +107,6 @@
     {
       "id": "uniruse-electropower",
       "name": "Електроенергетика и електрообзавеждане",
-      "rsvu_code": "50200042",
       "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
       "tuition_join": {
         "source": "fees-state-redovno",
@@ -150,7 +119,6 @@
     {
       "id": "uniruse-electronics",
       "name": "Електроника",
-      "rsvu_code": "50200052",
       "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
       "tuition_join": {
         "source": "fees-state-redovno",
@@ -163,7 +131,6 @@
     {
       "id": "uniruse-compctrl",
       "name": "Компютърно управление и автоматизация",
-      "rsvu_code": "50200912",
       "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
       "tuition_join": {
         "source": "fees-state-redovno",
@@ -176,7 +143,6 @@
     {
       "id": "uniruse-internetmobile",
       "name": "Интернет и мобилни комуникации",
-      "rsvu_code": "50301112",
       "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
       "tuition_join": {
         "source": "fees-state-redovno",
@@ -189,7 +155,6 @@
     {
       "id": "uniruse-compsystems",
       "name": "Компютърни системи и технологии",
-      "rsvu_code": "50300022",
       "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
       "tuition_join": {
         "source": "fees-state-redovno",
@@ -202,7 +167,6 @@
     {
       "id": "uniruse-economics",
       "name": "Икономика",
-      "rsvu_code": "30800082",
       "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
       "tuition_join": {
         "source": "fees-state-redovno",
@@ -215,7 +179,6 @@
     {
       "id": "uniruse-indmgmt",
       "name": "Индустриален мениджмънт",
-      "rsvu_code": "51300052",
       "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
       "tuition_join": {
         "source": "fees-state-redovno",
@@ -228,7 +191,6 @@
     {
       "id": "uniruse-socialwork",
       "name": "Социални дейности",
-      "rsvu_code": "30400022",
       "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
       "tuition_join": {
         "source": "fees-state-redovno",

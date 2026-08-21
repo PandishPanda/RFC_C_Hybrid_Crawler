@@ -50,8 +50,7 @@
       "admission_join": {
         "source": "su-adm",
         "alias": "Компютърни науки"
-      },
-      "rsvu_code": "40600082"
+      }
     },
     {
       "id": "su-si",
@@ -64,8 +63,7 @@
       "admission_join": {
         "source": "su-adm",
         "alias": "Софтуерно инженерство"
-      },
-      "rsvu_code": "40600272"
+      }
     },
     {
       "id": "su-is",
@@ -78,8 +76,7 @@
       "admission_join": {
         "source": "su-adm",
         "alias": "Информационни системи"
-      },
-      "rsvu_code": "40600282"
+      }
     },
     {
       "id": "su-stat",
@@ -92,8 +89,7 @@
       "admission_join": {
         "source": "su-adm",
         "alias": "Статистика"
-      },
-      "rsvu_code": "40500042"
+      }
     },
     {
       "id": "su-ch",
@@ -105,8 +101,7 @@
       "tuition_join": {
         "source": "su-fees",
         "alias": "Компютърна химия"
-      },
-      "rsvu_code": "40200012"
+      }
     },
     {
       "id": "su-ih",
@@ -131,8 +126,7 @@
       "admission_join": {
         "source": "su-adm",
         "alias": "Психология"
-      },
-      "rsvu_code": "30200012"
+      }
     },
     {
       "id": "su-phil",
@@ -147,6 +141,5 @@
         "alias": "Философия (на английски език)"
       }
     }
-  ],
-  "rsvu_id": 195
+  ]
 }
