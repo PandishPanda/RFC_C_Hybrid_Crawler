@@ -273,6 +273,11 @@ LABEL_PATTERNS = {
         ("en-required-min", r'Applicants are required to have obtained a (minimum of a bachelor[’\']s degree from an accredited institution of higher education)'),
         ("en-dzi-b2", r'(?:may also be admitted based on their result from the )(State Matriculation Examination \(DZI\) in English language, provided that the exam corresponds to CEFR level B2 and the final grade is at least Very Good \(5\.00\))'),
         ("en-min-gpa", r'The (recommended minimum GPA for applicants is .+?scale\))'),
+        # UniRuse family: enumerated балообразуване formula introduced by
+        # a literal marker; capture ends at the sentence-final period
+        # before the next prose sentence (2026-08-22, 20 graded-MISS
+        # cells the frozen key proved exist).
+        ("bg-kandidatstva-se", r'Кандидатства се с:\s*(1\).{20,500}?\.)(?=\s+[А-Я]|\s*$)'),
     ],
 }
 

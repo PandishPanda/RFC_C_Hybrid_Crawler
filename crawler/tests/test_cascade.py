@@ -322,11 +322,12 @@ class TestGoldenRegression(unittest.TestCase):
     def golden(self, tiers):
         return [r for r in fx.golden_records() if r["tier"] in tiers]
 
-    def test_label_library_is_29_shared_patterns(self):
-        # 29 = 27 + bg-lang-label (2026-08-17 VUM benchmark repair)
+    def test_label_library_is_30_shared_patterns(self):
+        # 30 = 27 + bg-lang-label (2026-08-17 VUM benchmark repair)
         #         + bg-programme-level (2026-08-21 NBU build-out)
+        #         + bg-kandidatstva-se (2026-08-22 UniRuse admission)
         n = sum(len(v) for v in cascade.LABEL_PATTERNS.values())
-        self.assertEqual(n, 29)
+        self.assertEqual(n, 30)
 
     def test_reproduces_every_golden_record(self):
         extractions = benchmark_extractions()
@@ -1051,3 +1052,29 @@ class ScopingBypassOtherRoutesTest(unittest.TestCase):
                                   {url: cascade.TextSource(ref="html:s",
                                                            text=text)})
         self.assertIsNone(r)
+
+
+class KandidatstvaSeLabelTest(unittest.TestCase):
+    """UniRuse family: per-program admission formulas on faculty pages,
+    introduced by «Кандидатства се с:» — 20 graded-MISS cells whose
+    existence the frozen key proves (labeller quoted these formulas)."""
+
+    def test_formula_is_captured_after_the_marker(self):
+        src = cascade.TextSource(
+            "html:https://x.example/f",
+            "и други. Кандидатства се с: 1) оценка от държавен зрелостен "
+            "изпит или един избираем изпит по: математика, български "
+            "език, ИИТ или ОТП; 2) оценка от дипломата по математика; "
+            "3) оценка от дипломата по български език. Успешно "
+            "завършилите се реализират като инженери.")
+        r = cascade.harvest_labels("admission", src)
+        self.assertIsNotNone(r)
+        self.assertTrue(r.value.startswith("1) оценка от държавен"))
+        self.assertIn("3) оценка от дипломата по български език", r.value)
+        self.assertNotIn("Успешно", r.value)
+
+    def test_no_marker_no_match(self):
+        src = cascade.TextSource(
+            "html:https://x.example/f",
+            "Свободен текст за приема без формулата за балообразуване.")
+        self.assertIsNone(cascade.harvest_labels("admission", src))

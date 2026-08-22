@@ -272,12 +272,20 @@
     {
       "id": "shu-311",
       "name": "Бизнес математика",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/311-kvalifikaciya-07-20-2026.pdf"
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/311-kvalifikaciya-07-20-2026.pdf",
+      "tuition_join": {
+        "source": "fees-bak-dp",
+        "alias_pattern": "4\\.5\\.1\\.\\s*Бизнес математика"
+      }
     },
     {
       "id": "shu-907",
       "name": "Дигитални технологии и изкуствен интелект",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/907-kvalifikaciya-07-07-2026.pdf"
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/907-kvalifikaciya-07-07-2026.pdf",
+      "tuition_join": {
+        "source": "fees-bak-dp",
+        "alias_pattern": "4\\.6\\.3\\.\\s*Дигитални технологии и изкуствен интелект"
+      }
     },
     {
       "id": "shu-122",
@@ -287,37 +295,65 @@
     {
       "id": "shu-216",
       "name": "Английска филология",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/216-kvalifikaciya-07-22-2026.pdf"
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/216-kvalifikaciya-07-22-2026.pdf",
+      "tuition_join": {
+        "source": "fees-bak-dp",
+        "alias_pattern": "2\\.1\\.3\\.\\s*Английска филология"
+      }
     },
     {
       "id": "shu-1159",
       "name": "Английска филология: Езиково обслужване на туризма и бизнеса",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1159-kvalifikaciya-07-22-2026.pdf"
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1159-kvalifikaciya-07-22-2026.pdf",
+      "tuition_join": {
+        "source": "fees-mag",
+        "alias_pattern": "2\\.1\\.5\\.\\s*Английска филология: Езиково обслужване"
+      }
     },
     {
       "id": "shu-1003",
       "name": "Английска филология: Лингвистика и превод",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1003-kvalifikaciya-07-22-2026.pdf"
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1003-kvalifikaciya-07-22-2026.pdf",
+      "tuition_join": {
+        "source": "fees-mag",
+        "alias_pattern": "2\\.1\\.4\\.\\s*Английска филология: Лингвистика и превод"
+      }
     },
     {
       "id": "shu-88",
       "name": "Астрономия",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/88-kvalifikaciya-08-07-2026.pdf"
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/88-kvalifikaciya-08-07-2026.pdf",
+      "tuition_join": {
+        "source": "fees-bak-dp",
+        "alias_pattern": "4\\.1\\.1\\.\\s*Астрономия /Астрономия и метеорология"
+      }
     },
     {
       "id": "shu-540",
       "name": "Астрономия и метеорология",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/540-kvalifikaciya-2024.pdf"
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/540-kvalifikaciya-2024.pdf",
+      "tuition_join": {
+        "source": "fees-bak-dp",
+        "alias_pattern": "4\\.1\\.1\\.\\s*Астрономия /Астрономия и метеорология"
+      }
     },
     {
       "id": "shu-1047",
       "name": "Астрофизика",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1047-kvalifikaciya-08-07-2026.pdf"
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1047-kvalifikaciya-08-07-2026.pdf",
+      "tuition_join": {
+        "source": "fees-mag",
+        "alias_pattern": "4\\.1\\.1\\.\\s*Астрофизика"
+      }
     },
     {
       "id": "shu-1173",
       "name": "Административна и организационна сигурност",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1173-kvalifikaciya-07-20-2026.pdf"
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1173-kvalifikaciya-07-20-2026.pdf",
+      "tuition_join": {
+        "source": "fees-mag",
+        "alias_pattern": "9\\.1\\.1\\.\\s*Административна и организационна сигурност"
+      }
     },
     {
       "id": "shu-402",
@@ -327,22 +363,38 @@
     {
       "id": "shu-1147",
       "name": "Геоматика",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1147-kvalifikaciya-07-20-2026.pdf"
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1147-kvalifikaciya-07-20-2026.pdf",
+      "tuition_join": {
+        "source": "fees-mag",
+        "alias_pattern": "5\\.7\\.1\\.\\s*Геоматика"
+      }
     },
     {
       "id": "shu-1111",
       "name": "Иновации в началното образование",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1111-kvalifikaciya-08-04-2026.pdf"
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1111-kvalifikaciya-08-04-2026.pdf",
+      "tuition_join": {
+        "source": "fees-mag",
+        "alias_pattern": "1\\.2\\.4\\.\\s*Иновации в началното образование"
+      }
     },
     {
       "id": "shu-1113",
       "name": "Иновации в предучилищното и началното образование",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1113-kvalifikaciya-08-04-2026.pdf"
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1113-kvalifikaciya-08-04-2026.pdf",
+      "tuition_join": {
+        "source": "fees-mag",
+        "alias_pattern": "1\\.2\\.3\\.\\s*Иновации в предучилищното и началното образование"
+      }
     },
     {
       "id": "shu-276",
       "name": "Информатика и информационни технологии, гр. Добрич",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/276-kvalifikaciya-02-27-2025.pdf"
+      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/276-kvalifikaciya-02-27-2025.pdf",
+      "tuition_join": {
+        "source": "fees-bak-dp",
+        "alias_pattern": "4\\.6\\.1\\.\\s*Информатика и информационни технологии"
+      }
     }
   ]
 }
