@@ -22,8 +22,12 @@ Two rendered reports live in `docs/` (open them in a browser):
 - **[docs/rfc-c.html](docs/rfc-c.html)** — RFC-C rev. 3, the STA-78 design
   document, rewritten against the complete evidence.
 - **[docs/scorecard.html](docs/scorecard.html)** — the full scorecard:
-  per-university numbers, every `crawler validate` row, and all 24 recorded
+  per-university numbers, every `crawler validate` row, and the recorded
   site findings.
+- **[docs/missing-matrix.html](docs/missing-matrix.html)** — the missing-data
+  matrix: 8 universities × 5 fields, each cell with count, cause and affected
+  programs; 397/740 cells split into recoverable config work (~140),
+  fetch-route limits (80, NBU's JS) and labeller-confirmed honest nulls.
 
 | | |
 | -- | -- |
