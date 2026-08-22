@@ -4,49 +4,57 @@
       "program_id": "mu-nurse",
       "field": "tuition",
       "verdict": "wrong",
-      "note": ""
+      "note": "",
+      "shipped_value": "безплатно"
     },
     {
       "program_id": "mu-med",
       "field": "tuition",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "620 евро"
     },
     {
       "program_id": "mu-med",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "изпит по биология и по химия."
     },
     {
       "program_id": "mu-pharm",
       "field": "tuition",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "620 евро"
     },
     {
       "program_id": "mu-pharm",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "изпит по биология и по химия."
     },
     {
       "program_id": "mu-nurse",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "приемен изпит-тест по биология"
     },
     {
       "program_id": "mu-ap",
       "field": "tuition",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "410 евро"
     },
     {
       "program_id": "mu-ap",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "изпит по биология или оценка от втори ДЗИ"
     }
   ]
 }

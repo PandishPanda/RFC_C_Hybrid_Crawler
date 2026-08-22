@@ -303,6 +303,16 @@ def grade_report(key, run_report, *, manual_verdicts=None):
             category = grade_field(entry, field_record)
             if category is GradeCategory.CHECK:
                 manual = manual_verdicts.get((pid, field))
+                if isinstance(manual, dict):
+                    # A verdict adjudicates ONE shipped value; if this run
+                    # ships a different one, no human has judged it yet --
+                    # the cell stays CHECK. (Legacy string verdicts carry
+                    # no binding and apply as before.)
+                    judged = manual.get("shipped_value")
+                    if judged is not None and judged != field_record.get("value"):
+                        manual = None
+                    else:
+                        manual = manual["verdict"]
                 if manual is not None:
                     category = (GradeCategory.OK_MANUAL if manual == "ok"
                                else GradeCategory.WRONG)
@@ -394,15 +404,22 @@ def read_manual_verdicts(out_dir, uni_id):
     if path is None or not path.exists():
         return {}
     data = json.loads(path.read_text(encoding="utf-8"))
-    return {(e["program_id"], e["field"]): e["verdict"] for e in data["verdicts"]}
+    return {(e["program_id"], e["field"]):
+            ({"verdict": e["verdict"], "shipped_value": e["shipped_value"]}
+             if "shipped_value" in e else e["verdict"])
+            for e in data["verdicts"]}
 
 
-def write_manual_verdict(out_dir, uni_id, program_id, field, verdict, *, note=""):
-    # type: (str, str, str, str, str, str) -> str
+def write_manual_verdict(out_dir, uni_id, program_id, field, verdict, *,
+                         note="", shipped_value=None):
+    # type: (str, str, str, str, str, str, Optional[str]) -> str
     """verdict is "ok" or "wrong" -- a human's resolution of a CHECK
     entry grade_field couldn't auto-classify. Appends/replaces (keyed by
     program_id+field), durable across re-runs, mirroring
-    the durable-resolution file pattern."""
+    the durable-resolution file pattern. shipped_value, when given, binds
+    the verdict to the exact value the human judged: a later run shipping
+    anything else returns the cell to CHECK instead of inheriting a
+    verdict on a value nobody looked at."""
     if verdict not in ("ok", "wrong"):
         raise ValueError(
             "verdict must be 'ok' or 'wrong', got {0!r}".format(verdict))
@@ -413,8 +430,11 @@ def write_manual_verdict(out_dir, uni_id, program_id, field, verdict, *, note=""
         existing = json.loads(path.read_text(encoding="utf-8"))["verdicts"]
     existing = [e for e in existing
                if (e["program_id"], e["field"]) != (program_id, field)]
-    existing.append(dict(program_id=program_id, field=field,
-                        verdict=verdict, note=note))
+    entry = dict(program_id=program_id, field=field,
+                 verdict=verdict, note=note)
+    if shipped_value is not None:
+        entry["shipped_value"] = shipped_value
+    existing.append(entry)
     path.write_text(
         json.dumps({"verdicts": existing}, ensure_ascii=False, indent=2),
         encoding="utf-8")

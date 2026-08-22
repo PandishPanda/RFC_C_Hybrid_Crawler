@@ -4,229 +4,267 @@
       "program_id": "vum-sst",
       "field": "degree",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "accredited Bulgarian Professional Bachelor degree from VUM and the British BSc (Hons) Software Engineering awarded by Cardiff Metropolitan University"
     },
     {
       "program_id": "vum-sst",
       "field": "duration",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "3 years / 6 semesters"
     },
     {
       "program_id": "vum-sst",
       "field": "language",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "English"
     },
     {
       "program_id": "vum-sst",
       "field": "tuition",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "1500 € per semester for EU and EEA citizens"
     },
     {
       "program_id": "vum-sst",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "State Matriculation Examination (DZI) in English language, provided that the exam corresponds to CEFR level B2 and the final grade is at least Very Good (5.00)"
     },
     {
       "program_id": "vum-gca",
       "field": "degree",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "accredited Bulgarian Professional Bachelor degree from VUM and the British BA (Hons) Culinary Arts Management awarded by Cardiff Metropolitan University"
     },
     {
       "program_id": "vum-gca",
       "field": "duration",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "3 years / 6 semesters"
     },
     {
       "program_id": "vum-gca",
       "field": "language",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "English"
     },
     {
       "program_id": "vum-gca",
       "field": "tuition",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "1500 € per semester for EU and EEA citizens"
     },
     {
       "program_id": "vum-gca",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "State Matriculation Examination (DZI) in English language, provided that the exam corresponds to CEFR level B2 and the final grade is at least Very Good (5.00)"
     },
     {
       "program_id": "vum-mba",
       "field": "degree",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "VUM Master’s degree in Business Administration and the Master of Business Administration awarded by Cardiff Metropolitan University"
     },
     {
       "program_id": "vum-mba",
       "field": "duration",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "3 semesters or 4 semesters"
     },
     {
       "program_id": "vum-mba",
       "field": "language",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "English"
     },
     {
       "program_id": "vum-mba",
       "field": "tuition",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "1500 € per semester for EU and EEA citizens"
     },
     {
       "program_id": "vum-mba",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "English language proficiency equivalent to IELTS 6.5 or above"
     },
     {
       "program_id": "vum-corr",
       "field": "degree",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "MASTER"
     },
     {
       "program_id": "vum-corr",
       "field": "duration",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "3 – 4 semesters"
     },
     {
       "program_id": "vum-corr",
       "field": "language",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "BULGARIAN"
     },
     {
       "program_id": "vum-corr",
       "field": "tuition",
       "verdict": "wrong",
-      "note": ""
+      "note": "",
+      "shipped_value": "1100 leva"
     },
     {
       "program_id": "vum-corr",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "candidates holding a Bachelor’s or Master’s degree from any field of study"
     },
     {
       "program_id": "vum-ibm-pb",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "При приема във ВУМ се вземат предвид образователната подготовка на кандидата, академичните му резултати, мотивацията и владеенето на английски език, както и представянето на необходимите документи за кандидатстване; Процесът на прием се осъществява в съответствие с Правилника за прием на ВУМ и приложимото българско законодателство; В зависимост от гражданството на кандидата, държавата, в която е придобито предходното образование, избраната програма и форма на обучение, както и, когато е приложимо, преминаването към последната година на обучение по програмата на Cardiff Metropolitan University, могат да се прилагат допълнителни изисквания; За кандидатите, чиито документи за предходно образование са издадени извън Република България, могат да бъдат необходими допълнителни процедури по признаване, легализация и официален превод"
     },
     {
       "program_id": "vum-ibm-b",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "При приема във ВУМ се вземат предвид образователната подготовка на кандидата, академичните му резултати, мотивацията и владеенето на английски език, както и представянето на необходимите документи за кандидатстване. Процесът на прием се осъществява в съответствие с Правилника за прием на ВУМ и приложимото българско законодателство.; В зависимост от гражданството на кандидата, държавата, в която е придобито предходното образование, избраната програма и форма на обучение, както и, когато е приложимо, преминаването към последната година на обучение по програмата на Cardiff Metropolitan University, могат да се прилагат допълнителни изисквания.; За кандидатите, чиито документи за предходно образование са издадени извън Република България, могат да бъдат необходими допълнителни процедури по признаване, легализация и официален превод."
     },
     {
       "program_id": "vum-ped-econ",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "висока мотивираност; добри резултати от дипломата за средно образование; Владеенето на английски език е препоръчително, но не задължително"
     },
     {
       "program_id": "vum-int-tour",
       "field": "degree",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "Магистър"
     },
     {
       "program_id": "vum-food",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "висока мотивираност; добри резултати от дипломата за средно образование; Владеенето на английски език е препоръчително, но не задължително"
     },
     {
       "program_id": "vum-ibm-pb",
       "field": "tuition",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "1500 € на семестър за граждани на ЕС и ЕИП"
     },
     {
       "program_id": "vum-ibm-b",
       "field": "tuition",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "1500 € на семестър за граждани на ЕС и ЕИП"
     },
     {
       "program_id": "vum-hm-pb",
       "field": "tuition",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "1500 € на семестър за граждани на ЕС и ЕИП"
     },
     {
       "program_id": "vum-hm-pb",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "Приемът във ВУМ се основава на образователната подготовка на кандидата, академичните му постижения, мотивацията, нивото на владеене на английски език и предоставянето на необходимите документи за кандидатстване; Процесът на прием се осъществява в съответствие с Правилника за прием на ВУМ и приложимото българско законодателство; В зависимост от гражданството на кандидата, държавата, в която е придобито предходното образование, избраната образователна степен и форма на обучение, както и – когато е приложимо – кандидатстването за финалната година с възможност за придобиване на диплома от Cardiff Metropolitan University, могат да се прилагат допълнителни изисквания; За кандидати, чиито документи за предходно образование са издадени извън Република България, може да бъдат необходими допълнителни процедури по признаване, легализация и официален превод на документите"
     },
     {
       "program_id": "vum-hm-b",
       "field": "tuition",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "1500 € на семестър за граждани на ЕС и ЕИП"
     },
     {
       "program_id": "vum-hm-b",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "Приемът във ВУМ се основава на образователната подготовка на кандидата, академичните му постижения, мотивацията, нивото на владеене на английски език и предоставянето на необходимите документи за кандидатстване; Процесът на прием се осъществява в съответствие с Правилника за прием на ВУМ и приложимото българско законодателство; В зависимост от гражданството на кандидата, държавата, в която е придобито предходното образование, избраната образователна степен и форма на обучение, както и – когато е приложимо – кандидатстването за финалната година с възможност за придобиване на диплома от Cardiff Metropolitan University, могат да се прилагат допълнителни изисквания; За кандидати, чиито документи за предходно образование са издадени извън Република България, може да бъдат необходими допълнителни процедури по признаване, легализация и официален превод на документите"
     },
     {
       "program_id": "vum-ped-hosp",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "висока мотивираност; добри резултати от дипломата за средно образование; Владеенето на английски език е препоръчително, но не задължително"
     },
     {
       "program_id": "vum-hce",
       "field": "tuition",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "1500 € на семестър за граждани на ЕС и ЕИП"
     },
     {
       "program_id": "vum-int-tour",
       "field": "tuition",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "1500 € на семестър за граждани на ЕС и ЕИП"
     },
     {
       "program_id": "vum-int-tour",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "При прием във ВУМ се вземат предвид завършеното висше образование, академичните резултати, професионалният профил, мотивацията и владеенето на английски език, както и представянето на необходимите документи.; Трисеместриалният вариант е предназначен за кандидати с бакалавърска степен в областта на туризма, хотелиерството или в сродна област. Кандидатите с предходно образование в други области обикновено се обучават по четирисеместриалния вариант.; Приемът се осъществява в съответствие с Правилника за прием на ВУМ и приложимото българско законодателство. В зависимост от държавата, в която е придобито предходното образование, могат да се прилагат допълнителни изисквания за признаване, легализация и официален превод на документите. В зависимост от гражданството и индивидуалните обстоятелства на кандидата могат да се прилагат и изисквания за виза или пребиваване.; Обичайното изискване за регистрация в Cardiff Metropolitan University е призната бакалавърска степен с ниво, съответстващо най-малко на британската класификация Lower Second-Class degree / 2:2.; Кандидати, чието предходно образование не отговаря напълно на обичайното минимално изискване, могат, когато това е допустимо, да бъдат разгледани индивидуално въз основа на подходящ професионален или управленски опит. Такова индивидуално разглеждане се отнася единствено до академичния прием или регистрацията в Cardiff Metropolitan University и не отменя приложимите изисквания на ВУМ, нито българските законови и административни изисквания, свързани с признаване на документи, легализация, визи, пребиваване или записване.; Кандидатите трябва да удостоверят владеене на английски език на ниво IELTS 6.5 или еквивалентно по един от начините, приети от ВУМ и Cardiff Metropolitan University: с признат сертификат по английски език, с документ, удостоверяващ, че предходното им висше образование е било преподавано и оценявано на английски език, или чрез успешно полагане на входния изпит по английски език на ВУМ."
     },
     {
       "program_id": "vum-food",
       "field": "tuition",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "1500 € на семестър за граждани на ЕС и ЕИП"
     },
     {
       "program_id": "vum-mkt",
       "field": "tuition",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "1500 € на семестър за граждани на ЕС и ЕИП"
     },
     {
       "program_id": "vum-mkt",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "Основните изисквания към студентите са висока мотивираност и добри резултати от дипломата за средно образование."
     }
   ]
 }

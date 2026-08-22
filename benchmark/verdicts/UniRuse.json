@@ -4,13 +4,15 @@
       "program_id": "uniruse-law",
       "field": "degree",
       "verdict": "ok",
-      "note": "labeller 2026-08-22: accepted the shipped value"
+      "note": "labeller 2026-08-22: accepted the shipped value",
+      "shipped_value": "образователно-квалификационна степен \"бакалавър\""
     },
     {
       "program_id": "uniruse-bizmgmt",
       "field": "admission",
       "verdict": "wrong",
-      "note": "labeller 2026-08-22: neighbouring business program's formula from the shared page (candidate-selection residual)"
+      "note": "labeller 2026-08-22: neighbouring business program's formula from the shared page (candidate-selection residual)",
+      "shipped_value": "1) оценка от държавен зрелостен изпит или един избираем изпит по: икономическа география на България, български език, чужд език ( английски ), история на България, ОТП, ИИТ или математика ; 2) оценка от дипломата по български език; 3) оценка от дипломата по математика."
     }
   ]
 }

@@ -4,31 +4,36 @@
       "program_id": "SHU-rsvu9749-BSC-BG",
       "field": "tuition",
       "verdict": "ok",
-      "note": "labeller 2026-08-21: accepted the shipped value"
+      "note": "labeller 2026-08-21: accepted the shipped value",
+      "shipped_value": "175.00 €"
     },
     {
       "program_id": "SHU-rsvu9749-BSC-BG",
       "field": "admission",
       "verdict": "ok",
-      "note": "labeller 2026-08-21: accepted the shipped value"
+      "note": "labeller 2026-08-21: accepted the shipped value",
+      "shipped_value": "Балът за класиране в специалността се образува като сума от утроената оценка от конкурсен изпит или ДЗИ и оценката от дипломата за средно образование"
     },
     {
       "program_id": "shu-216",
       "field": "tuition",
       "verdict": "ok",
-      "note": "labeller 2026-08-22: same amount, decimal formatting differs"
+      "note": "labeller 2026-08-22: same amount, decimal formatting differs",
+      "shipped_value": "165.00 €"
     },
     {
       "program_id": "shu-88",
       "field": "tuition",
       "verdict": "ok",
-      "note": "labeller 2026-08-22: same amount, decimal formatting differs"
+      "note": "labeller 2026-08-22: same amount, decimal formatting differs",
+      "shipped_value": "165.00 €"
     },
     {
       "program_id": "shu-1111",
       "field": "tuition",
       "verdict": "ok",
-      "note": "labeller 2026-08-22: same amount, decimal formatting differs"
+      "note": "labeller 2026-08-22: same amount, decimal formatting differs",
+      "shipped_value": "489.00 €"
     }
   ]
 }

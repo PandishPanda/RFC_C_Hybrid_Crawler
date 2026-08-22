@@ -22,7 +22,8 @@ def site_with_anchor(code, version):
     return parse_site_config({
         "uni_id": "X", "sources": {},
         "anchors": {"a1": {"source": PLAN.format(code, version),
-                           "pattern": r'ОКС\s*"([^"]+)"'}},
+                           "pattern": r'ОКС\s*"([^"]+)"',
+                           "scope": "names-program"}},
         "programs": [{"id": "p", "name": "P", "page": "https://x/p",
                       "field_anchors": {"degree": "a1"}}],
     }, origin="<t>")

@@ -4,7 +4,8 @@
       "program_id": "muv-medicina",
       "field": "degree",
       "verdict": "wrong",
-      "note": "labeller 2026-08-21: wrong-row / unrelated-page value"
+      "note": "labeller 2026-08-21: wrong-row / unrelated-page value",
+      "shipped_value": "образователно-квалификационна степен „магистър”"
     },
     {
       "program_id": "muv-rentgenov-laborant",
@@ -22,31 +23,36 @@
       "program_id": "MUVarna-rsvu31893-BSC-BG",
       "field": "admission",
       "verdict": "ok",
-      "note": "labeller 2026-08-21: ruled acceptable when amending the key"
+      "note": "labeller 2026-08-21: ruled acceptable when amending the key",
+      "shipped_value": "оценката от държавния зрелостен изпит по български език и литература и утроената оценка от конкурсния изпит тест по биология в МУ-Варна"
     },
     {
       "program_id": "MUVarna-rsvu11227-PHD-BG",
       "field": "admission",
       "verdict": "ok",
-      "note": "labeller 2026-08-21: ruled acceptable when amending the key"
+      "note": "labeller 2026-08-21: ruled acceptable when amending the key",
+      "shipped_value": "изпит по специалността и по един избран от тях чужд език (английски, немски, руски език)"
     },
     {
       "program_id": "MUVarna-rsvu31893-BSC-BG",
       "field": "duration",
       "verdict": "ok",
-      "note": "labeller 2026-08-21: same duration, different phrasing"
+      "note": "labeller 2026-08-21: same duration, different phrasing",
+      "shipped_value": "четири години (осем семестъра)"
     },
     {
       "program_id": "MUVarna-rsvu31893-BSC-BG",
       "field": "tuition",
       "verdict": "wrong",
-      "note": "labeller 2026-08-21: shipped first-year fee only; the source states a per-year progression"
+      "note": "labeller 2026-08-21: shipped first-year fee only; the source states a per-year progression",
+      "shipped_value": "500 евро"
     },
     {
       "program_id": "muv-akusherka",
       "field": "degree",
       "verdict": "wrong",
-      "note": "labeller 2026-08-22: pharmacy-management master's sentence near an Акушерка mention — not this program's degree (candidate-selection residual, finding 2)"
+      "note": "labeller 2026-08-22: pharmacy-management master's sentence near an Акушерка mention — not this program's degree (candidate-selection residual, finding 2)",
+      "shipped_value": "образователно-квалификационна степен „магистър“"
     }
   ]
 }

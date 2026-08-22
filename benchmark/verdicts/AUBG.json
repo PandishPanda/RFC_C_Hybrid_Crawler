@@ -4,43 +4,50 @@
       "program_id": "aubg-cs",
       "field": "degree",
       "verdict": "wrong",
-      "note": ""
+      "note": "",
+      "shipped_value": "Bachelor of Arts"
     },
     {
       "program_id": "aubg-ba",
       "field": "degree",
       "verdict": "wrong",
-      "note": ""
+      "note": "",
+      "shipped_value": "Bachelor of Arts"
     },
     {
       "program_id": "aubg-econ",
       "field": "degree",
       "verdict": "wrong",
-      "note": ""
+      "note": "",
+      "shipped_value": "Bachelor of Arts"
     },
     {
       "program_id": "aubg-cs",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "recommended minimum GPA for applicants is 3.0 on a 4.0 scale (4.5 out of six 6 on the Bulgarian scale)"
     },
     {
       "program_id": "aubg-ba",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "recommended minimum GPA for applicants is 3.0 on a 4.0 scale (4.5 out of six 6 on the Bulgarian scale)"
     },
     {
       "program_id": "aubg-econ",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "recommended minimum GPA for applicants is 3.0 on a 4.0 scale (4.5 out of six 6 on the Bulgarian scale)"
     },
     {
       "program_id": "aubg-emba",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "minimum of a bachelor’s degree from an accredited institution of higher education"
     }
   ]
 }

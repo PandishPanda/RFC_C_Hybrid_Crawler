@@ -217,10 +217,21 @@ class AnchorConfig:
     is recorded as "anchor:<id>" so the per-anchor maintenance bill stays
     countable (RFC v2 Q3 — this tier is what the ticket-02 LLM tail
     replaces).
+
+    scope: required when a program uses this anchor on a page that is not
+    its own (the measured MUVarna fabrication was an anchor on an
+    unrelated project page shipping a plausible degree, 2026-08-22):
+      "names-program"  the page must name the program at resolve time,
+                       else the anchor yields nothing;
+      "page-wide"      a human attested this page's claim applies to the
+                       wired programs (the ADR-0003 escape hatch — the
+                       config diff is the record).
+    None is valid only for own-page anchors, where scope is inherent.
     """
     id: str
     source: str
     pattern: str
+    scope: Optional[str] = None
 
 
 # ------------------------------------------------------------------- sources
@@ -635,7 +646,7 @@ def _build_section_ref(data, path, sources):
 
 
 def _build_anchor(anchor_id, data, path, sources):
-    _reject_unknown(data, ("source", "pattern"), path)
+    _reject_unknown(data, ("source", "pattern", "scope"), path)
     source = _str(_require(data, "source", path), path + ".source")
     if "://" not in source and source not in sources:
         raise ConfigError(
@@ -646,7 +657,13 @@ def _build_anchor(anchor_id, data, path, sources):
         raise ConfigError(
             path + ".pattern: needs a capturing group (group 1 is the "
             "anchored value)")
-    return AnchorConfig(id=anchor_id, source=source, pattern=pattern)
+    scope = data.get("scope")
+    if scope is not None and scope not in ("names-program", "page-wide"):
+        raise ConfigError(
+            path + ".scope: {0!r} is not a scope -- one of: "
+            "names-program, page-wide".format(scope))
+    return AnchorConfig(id=anchor_id, source=source, pattern=pattern,
+                        scope=scope)
 
 
 _PROGRAM_KEYS = ("id", "name", "page",
@@ -668,6 +685,24 @@ def _build_field_anchors(data, path, anchors):
                 "{0}.{1}: {2!r} is not a declared anchor id".format(
                     path, field_name, anchor_id))
     return field_anchors
+
+
+def _check_anchor_scopes(program, anchors, path, sources):
+    """Off-page anchors must declare scope; own-page scope is inherent.
+    An anchor may address the program's own document via a source id --
+    resolve to the URL before comparing (SHU wires its per-program PDFs
+    that way)."""
+    for field_name, anchor_id in program.field_anchors.items():
+        a = anchors[anchor_id]
+        src_url = sources[a.source].url if a.source in sources else a.source
+        if src_url != program.page and a.scope is None:
+            raise ConfigError(
+                "{0}.field_anchors.{1}: anchor {2!r} points at {3!r}, "
+                "which is not this program's page -- declare its scope "
+                "(names-program or page-wide). An unscoped off-page "
+                "anchor shipped a fabricated degree from an unrelated "
+                "page (measured 2026-08-22)".format(
+                    path, field_name, anchor_id, a.source))
 
 
 def _build_suppress_labels(data, path):
@@ -748,6 +783,7 @@ def _build_program(data, path, sources, anchors):
         suppress_labels=_build_suppress_labels(
             data.get("suppress_labels", {}), path + ".suppress_labels"),
     )
+    _check_anchor_scopes(program, anchors, path, sources)
     return program
 
 

@@ -4,37 +4,43 @@
       "program_id": "su-kn",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "изпит по математика"
     },
     {
       "program_id": "su-ch",
       "field": "duration",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "Продължителност на обучението (брой семестри): осем"
     },
     {
       "program_id": "su-ch",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "конкурсен изпит по химия, математика, физика или биология"
     },
     {
       "program_id": "su-psy",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "изпит по английски език"
     },
     {
       "program_id": "su-inf",
       "field": "admission",
       "verdict": "ok",
-      "note": ""
+      "note": "",
+      "shipped_value": "изпит по математика"
     },
     {
       "program_id": "su-cult",
       "field": "tuition",
       "verdict": "wrong",
-      "note": ""
+      "note": "",
+      "shipped_value": "освободени"
     }
   ]
 }

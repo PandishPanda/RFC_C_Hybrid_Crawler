@@ -285,47 +285,58 @@
   "anchors": {
     "uniruse-bizmgmt-plan-degree": {
       "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.7.4.1&version=5",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]"
+      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+      "scope": "names-program"
     },
     "uniruse-digmgmt-plan-degree": {
       "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.7.9.1&version=2",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]"
+      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+      "scope": "names-program"
     },
     "uniruse-pubadmin-plan-degree": {
       "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.7.3.1&version=4",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]"
+      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+      "scope": "names-program"
     },
     "uniruse-electropower-plan-degree": {
       "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.2.1.1&version=6",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]"
+      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+      "scope": "names-program"
     },
     "uniruse-electronics-plan-degree": {
       "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.2.2.1&version=5",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]"
+      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+      "scope": "names-program"
     },
     "uniruse-compctrl-plan-degree": {
       "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.2.5.1&version=4",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]"
+      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+      "scope": "names-program"
     },
     "uniruse-internetmobile-plan-degree": {
       "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.3.9.1&version=5",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]"
+      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+      "scope": "names-program"
     },
     "uniruse-compsystems-plan-degree": {
       "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.3.1.1&version=5",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]"
+      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+      "scope": "names-program"
     },
     "uniruse-economics-plan-degree": {
       "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.8.4.1&version=4",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]"
+      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+      "scope": "names-program"
     },
     "uniruse-indmgmt-plan-degree": {
       "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.13.4.1&version=5",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]"
+      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+      "scope": "names-program"
     },
     "uniruse-socialwork-plan-degree": {
       "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.4.1.1&version=3",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]"
+      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+      "scope": "names-program"
     }
   }
 }

@@ -43,12 +43,7 @@
       }
     }
   },
-  "anchors": {
-    "mu-nurse-free": {
-      "source": "https://mu-pleven.bg/index.php/bg/learning/students/2022-07-27-13-03-20/8410-t2026-2027",
-      "pattern": "специалностите „Медицинска сестра“ и „Акушерка“ са включени в списъка на защитените и обучението в тях за новоприетите студенти по държавна поръчка е (безплатно)"
-    }
-  },
+  "anchors": {},
   "programs": [
     {
       "id": "mu-med",
@@ -84,8 +79,10 @@
         "source": "mu-fees",
         "alias_pattern": "Медицинска сестра \\(III и IVкурс\\)"
       },
-      "field_anchors": {
-        "tuition": "mu-nurse-free"
+      "field_anchors": {},
+      "tuition_join": {
+        "source": "mu-fees",
+        "alias_pattern": "Медицинска сестра \\(III и IVкурс\\)"
       }
     },
     {

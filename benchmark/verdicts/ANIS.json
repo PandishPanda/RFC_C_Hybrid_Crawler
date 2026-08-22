@@ -4,25 +4,29 @@
       "program_id": "ANIS-rsvu8494-MSC-BG",
       "field": "duration",
       "verdict": "wrong",
-      "note": "labeller 2026-08-22: restated the key value; shipped statement is not this program's"
+      "note": "labeller 2026-08-22: restated the key value; shipped statement is not this program's",
+      "shipped_value": "Срокът на обучение е 4 семестъра (2 учебни години)"
     },
     {
       "program_id": "ANIS-rsvu8494-MSC-BG",
       "field": "admission",
       "verdict": "wrong",
-      "note": "labeller 2026-08-22: restated the key value; shipped statement is not this program's"
+      "note": "labeller 2026-08-22: restated the key value; shipped statement is not this program's",
+      "shipped_value": "Право на обучение ползват кандидати, които имат минимален успех Добър от диплома за завършена степен на висшето образование (чл. 21, ал. 4 от ЗВО). Успехът на дипломата се формира като средноаритметична оценка от средния успех от семестриалните изпити и оценките от държавните изпити или от защитата на дипломната работа."
     },
     {
       "program_id": "ANIS-rsvu9422-MSC-BG",
       "field": "duration",
       "verdict": "wrong",
-      "note": "labeller 2026-08-22: restated the key value; shipped statement is not this program's"
+      "note": "labeller 2026-08-22: restated the key value; shipped statement is not this program's",
+      "shipped_value": "Срокът на обучение е 4 семестъра (2 учебни години)"
     },
     {
       "program_id": "ANIS-rsvu9422-MSC-BG",
       "field": "admission",
       "verdict": "wrong",
-      "note": "labeller 2026-08-22: restated the key value; shipped statement is not this program's"
+      "note": "labeller 2026-08-22: restated the key value; shipped statement is not this program's",
+      "shipped_value": "Право на обучение ползват кандидати, които имат минимален успех Добър от диплома за завършена степен на висшето образование (чл. 21, ал. 4 от ЗВО). Успехът на дипломата се формира като средноаритметична оценка от средния успех от семестриалните изпити и оценките от държавните изпити или от защитата на дипломната работа."
     }
   ]
 }

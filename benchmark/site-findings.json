@@ -140,7 +140,8 @@
       "kind": "trust",
       "finding": "first FABRICATION in the benchmark: Патофизиология degree came from an EU-project announcement about dissertation defence — an anchor pointing at an unrelated page",
       "impact": "1 fabrication in 215 graded cells; a bad anchor can assert what no source states",
-      "status": "open"
+      "status": "fixed",
+      "resolution": "2026-08-22 anchor-scope validation: every off-page anchor must declare scope (names-program: emits only when the page names the program; page-wide: human-attested university-wide claim). The loader rejects unscoped off-page anchors (ConfigError). phd-degree-project DELETED — its 3 degree cells (Патофизиология + 2 ungraded PhD siblings) removed from the published pointer. Regrade: fabrications 1 → 0 fleet-wide."
     },
     {
       "uni_id": "MUVarna",
@@ -197,6 +198,14 @@
       "finding": "FIXED 2026-08-22: the ЗВО admission rule and 4-semester duration — page-wide claims the labeller ruled applicable during grading — promoted into config anchors on all 18 programs (the ADR-0003 escape hatch). Regrade 24/25, 0 wrong (was 14/25 with 4 wrong)",
       "impact": "+30 shipped cells, all grading correct",
       "status": "fixed"
+    },
+    {
+      "uni_id": "MUPleven",
+      "kind": "benchmark-integrity",
+      "finding": "stale manual verdict: the labeller's 'wrong' on mu-nurse tuition adjudicated «безплатно» (the decree anchor), but after the fee-order join shipped «410 евро» the byte-identical verdict carry-over re-applied it to a value no human had judged",
+      "impact": "any changed cell silently inherited its old verdict — stale 'ok's could green-light unjudged values",
+      "status": "fixed",
+      "resolution": "2026-08-22 verdicts now bind to the shipped_value they adjudicated; a changed value returns the cell to CHECK. All 8 verdict files backfilled from the runs they judged; mu-nurse tuition bound to «безплатно», so «410 евро» is CHECK pending labeller adjudication."
     }
   ]
 }

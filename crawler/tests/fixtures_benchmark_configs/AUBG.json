@@ -12,23 +12,28 @@
   "anchors": {
     "aubg-ba-degree": {
       "source": "aubg-catalog",
-      "pattern": "required to earn a (Bachelor of Arts) degree at AUBG"
+      "pattern": "required to earn a (Bachelor of Arts) degree at AUBG",
+      "scope": "page-wide"
     },
     "aubg-duration": {
       "source": "https://www.aubg.edu/academics/bachelor-degrees/",
-      "pattern": "The duration of undergraduate education at AUBG is ([a-z]+ semesters)"
+      "pattern": "The duration of undergraduate education at AUBG is ([a-z]+ semesters)",
+      "scope": "page-wide"
     },
     "aubg-tuition": {
       "source": "https://www.aubg.edu/admissions/bachelors/cost-aid/",
-      "pattern": "tuition is (€[\\d,]+/semester)"
+      "pattern": "tuition is (€[\\d,]+/semester)",
+      "scope": "page-wide"
     },
     "aubg-emba-degree": {
       "source": "https://www.aubg.edu/academics/executive-mba/",
-      "pattern": "The AUBG (Executive MBA) Program is accredited both in the United States"
+      "pattern": "The AUBG (Executive MBA) Program is accredited both in the United States",
+      "scope": "page-wide"
     },
     "aubg-emba-tuition": {
       "source": "https://www.aubg.edu/admissions/emba/tuition-and-financing/",
-      "pattern": "The tuition fee for the EMBA program is (€[\\d,]+)"
+      "pattern": "The tuition fee for the EMBA program is (€[\\d,]+)",
+      "scope": "page-wide"
     }
   },
   "programs": [

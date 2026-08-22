@@ -881,6 +881,14 @@ def resolve_field(site, program, field, docs):
         anchor_cfg = site.anchors[anchor_id]
         source = docs.get(anchor_cfg.source)
         if source is not None:
+            if anchor_cfg.scope == "names-program":
+                # the anchored page must name the program, or the anchor
+                # yields nothing -- an unscoped anchor on an unrelated
+                # page shipped a fabricated degree (measured 2026-08-22)
+                page_text = norm(source.text).lower()
+                if not _find_all(page_text, program.name.lower()):
+                    source = None
+        if source is not None:
             r = anchor_probe(field, source, anchor_cfg)
             if r:
                 return r

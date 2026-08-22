@@ -315,6 +315,53 @@ class ManualVerdictOverlayTest(unittest.TestCase):
         self.assertEqual(report.rows[0].category, GradeCategory.WRONG)
         self.assertEqual(report.wrong_rate, 1.0)
 
+    def test_verdict_bound_to_a_shipped_value_ignores_a_changed_value(self):
+        # The labeller's verdict adjudicates ONE shipped value. If a later
+        # run ships something else, reusing the verdict would grade a value
+        # no human ever looked at (measured: mu-nurse tuition was ruled
+        # "wrong" against «безплатно», then the fee-order join shipped
+        # «410 евро» and inherited the stale "wrong").
+        write_manual_verdict(self.out, "X", "p1", "tuition", "wrong",
+                             note="fee order governs",
+                             shipped_value="безплатно")
+        key = {("p1", "tuition"): key_entry("p1", "tuition",
+                                            "410 € / семестър")}
+        run_report = {"programs": [
+            {"program_id": "p1", "fields": {
+                "tuition": record("PASS", "410 евро")}},
+        ]}
+        manual = read_manual_verdicts(self.out, "X")
+        report = grade_report(key, run_report, manual_verdicts=manual)
+        self.assertEqual(report.rows[0].category, GradeCategory.CHECK,
+                         "a changed shipped value must return to CHECK, "
+                         "not inherit a verdict on the old value")
+
+    def test_verdict_bound_to_the_current_shipped_value_still_applies(self):
+        write_manual_verdict(self.out, "X", "p1", "tuition", "ok",
+                             shipped_value="410 евро")
+        key = {("p1", "tuition"): key_entry("p1", "tuition",
+                                            "410 € / семестър")}
+        run_report = {"programs": [
+            {"program_id": "p1", "fields": {
+                "tuition": record("PASS", "410 евро")}},
+        ]}
+        manual = read_manual_verdicts(self.out, "X")
+        report = grade_report(key, run_report, manual_verdicts=manual)
+        self.assertEqual(report.rows[0].category, GradeCategory.OK_MANUAL)
+
+    def test_legacy_verdict_without_shipped_value_applies_unconditionally(self):
+        # Pre-existing verdict files carry no shipped_value; they keep
+        # working exactly as before (byte-identical carry-over).
+        write_manual_verdict(self.out, "X", "p1", "duration", "ok")
+        key = {("p1", "duration"): key_entry("p1", "duration", "8")}
+        run_report = {"programs": [
+            {"program_id": "p1", "fields": {
+                "duration": record("PASS", "4 years")}},
+        ]}
+        manual = read_manual_verdicts(self.out, "X")
+        report = grade_report(key, run_report, manual_verdicts=manual)
+        self.assertEqual(report.rows[0].category, GradeCategory.OK_MANUAL)
+
     def test_invalid_verdict_string_is_rejected(self):
         with self.assertRaises(ValueError):
             write_manual_verdict(self.out, "X", "p1", "duration", "maybe")

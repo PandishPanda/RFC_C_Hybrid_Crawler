@@ -1078,3 +1078,54 @@ class KandidatstvaSeLabelTest(unittest.TestCase):
             "html:https://x.example/f",
             "Свободен текст за приема без формулата за балообразуване.")
         self.assertIsNone(cascade.harvest_labels("admission", src))
+
+
+class AnchorNamesProgramTest(unittest.TestCase):
+    """scope="names-program": the anchored page must name the program at
+    resolve time, else the anchor yields nothing — the measured MUVarna
+    fabrication was an anchor on an unrelated project page that never
+    mentions Патофизиология."""
+
+    def _site(self, scope):
+        return config.parse_site_config({
+            "uni_id": "X", "sources": {},
+            "anchors": {"deg": {
+                "source": "https://x.example/other",
+                "pattern": "(образователна и научна степен доктор)",
+                "scope": scope}},
+            "programs": [{"id": "p1", "name": "Патофизиология",
+                          "page": "https://x.example/own",
+                          "field_anchors": {"degree": "deg"}}],
+        }, origin="anchor-scope-test")
+
+    DOCS = {"https://x.example/other": None}
+
+    def _docs(self, text):
+        return {"https://x.example/other": cascade.TextSource(
+                    ref="html:other", text=text),
+                "https://x.example/own": cascade.TextSource(
+                    ref="html:own", text="страница на програмата")}
+
+    def test_page_not_naming_the_program_yields_nothing(self):
+        site = self._site("names-program")
+        p = site.programs[0]
+        text = ("проект по програма BG05SFPR001: успешна защита се доказва "
+                "с диплома за образователна и научна степен доктор")
+        self.assertIsNone(cascade.resolve_field(site, p, "degree",
+                                                self._docs(text)))
+
+    def test_page_naming_the_program_probes_normally(self):
+        site = self._site("names-program")
+        p = site.programs[0]
+        text = ("Докторска програма Патофизиология: присъжда се "
+                "образователна и научна степен доктор")
+        r = cascade.resolve_field(site, p, "degree", self._docs(text))
+        self.assertIsNotNone(r)
+
+    def test_page_wide_scope_probes_without_the_name(self):
+        site = self._site("page-wide")
+        p = site.programs[0]
+        text = ("общи правила: присъжда се образователна и научна "
+                "степен доктор")
+        r = cascade.resolve_field(site, p, "degree", self._docs(text))
+        self.assertIsNotNone(r)
