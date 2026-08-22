@@ -1,0 +1,204 @@
+{
+  "entries": [
+    {
+      "program_id": "uniruse-bizmgmt",
+      "field": "degree",
+      "expected_value": "Бакалавър",
+      "null_reason": null,
+      "snippet": "Бакалавър",
+      "source_url": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.7.4.1&version=5"
+    },
+    {
+      "program_id": "uniruse-bizmgmt",
+      "field": "duration",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated for THIS program on the shared faculty page",
+      "snippet": null,
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management"
+    },
+    {
+      "program_id": "uniruse-bizmgmt",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated for THIS program on the shared faculty page",
+      "snippet": null,
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management"
+    },
+    {
+      "program_id": "uniruse-bizmgmt",
+      "field": "tuition",
+      "expected_value": "204.52",
+      "null_reason": null,
+      "snippet": "204.52",
+      "source_url": "https://www.uni-ruse.bg/education/students/Documents/Zapoved_taksi_2025_2026_3811_14.10.2025_%d0%bf%d1%80%d0%b8%d0%b5%d0%bc%202025-2026n.xlsx"
+    },
+    {
+      "program_id": "uniruse-bizmgmt",
+      "field": "admission",
+      "expected_value": "1) оценка от държавен зрелостен изпит или един избираем изпит по: български език, история на България или биология; 2) оценка от дипломата по български език.",
+      "null_reason": null,
+      "snippet": "1) оценка от държавен зрелостен изпит или един избираем изпит по: български език, история на България или биология; 2) оценка от дипломата по български език.",
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management"
+    },
+    {
+      "program_id": "uniruse-compsystems",
+      "field": "degree",
+      "expected_value": "Бакалавър",
+      "null_reason": null,
+      "snippet": "Бакалавър",
+      "source_url": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.3.1.1&version=5"
+    },
+    {
+      "program_id": "uniruse-compsystems",
+      "field": "duration",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated for THIS program on the shared faculty page",
+      "snippet": null,
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation"
+    },
+    {
+      "program_id": "uniruse-compsystems",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated for THIS program on the shared faculty page",
+      "snippet": null,
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation"
+    },
+    {
+      "program_id": "uniruse-compsystems",
+      "field": "tuition",
+      "expected_value": "240.31",
+      "null_reason": null,
+      "snippet": "240.31",
+      "source_url": "https://www.uni-ruse.bg/education/students/Documents/Zapoved_taksi_2025_2026_3811_14.10.2025_%d0%bf%d1%80%d0%b8%d0%b5%d0%bc%202025-2026n.xlsx"
+    },
+    {
+      "program_id": "uniruse-compsystems",
+      "field": "admission",
+      "expected_value": "1) оценка от държавен зрелостен изпит или един избираем изпит по: математика, български език, ИИТ или ОТП; 2) оценка от дипломата по математика; 3) оценка от дипломата по български език.",
+      "null_reason": null,
+      "snippet": "1) оценка от държавен зрелостен изпит или един избираем изпит по: математика, български език, ИИТ или ОТП; 2) оценка от дипломата по математика; 3) оценка от дипломата по български език.",
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation"
+    },
+    {
+      "program_id": "uniruse-se",
+      "field": "degree",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated for THIS program on the shared faculty page",
+      "snippet": null,
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education"
+    },
+    {
+      "program_id": "uniruse-se",
+      "field": "duration",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated for THIS program on the shared faculty page",
+      "snippet": null,
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education"
+    },
+    {
+      "program_id": "uniruse-se",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated for THIS program on the shared faculty page",
+      "snippet": null,
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education"
+    },
+    {
+      "program_id": "uniruse-se",
+      "field": "tuition",
+      "expected_value": "240.31",
+      "null_reason": null,
+      "snippet": "240.31",
+      "source_url": "https://www.uni-ruse.bg/education/students/Documents/Zapoved_taksi_2025_2026_3811_14.10.2025_%d0%bf%d1%80%d0%b8%d0%b5%d0%bc%202025-2026n.xlsx"
+    },
+    {
+      "program_id": "uniruse-se",
+      "field": "admission",
+      "expected_value": "1) оценка от държавен зрелостен изпит или един избираем изпит по: математика, български език, ИИТ или ОТП; 2) оценка от дипломата по български език; 3) оценка от дипломата по математика.",
+      "null_reason": null,
+      "snippet": "1) оценка от държавен зрелостен изпит или един избираем изпит по: математика, български език, ИИТ или ОТП; 2) оценка от дипломата по български език; 3) оценка от дипломата по математика.",
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education"
+    },
+    {
+      "program_id": "uniruse-cs",
+      "field": "degree",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated for THIS program on the shared faculty page",
+      "snippet": null,
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education"
+    },
+    {
+      "program_id": "uniruse-cs",
+      "field": "duration",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated for THIS program on the shared faculty page",
+      "snippet": null,
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education"
+    },
+    {
+      "program_id": "uniruse-cs",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated for THIS program on the shared faculty page",
+      "snippet": null,
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education"
+    },
+    {
+      "program_id": "uniruse-cs",
+      "field": "tuition",
+      "expected_value": "240.31",
+      "null_reason": null,
+      "snippet": "240.31",
+      "source_url": "https://www.uni-ruse.bg/education/students/Documents/Zapoved_taksi_2025_2026_3811_14.10.2025_%d0%bf%d1%80%d0%b8%d0%b5%d0%bc%202025-2026n.xlsx"
+    },
+    {
+      "program_id": "uniruse-cs",
+      "field": "admission",
+      "expected_value": "1) оценка от държавен зрелостен изпит или един избираем изпит по: математика, български език, ИИТ или ОТП; 2) оценка от дипломата по български език; 3) оценка от дипломата по математика.",
+      "null_reason": null,
+      "snippet": "1) оценка от държавен зрелостен изпит или един избираем изпит по: математика, български език, ИИТ или ОТП; 2) оценка от дипломата по български език; 3) оценка от дипломата по математика.",
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education"
+    },
+    {
+      "program_id": "uniruse-law",
+      "field": "degree",
+      "expected_value": "магистър",
+      "null_reason": null,
+      "snippet": "магистър",
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-law-studies"
+    },
+    {
+      "program_id": "uniruse-law",
+      "field": "duration",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated for THIS program on the shared faculty page",
+      "snippet": null,
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-law-studies"
+    },
+    {
+      "program_id": "uniruse-law",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated for THIS program on the shared faculty page",
+      "snippet": null,
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-law-studies"
+    },
+    {
+      "program_id": "uniruse-law",
+      "field": "tuition",
+      "expected_value": "235.19",
+      "null_reason": null,
+      "snippet": "235.19",
+      "source_url": "https://www.uni-ruse.bg/education/students/Documents/Zapoved_taksi_2025_2026_3811_14.10.2025_%d0%bf%d1%80%d0%b8%d0%b5%d0%bc%202025-2026n.xlsx"
+    },
+    {
+      "program_id": "uniruse-law",
+      "field": "admission",
+      "expected_value": "1) оценка от държавен зрелостен изпит по БЕЛ, а за завършили преди 2008г се взема общият успех от дипломата за средно образование, 2) оценка от кандидатстудентски изпит по история на България; 3) оценка от дипломата по български език",
+      "null_reason": null,
+      "snippet": "1) оценка от държавен зрелостен изпит по БЕЛ, а за завършили преди 2008г се взема общият успех от дипломата за средно образование, 2) оценка от кандидатстудентски изпит по история на България; 3) оценка от дипломата по български език",
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-law-studies"
+    }
+  ]
+}

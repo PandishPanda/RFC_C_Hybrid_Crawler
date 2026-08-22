@@ -148,6 +148,13 @@
       "finding": "fee join reads a single figure where the source states a per-year progression (Кинезитерапия: shipped «500 евро», source says 500 € first year then 410 €)",
       "impact": "1 graded wrong; understates multi-year fees",
       "status": "open"
+    },
+    {
+      "uni_id": "UniRuse",
+      "kind": "trust",
+      "finding": "shared-page contamination CONFIRMED at a second university: uniruse-se and uniruse-cs shipped the identical «ОКС „магистър\"» from their shared faculty page, though both were added from UniRuse's BACHELOR index. The single-page control program (Право) showed no contamination — isolating the shared page as the cause",
+      "impact": "2 fabrications. With MUVarna this is 4 defects across 2 of the 3 shared-page universities; ANIS is the third and is still ungraded",
+      "status": "open"
     }
   ]
 }

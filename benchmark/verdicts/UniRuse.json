@@ -1,0 +1,10 @@
+{
+  "verdicts": [
+    {
+      "program_id": "uniruse-law",
+      "field": "degree",
+      "verdict": "ok",
+      "note": "labeller 2026-08-22: accepted the shipped value"
+    }
+  ]
+}
