@@ -1,18 +1,18 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Crawler scorecard — all 8 universities</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Crawler scorecard — 9 universities</title>
 <script src="https://cdn.tailwindcss.com"></script></head><body class="bg-slate-950 text-slate-100">
 <div class="max-w-[1750px] mx-auto px-10 py-8">
 <header class="mb-6 flex justify-between items-start border-b border-slate-800 pb-5">
 <div><h1 class="text-3xl font-bold">Crawler scorecard — complete</h1>
-<p class="text-slate-400 mt-1">8 universities · 148 programs · 353/740 fields extracted · 190 cells blind-graded · 2026-08-22</p></div>
+<p class="text-slate-400 mt-1">9 universities · 163 programs · 475/815 fields extracted (58%) · 265 cells blind-graded · 2026-08-22 (post anchor-scope + candidate-selection fixes)</p></div>
 <div class="flex gap-3 text-center">
-<div class="bg-slate-800 border border-slate-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold">66%</p><p class="text-xs text-slate-300">graded correct</p></div>
-<div class="bg-rose-900/50 border border-rose-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold text-rose-300">3</p><p class="text-xs text-rose-200">fabrications</p></div>
-<div class="bg-emerald-900/50 border border-emerald-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold text-emerald-300">0</p><p class="text-xs text-emerald-200">gate failures</p></div>
-<div class="bg-amber-900/50 border border-amber-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold text-amber-300">13</p><p class="text-xs text-amber-200">open findings</p></div></div></header>
+<div class="bg-slate-800 border border-slate-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold">81.5%</p><p class="text-xs text-slate-300">graded correct</p></div>
+<div class="bg-emerald-900/50 border border-emerald-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold text-emerald-300">0</p><p class="text-xs text-emerald-200">fabrications</p></div>
+<div class="bg-slate-800 border border-slate-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold">6</p><p class="text-xs text-slate-300">wrong (2.3%)</p></div>
+<div class="bg-amber-900/50 border border-amber-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold text-amber-300">11</p><p class="text-xs text-amber-200">open findings</p></div></div></header>
 
-<div class="bg-rose-950/40 border border-rose-800 rounded-xl p-4 mb-6 text-sm">
-<p class="font-bold text-rose-300 mb-1">Read this before the numbers</p>
-<p class="text-rose-100">Earlier revisions of this scorecard reported <strong>0 fabrications</strong>. That was true of the first 190 graded cells and is <strong>no longer true</strong>: grading MUVarna and UniRuse produced 3 fabrications and exposed <strong>misattribution on shared pages</strong> — a program shipping a neighbour's value, verbatim-present and therefore invisible to the provenance gate. The gate has still never shipped a value absent from its artifact. It cannot, and never could, verify that the value belongs to the program it was attached to.</p></div>
+<div class="bg-emerald-950/40 border border-emerald-800 rounded-xl p-4 mb-6 text-sm">
+<p class="font-bold text-emerald-300 mb-1">The fabrication arc — read this before the numbers</p>
+<p class="text-emerald-100">Grading MUVarna and UniRuse (2026-08-21/22) produced <b>3 fabrications</b>: shared pages let a program ship a neighbour's value, verbatim-present and invisible to the provenance gate. Three fixes closed the class, each verified by regrade against the same frozen keys: <b>region-scoped harvesting</b> (a program only reads the part of a shared page anchored to its name), <b>anchor scope validation</b> (every off-page anchor declares <code>names-program</code> or human-attested <code>page-wide</code>; the loader rejects the rest — the last fabrication's anchor is deleted), and <b>caps-heading anchoring</b> (a prose mention of a name inside a foreign section no longer opens a region there). Fabrications measured now: <b>0 of 265</b>. The provenance gate itself has never shipped a value absent from its artifact.</p></div>
 
 <h2 class="text-xl font-semibold text-indigo-300 mb-2">Per-university</h2>
 <table class="w-full text-sm bg-slate-900 border border-slate-800 rounded-xl overflow-hidden mb-3">
@@ -21,6 +21,42 @@
 <th class="p-2 text-right">tiers</th><th class="p-2 text-right">graded sample</th><th class="p-2 text-right">accuracy</th>
 <th class="p-2 text-right">wrong</th><th class="p-2 text-right">fabric.</th><th class="p-2 text-right">gate fails</th></tr></thead>
 <tbody><tr class="border-t border-slate-800">
+<td class="p-2 font-medium">VUM</td><td class="p-2 text-right">15</td>
+<td class="p-2 text-right">74/75</td>
+<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:99%"></div></div></td>
+<td class="p-2 text-right text-xs text-slate-400">llm-tail:36 · G:27 · F:11</td>
+<td class="p-2 text-right">15 prog / 75 cells</td>
+<td class="p-2 text-right">87% <span class="text-amber-400">+8 check</span></td>
+<td class="p-2 text-right">1</td>
+<td class="p-2 text-right">0</td>
+<td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
+<td class="p-2 font-medium">SofiaUniversity</td><td class="p-2 text-right">20</td>
+<td class="p-2 text-right">73/100</td>
+<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:73%"></div></div></td>
+<td class="p-2 text-right text-xs text-slate-400">G:42 · F:31</td>
+<td class="p-2 text-right">5 prog / 25 cells</td>
+<td class="p-2 text-right">92%</td>
+<td class="p-2 text-right">1</td>
+<td class="p-2 text-right">0</td>
+<td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
+<td class="p-2 font-medium">UniRuse</td><td class="p-2 text-right">20</td>
+<td class="p-2 text-right">51/100</td>
+<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:51%"></div></div></td>
+<td class="p-2 text-right text-xs text-slate-400">F:20 · G:20 · B:11</td>
+<td class="p-2 text-right">5 prog / 25 cells</td>
+<td class="p-2 text-right">96%</td>
+<td class="p-2 text-right">—</td>
+<td class="p-2 text-right">0</td>
+<td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
+<td class="p-2 font-medium">ANIS</td><td class="p-2 text-right">18</td>
+<td class="p-2 text-right">49/90</td>
+<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:54%"></div></div></td>
+<td class="p-2 text-right text-xs text-slate-400">B:39 · G:10</td>
+<td class="p-2 text-right">5 prog / 25 cells</td>
+<td class="p-2 text-right">96%</td>
+<td class="p-2 text-right">—</td>
+<td class="p-2 text-right">0</td>
+<td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
 <td class="p-2 font-medium">AUBG</td><td class="p-2 text-right">18</td>
 <td class="p-2 text-right">90/90</td>
 <td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:100%"></div></div></td>
@@ -28,219 +64,64 @@
 <td class="p-2 text-right">4 prog / 20 cells</td>
 <td class="p-2 text-right">85%</td>
 <td class="p-2 text-right">3</td>
-<td class="p-2 text-right text-slate-400 font-bold">0</td>
-<td class="p-2 text-right text-emerald-400">0</td></tr><tr class="border-t border-slate-800">
-<td class="p-2 font-medium">SofiaUniversity</td><td class="p-2 text-right">20</td>
-<td class="p-2 text-right">73/100</td>
-<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-amber-500" style="width:73%"></div></div></td>
-<td class="p-2 text-right text-xs text-slate-400">F:31 · G:42</td>
+<td class="p-2 text-right">0</td>
+<td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
+<td class="p-2 font-medium">MUVarna</td><td class="p-2 text-right">15</td>
+<td class="p-2 text-right">21/75</td>
+<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:28%"></div></div></td>
+<td class="p-2 text-right text-xs text-slate-400">G:9 · B:8 · F:4</td>
 <td class="p-2 text-right">5 prog / 25 cells</td>
-<td class="p-2 text-right">72%</td>
+<td class="p-2 text-right">44%</td>
 <td class="p-2 text-right">1</td>
-<td class="p-2 text-right text-slate-400 font-bold">0</td>
-<td class="p-2 text-right text-emerald-400">0</td></tr><tr class="border-t border-slate-800">
+<td class="p-2 text-right">0</td>
+<td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
 <td class="p-2 font-medium">MUPleven</td><td class="p-2 text-right">17</td>
 <td class="p-2 text-right">52/85</td>
-<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-amber-500" style="width:61%"></div></div></td>
-<td class="p-2 text-right text-xs text-slate-400">B:1 · F:42 · G:9</td>
+<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:61%"></div></div></td>
+<td class="p-2 text-right text-xs text-slate-400">F:43 · G:9</td>
 <td class="p-2 text-right">4 prog / 20 cells</td>
-<td class="p-2 text-right">95%</td>
-<td class="p-2 text-right">1</td>
-<td class="p-2 text-right text-slate-400 font-bold">0</td>
-<td class="p-2 text-right text-emerald-400">0</td></tr><tr class="border-t border-slate-800">
-<td class="p-2 font-medium">UniRuse</td><td class="p-2 text-right">20</td>
-<td class="p-2 text-right">36/100</td>
-<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-rose-500" style="width:36%"></div></div></td>
-<td class="p-2 text-right text-xs text-slate-400">B:11 · F:20 · G:5</td>
-<td class="p-2 text-right">5 prog / 25 cells</td>
-<td class="p-2 text-right">72%</td>
+<td class="p-2 text-right">100%</td>
+<td class="p-2 text-right">—</td>
 <td class="p-2 text-right">0</td>
-<td class="p-2 text-right text-rose-400 font-bold">2</td>
-<td class="p-2 text-right text-emerald-400">0</td></tr><tr class="border-t border-slate-800">
-<td class="p-2 font-medium">MUVarna</td><td class="p-2 text-right">15</td>
-<td class="p-2 text-right">26/75</td>
-<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-rose-500" style="width:35%"></div></div></td>
-<td class="p-2 text-right text-xs text-slate-400">B:11 · F:4 · G:11</td>
-<td class="p-2 text-right">5 prog / 25 cells</td>
-<td class="p-2 text-right">36%</td>
-<td class="p-2 text-right">3</td>
-<td class="p-2 text-right text-rose-400 font-bold">1</td>
-<td class="p-2 text-right text-emerald-400">0</td></tr><tr class="border-t border-slate-800">
+<td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
 <td class="p-2 font-medium">SHU</td><td class="p-2 text-right">20</td>
-<td class="p-2 text-right">32/100</td>
-<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-rose-500" style="width:32%"></div></div></td>
-<td class="p-2 text-right text-xs text-slate-400">B:13 · F:4 · G:15</td>
+<td class="p-2 text-right">45/100</td>
+<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:45%"></div></div></td>
+<td class="p-2 text-right text-xs text-slate-400">F:17 · G:16 · B:12</td>
 <td class="p-2 text-right">5 prog / 25 cells</td>
-<td class="p-2 text-right">52%</td>
+<td class="p-2 text-right">64%</td>
+<td class="p-2 text-right">—</td>
 <td class="p-2 text-right">0</td>
-<td class="p-2 text-right text-slate-400 font-bold">0</td>
-<td class="p-2 text-right text-emerald-400">0</td></tr><tr class="border-t border-slate-800">
-<td class="p-2 font-medium">ANIS</td><td class="p-2 text-right">18</td>
-<td class="p-2 text-right">24/90</td>
-<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-rose-500" style="width:27%"></div></div></td>
-<td class="p-2 text-right text-xs text-slate-400">B:9 · G:15</td>
-<td class="p-2 text-right">5 prog / 25 cells</td>
-<td class="p-2 text-right">60%</td>
-<td class="p-2 text-right">4</td>
-<td class="p-2 text-right text-slate-400 font-bold">0</td>
-<td class="p-2 text-right text-emerald-400">0</td></tr><tr class="border-t border-slate-800">
+<td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
 <td class="p-2 font-medium">NBU</td><td class="p-2 text-right">20</td>
 <td class="p-2 text-right">20/100</td>
-<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-rose-500" style="width:20%"></div></div></td>
+<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:20%"></div></div></td>
 <td class="p-2 text-right text-xs text-slate-400">G:20</td>
 <td class="p-2 text-right">5 prog / 25 cells</td>
 <td class="p-2 text-right">64%</td>
+<td class="p-2 text-right">—</td>
 <td class="p-2 text-right">0</td>
-<td class="p-2 text-right text-slate-400 font-bold">0</td>
-<td class="p-2 text-right text-emerald-400">0</td></tr>
-<tr class="bg-slate-800 font-bold border-t-2 border-slate-600"><td class="p-2">TOTAL</td><td class="p-2 text-right">148</td>
-<td class="p-2 text-right">353/740</td><td class="p-2">48%</td><td class="p-2"></td>
-<td class="p-2 text-right">190 cells</td><td class="p-2 text-right">66%</td>
-<td class="p-2 text-right">12</td><td class="p-2 text-right text-rose-400">3</td>
-<td class="p-2 text-right text-emerald-400">0</td></tr></tbody></table>
-<p class="text-xs text-slate-500 mb-8">Accuracy = correct + honest-nulls ÷ graded cells, on a 5-program sample per university (20–25 cells each), labelled blind by a human who did not build the pipeline. 50 of the graded cells are MISSES — data that exists but we did not extract, mostly unwired joins on recently-added programs. VUM (75 further graded cells, 1 wrong) is excluded here: it is a benchmark university, not a delivery target.</p>
+<td class="p-2 text-right">0</td></tr>
+<tr class="bg-slate-800 font-bold border-t border-slate-600"><td class="p-2">TOTAL</td><td class="p-2 text-right">163</td>
+<td class="p-2 text-right">475/815</td><td class="p-2"></td><td class="p-2"></td>
+<td class="p-2 text-right">265 cells</td><td class="p-2 text-right">81.5%</td>
+<td class="p-2 text-right">6</td><td class="p-2 text-right">0</td><td class="p-2 text-right">0</td></tr></tbody></table>
+<p class="text-xs text-slate-500 mb-6">Accuracy = correct-or-honest-null of graded cells. Samples: 5 programs per university (all 15 for VUM, 4 for AUBG/MUPleven where keys cover 4); crawling always covers every configured program. VUM's 8 "check" cells are LLM-tail admission answers re-phrased by the 2026-08-22 rerun — the shipped-value-bound verdicts refuse to inherit the labeller's earlier ok onto new wording, so they await re-adjudication.</p>
 
-<h2 class="text-xl font-semibold text-indigo-300 mb-3">Scorecard rows</h2>
-<section class="mb-5"><h3 class="text-lg font-semibold text-indigo-300 mb-2">1 SNAPSHOT→ARTIFACT</h3><table class="w-full text-sm bg-slate-900 border border-slate-800 rounded-xl overflow-hidden"><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">canonical churn (unexplained)</td><td class="p-2 text-slate-200">0 of 0 pairs (raw churn 0 filtered)</td>
-<td class="p-2 text-xs text-slate-400 w-60">0 unexplained</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-900/50 text-emerald-300 border border-emerald-700">✓ PASS</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">churn_report@2026-08-22</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">doc failures (benchmark replay)</td><td class="p-2 text-slate-200">—</td>
-<td class="p-2 text-xs text-slate-400 w-60">0</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-slate-900/50 text-slate-300 border border-slate-700">… PENDING</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">same</td></tr></table></section><section class="mb-5"><h3 class="text-lg font-semibold text-indigo-300 mb-2">2 CASCADE (G/F/B)</h3><table class="w-full text-sm bg-slate-900 border border-slate-800 rounded-xl overflow-hidden"><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">frozen acceptance</td><td class="p-2 text-slate-200">spike cache not present in this clone</td>
-<td class="p-2 text-xs text-slate-400 w-60">94P/6N G:55/F:27/B:12 exact</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-slate-900/50 text-slate-300 border border-slate-700">… PENDING</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">needs .scratch/sta-78/spikes/a (gathered data)</td></tr></table></section><section class="mb-5"><h3 class="text-lg font-semibold text-indigo-300 mb-2">6 GRADER (oracle)</h3><table class="w-full text-sm bg-slate-900 border border-slate-800 rounded-xl overflow-hidden"><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">graded accuracy tier-1</td><td class="p-2 text-slate-200">13 wrong / 265 ⇒ ≤7.7% @95%</td>
-<td class="p-2 text-xs text-slate-400 w-60">≤8.7%</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-900/50 text-emerald-300 border border-emerald-700">✓ PASS</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">ARCHIVED 2026-08-17</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">graded accuracy tier-2</td><td class="p-2 text-slate-200">13 wrong / 265 ⇒ ≤7.7% @95%</td>
-<td class="p-2 text-xs text-slate-400 w-60">≤3.0%</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-rose-900/50 text-rose-300 border border-rose-700">✗ FAIL</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">ARCHIVED 2026-08-17</td></tr></table></section><section class="mb-5"><h3 class="text-lg font-semibold text-indigo-300 mb-2">3 LLM TAIL</h3><table class="w-full text-sm bg-slate-900 border border-slate-800 rounded-xl overflow-hidden"><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">fabrications (graded runs)</td><td class="p-2 text-slate-200">3</td>
-<td class="p-2 text-xs text-slate-400 w-60">0</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-rose-900/50 text-rose-300 border border-rose-700">✗ FAIL</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">ARCHIVED 2026-08-17</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">fill on prose pages</td><td class="p-2 text-slate-200">ANIS 0/0 (deterministic; no tail run) | AUBG 0/0 (fully deterministic — no tail-eligible fields) | MUPleven 0/0 (fully deterministic — no tail-eligible fields) | MUVarna 0/0 (deterministic; no tail run) | NBU 0/0 (deterministic; no tail run) | SHU 0/0 (deterministic; no tail run) | SofiaUniversity 0/0 (deterministic; no tail run) | UniRuse 0/0 (deterministic; no tail run) | VUM 34/37 (site-dependent)</td>
-<td class="p-2 text-xs text-slate-400 w-60">— (no bar: property of pages)</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-900/50 text-amber-300 border border-amber-700">≈ PROXY</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">python3 -m crawler run VUM --tail &amp;&amp; python3 -m crawler grade VUM --run-report crawler-out/VUM/run-report.json --key .scratch/pipeline-e2e/assets/vum-frozen-key.json</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">cost per TAIL call</td><td class="p-2 text-slate-200">$0.093–$0.093 by site (VUM)</td>
-<td class="p-2 text-xs text-slate-400 w-60">$0.06</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-rose-900/50 text-rose-300 border border-rose-700">✗ FAIL</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">llm-usage ledgers, tail-tagged calls only</td></tr></table></section><section class="mb-5"><h3 class="text-lg font-semibold text-indigo-300 mb-2">4 ONBOARDING</h3><table class="w-full text-sm bg-slate-900 border border-slate-800 rounded-xl overflow-hidden"><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">proposal precision (per batch)</td><td class="p-2 text-slate-200">vum-bg-08-17: 100% | uniruse-08-15: 20% → change seeds</td>
-<td class="p-2 text-xs text-slate-400 w-60">advice &lt;50%</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-sky-900/50 text-sky-300 border border-sky-700">· INFO</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">onboarding-proposal.json</td></tr></table></section><section class="mb-5"><h3 class="text-lg font-semibold text-indigo-300 mb-2">7 FEES</h3><table class="w-full text-sm bg-slate-900 border border-slate-800 rounded-xl overflow-hidden"><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">sampled fee correctness</td><td class="p-2 text-slate-200">not yet run</td>
-<td class="p-2 text-xs text-slate-400 w-60">0 wrong (population bound)</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-slate-900/50 text-slate-300 border border-slate-700">… PENDING</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">map ticket 06</td></tr></table></section><section class="mb-5"><h3 class="text-lg font-semibold text-indigo-300 mb-2">8 SITE FINDINGS</h3><table class="w-full text-sm bg-slate-900 border border-slate-800 rounded-xl overflow-hidden"><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">recorded</td><td class="p-2 text-slate-200">24 finding(s) across 8 universit(ies); 13 still open</td>
-<td class="p-2 text-xs text-slate-400 w-60">every uni accounted for</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-sky-900/50 text-sky-300 border border-sky-700">· INFO</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">site-findings.json 2026-08-21</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">ANIS · discovery</td><td class="p-2 text-slate-200">every program lives on one admissions page; the onboarding link survey has nothing to propose (0 proposals, $0.35 spent to learn it)</td>
-<td class="p-2 text-xs text-slate-400 w-60">programs enumerated by hand from page text</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-900/50 text-amber-300 border border-amber-700">≈ PROXY</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: open</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">ANIS · extraction</td><td class="p-2 text-slate-200">shared admissions page yields few per-program values</td>
-<td class="p-2 text-xs text-slate-400 w-60">24/90 fields extract</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-900/50 text-amber-300 border border-amber-700">≈ PROXY</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: open</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">ANIS · trust</td><td class="p-2 text-slate-200">shared-page contamination did NOT occur here, refuting the hypothesis that shared pages are inherently unsafe. ANIS&#x27;s page-wide statements genuinely apply to every program (single-faculty academy), so identical values are correct. The real risk is a shared page carrying PROGRAM-SPECIFIC claims (MUVarna, UniRuse), not shared pages as such</td>
-<td class="p-2 text-xs text-slate-400 w-60">sharpens the defect: the resolver must distinguish claim SCOPE, not avoid shared sources</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-sky-900/50 text-sky-300 border border-sky-700">· INFO</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: accepted</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">ANIS · extraction</td><td class="p-2 text-slate-200">where a page states two competing values, the cascade takes the first: shipped «2 или 3 семестъра» and «само по документи» where the labeller ruled «4 семестъра» and the ЗВО minimum-grade rule govern</td>
-<td class="p-2 text-xs text-slate-400 w-60">4 graded wrong — first-match selection, not attribution error</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-900/50 text-amber-300 border border-amber-700">≈ PROXY</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: open</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">AUBG · discovery</td><td class="p-2 text-slate-200">site redirects browser-like user agents to a /region-selector/ interstitial; our fetcher sends a real browser UA by design, so link discovery saw 1 link on a 99-link page. Region choices are JS-rendered, so no cookie can be lifted</td>
-<td class="p-2 text-xs text-slate-400 w-60">discovery only possible via sitemap.xml</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-sky-900/50 text-sky-300 border border-sky-700">· INFO</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: mitigated</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">AUBG · coverage</td><td class="p-2 text-slate-200">17 bachelor majors + 1 EMBA is the whole degree catalogue; the rest of /bachelor-degrees/ are minors and short courses</td>
-<td class="p-2 text-xs text-slate-400 w-60">18 programs, not 20 — padding would ship non-degrees as Programs</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-sky-900/50 text-sky-300 border border-sky-700">· INFO</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: accepted</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">MUPleven · extraction</td><td class="p-2 text-slate-200">three programs have no row in the fee order (Медицинска рехабилитация, Медико-социални дейности, Обществено здраве и здравен мениджмънт)</td>
-<td class="p-2 text-xs text-slate-400 w-60">tuition ships as an honest null for those three</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-sky-900/50 text-sky-300 border border-sky-700">· INFO</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: accepted</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">MUVarna · discovery</td><td class="p-2 text-slate-200">sitemap carries no program pages; all programs named on one shared specialties page</td>
-<td class="p-2 text-xs text-slate-400 w-60">enumerated by hand; 15 programs is all the page lists</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-sky-900/50 text-sky-300 border border-sky-700">· INFO</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: accepted</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">MUVarna · extraction</td><td class="p-2 text-slate-200">shared specialties page carries little per-program data</td>
-<td class="p-2 text-xs text-slate-400 w-60">26/75 fields extract</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-900/50 text-amber-300 border border-amber-700">≈ PROXY</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: open</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">MUVarna · trust</td><td class="p-2 text-slate-200">PROVEN wrong-row contamination on a shared page: muv-medicina and muv-rentgenov-laborant shipped the IDENTICAL «ОКС „бакалавър&quot;» snippet, taken from a sentence about a different program (Организация и управление на военни формирования). Medicine is магистър. Both values are verbatim in the artifact, so the provenance gate passed them</td>
-<td class="p-2 text-xs text-slate-400 w-60">2 graded wrong. The gate proves presence, not attribution — on a shared page the first match wins regardless of which program is being resolved. UniRuse and ANIS are also shared-page and NOT yet graded</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-900/50 text-amber-300 border border-amber-700">≈ PROXY</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: open</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">MUVarna · trust</td><td class="p-2 text-slate-200">first FABRICATION in the benchmark: Патофизиология degree came from an EU-project announcement about dissertation defence — an anchor pointing at an unrelated page</td>
-<td class="p-2 text-xs text-slate-400 w-60">1 fabrication in 215 graded cells; a bad anchor can assert what no source states</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-900/50 text-amber-300 border border-amber-700">≈ PROXY</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: open</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">MUVarna · extraction</td><td class="p-2 text-slate-200">fee join reads a single figure where the source states a per-year progression (Кинезитерапия: shipped «500 евро», source says 500 € first year then 410 €)</td>
-<td class="p-2 text-xs text-slate-400 w-60">1 graded wrong; understates multi-year fees</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-900/50 text-amber-300 border border-amber-700">≈ PROXY</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: open</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">NBU · extraction</td><td class="p-2 text-slate-200">MEASURED (5-program graded sample): duration and admission are visible to a human browser but unreachable by the fetch route — 9 of 25 cells. language and tuition are NOT on the programme pages at all: the labeller confirmed them absent, so those nulls are honest, not losses</td>
-<td class="p-2 text-xs text-slate-400 w-60">JS gap costs 36% of graded cells (9/25); 44% (11/25) of nulls are genuinely-absent data. Every shipped degree graded correct (5/5)</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-900/50 text-amber-300 border border-amber-700">≈ PROXY</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: open</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">NBU · discovery</td><td class="p-2 text-slate-200">on-site program index is JS-loaded and the 74 gzipped sub-sitemaps carry no programmes; only the separate e-catalog serves static per-programme pages</td>
-<td class="p-2 text-xs text-slate-400 w-60">discovery via ecatalog.nbu.bg only</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-sky-900/50 text-sky-300 border border-sky-700">· INFO</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: mitigated</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">SHU · discovery</td><td class="p-2 text-slate-200">site is a catch-all — /, /specialnosti/ and /kandidatstudentski-kampanii/ return byte-identical HTML; the 4,819-URL sitemap holds news and projects but no program pages</td>
-<td class="p-2 text-xs text-slate-400 w-60">programs found only via per-faculty specialnosti pages linking per-program PDFs</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-sky-900/50 text-sky-300 border border-sky-700">· INFO</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: mitigated</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">SHU · trust</td><td class="p-2 text-slate-200">a 460k-char candidate handbook names every program and was REJECTED as a shared page: all 20 programs would extract the same first-match values, verbatim-present and therefore invisible to the provenance gate</td>
-<td class="p-2 text-xs text-slate-400 w-60">would have manufactured 20 confidently wrong programs; per-program PDFs used instead</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-sky-900/50 text-sky-300 border border-sky-700">· INFO</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: avoided</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">SHU · coverage</td><td class="p-2 text-slate-200">MEASURED: the 15 programs added in the build-out have no fee or admission joins wired, so duration/tuition/admission ship null. shu-122 (Икономика) ships NOTHING at all — even degree — while every other program manages it</td>
-<td class="p-2 text-xs text-slate-400 w-60">12 of 25 graded cells are MISS; all are unwired config, not extraction errors</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-900/50 text-amber-300 border border-amber-700">≈ PROXY</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: open</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">SHU · trust</td><td class="p-2 text-slate-200">refusing the 460k-char handbook as a shared source cost NO tuition coverage: the labeller found every fee in the properly-structured fee orders, which per-program joins can reach safely</td>
-<td class="p-2 text-xs text-slate-400 w-60">the safe choice was also the complete one — recorded so it is not revisited</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-sky-900/50 text-sky-300 border border-sky-700">· INFO</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: avoided</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">SofiaUniversity · discovery</td><td class="p-2 text-slate-200">fragmented faculty subsites — no single program index; three seeds needed (FMI, PHLS, chemistry) and each faculty is a separate host/path shape</td>
-<td class="p-2 text-xs text-slate-400 w-60">onboarding survey works, but seeds are hand-found per faculty</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-sky-900/50 text-sky-300 border border-sky-700">· INFO</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: accepted</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">SofiaUniversity · extraction</td><td class="p-2 text-slate-200">language is stated on the program pages but no shared label matches it — measured, not assumed: all 5 graded programs keyed «Български» and shipped nothing</td>
-<td class="p-2 text-xs text-slate-400 w-60">6 of SU&#x27;s 25 graded cells are MISS; a fixable label gap, not a missing fact</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-900/50 text-amber-300 border border-amber-700">≈ PROXY</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: open</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">SofiaUniversity · trust</td><td class="p-2 text-slate-200">Docling merged a fee row&#x27;s cells: «освободени 310 EUR» came out as ONE cell and the row lost columns, so the join read «освободени» where the labeller read 310 EUR (su-cult)</td>
-<td class="p-2 text-xs text-slate-400 w-60">1 graded wrong; a merged cell can silently flip a fee between exempt and charged</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-900/50 text-amber-300 border border-amber-700">≈ PROXY</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: open</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">UniRuse · freshness</td><td class="p-2 text-slate-200">fee source still states the 2025/2026 cycle; the year-lag check fires on every run (20 values)</td>
-<td class="p-2 text-xs text-slate-400 w-60">publish blocks every time; promoted only by standing human clear</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-sky-900/50 text-sky-300 border border-sky-700">· INFO</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: accepted-by-owner</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">UniRuse · extraction</td><td class="p-2 text-slate-200">many programs share one faculty page, so per-program field resolution is weak</td>
-<td class="p-2 text-xs text-slate-400 w-60">36/100 fields extract</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-900/50 text-amber-300 border border-amber-700">≈ PROXY</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: open</td></tr><tr class="border-t border-slate-800 align-top">
-<td class="p-2 w-52 text-slate-300">UniRuse · trust</td><td class="p-2 text-slate-200">shared-page contamination CONFIRMED at a second university: uniruse-se and uniruse-cs shipped the identical «ОКС „магистър&quot;» from their shared faculty page, though both were added from UniRuse&#x27;s BACHELOR index. The single-page control program (Право) showed no contamination — isolating the shared page as the cause</td>
-<td class="p-2 text-xs text-slate-400 w-60">2 fabrications. With MUVarna this is 4 defects across 2 of the 3 shared-page universities; ANIS is the third and is still ungraded</td>
-<td class="p-2 w-24"><span class="px-2 py-0.5 rounded text-xs font-bold bg-amber-900/50 text-amber-300 border border-amber-700">≈ PROXY</span></td>
-<td class="p-2 text-xs text-slate-500 w-52">status: open</td></tr></table></section>
-<footer class="text-xs text-slate-500 border-t border-slate-800 pt-4 mt-4">Generated from <code>crawler validate</code> · evidence in tracked benchmark/ · PROXY = visible but unmeasured cost, never a pass.</footer>
+<div class="grid grid-cols-2 gap-4 mb-6 text-sm">
+<div class="bg-slate-900 border border-slate-700 rounded-xl p-4">
+<p class="font-bold text-indigo-300 mb-2">The 6 wrongs, by name</p>
+<ul class="space-y-1 text-slate-300 list-disc ml-4">
+<li><b>VUM vum-corr tuition</b> — page still states last cycle's «1100 leva»; human-adjudicated stale-green (site staleness, not extraction).</li>
+<li><b>SU su-cult tuition</b> — Docling merged a fee row's cells; «освободени» shipped where the labeller read 310 EUR. Open finding.</li>
+<li><b>AUBG degree ×3</b> — «Bachelor of Arts» shipped where the labeller ruled «Major» governs. A definitional ruling, recorded; not an extraction defect.</li>
+<li><b>MUVarna Кинезитерапия tuition</b> — «500 евро» shipped where the fee order differentiates «500 € first year, 410 € after»; labeller ruled the full split governs.</li></ul></div>
+<div class="bg-slate-900 border border-slate-700 rounded-xl p-4">
+<p class="font-bold text-indigo-300 mb-2">Findings ledger (benchmark/site-findings.json)</p>
+<p class="text-slate-300 mb-2">32 recorded findings: <b class="text-emerald-300">9 fixed</b> (each closed by a measured regrade), <b class="text-amber-300">11 open</b>, 7 accepted, 3 mitigated, 2 avoided.</p>
+<p class="text-slate-400 text-xs">Biggest open items: NBU's JS-loaded tabs (80 cells, fetch-route limit), SU's Docling merged-cell row, per-program recipes not yet wired for MUVarna/SHU/MUPleven build-out programs (~140 recoverable cells — see the missing-data matrix).</p></div></div>
+
+<h2 class="text-xl font-semibold text-indigo-300 mb-2">What the benchmark measures</h2>
+<p class="text-sm text-slate-300 mb-2">Frozen answer keys are written by a human labeller reading the live pages <i>before</i> seeing pipeline output; verdicts on ambiguous cells are the labeller's and are bound to the exact shipped value they judged (a changed value returns to CHECK). Key amendments happen only with a recorded, labeller-confirmed reason — 2 amendments to date (SU language ×5: labeller inference corrected to null; UniRuse bizmgmt admission: formula attributed to the wrong block).</p>
+<footer class="text-xs text-slate-600 border-t border-slate-800 pt-3 mt-6">Sources: crawler-out/*/run-report.json (2026-08-22 runs, all promoted), benchmark/keys/*, benchmark/verdicts/*, benchmark/site-findings.json, benchmark/baseline.json. Companion: missing-matrix.html · rfc-c.html.</footer>
 </div></body></html>
