@@ -152,6 +152,19 @@ class SectionedFeeRowJoin:
     sections: Tuple[SectionSpec, ...]
     fee_pattern: str                      # group 1 = fee, matched in the row
     currency_suffix: str = ""             # e.g. "евро" (stated in the header)
+    # Compose EVERY matching row of the program's own track into one
+    # value («(I курс): 500 евро; (II курс): 410 евро; ...») instead of
+    # taking the first. Opt-in: fee orders that state one row per year
+    # band need it, and a partial fee is a value the labeller grades
+    # WRONG (measured on Кинезитерапия). Other users of this join kind
+    # keep first-hit semantics.
+    compose_bands: bool = False
+    # Rows whose text matches are skipped outright: a fee order may list
+    # a DIFFERENT schedule (задочна/part-time) for the same programme,
+    # sometimes merged onto one line so its BGN column reads as a EUR
+    # fee. Excluding the row beats contorting the alias, which would
+    # drag table row numbers into the composed value.
+    row_exclude: str = ""
     context: Mapping[str, str] = field(default_factory=dict)
 
     kind = "sectioned-fee-row"
@@ -455,7 +468,8 @@ def _build_section(data, path):
 
 def _build_sectioned(data, path):
     _reject_unknown(data, ("kind", "name", "sections", "fee_pattern",
-                           "currency_suffix", "context"), path)
+                           "currency_suffix", "compose_bands",
+                           "row_exclude", "context"), path)
     raw_sections = _require(data, "sections", path)
     if not isinstance(raw_sections, list) or not raw_sections:
         raise ConfigError(path + ".sections: expected a non-empty list")
@@ -475,6 +489,10 @@ def _build_sectioned(data, path):
         currency_suffix=_str(data["currency_suffix"],
                              path + ".currency_suffix")
         if "currency_suffix" in data else "",
+        compose_bands=_bool(data.get("compose_bands", False),
+                            path + ".compose_bands"),
+        row_exclude=_str(data["row_exclude"], path + ".row_exclude")
+        if "row_exclude" in data else "",
         context=_str_dict(data.get("context", {}), path + ".context"),
     )
 

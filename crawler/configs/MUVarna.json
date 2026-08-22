@@ -29,7 +29,9 @@
           "year": "2026/2027",
           "currency": "EUR",
           "fee_basis": "годишна такса, субсидирано обучение, редовна форма (колона 'Субсидирано обучение евро')"
-        }
+        },
+        "compose_bands": true,
+        "row_exclude": "задочна"
       }
     },
     "muv-phd-fees": {
@@ -101,7 +103,7 @@
       "page": "https://www.mu-varna.bg/BG/specialnosti",
       "tuition_join": {
         "source": "muv-fees",
-        "alias_pattern": "Кинезитерапия \\(I курс\\)"
+        "alias_pattern": "Кинезитерапия \\((?:I|II|III|III\\-IV) курс\\)"
       },
       "language_tracks": {
         "source": "muv-fees",
@@ -158,7 +160,11 @@
     {
       "id": "muv-medicinska-sestra",
       "name": "Медицинска сестра",
-      "page": "https://www.mu-varna.bg/BG/specialnosti"
+      "page": "https://www.mu-varna.bg/BG/specialnosti",
+      "language_tracks": {
+        "source": "muv-fees",
+        "alias_pattern": "Медицинска сестра"
+      }
     },
     {
       "id": "muv-medicinsko-osiguryavane-na",
@@ -168,12 +174,24 @@
     {
       "id": "muv-akusherka",
       "name": "Акушерка",
-      "page": "https://www.mu-varna.bg/BG/specialnosti"
+      "page": "https://www.mu-varna.bg/BG/specialnosti",
+      "language_tracks": {
+        "source": "muv-fees",
+        "alias_pattern": "Акушерка"
+      }
     },
     {
       "id": "muv-logopediya",
       "name": "Логопедия",
-      "page": "https://www.mu-varna.bg/BG/specialnosti"
+      "page": "https://www.mu-varna.bg/BG/specialnosti",
+      "tuition_join": {
+        "source": "muv-fees",
+        "alias_pattern": "Логопедия \\((?:I|II|III|III\\-IV) курс\\)"
+      },
+      "language_tracks": {
+        "source": "muv-fees",
+        "alias_pattern": "Логопедия"
+      }
     },
     {
       "id": "muv-upravlenie-na-zdravnite-gr",
@@ -183,22 +201,54 @@
     {
       "id": "muv-pomoshtnikfarmacevt",
       "name": "Помощник-фармацевт",
-      "page": "https://www.mu-varna.bg/BG/specialnosti"
+      "page": "https://www.mu-varna.bg/BG/specialnosti",
+      "tuition_join": {
+        "source": "muv-fees",
+        "alias_pattern": "Помощник\\-фармацевт \\((?:I|II|III|III\\-IV) курс\\)"
+      },
+      "language_tracks": {
+        "source": "muv-fees",
+        "alias_pattern": "Помощник-фармацевт"
+      }
     },
     {
       "id": "muv-rehabilitator",
       "name": "Рехабилитатор",
-      "page": "https://www.mu-varna.bg/BG/specialnosti"
+      "page": "https://www.mu-varna.bg/BG/specialnosti",
+      "tuition_join": {
+        "source": "muv-fees",
+        "alias_pattern": "Рехабилитатор \\((?:I|II|III|III\\-IV) курс\\)"
+      },
+      "language_tracks": {
+        "source": "muv-fees",
+        "alias_pattern": "Рехабилитатор"
+      }
     },
     {
       "id": "muv-inspektor-po-obshtestveno",
       "name": "Инспектор по обществено здраве",
-      "page": "https://www.mu-varna.bg/BG/specialnosti"
+      "page": "https://www.mu-varna.bg/BG/specialnosti",
+      "tuition_join": {
+        "source": "muv-fees",
+        "alias_pattern": "Инспектор по обществено здраве \\((?:I|II|III|III\\-IV) курс\\)"
+      },
+      "language_tracks": {
+        "source": "muv-fees",
+        "alias_pattern": "Инспектор по обществено здраве"
+      }
     },
     {
       "id": "muv-rentgenov-laborant",
       "name": "Рентгенов лаборант",
-      "page": "https://www.mu-varna.bg/BG/specialnosti"
+      "page": "https://www.mu-varna.bg/BG/specialnosti",
+      "tuition_join": {
+        "source": "muv-fees",
+        "alias_pattern": "Рентгенов лаборант \\((?:I|II|III|III\\-IV) курс\\)"
+      },
+      "language_tracks": {
+        "source": "muv-fees",
+        "alias_pattern": "Рентгенов лаборант"
+      }
     }
   ]
 }

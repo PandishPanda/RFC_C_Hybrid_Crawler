@@ -735,11 +735,14 @@ def _sectioned_hits(source, join, alias_pattern):
                         + type(source).__name__)
     alias_rx = re.compile(alias_pattern)
     fee_rx = re.compile(join.fee_pattern)
+    exclude_rx = re.compile(join.row_exclude) if join.row_exclude else None
     section = None
     header_rows = {}
     hits = []
     for row in source.rows():
         joined = norm(" ".join(row))
+        if exclude_rx is not None and exclude_rx.search(joined):
+            continue
         for spec in join.sections:
             if spec.match in joined:
                 section = spec
@@ -772,12 +775,33 @@ def sectioned_fee_join(field, source, join, alias_pattern):
     if not hits:
         return None
     section, fee, row_line = hits[0]
-    value = fee + (" " + join.currency_suffix if join.currency_suffix else "")
+    suffix = " " + join.currency_suffix if join.currency_suffix else ""
+    value = fee + suffix
     tracks = _tracks(hits)
     segments = []
     if section is not None:
         segments.append(header_rows.get(section.track, ""))
     segments.append(row_line)
+    if join.compose_bands:
+        # Fee orders that state one row per year band: the whole
+        # schedule is the value, because a single band is a partial fee
+        # and the labeller grades those WRONG. Only the FIRST hit's
+        # track composes -- a foreign-student section restates the same
+        # programme at a different price.
+        band = [h for h in hits if h[0] is section]
+        if len(band) > 1:
+            alias_rx = re.compile(alias_pattern)
+            parts = []
+            segments = []
+            if section is not None:
+                segments.append(header_rows.get(section.track, ""))
+            for _, band_fee, band_row in band:
+                m = alias_rx.search(band_row)
+                label = m.group(0) if m else ""
+                parts.append("{0}: {1}{2}".format(label, band_fee, suffix)
+                             if label else band_fee + suffix)
+                segments.append(band_row)
+            value = "; ".join(parts)
     context = dict(join.context)
     context["tracks"] = tracks
     context["track_headers"] = {t: header_rows.get(t, "") for t in tracks}

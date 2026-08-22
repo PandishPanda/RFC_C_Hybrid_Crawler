@@ -541,6 +541,108 @@ class TestSectionedFeeJoin(unittest.TestCase):
                          ["обучение на български език"])
 
 
+class TestBandedFeeComposition(unittest.TestCase):
+    """MUVarna's fee order states one row PER YEAR BAND («Кинезитерапия
+    (I курс)» 500, «(II курс)» 410, «(III-IV курс)» 410). Taking the
+    first row alone ships «500 евро», which the labeller graded WRONG —
+    the key is the whole schedule, «500 € за първи курс, 410 € за втори,
+    трети и четвърти курс».
+
+    compose_bands is OPT-IN: four other configs (incl. the frozen
+    benchmark fixture) use this join kind and must keep first-hit
+    semantics."""
+
+    SECTIONS = (
+        config.SectionSpec(track="обучение на български език",
+                           match="обучение на български език"),
+        config.SectionSpec(track="чл. 95 (чуждестранни)",
+                           match="по чл. 95", foreign=True),
+    )
+    TABLE = [
+        ["", "обучение на български език (в евро)", ""],
+        ["4.16", "Кинезитерапия (I курс)", "977,92", "500"],
+        ["4.17", "Кинезитерапия (II курс)", "801,89", "410"],
+        ["4.18", "Кинезитерапия (III-IV курс)", "801,89", "410"],
+        ["", "Чуждестранни граждани по чл. 95 (в евро)", ""],
+        ["9.1", "Кинезитерапия (I курс)", "4000", "7823"],
+    ]
+    ALIAS = r"Кинезитерапия \((?:I|II|III-IV) курс\)"
+
+    def _join(self, compose_bands):
+        return config.SectionedFeeRowJoin(
+            name="muv", sections=self.SECTIONS,
+            fee_pattern=r"\d{3,4},\d{2} (\d{3,4})\b",
+            currency_suffix="евро", compose_bands=compose_bands)
+
+    def test_bands_compose_into_the_whole_schedule(self):
+        r = cascade.sectioned_fee_join("tuition", table_source(self.TABLE),
+                                       self._join(True), self.ALIAS)
+        self.assertEqual(
+            r.value,
+            "Кинезитерапия (I курс): 500 евро; "
+            "Кинезитерапия (II курс): 410 евро; "
+            "Кинезитерапия (III-IV курс): 410 евро")
+
+    def test_composition_never_crosses_into_a_foreign_track(self):
+        r = cascade.sectioned_fee_join("tuition", table_source(self.TABLE),
+                                       self._join(True), self.ALIAS)
+        self.assertNotIn("7823", r.value)
+        self.assertNotIn("4000", r.value)
+
+    def test_every_composed_row_is_a_provenance_segment(self):
+        r = cascade.sectioned_fee_join("tuition", table_source(self.TABLE),
+                                       self._join(True), self.ALIAS)
+        self.assertIn("обучение на български език (в евро)", r.segments)
+        for band in ("I курс", "II курс", "III-IV курс"):
+            self.assertTrue(
+                any(band in seg for seg in r.segments),
+                "band {0!r} has no verbatim segment".format(band))
+
+    def test_opt_out_is_the_default_and_keeps_first_hit_semantics(self):
+        r = cascade.sectioned_fee_join("tuition", table_source(self.TABLE),
+                                       self._join(False), self.ALIAS)
+        self.assertEqual(r.value, "500 евро")
+
+    def test_row_exclude_skips_a_different_schedule(self):
+        # The order merges two задочна (part-time) rows onto one line;
+        # its BGN column then reads as a EUR fee. The gate caught it
+        # (REJECT_SUPPORT «977»), but the row is simply a DIFFERENT
+        # schedule and belongs excluded, not worked around in the alias
+        # — an anchored alias drags the table row number into the value.
+        table = [["", "обучение на български език (в евро)", ""],
+                 ["4.13", "Логопедия (I курс)", "977,92", "500"],
+                 ["4.14", "Логопедия (II курс)", "801,89", "410"],
+                 ["4.21 4.22", "Логопедия (I курс) Логопедия (II курс)",
+                  "задочна", "977,92 977,92", "500 500"]]
+        join = config.SectionedFeeRowJoin(
+            name="muv", sections=self.SECTIONS,
+            fee_pattern=r"\d{3,4},\d{2} (\d{3,4})\b",
+            currency_suffix="евро", compose_bands=True,
+            row_exclude="задочна")
+        r = cascade.sectioned_fee_join(
+            "tuition", table_source(table), join,
+            r"Логопедия \((?:I|II) курс\)")
+        self.assertEqual(r.value,
+                         "Логопедия (I курс): 500 евро; "
+                         "Логопедия (II курс): 410 евро")
+        self.assertFalse(any("задочна" in seg for seg in r.segments))
+
+    def test_composed_labels_carry_no_table_row_numbers(self):
+        r = cascade.sectioned_fee_join("tuition", table_source(self.TABLE),
+                                       self._join(True), self.ALIAS)
+        self.assertNotIn("4.16", r.value)
+        self.assertTrue(r.value.startswith("Кинезитерапия (I курс):"))
+
+    def test_a_single_band_composes_to_a_plain_fee(self):
+        # One row only: composing must not decorate it with a label the
+        # single-row case never had.
+        table = [["", "обучение на български език (в евро)", ""],
+                 ["1", "Кинезитерапия (I курс)", "977,92", "500"]]
+        r = cascade.sectioned_fee_join("tuition", table_source(table),
+                                       self._join(True), self.ALIAS)
+        self.assertEqual(r.value, "500 евро")
+
+
 class TestOrdinanceJoin(unittest.TestCase):
     def test_layout_surface_is_required_loudly(self):
         join = config.OrdinanceJoin(name="su",
