@@ -37,6 +37,10 @@ POINTER_NAME = "current-run.json"
 SUMMARIES_DIR = "run-summaries"
 
 _YEAR_RANGE_RX = re.compile(r"\b(20\d{2})\s*/\s*(20\d{2})\b")
+# a year introduced by «до уч.» / «до учебната» is a historical
+# reference ("until academic year X it was called Y"), never the
+# validity year of the value that happens to sit near it
+_HISTORICAL_YEAR_RX = re.compile(r"до\s+уч(?:\.|ебната)\s*$")
 
 
 def run_id_for(uni_id, now=None):
@@ -69,8 +73,16 @@ def infer_academic_year(segments, value, fallback_academic_year, field=None):
     if field is not None and field not in YEAR_VARYING_FIELDS:
         return fallback_academic_year
     for text in (value, *(segments or ())):
-        m = _YEAR_RANGE_RX.search(text or "")
-        if m:
+        for m in _YEAR_RANGE_RX.finditer(text or ""):
+            if _HISTORICAL_YEAR_RX.search(text, max(0, m.start() - 24),
+                                          m.start()):
+                # «до уч. 2020/2021 г.» dates a subject's FORMER NAME,
+                # not this value. SU's current 2026/2027 ordinance says
+                # «ДЗИ по философия (до уч. 2020/2021 г. „Философски
+                # цикъл“)», and reading that as the value's cycle
+                # blocked a publish on an up-to-date document
+                # (measured 2026-08-23).
+                continue
             return "{0}/{1}".format(m.group(1), m.group(2))
     return fallback_academic_year
 

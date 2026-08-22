@@ -185,7 +185,8 @@
         "alias": "Индустриален мениджмънт"
       },
       "field_anchors": {
-        "degree": "uniruse-indmgmt-plan-degree"
+        "degree": "uniruse-indmgmt-plan-degree",
+        "admission": "uniruse-indmgmt-page-admission"
       }
     },
     {
@@ -207,6 +208,9 @@
       "tuition_join": {
         "source": "fees-state-redovno",
         "alias": "Софтуерно инженерство"
+      },
+      "field_anchors": {
+        "admission": "uniruse-se-page-admission"
       }
     },
     {
@@ -225,6 +229,9 @@
       "tuition_join": {
         "source": "fees-state-redovno",
         "alias": "Финансова математика"
+      },
+      "field_anchors": {
+        "degree": "uniruse-finmath-plan-degree"
       }
     },
     {
@@ -243,6 +250,9 @@
       "tuition_join": {
         "source": "fees-state-redovno",
         "alias": "Право"
+      },
+      "field_anchors": {
+        "degree": "uniruse-law-page-degree"
       }
     },
     {
@@ -252,6 +262,9 @@
       "tuition_join": {
         "source": "fees-state-redovno",
         "alias": "Машинно инженерство"
+      },
+      "field_anchors": {
+        "degree": "uniruse-mecheng-plan-degree"
       }
     },
     {
@@ -270,6 +283,9 @@
       "tuition_join": {
         "source": "fees-state-redovno",
         "alias": "Земеделска техника и технологии"
+      },
+      "field_anchors": {
+        "degree": "uniruse-agritech-plan-degree"
       }
     },
     {
@@ -279,6 +295,10 @@
       "tuition_join": {
         "source": "fees-state-redovno",
         "alias": "Дизайн"
+      },
+      "field_anchors": {
+        "degree": "uniruse-design-plan-degree",
+        "admission": "uniruse-design-page-admission"
       }
     }
   ],
@@ -337,6 +357,42 @@
       "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.4.1.1&version=3",
       "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
       "scope": "names-program"
+    },
+    "uniruse-indmgmt-page-admission": {
+      "source": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
+      "pattern": "Специалност ИНДУСТРИАЛЕН МЕНИДЖМЪНТ(?:(?!Специалност).)*?Кандидатства се с:\\s*((?:(?!Специалност).){20,600}?\\.)(?=\\s+[А-Я]|\\s*$)"
+    },
+    "uniruse-se-page-admission": {
+      "source": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
+      "pattern": "Специалност СОФТУЕРНО ИНЖЕНЕРСТВО(?:(?!Специалност).)*?Кандидатства се с:\\s*((?:(?!Специалност).){20,600}?\\.)(?=\\s+[А-Я]|\\s*$)"
+    },
+    "uniruse-finmath-plan-degree": {
+      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB4.5.1.1&version=5",
+      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+      "scope": "names-program"
+    },
+    "uniruse-law-page-degree": {
+      "source": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-law-studies",
+      "pattern": "Специалност ПРАВО(?:(?!Специалност).)*?получават диплома за образователно-квалификационната[^\"]{0,20}\"([^\"]+)\""
+    },
+    "uniruse-mecheng-plan-degree": {
+      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.1.8.1&version=5",
+      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+      "scope": "names-program"
+    },
+    "uniruse-agritech-plan-degree": {
+      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.1.1.1&version=5",
+      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+      "scope": "names-program"
+    },
+    "uniruse-design-plan-degree": {
+      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.13.17.1&version=5",
+      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+      "scope": "names-program"
+    },
+    "uniruse-design-page-admission": {
+      "source": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-agricultural-mechanisation",
+      "pattern": "Специалност ДИЗАЙН(?:(?!Специалност).)*?Кандидатства се с:\\s*((?:(?!Специалност).){20,700}?\\.)(?=\\s+[А-Я]|\\s*$)"
     }
   }
 }

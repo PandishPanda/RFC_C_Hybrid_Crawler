@@ -254,6 +254,70 @@
       "impact": "attribution on the fleet's most shared-page university rests on mention anchoring plus the REGION_WINDOW rather than on section structure",
       "status": "open",
       "resolution": "MEASURED 2026-08-22 and deliberately NOT shipped: loosening the detector alone removed no bad value and cost two correct ones (uniruse-socialwork's own admission formula is cut off by the word «икономика» — a sibling programme name — appearing in its prose; uniruse-socped's formula sits 27 chars past REGION_WINDOW). The loosening only pays together with the matching BOUNDARY rule: a section must end at the next HEADING, not at a prose mention of a sibling. Ship the two together, with a fleet diff and regrade."
+    },
+    {
+      "uni_id": "MUPleven",
+      "kind": "trust",
+      "finding": "PRE-EXISTING latent fabrication found by the adversarial audit: mu-health-care-management-maste shipped «230 евро», the BACHELOR's fee, off fee-order row «4.1 Управление на здравните грижи 230 260 460 230» — byte-identical provenance to the bachelor programme's cell. Column offsets put 230 under «бакалавър/задочно» and the master's own «магистър след бакалавър» column at 260",
+      "impact": "a wrong fee shipped into promoted data, verbatim-present and therefore gate-clean; ungraded, so the benchmark could not see it",
+      "status": "fixed",
+      "resolution": "2026-08-23 tuition_join removed for the master programme. The sectioned-fee-row join matches at ROW level by design (this family's Docling grid shifts columns per row), so it cannot express «take the магистър след бакалавър column»; a null is the honest output. Independently re-verified against pdftotext -layout."
+    },
+    {
+      "uni_id": "MUPleven",
+      "kind": "extraction",
+      "finding": "the spravochnik admission_pattern bound Чл. 30 («За специалностите от този раздел...») to four programmes that are NOT in Раздел III — Ветеринарна медицина, ОЗЗМ, and both Управление на здравните грижи tracks each have their own rule (Чл. 43(1), Чл. 39, Чл. 41(1)/42)",
+      "impact": "4 admission cells shipped a rule belonging to a different group of specialties",
+      "status": "fixed",
+      "resolution": "2026-08-23 the four cells were dropped to null during the recoverable-cells pass; their own articles are not yet wired."
+    },
+    {
+      "uni_id": "SofiaUniversity",
+      "kind": "trust",
+      "finding": "PRE-EXISTING: su-philo (Философия, taught in Bulgarian) shipped the admission clause that explicitly names «специалност Философия (на английски език)» — the alias «Философия» matches inside the English programme's name and the join re.escape()s aliases, so no lookahead can exclude it",
+      "impact": "an ungraded programme shipped a different programme's admission requirement",
+      "status": "fixed",
+      "resolution": "2026-08-23 admission_join removed for su-philo (null). A per-alias exclusion would need the join to stop escaping aliases, which would make every alias a regex — not worth that blast radius for one cell."
+    },
+    {
+      "uni_id": "SofiaUniversity",
+      "kind": "extraction",
+      "finding": "su-cult's balloobrazuvane row interleaves merged table columns, so the widened row_pattern took list item 4 («ДЗИ по английски език») when item 1 is «ДЗИ по философия». SU's established, human-blessed convention is item 1 of the «С коефициент 3» list (su-kn, su-psy, su-inf, su-polit, su-euro all follow it)",
+      "impact": "1 graded cell would have shipped the wrong entrance exam",
+      "status": "fixed",
+      "resolution": "2026-08-23 admission_join removed for su-cult; the cell returns to an honest MISS. su-pubadm and su-socio, whose rows are not column-merged, correctly take item 1 and were kept."
+    },
+    {
+      "uni_id": "(pipeline)",
+      "kind": "freshness",
+      "finding": "the year-lag gate read «(до уч. 2020/2021 г. „Философски цикъл“)» — a footnote dating a subject's FORMER NAME — as the validity year of two SU admission values, and blocked publishing a document that is current (SU's 2026/2027 balloobrazuvane ordinance)",
+      "impact": "a false-positive publish block that would recur every run and need a human clear",
+      "status": "fixed",
+      "resolution": "2026-08-23 infer_academic_year now skips a year introduced by «до уч.»/«до учебната» and keeps scanning; a genuinely stated older cycle is still caught. SU publishes clean."
+    },
+    {
+      "uni_id": "SHU",
+      "kind": "benchmark-integrity",
+      "finding": "frozen-key defect reported by the wiring agent: the shu-122 tuition key expects «175 €» sourced to taksi-DP-profBak-i-bak_2026-2027.pdf, but that fee order contains no 3.8 Икономика direction at all",
+      "impact": "a key entry that no source can satisfy; the cell can only ever MISS",
+      "status": "open",
+      "resolution": "needs labeller review of where the 175 € figure was read."
+    },
+    {
+      "uni_id": "SHU",
+      "kind": "extraction",
+      "finding": "shu-907's admission value carries a pdftotext artifact — «тест по информатика; ДЗИ по 16 информатика; ...» — where the page-16 footer folds into the middle of the list",
+      "impact": "cosmetically corrupted but verbatim and gate-clean; a labeller will query it",
+      "status": "open",
+      "resolution": "correcting the text would fail the containment gate; needs a renderer-level footer strip."
+    },
+    {
+      "uni_id": "MUPleven",
+      "kind": "benchmark-integrity",
+      "finding": "the recorded reason for 3 of the 4 missing tuition cells ('those programmes have no fee-order row') is FALSE — the wiring agent found verbatim docling rows for them in taksi_za_kandidatstvane_obuchenie_2026_2027.pdf",
+      "impact": "a closed 'honest null' bucket that is actually recoverable coverage",
+      "status": "open",
+      "resolution": "not wired in this pass (out of the agent's scope); revisit with the column caveat above in mind."
     }
   ]
 }

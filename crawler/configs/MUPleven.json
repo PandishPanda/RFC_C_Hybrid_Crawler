@@ -37,9 +37,27 @@
       "join": {
         "kind": "spravochnik",
         "name": "mu",
-        "sentence_pattern": "Специалност\\s*[„\"]{alias}[\"”]\\s*[–-]\\s*(?P<degree>ОКС\\s*[„\"][а-я ]+[\"”])\\s*,\\s*редовна форма,?\\s*(?P<duration>срок на обучение \\d+ години)",
-        "admission_pattern": "{alias}[^\\n]*[\\s\\S]{0,600}?Чл\\.\\s*30\\.\\s*За специалностите от този раздел се кандидатства в МУ\\s*-?\\s*Плевен с\\s+(изпит по [^.]+?)\\.",
+        "sentence_pattern": "[Сс]пециалност\\s*[„\"]{alias}[\"”“]\\s*[–,-]\\s*(?P<degree>ОКС\\s*[„\"][а-я ]+[\"”“])[^.]{0,120}?(?P<duration>срок(?: на обучение)? \\d+(?:[.,]\\d+)? години)",
+        "admission_pattern": "{alias}[\\s\\S]{0,260}?Чл\\.\\s*30\\.\\s*За специалностите от този раздел се кандидатства в МУ\\s*-?\\s*Плевен с\\s+(изпит по [^.]+?)\\.",
         "admission_label": "chl30"
+      }
+    },
+    "mu-sprav-ukg-bachelor": {
+      "url": "https://mu-pleven.bg/forms/ksk2026/Spavochnik%20KSK%202026%20-%2015-12-2025.pdf",
+      "route": "prose-pdf",
+      "join": {
+        "kind": "spravochnik",
+        "name": "mu-ukg-bachelor",
+        "sentence_pattern": "Специалност\\s*[„\"]{alias}[\"”]\\s*[–-]\\s*(?P<degree>ОКС\\s*[„\"]бакалавър[\"”“])\\s*и\\s*ОКС[^.]{0,160}?(?P<duration>срок на обучение на бакалаврите \\d+(?:[.,]\\d+)? години)"
+      }
+    },
+    "mu-sprav-ukg-master": {
+      "url": "https://mu-pleven.bg/forms/ksk2026/Spavochnik%20KSK%202026%20-%2015-12-2025.pdf",
+      "route": "prose-pdf",
+      "join": {
+        "kind": "spravochnik",
+        "name": "mu-ukg-master",
+        "sentence_pattern": "Специалност\\s*[„\"]{alias}[\"”]\\s*[–-]\\s*ОКС\\s*[„\"]бакалавър[\"”“]\\s*и\\s*(?P<degree>ОКС\\s*[„\"]магистър[\"”“])[^.]{0,200}?срок на обучение на бакалаврите \\d+(?:[.,]\\d+)? години и\\s*(?P<duration>на магистрите \\d+(?:[.,]\\d+)? или \\d+(?:[.,]\\d+)? години, в зависимост от предходното образование)"
       }
     }
   },
@@ -112,6 +130,10 @@
       "tuition_join": {
         "source": "mu-fees",
         "alias_pattern": "Акушерка \\(III и IVкурс\\)"
+      },
+      "language_tracks": {
+        "source": "mu-fees",
+        "alias_pattern": "Акушерка \\(III и IVкурс\\)"
       }
     },
     {
@@ -125,6 +147,10 @@
       "tuition_join": {
         "source": "mu-fees",
         "alias_pattern": "Ветеринарна медицина \\(I курс\\)"
+      },
+      "language_tracks": {
+        "source": "mu-fees",
+        "alias_pattern": "Ветеринарна медицина"
       }
     },
     {
@@ -138,6 +164,10 @@
       "tuition_join": {
         "source": "mu-fees",
         "alias_pattern": "Кинезитерапия"
+      },
+      "language_tracks": {
+        "source": "mu-fees",
+        "alias_pattern": "Кинезитерапия"
       }
     },
     {
@@ -146,7 +176,11 @@
       "page": "https://mu-pleven.bg/index.php/bg/specialities/social-activities",
       "spravochnik": {
         "source": "mu-sprav",
-        "alias": "Медико"
+        "alias": "Медико-социални дейности"
+      },
+      "language_tracks": {
+        "source": "mu-fees",
+        "alias_pattern": "Медико-социални дейности"
       }
     },
     {
@@ -158,6 +192,10 @@
         "alias": "Медицинска козметика"
       },
       "tuition_join": {
+        "source": "mu-fees",
+        "alias_pattern": "Медицинска козметика"
+      },
+      "language_tracks": {
         "source": "mu-fees",
         "alias_pattern": "Медицинска козметика"
       }
@@ -182,6 +220,10 @@
       "tuition_join": {
         "source": "mu-fees",
         "alias_pattern": "Медицински лаборант"
+      },
+      "language_tracks": {
+        "source": "mu-fees",
+        "alias_pattern": "Медицински лаборант"
       }
     },
     {
@@ -204,6 +246,10 @@
       "tuition_join": {
         "source": "mu-fees",
         "alias_pattern": "Опазване и контрол на общественото здраве"
+      },
+      "language_tracks": {
+        "source": "mu-fees",
+        "alias_pattern": "Опазване и контрол на общественото здраве"
       }
     },
     {
@@ -217,6 +263,10 @@
       "tuition_join": {
         "source": "mu-fees",
         "alias_pattern": "Рентгенов лаборант"
+      },
+      "language_tracks": {
+        "source": "mu-fees",
+        "alias_pattern": "Рентгенов лаборант"
       }
     },
     {
@@ -226,6 +276,10 @@
       "spravochnik": {
         "source": "mu-sprav",
         "alias": "Социални дейности в здравеопазването"
+      },
+      "language_tracks": {
+        "source": "mu-fees",
+        "alias_pattern": "Социални дейности в здравеопазването"
       }
     },
     {
@@ -233,10 +287,14 @@
       "name": "Управление на здравните грижи - Бакалавър",
       "page": "https://mu-pleven.bg/index.php/bg/specialities/health-care-management-bachelor",
       "spravochnik": {
-        "source": "mu-sprav",
+        "source": "mu-sprav-ukg-bachelor",
         "alias": "Управление на здравните грижи"
       },
       "tuition_join": {
+        "source": "mu-fees",
+        "alias_pattern": "Управление на здравните грижи"
+      },
+      "language_tracks": {
         "source": "mu-fees",
         "alias_pattern": "Управление на здравните грижи"
       }
@@ -246,10 +304,10 @@
       "name": "Управление на здравните грижи - Магистър",
       "page": "https://mu-pleven.bg/index.php/bg/specialities/health-care-management-master",
       "spravochnik": {
-        "source": "mu-sprav",
+        "source": "mu-sprav-ukg-master",
         "alias": "Управление на здравните грижи"
       },
-      "tuition_join": {
+      "language_tracks": {
         "source": "mu-fees",
         "alias_pattern": "Управление на здравните грижи"
       }

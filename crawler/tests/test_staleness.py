@@ -106,18 +106,22 @@ class VersionDriftTest(unittest.TestCase):
 
 
 class ShippedConfigTest(unittest.TestCase):
-    def test_uniruse_11_degree_anchors_are_all_version_pinned(self):
+    def test_uniruse_degree_anchors_are_all_version_pinned(self):
         # Ticket 14 wired these knowingly; this is the check that keeps
         # the exposure visible rather than remembered.
         site = load_configs_dir("crawler/configs")["UniRuse"]
         found = staleness.pinned_sources(site)
-        # 13 = the 11 degree anchors + 2 curriculum plan URLs migrated to
+        # 17 = the 15 degree anchors + 2 curriculum plan URLs migrated to
         # extra_pages when ADR-0006 dropped Offerings (the pins the
-        # offerings' CurriculumRefs used to carry).
-        self.assertEqual(len(found), 13)
+        # offerings' CurriculumRefs used to carry). Was 13/11 until
+        # 2026-08-23, when the recoverable-cells pass wired plan anchors
+        # for the last 4 unanchored programmes -- the exposure grew on
+        # purpose, and this test exists to make that visible rather than
+        # remembered.
+        self.assertEqual(len(found), 17)
         wheres = [w for w, _, _, _ in found]
         self.assertEqual(sum(1 for w in wheres if w.startswith("anchors[")),
-                         11)
+                         15)
         self.assertEqual(
             sum(1 for w in wheres if w.endswith(".extra_pages")), 2)
 

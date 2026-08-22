@@ -260,6 +260,48 @@ class ExpectationChecksTest(unittest.TestCase):
         self.assertFalse(result.blocked)
 
 
+class HistoricalYearIsNotTheValuesYearTest(unittest.TestCase):
+    """«до уч. 2020/2021 г.» dates a subject's OLD NAME, not the value.
+
+    Measured 2026-08-23: SU's 2026/2027 balloobrazuvane ordinance
+    explains that «философия» was called «Философски цикъл» until
+    2020/2021. Two admission values inherited that year and the year-lag
+    gate blocked SU's publish on a document that is current."""
+
+    def test_a_do_uch_year_is_skipped(self):
+        seg = ("Публична администрация Редовна С коефициент 3: 1. ДЗИ по "
+               "математика 12. ДЗИ по философия (до уч. 2020/2021 г. "
+               "„Философски цикъл“) 13. ДЗИ по биология")
+        self.assertEqual(
+            ledger.infer_academic_year([seg], "изпит по математика",
+                                       "2026/2027", field="admission"),
+            "2026/2027")
+
+    def test_the_long_form_do_uchebnata_is_skipped_too(self):
+        seg = "нещо (до учебната 2020/2021 г. се казваше друго)"
+        self.assertEqual(
+            ledger.infer_academic_year([seg], "изпит", "2026/2027",
+                                       field="admission"),
+            "2026/2027")
+
+    def test_a_real_stated_year_still_wins(self):
+        # The whole point of the check: a value that states its own,
+        # older cycle must still be caught as lagging.
+        seg = "Такси за учебната 2025/2026 година: 500 лв."
+        self.assertEqual(
+            ledger.infer_academic_year([seg], "500 лв.", "2026/2027",
+                                       field="tuition"),
+            "2025/2026")
+
+    def test_a_real_year_after_a_historical_one_still_wins(self):
+        seg = ("до уч. 2020/2021 г. беше друго; таксите за 2025/2026 са "
+               "определени с заповед")
+        self.assertEqual(
+            ledger.infer_academic_year([seg], "500 лв.", "2026/2027",
+                                       field="tuition"),
+            "2025/2026")
+
+
 class CurrencyEquivalenceTest(unittest.TestCase):
     def test_bgn_eur_peg_restatement_is_equivalent(self):
         # 1200 BGN / 1.95583 = 613.55 EUR
