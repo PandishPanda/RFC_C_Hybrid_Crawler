@@ -41,18 +41,32 @@
       "shipped_value": "четири години (осем семестъра)"
     },
     {
-      "program_id": "MUVarna-rsvu31893-BSC-BG",
-      "field": "tuition",
-      "verdict": "wrong",
-      "note": "labeller 2026-08-21: shipped first-year fee only; the source states a per-year progression",
-      "shipped_value": "500 евро"
-    },
-    {
       "program_id": "muv-akusherka",
       "field": "degree",
       "verdict": "wrong",
       "note": "labeller 2026-08-22: pharmacy-management master's sentence near an Акушерка mention — not this program's degree (candidate-selection residual, finding 2)",
       "shipped_value": "образователно-квалификационна степен „магистър“"
+    },
+    {
+      "program_id": "MUVarna-rsvu31893-BSC-BG",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": "labeller 2026-08-22: composed per-band schedule states the same fees for the same year bands as the key",
+      "shipped_value": "Кинезитерапия (I курс): 500 евро; Кинезитерапия (II курс): 410 евро; Кинезитерапия (III-IV курс): 410 евро"
+    },
+    {
+      "program_id": "muv-rentgenov-laborant",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": "labeller 2026-08-22: composed per-band schedule matches the key's amounts and bands",
+      "shipped_value": "Рентгенов лаборант (I курс): 500 евро; Рентгенов лаборант (II курс): 390 евро; Рентгенов лаборант (III курс): 390 евро"
+    },
+    {
+      "program_id": "muv-akusherka",
+      "field": "duration",
+      "verdict": "ok",
+      "note": "labeller 2026-08-22: four years IS eight semesters; the page states years only, so years is the honest extraction",
+      "shipped_value": "с продължителност четири години"
     }
   ]
 }
