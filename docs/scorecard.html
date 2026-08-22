@@ -5,7 +5,7 @@
 <div><h1 class="text-3xl font-bold">Crawler scorecard — complete</h1>
 <p class="text-slate-400 mt-1">9 universities · 163 programs · 475/815 fields extracted (58%) · 265 cells blind-graded · 2026-08-22 (post anchor-scope + candidate-selection fixes)</p></div>
 <div class="flex gap-3 text-center">
-<div class="bg-slate-800 border border-slate-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold">81.5%</p><p class="text-xs text-slate-300">graded correct</p></div>
+<div class="bg-slate-800 border border-slate-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold">84.5%</p><p class="text-xs text-slate-300">graded correct</p></div>
 <div class="bg-emerald-900/50 border border-emerald-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold text-emerald-300">0</p><p class="text-xs text-emerald-200">fabrications</p></div>
 <div class="bg-slate-800 border border-slate-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold">6</p><p class="text-xs text-slate-300">wrong (2.3%)</p></div>
 <div class="bg-amber-900/50 border border-amber-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold text-amber-300">11</p><p class="text-xs text-amber-200">open findings</p></div></div></header>
@@ -26,7 +26,7 @@
 <td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:99%"></div></div></td>
 <td class="p-2 text-right text-xs text-slate-400">llm-tail:36 · G:27 · F:11</td>
 <td class="p-2 text-right">15 prog / 75 cells</td>
-<td class="p-2 text-right">87% <span class="text-amber-400">+8 check</span></td>
+<td class="p-2 text-right">97%</td>
 <td class="p-2 text-right">1</td>
 <td class="p-2 text-right">0</td>
 <td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
@@ -104,9 +104,9 @@
 <td class="p-2 text-right">0</td></tr>
 <tr class="bg-slate-800 font-bold border-t border-slate-600"><td class="p-2">TOTAL</td><td class="p-2 text-right">163</td>
 <td class="p-2 text-right">475/815</td><td class="p-2"></td><td class="p-2"></td>
-<td class="p-2 text-right">265 cells</td><td class="p-2 text-right">81.5%</td>
+<td class="p-2 text-right">265 cells</td><td class="p-2 text-right">84.5%</td>
 <td class="p-2 text-right">6</td><td class="p-2 text-right">0</td><td class="p-2 text-right">0</td></tr></tbody></table>
-<p class="text-xs text-slate-500 mb-6">Accuracy = correct-or-honest-null of graded cells. Samples: 5 programs per university (all 15 for VUM, 4 for AUBG/MUPleven where keys cover 4); crawling always covers every configured program. VUM's 8 "check" cells are LLM-tail admission answers re-phrased by the 2026-08-22 rerun — the shipped-value-bound verdicts refuse to inherit the labeller's earlier ok onto new wording, so they await re-adjudication.</p>
+<p class="text-xs text-slate-500 mb-6">Accuracy = correct-or-honest-null of graded cells. Samples: 5 programs per university (all 15 for VUM, 4 for AUBG/MUPleven where keys cover 4); crawling always covers every configured program. VUM's 8 tail re-phrasings were flagged CHECK by the shipped-value-bound verdicts and re-adjudicated ok by the labeller the same day.</p>
 
 <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
 <div class="bg-slate-900 border border-slate-700 rounded-xl p-4">
