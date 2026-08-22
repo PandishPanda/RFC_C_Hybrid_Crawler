@@ -1,13 +1,6 @@
 {
   "verdicts": [
     {
-      "program_id": "mu-nurse",
-      "field": "tuition",
-      "verdict": "wrong",
-      "note": "",
-      "shipped_value": "безплатно"
-    },
-    {
       "program_id": "mu-med",
       "field": "tuition",
       "verdict": "ok",
@@ -55,6 +48,13 @@
       "verdict": "ok",
       "note": "",
       "shipped_value": "изпит по биология или оценка от втори ДЗИ"
+    },
+    {
+      "program_id": "mu-nurse",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": "labeller 2026-08-22: fee order row «Медицинска сестра (III и IVкурс)» 410 €/semester governs; shipped 410 евро matches",
+      "shipped_value": "410 евро"
     }
   ]
 }
