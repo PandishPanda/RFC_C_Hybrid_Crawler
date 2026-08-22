@@ -5,6 +5,12 @@
       "field": "degree",
       "verdict": "ok",
       "note": "labeller 2026-08-22: accepted the shipped value"
+    },
+    {
+      "program_id": "uniruse-bizmgmt",
+      "field": "admission",
+      "verdict": "wrong",
+      "note": "labeller 2026-08-22: neighbouring business program's formula from the shared page (candidate-selection residual)"
     }
   ]
 }

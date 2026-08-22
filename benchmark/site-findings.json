@@ -12,9 +12,9 @@
     {
       "uni_id": "SofiaUniversity",
       "kind": "extraction",
-      "finding": "language is stated on the program pages but no shared label matches it — measured, not assumed: all 5 graded programs keyed «Български» and shipped nothing",
-      "impact": "6 of SU's 25 graded cells are MISS; a fixable label gap, not a missing fact",
-      "status": "open"
+      "finding": "language of instruction is NOT stated on any SU program page (0/20 probed 2026-08-22). Earlier versions of this finding said the opposite in both directions; the probe settles it. The frozen key's «Български» entries were labeller inferences, since amended to null",
+      "impact": "18 language nulls are HONEST, not recoverable; matrix bucket corrected",
+      "status": "accepted"
     },
     {
       "uni_id": "UniRuse",
@@ -190,6 +190,13 @@
       "finding": "REGION_WINDOW cannot bound at UNCONFIGURED sections: muv-inspektor's span crosses into the unconfigured «Оптометрист» block within 2,500 chars and ships its «ОКС „Магистър\"». Deterministically unsolvable without page section structure",
       "impact": "1 known ungraded wrong; the full fix is section-aware candidate selection (finding 2)",
       "status": "open"
+    },
+    {
+      "uni_id": "ANIS",
+      "kind": "extraction",
+      "finding": "FIXED 2026-08-22: the ЗВО admission rule and 4-semester duration — page-wide claims the labeller ruled applicable during grading — promoted into config anchors on all 18 programs (the ADR-0003 escape hatch). Regrade 24/25, 0 wrong (was 14/25 with 4 wrong)",
+      "impact": "+30 shipped cells, all grading correct",
+      "status": "fixed"
     }
   ]
 }

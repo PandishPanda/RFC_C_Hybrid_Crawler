@@ -19,9 +19,9 @@
     {
       "program_id": "su-kn",
       "field": "language",
-      "expected_value": "Български",
-      "null_reason": null,
-      "snippet": "Български",
+      "expected_value": null,
+      "null_reason": "amended 2026-08-22, labeller-confirmed: no SU program page states a language of instruction (0/20 probed); the original «Български» was an inference, which the worksheet's own protocol scores as NOT STATED",
+      "snippet": null,
       "source_url": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/kompyut_rni_nauki"
     },
     {
@@ -59,9 +59,9 @@
     {
       "program_id": "su-inf",
       "field": "language",
-      "expected_value": "Български",
-      "null_reason": null,
-      "snippet": "Български",
+      "expected_value": null,
+      "null_reason": "amended 2026-08-22, labeller-confirmed: no SU program page states a language of instruction (0/20 probed); the original «Български» was an inference, which the worksheet's own protocol scores as NOT STATED",
+      "snippet": null,
       "source_url": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/informatika"
     },
     {
@@ -99,9 +99,9 @@
     {
       "program_id": "su-psy",
       "field": "language",
-      "expected_value": "Български",
-      "null_reason": null,
-      "snippet": "Български",
+      "expected_value": null,
+      "null_reason": "amended 2026-08-22, labeller-confirmed: no SU program page states a language of instruction (0/20 probed); the original «Български» was an inference, which the worksheet's own protocol scores as NOT STATED",
+      "snippet": null,
       "source_url": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/psihologiya/"
     },
     {
@@ -139,9 +139,9 @@
     {
       "program_id": "su-cult",
       "field": "language",
-      "expected_value": "Български",
-      "null_reason": null,
-      "snippet": "Български",
+      "expected_value": null,
+      "null_reason": "amended 2026-08-22, labeller-confirmed: no SU program page states a language of instruction (0/20 probed); the original «Български» was an inference, which the worksheet's own protocol scores as NOT STATED",
+      "snippet": null,
       "source_url": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/kulturologiya/"
     },
     {
@@ -179,9 +179,9 @@
     {
       "program_id": "su-ch",
       "field": "language",
-      "expected_value": "Български",
-      "null_reason": null,
-      "snippet": "Български",
+      "expected_value": null,
+      "null_reason": "amended 2026-08-22, labeller-confirmed: no SU program page states a language of instruction (0/20 probed); the original «Български» was an inference, which the worksheet's own protocol scores as NOT STATED",
+      "snippet": null,
       "source_url": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/kompyut_rna_himiya"
     },
     {

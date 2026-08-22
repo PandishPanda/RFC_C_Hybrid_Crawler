@@ -11,6 +11,24 @@
       "field": "admission",
       "verdict": "ok",
       "note": "labeller 2026-08-21: accepted the shipped value"
+    },
+    {
+      "program_id": "shu-216",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": "labeller 2026-08-22: same amount, decimal formatting differs"
+    },
+    {
+      "program_id": "shu-88",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": "labeller 2026-08-22: same amount, decimal formatting differs"
+    },
+    {
+      "program_id": "shu-1111",
+      "field": "tuition",
+      "verdict": "ok",
+      "note": "labeller 2026-08-22: same amount, decimal formatting differs"
     }
   ]
 }
