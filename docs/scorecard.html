@@ -3,16 +3,16 @@
 <div class="max-w-[1750px] mx-auto px-10 py-8">
 <header class="mb-6 flex justify-between items-start border-b border-slate-800 pb-5">
 <div><h1 class="text-3xl font-bold">Crawler scorecard — complete</h1>
-<p class="text-slate-400 mt-1">9 universities · 163 programs · 475/815 fields extracted (58%) · 265 cells blind-graded · 2026-08-22 (post anchor-scope + candidate-selection fixes)</p></div>
+<p class="text-slate-400 mt-1">9 universities · 163 programs · 537/815 fields extracted (66%) · 265 cells blind-graded · 2026-08-23</p></div>
 <div class="flex gap-3 text-center">
-<div class="bg-slate-800 border border-slate-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold">84.5%</p><p class="text-xs text-slate-300">graded correct</p></div>
+<div class="bg-slate-800 border border-slate-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold">90.2%</p><p class="text-xs text-slate-300">graded correct</p></div>
 <div class="bg-emerald-900/50 border border-emerald-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold text-emerald-300">0</p><p class="text-xs text-emerald-200">fabrications</p></div>
-<div class="bg-slate-800 border border-slate-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold">6</p><p class="text-xs text-slate-300">wrong (2.3%)</p></div>
-<div class="bg-amber-900/50 border border-amber-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold text-amber-300">11</p><p class="text-xs text-amber-200">open findings</p></div></div></header>
+<div class="bg-slate-800 border border-slate-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold">5</p><p class="text-xs text-slate-300">wrong (1.9%)</p></div>
+<div class="bg-amber-900/50 border border-amber-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold text-amber-300">15</p><p class="text-xs text-amber-200">open findings</p></div></div></header>
 
 <div class="bg-emerald-950/40 border border-emerald-800 rounded-xl p-4 mb-6 text-sm">
-<p class="font-bold text-emerald-300 mb-1">The fabrication arc — read this before the numbers</p>
-<p class="text-emerald-100">Grading MUVarna and UniRuse (2026-08-21/22) produced <b>3 fabrications</b>: shared pages let a program ship a neighbour's value, verbatim-present and invisible to the provenance gate. Three fixes closed the class, each verified by regrade against the same frozen keys: <b>region-scoped harvesting</b> (a program only reads the part of a shared page anchored to its name), <b>anchor scope validation</b> (every off-page anchor declares <code>names-program</code> or human-attested <code>page-wide</code>; the loader rejects the rest — the last fabrication's anchor is deleted), and <b>caps-heading anchoring</b> (a prose mention of a name inside a foreign section no longer opens a region there). Fabrications measured now: <b>0 of 265</b>. The provenance gate itself has never shipped a value absent from its artifact.</p></div>
+<p class="font-bold text-emerald-300 mb-1">How the fabrications were closed — and why the number is trustworthy</p>
+<p class="text-emerald-100">Grading MUVarna and UniRuse produced <b>3 fabrications</b>: on a shared page a program can ship a neighbour's value, verbatim-present and therefore invisible to the provenance gate. Four structural fixes closed the class, each verified by regrade against the <i>same</i> frozen keys: <b>region-scoped harvesting</b>, <b>anchor scope validation</b>, <b>caps-heading anchoring</b>, and <b>banded fee composition</b> (a partial fee is a wrong fee). Along the way the same discipline found <b>7 further latent fabrications that no key covered</b> — invisible to the benchmark, caught only by reading every changed cell's provenance. Fabrications measured now: <b>0 of 265</b>.</p></div>
 
 <h2 class="text-xl font-semibold text-indigo-300 mb-2">Per-university</h2>
 <table class="w-full text-sm bg-slate-900 border border-slate-800 rounded-xl overflow-hidden mb-3">
@@ -21,30 +21,21 @@
 <th class="p-2 text-right">tiers</th><th class="p-2 text-right">graded sample</th><th class="p-2 text-right">accuracy</th>
 <th class="p-2 text-right">wrong</th><th class="p-2 text-right">fabric.</th><th class="p-2 text-right">gate fails</th></tr></thead>
 <tbody><tr class="border-t border-slate-800">
-<td class="p-2 font-medium">VUM</td><td class="p-2 text-right">15</td>
-<td class="p-2 text-right">74/75</td>
-<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:99%"></div></div></td>
-<td class="p-2 text-right text-xs text-slate-400">llm-tail:36 · G:27 · F:11</td>
-<td class="p-2 text-right">15 prog / 75 cells</td>
-<td class="p-2 text-right">97%</td>
-<td class="p-2 text-right">1</td>
-<td class="p-2 text-right">0</td>
-<td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
-<td class="p-2 font-medium">SofiaUniversity</td><td class="p-2 text-right">20</td>
-<td class="p-2 text-right">73/100</td>
-<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:73%"></div></div></td>
-<td class="p-2 text-right text-xs text-slate-400">G:42 · F:31</td>
-<td class="p-2 text-right">5 prog / 25 cells</td>
-<td class="p-2 text-right">92%</td>
-<td class="p-2 text-right">1</td>
-<td class="p-2 text-right">0</td>
-<td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
 <td class="p-2 font-medium">UniRuse</td><td class="p-2 text-right">20</td>
-<td class="p-2 text-right">51/100</td>
-<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:51%"></div></div></td>
-<td class="p-2 text-right text-xs text-slate-400">F:20 · G:20 · B:11</td>
+<td class="p-2 text-right">58/100</td>
+<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:58%"></div></div></td>
+<td class="p-2 text-right text-xs text-slate-400">F:20 · B:19 · G:19</td>
 <td class="p-2 text-right">5 prog / 25 cells</td>
-<td class="p-2 text-right">96%</td>
+<td class="p-2 text-right font-semibold">100%</td>
+<td class="p-2 text-right">—</td>
+<td class="p-2 text-right">0</td>
+<td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
+<td class="p-2 font-medium">SHU</td><td class="p-2 text-right">20</td>
+<td class="p-2 text-right">67/100</td>
+<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:67%"></div></div></td>
+<td class="p-2 text-right text-xs text-slate-400">B:34 · F:17 · G:16</td>
+<td class="p-2 text-right">5 prog / 25 cells</td>
+<td class="p-2 text-right font-semibold">96%</td>
 <td class="p-2 text-right">—</td>
 <td class="p-2 text-right">0</td>
 <td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
@@ -53,8 +44,35 @@
 <td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:54%"></div></div></td>
 <td class="p-2 text-right text-xs text-slate-400">B:39 · G:10</td>
 <td class="p-2 text-right">5 prog / 25 cells</td>
-<td class="p-2 text-right">96%</td>
+<td class="p-2 text-right font-semibold">96%</td>
 <td class="p-2 text-right">—</td>
+<td class="p-2 text-right">0</td>
+<td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
+<td class="p-2 font-medium">MUPleven</td><td class="p-2 text-right">17</td>
+<td class="p-2 text-right">68/85</td>
+<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:80%"></div></div></td>
+<td class="p-2 text-right text-xs text-slate-400">F:59 · G:9</td>
+<td class="p-2 text-right">4 prog / 20 cells</td>
+<td class="p-2 text-right font-semibold">100%</td>
+<td class="p-2 text-right">—</td>
+<td class="p-2 text-right">0</td>
+<td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
+<td class="p-2 font-medium">VUM</td><td class="p-2 text-right">15</td>
+<td class="p-2 text-right">74/75</td>
+<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:99%"></div></div></td>
+<td class="p-2 text-right text-xs text-slate-400">llm-tail:36 · G:27 · F:11</td>
+<td class="p-2 text-right">15 prog / 75 cells</td>
+<td class="p-2 text-right font-semibold">97%</td>
+<td class="p-2 text-right">1</td>
+<td class="p-2 text-right">0</td>
+<td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
+<td class="p-2 font-medium">SofiaUniversity</td><td class="p-2 text-right">20</td>
+<td class="p-2 text-right">76/100</td>
+<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:76%"></div></div></td>
+<td class="p-2 text-right text-xs text-slate-400">G:42 · F:32 · B:2</td>
+<td class="p-2 text-right">5 prog / 25 cells</td>
+<td class="p-2 text-right font-semibold">92%</td>
+<td class="p-2 text-right">1</td>
 <td class="p-2 text-right">0</td>
 <td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
 <td class="p-2 font-medium">AUBG</td><td class="p-2 text-right">18</td>
@@ -62,35 +80,8 @@
 <td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:100%"></div></div></td>
 <td class="p-2 text-right text-xs text-slate-400">B:53 · G:37</td>
 <td class="p-2 text-right">4 prog / 20 cells</td>
-<td class="p-2 text-right">85%</td>
+<td class="p-2 text-right font-semibold">85%</td>
 <td class="p-2 text-right">3</td>
-<td class="p-2 text-right">0</td>
-<td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
-<td class="p-2 font-medium">MUVarna</td><td class="p-2 text-right">15</td>
-<td class="p-2 text-right">21/75</td>
-<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:28%"></div></div></td>
-<td class="p-2 text-right text-xs text-slate-400">G:9 · B:8 · F:4</td>
-<td class="p-2 text-right">5 prog / 25 cells</td>
-<td class="p-2 text-right">44%</td>
-<td class="p-2 text-right">1</td>
-<td class="p-2 text-right">0</td>
-<td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
-<td class="p-2 font-medium">MUPleven</td><td class="p-2 text-right">17</td>
-<td class="p-2 text-right">52/85</td>
-<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:61%"></div></div></td>
-<td class="p-2 text-right text-xs text-slate-400">F:43 · G:9</td>
-<td class="p-2 text-right">4 prog / 20 cells</td>
-<td class="p-2 text-right">100%</td>
-<td class="p-2 text-right">—</td>
-<td class="p-2 text-right">0</td>
-<td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
-<td class="p-2 font-medium">SHU</td><td class="p-2 text-right">20</td>
-<td class="p-2 text-right">45/100</td>
-<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:45%"></div></div></td>
-<td class="p-2 text-right text-xs text-slate-400">F:17 · G:16 · B:12</td>
-<td class="p-2 text-right">5 prog / 25 cells</td>
-<td class="p-2 text-right">64%</td>
-<td class="p-2 text-right">—</td>
 <td class="p-2 text-right">0</td>
 <td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
 <td class="p-2 font-medium">NBU</td><td class="p-2 text-right">20</td>
@@ -98,30 +89,39 @@
 <td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:20%"></div></div></td>
 <td class="p-2 text-right text-xs text-slate-400">G:20</td>
 <td class="p-2 text-right">5 prog / 25 cells</td>
-<td class="p-2 text-right">64%</td>
+<td class="p-2 text-right font-semibold">64%</td>
+<td class="p-2 text-right">—</td>
+<td class="p-2 text-right">0</td>
+<td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
+<td class="p-2 font-medium">MUVarna</td><td class="p-2 text-right">15</td>
+<td class="p-2 text-right">35/75</td>
+<td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:47%"></div></div></td>
+<td class="p-2 text-right text-xs text-slate-400">F:16 · G:11 · B:8</td>
+<td class="p-2 text-right">5 prog / 25 cells</td>
+<td class="p-2 text-right font-semibold">68%</td>
 <td class="p-2 text-right">—</td>
 <td class="p-2 text-right">0</td>
 <td class="p-2 text-right">0</td></tr>
 <tr class="bg-slate-800 font-bold border-t border-slate-600"><td class="p-2">TOTAL</td><td class="p-2 text-right">163</td>
-<td class="p-2 text-right">475/815</td><td class="p-2"></td><td class="p-2"></td>
-<td class="p-2 text-right">265 cells</td><td class="p-2 text-right">84.5%</td>
-<td class="p-2 text-right">6</td><td class="p-2 text-right">0</td><td class="p-2 text-right">0</td></tr></tbody></table>
-<p class="text-xs text-slate-500 mb-6">Accuracy = correct-or-honest-null of graded cells. Samples: 5 programs per university (all 15 for VUM, 4 for AUBG/MUPleven where keys cover 4); crawling always covers every configured program. VUM's 8 tail re-phrasings were flagged CHECK by the shipped-value-bound verdicts and re-adjudicated ok by the labeller the same day.</p>
+<td class="p-2 text-right">537/815</td><td class="p-2"></td><td class="p-2"></td>
+<td class="p-2 text-right">265 cells</td><td class="p-2 text-right">90.2%</td>
+<td class="p-2 text-right">5</td><td class="p-2 text-right">0</td><td class="p-2 text-right">0</td></tr></tbody></table>
+<p class="text-xs text-slate-500 mb-6">Accuracy = correct-or-honest-null share of graded cells. Samples: 5 programs per university (all 15 at VUM; 4 where the key covers 4); crawling always covers every configured program. Tier B = config anchors, F = family joins, G = shared labels, llm-tail = the gated LLM tail (VUM only).</p>
 
 <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
 <div class="bg-slate-900 border border-slate-700 rounded-xl p-4">
-<p class="font-bold text-indigo-300 mb-2">The 6 wrongs, by name</p>
+<p class="font-bold text-indigo-300 mb-2">The 5 remaining wrongs, by name</p>
 <ul class="space-y-1 text-slate-300 list-disc ml-4">
-<li><b>VUM vum-corr tuition</b> — page still states last cycle's «1100 leva»; human-adjudicated stale-green (site staleness, not extraction).</li>
-<li><b>SU su-cult tuition</b> — Docling merged a fee row's cells; «освободени» shipped where the labeller read 310 EUR. Open finding.</li>
 <li><b>AUBG degree ×3</b> — «Bachelor of Arts» shipped where the labeller ruled «Major» governs. A definitional ruling, recorded; not an extraction defect.</li>
-<li><b>MUVarna Кинезитерапия tuition</b> — «500 евро» shipped where the fee order differentiates «500 € first year, 410 € after»; labeller ruled the full split governs.</li></ul></div>
+<li><b>SU su-cult tuition</b> — Docling merged a fee row's cells, so «освободени» shipped where the labeller read 310 EUR. Open finding.</li>
+<li><b>VUM vum-corr tuition</b> — the page still states last cycle's «1100 leva»; human-adjudicated site staleness, not extraction.</li></ul>
+<p class="text-slate-400 mt-2 text-xs">Four universities now grade clean: UniRuse 25/25, MUPleven 20/20, SHU 24/25, ANIS 24/25.</p></div>
 <div class="bg-slate-900 border border-slate-700 rounded-xl p-4">
 <p class="font-bold text-indigo-300 mb-2">Findings ledger (benchmark/site-findings.json)</p>
-<p class="text-slate-300 mb-2">32 recorded findings: <b class="text-emerald-300">9 fixed</b> (each closed by a measured regrade), <b class="text-amber-300">11 open</b>, 7 accepted, 3 mitigated, 2 avoided.</p>
-<p class="text-slate-400 text-xs">Biggest open items: NBU's JS-loaded tabs (80 cells, fetch-route limit), SU's Docling merged-cell row, per-program recipes not yet wired for MUVarna/SHU/MUPleven build-out programs (~140 recoverable cells — see the missing-data matrix).</p></div></div>
+<p class="text-slate-300 mb-2">43 recorded findings: <b class="text-emerald-300">16 fixed</b> (each closed by a measured regrade), <b class="text-amber-300">15 open</b>, 7 accepted, 3 mitigated, 2 avoided.</p>
+<p class="text-slate-400 text-xs">Biggest open items: NBU's JS-loaded tabs (40 cells, fetch-route limit), SU's Docling merged-cell row, a frozen-key entry at SHU that no source can satisfy, and remaining unwired recipes at MUVarna. See the missing-data matrix.</p></div></div>
 
 <h2 class="text-xl font-semibold text-indigo-300 mb-2">What the benchmark measures</h2>
-<p class="text-sm text-slate-300 mb-2">Frozen answer keys are written by a human labeller reading the live pages <i>before</i> seeing pipeline output; verdicts on ambiguous cells are the labeller's and are bound to the exact shipped value they judged (a changed value returns to CHECK). Key amendments happen only with a recorded, labeller-confirmed reason — 2 amendments to date (SU language ×5: labeller inference corrected to null; UniRuse bizmgmt admission: formula attributed to the wrong block).</p>
-<footer class="text-xs text-slate-600 border-t border-slate-800 pt-3 mt-6">Sources: crawler-out/*/run-report.json (2026-08-22 runs, all promoted), benchmark/keys/*, benchmark/verdicts/*, benchmark/site-findings.json, benchmark/baseline.json. Companion: missing-matrix.html · rfc-c.html.</footer>
+<p class="text-sm text-slate-300 mb-2">Frozen answer keys are written by a human labeller reading the live pages <i>before</i> seeing pipeline output. Verdicts on ambiguous cells are the labeller's and are bound to the exact shipped value judged — if a later run ships something else, the cell returns to CHECK rather than inheriting an old ruling. Key amendments happen only with a recorded, labeller-confirmed reason (3 to date).</p>
+<footer class="text-xs text-slate-600 border-t border-slate-800 pt-3 mt-6">Sources: crawler-out/*/run-report.json (2026-08-23 runs), benchmark/keys/*, benchmark/verdicts/*, benchmark/site-findings.json, benchmark/baseline.json. Companions: missing-matrix.html · rfc-c.html.</footer>
 </div></body></html>

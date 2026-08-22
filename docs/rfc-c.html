@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
-<title>RFC-C rev.4 — Hybrid crawler</title><script src="https://cdn.tailwindcss.com"></script>
+<title>RFC-C rev.5 — Hybrid crawler</title><script src="https://cdn.tailwindcss.com"></script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
 mermaid.initialize({startOnLoad:true,theme:'neutral',flowchart:{htmlLabels:true}});</script>
 <style>.mermaid svg{max-width:100%!important}</style></head>
@@ -8,40 +8,40 @@ mermaid.initialize({startOnLoad:true,theme:'neutral',flowchart:{htmlLabels:true}
 <header class="mb-6 border-b border-slate-700 pb-5">
 <p class="text-indigo-400 font-mono text-sm">STA-78 · RFC Round: University Crawler v2</p>
 <h1 class="text-4xl font-bold">RFC-C — Hybrid: deterministic core + gated LLM tail</h1>
-<p class="text-slate-400 mt-2 text-lg">Revision 4 · 2026-08-22 · 9 universities · 163 programs · 265 cells blind-graded</p></header>
+<p class="text-slate-400 mt-2 text-lg">Revision 5 · 2026-08-23 · 9 universities · 163 programs · 265 cells blind-graded</p></header>
 
 <div class="bg-emerald-950/40 border border-emerald-800 rounded-xl p-5 mb-8">
-<p class="font-bold text-emerald-300 mb-2 text-lg">Revision 4: rev.3's blocking defects are fixed and re-measured</p>
-<p class="text-emerald-100">Revision 3 withdrew the "0 fabrications" headline after the full benchmark found <strong>3 fabrications and 12 wrong values</strong> — misattribution on shared pages, invisible to a presence-only provenance gate. Revision 4 reports the fixes, each closed by a regrade against the <em>same frozen keys</em>: region-scoped harvesting, anchor scope validation (the fabricating anchor is deleted; the loader now rejects its whole class), caps-heading region anchoring, and deliberate candidate selection. Measured now: <strong>0 fabrications, 6 wrong in 265 cells (2.3%)</strong> — and every remaining wrong is a recorded labeller ruling, not an attribution defect.</p>
-<p class="text-emerald-100 mt-2">The gate's guarantee is unchanged and still narrow: it has <strong>never</strong> shipped a value absent from its source. Attribution — the value belonging to <em>its</em> program — is now enforced by the region and scope machinery, and measured by the benchmark.</p></div>
+<p class="font-bold text-emerald-300 mb-2 text-lg">Revision 5: the fabrication class is closed, and coverage is up to 66%</p>
+<p class="text-emerald-100">Revision 3 withdrew the "0 fabrications" headline after the full benchmark found <strong>3 fabrications and 12 wrong values</strong> — misattribution on shared pages, invisible to a presence-only provenance gate. Revisions 4 and 5 report the fixes, each closed by a regrade against the <em>same frozen keys</em>: region-scoped harvesting, anchor scope validation, caps-heading anchoring, and banded fee composition. Measured now: <strong>0 fabrications, 5 wrong in 265 cells (1.9%), 239 correct (90.2%)</strong>, with coverage up from 54% to <strong>66% of all fields</strong>.</p>
+<p class="text-emerald-100 mt-2">The more important finding is what the <em>method</em> caught. Hunting these defects surfaced <strong>seven further fabrications that no answer key covered</strong> — a programme taking its neighbour's degree, another taking an unconfigured section's duration, a master's programme billed at the bachelor's fee. Every one was verbatim-present and gate-clean; none was visible to the benchmark. They were found by reading the provenance of every changed cell, and by a second agent whose only job was to refute the first. <strong>Sampled grading measures the pipeline; it does not police it.</strong> Attribution review has to be part of the loop.</p></div>
 
 <section class="mb-8"><h2 class="text-2xl font-semibold text-indigo-300 mb-3">1 · Recommendation</h2>
 <div class="bg-slate-900 border border-slate-700 rounded-2xl p-6 text-lg leading-relaxed">
 <p>Build a <strong>deterministic extraction core</strong> — config-driven anchors, a shared label library, family joins over content-addressed snapshots — with a <strong>gated LLM tail</strong> for fields the core nulls, behind a <strong>mechanical provenance gate</strong>. Site knowledge is strictly-validated config data; "can't determine" ships as an honest null. <span class="text-indigo-300 font-semibold">The bet holds:</span> most of this data is extractable deterministically — 8 of 9 universities refresh with zero LLM calls. <span class="text-emerald-300 font-semibold">The correction landed:</span> presence-checking alone was not sufficient; per-program <strong>attribution</strong> is now a first-class, loader-enforced concern wherever one document serves many programs.</p></div>
 <div class="grid grid-cols-5 gap-3 mt-4 text-center">
-<div class="bg-slate-800 border border-slate-600 rounded-xl p-3"><p class="text-2xl font-bold">84.5%</p><p class="text-xs text-slate-300">graded correct (224/265)</p></div>
+<div class="bg-slate-800 border border-slate-600 rounded-xl p-3"><p class="text-2xl font-bold">90.2%</p><p class="text-xs text-slate-300">graded correct (239/265)</p></div>
 <div class="bg-emerald-900/50 border border-emerald-600 rounded-xl p-3"><p class="text-2xl font-bold text-emerald-300">0</p><p class="text-xs text-emerald-200">fabrications (was 3)</p></div>
 <div class="bg-emerald-900/50 border border-emerald-600 rounded-xl p-3"><p class="text-2xl font-bold text-emerald-300">0</p><p class="text-xs text-emerald-200">gate failures, 163 programs</p></div>
 <div class="bg-emerald-900/50 border border-emerald-600 rounded-xl p-3"><p class="text-2xl font-bold text-emerald-300">€0</p><p class="text-xs text-emerald-200">deterministic refresh</p></div>
-<div class="bg-amber-900/50 border border-amber-600 rounded-xl p-3"><p class="text-2xl font-bold text-amber-300">35</p><p class="text-xs text-amber-200">misses (mostly unwired config)</p></div></div></section>
+<div class="bg-amber-900/50 border border-amber-600 rounded-xl p-3"><p class="text-2xl font-bold text-amber-300">21</p><p class="text-xs text-amber-200">misses (mostly unwired config)</p></div></div></section>
 
 <section class="mb-8"><h2 class="text-2xl font-semibold text-indigo-300 mb-3">2 · Evidence: all 9 universities</h2>
 <table class="w-full text-sm bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
 <thead class="bg-slate-800 text-left text-slate-300"><tr><th class="p-2">University</th><th class="p-2 text-right">programs</th>
 <th class="p-2 text-right">fields extracted</th><th class="p-2 text-right">graded correct</th><th class="p-2 text-right">wrong</th><th class="p-2 text-right">fabrications</th></tr></thead>
 <tbody>
-<tr class="border-t border-slate-800"><td class="p-2">MUPleven</td><td class="p-2 text-right">17</td><td class="p-2 text-right">52/85</td><td class="p-2 text-right">20/20</td><td class="p-2 text-right text-slate-500">0</td><td class="p-2 text-right text-slate-500">0</td></tr>
-<tr class="border-t border-slate-800"><td class="p-2">UniRuse</td><td class="p-2 text-right">20</td><td class="p-2 text-right">51/100</td><td class="p-2 text-right">24/25</td><td class="p-2 text-right text-slate-500">0</td><td class="p-2 text-right text-slate-500">0</td></tr>
+<tr class="border-t border-slate-800"><td class="p-2">UniRuse</td><td class="p-2 text-right">20</td><td class="p-2 text-right">58/100</td><td class="p-2 text-right">25/25</td><td class="p-2 text-right text-slate-500">0</td><td class="p-2 text-right text-slate-500">0</td></tr>
+<tr class="border-t border-slate-800"><td class="p-2">MUPleven</td><td class="p-2 text-right">17</td><td class="p-2 text-right">68/85</td><td class="p-2 text-right">20/20</td><td class="p-2 text-right text-slate-500">0</td><td class="p-2 text-right text-slate-500">0</td></tr>
+<tr class="border-t border-slate-800"><td class="p-2">SHU</td><td class="p-2 text-right">20</td><td class="p-2 text-right">67/100</td><td class="p-2 text-right">24/25</td><td class="p-2 text-right text-slate-500">0</td><td class="p-2 text-right text-slate-500">0</td></tr>
 <tr class="border-t border-slate-800"><td class="p-2">ANIS</td><td class="p-2 text-right">18</td><td class="p-2 text-right">49/90</td><td class="p-2 text-right">24/25</td><td class="p-2 text-right text-slate-500">0</td><td class="p-2 text-right text-slate-500">0</td></tr>
-<tr class="border-t border-slate-800"><td class="p-2">SofiaUniversity</td><td class="p-2 text-right">20</td><td class="p-2 text-right">73/100</td><td class="p-2 text-right">23/25</td><td class="p-2 text-right">1</td><td class="p-2 text-right text-slate-500">0</td></tr>
 <tr class="border-t border-slate-800"><td class="p-2">VUM <span class="text-xs text-slate-500">(tail-enabled)</span></td><td class="p-2 text-right">15</td><td class="p-2 text-right">74/75</td><td class="p-2 text-right">73/75</td><td class="p-2 text-right">1</td><td class="p-2 text-right text-slate-500">0</td></tr>
+<tr class="border-t border-slate-800"><td class="p-2">SofiaUniversity</td><td class="p-2 text-right">20</td><td class="p-2 text-right">76/100</td><td class="p-2 text-right">23/25</td><td class="p-2 text-right">1</td><td class="p-2 text-right text-slate-500">0</td></tr>
 <tr class="border-t border-slate-800"><td class="p-2">AUBG</td><td class="p-2 text-right">18</td><td class="p-2 text-right">90/90</td><td class="p-2 text-right">17/20</td><td class="p-2 text-right">3</td><td class="p-2 text-right text-slate-500">0</td></tr>
+<tr class="border-t border-slate-800"><td class="p-2">MUVarna</td><td class="p-2 text-right">15</td><td class="p-2 text-right">35/75</td><td class="p-2 text-right">17/25</td><td class="p-2 text-right text-slate-500">0</td><td class="p-2 text-right text-slate-500">0</td></tr>
 <tr class="border-t border-slate-800"><td class="p-2">NBU</td><td class="p-2 text-right">20</td><td class="p-2 text-right">20/100</td><td class="p-2 text-right">16/25</td><td class="p-2 text-right text-slate-500">0</td><td class="p-2 text-right text-slate-500">0</td></tr>
-<tr class="border-t border-slate-800"><td class="p-2">SHU</td><td class="p-2 text-right">20</td><td class="p-2 text-right">45/100</td><td class="p-2 text-right">16/25</td><td class="p-2 text-right text-slate-500">0</td><td class="p-2 text-right text-slate-500">0</td></tr>
-<tr class="border-t border-slate-800"><td class="p-2">MUVarna</td><td class="p-2 text-right">15</td><td class="p-2 text-right">21/75</td><td class="p-2 text-right">11/25</td><td class="p-2 text-right">1</td><td class="p-2 text-right text-slate-500">0</td></tr>
 <tr class="bg-slate-800 font-bold border-t-2 border-slate-600"><td class="p-2">TOTAL</td>
-<td class="p-2 text-right">163</td><td class="p-2 text-right">475/815</td><td class="p-2 text-right">224/265</td>
-<td class="p-2 text-right">6</td><td class="p-2 text-right text-emerald-400">0</td></tr></tbody></table>
+<td class="p-2 text-right">163</td><td class="p-2 text-right">537/815</td><td class="p-2 text-right">239/265</td>
+<td class="p-2 text-right">5</td><td class="p-2 text-right text-emerald-400">0</td></tr></tbody></table>
 <p class="text-xs text-slate-500 mt-2">5-program blind sample per university (all 15 at VUM; 4 at AUBG/MUPleven), labelled by a human who did not build the pipeline, against frozen keys. The samples that found the fabrications in rev.3 are the same ones that now measure 0 — nothing was resampled. VUM's 8 tail re-phrasings were flagged CHECK by the shipped-value-bound verdicts and re-adjudicated ok by the labeller — the binding working as designed.</p></section>
 
 <section class="mb-8"><h2 class="text-2xl font-semibold text-indigo-300 mb-3">3 · What the full benchmark cycle established</h2>
@@ -57,7 +57,9 @@ mermaid.initialize({startOnLoad:true,theme:'neutral',flowchart:{htmlLabels:true}
 <li><strong>Misattribution on shared pages</strong> (3 fabrications, gate-green) → region-scoped harvesting: a program reads only spans anchored to its own name, bounded by siblings and a measured window.</li>
 <li><strong>Bad anchors can assert</strong> → anchor scope validation: every off-page anchor declares <code>names-program</code> (checked at resolve time, base-name aware) or human-attested <code>page-wide</code>; the loader rejects the rest. The fabricating anchor is deleted.</li>
 <li><strong>Prose mentions opened foreign regions</strong> → caps-heading anchoring: on pages with all-caps section headings, only heading occurrences anchor.</li>
-<li><strong>Stale manual verdicts</strong> → verdicts now bind to the shipped value they adjudicated; changed values return to CHECK.</li></ul></div>
+<li><strong>Stale manual verdicts</strong> → verdicts now bind to the shipped value they adjudicated; a changed value returns to CHECK.</li>
+<li><strong>A rule that was silently inert</strong> → the caps-heading rule computed regions on normalised text, where newlines no longer exist, so it never fired in production while its unit tests — which passed raw text — stayed green. Four latent fabrications survived behind it. Its regression test now asserts through the production seam.</li>
+<li><strong>Partial values are wrong values</strong> → a fee order stating one row per year shipped only the first («500 евро»), which the labeller graded WRONG. Joins can now compose the whole schedule.</li></ul></div>
 <div class="bg-slate-900 border border-slate-700 rounded-xl p-4"><p class="font-bold text-indigo-300 mb-2">Sharpened, not confirmed</p>
 <ul class="text-sm text-slate-300 space-y-2 list-disc ml-4">
 <li>We predicted shared pages were inherently unsafe. <strong>ANIS refuted it</strong> — all 18 programs on one page, zero contamination, because its statements genuinely are university-wide (now attested as <code>page-wide</code> anchors).</li>
@@ -69,7 +71,8 @@ mermaid.initialize({startOnLoad:true,theme:'neutral',flowchart:{htmlLabels:true}
 <li><s class="text-slate-500">Attribution checking (blocking)</s> — <span class="text-emerald-300">done, measured: fabrications 3 → 0 on the same frozen keys.</span></li>
 <li><s class="text-slate-500">Candidate selection</s> — <span class="text-emerald-300">done: heading-anchored regions + label coverage; akusherka's degree now comes from its own section.</span></li>
 <li><s class="text-slate-500">Anchor scope validation</s> — <span class="text-emerald-300">done: loader-enforced, with the page-wide escape hatch carrying explicit human attestation.</span></li>
-<li><strong>Finish the wired joins.</strong> 35 of 265 graded cells are misses — overwhelmingly programs added without fee/admission recipes (~110 recoverable cells fleet-wide; the same work already won ANIS admission 0→18 and SHU tuition 5→18). The single biggest coverage win available.</li>
+<li><s class="text-slate-500">Finish the wired joins</s> — <span class="text-emerald-300">largely done: a 4-agent config pass won 48 cells (SHU +22, MUPleven +16, UniRuse +7, SU +3). Coverage 54% → 66%; ~45 recoverable cells remain.</span></li>
+<li><strong>Attribution review must stay in the loop.</strong> Seven of the fabrications closed in this round sat in cells <em>no answer key covered</em>, so no amount of sampled grading would have found them. Reading the provenance of every changed cell, and running an independent agent whose only job is to refute the first, is what caught them — that has to be part of the process, not a one-off audit.</li>
 <li><strong>NBU's fetch route.</strong> 40 cells are JS-loaded and unreachable without a rendering fallback — an adapter decision, not config.</li>
 <li><strong>Then</strong> the attention ledger and refresh orchestrator (ADR-0005), which make the pipeline unattended. Deferred deliberately: surfacing backlog matters less than not shipping wrong values.</li></ol></section>
 
@@ -79,5 +82,5 @@ mermaid.initialize({startOnLoad:true,theme:'neutral',flowchart:{htmlLabels:true}
 <p><strong>Still open:</strong> if the recoverable-miss backlog (§4.4) keeps regrowing faster than config work closes it as universities are added, the per-program recipe model needs revisiting — that is a scaling question, not a correctness one.</p>
 <p><strong>The honest bottom line:</strong> a mechanical presence check is a real and rare guarantee — the previous attempt shipped 36% unsupported values, this ships none. Presence was never the same thing as correctness; it took the blind benchmark to measure the difference, three structural fixes to close it, and the same frozen keys to prove it closed. Every defect was found by human labels; every fix is verified by them.</p></div></section>
 
-<footer class="text-slate-500 text-sm border-t border-slate-800 pt-4">RFC-C rev.4 · evidence in tracked <code>benchmark/</code> · 265 graded cells across 9 universities · docs/adr/0001–0006 · companions: scorecard.html, missing-matrix.html</footer>
+<footer class="text-slate-500 text-sm border-t border-slate-800 pt-4">RFC-C rev.5 · evidence in tracked <code>benchmark/</code> · 265 graded cells across 9 universities · docs/adr/0001–0006 · companions: scorecard.html, missing-matrix.html</footer>
 </div></body></html>
