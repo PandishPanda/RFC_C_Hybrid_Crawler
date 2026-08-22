@@ -701,6 +701,82 @@ def _shared_site(programs):
         origin="shared-page-test")
 
 
+class ProgramRegionHeadingAnchorTest(unittest.TestCase):
+    """When a shared page marks a program's section with a CAPS HEADING
+    (the name fully uppercase, alone on its line), only heading
+    occurrences anchor regions -- a prose mention of the name inside a
+    FOREIGN section must not open a span there.
+
+    Measured (MUVarna /BG/specialnosti, 2026-08-22): «„Акушерка“»
+    mentioned in Медицинска сестра's closing sentence opened a
+    2,500-char span that crossed into the UNCONFIGURED «ФАРМАЦЕВТИЧЕН
+    МЕНИДЖМЪНТ» section and shipped its «магистър» degree for the
+    bachelor programme; «"Медицински оптик"» mentioned inside
+    «ОПТОМЕТРИСТ» did the same in the other direction. Pages with no
+    caps heading (UniRuse, ANIS) keep mention anchoring unchanged."""
+
+    # Geometry mirrors the real page: the mention sits far past the own
+    # section, and the foreign claim lands well inside REGION_WINDOW of
+    # the mention (real page: mention 22924, claim 24212 -- 1,288 in).
+    PAGE = (
+        "нав: Специалност \"Акушерка\" | Специалност \"Ботаника\"\n"
+        + "х" * 200 + "\n"
+        + "АКУШЕРКА\n"
+        + "(При кандидатстване се изисква завършено средно образование)\n"
+        + "Обучението по специалност „Акушерка“ дава степен „бакалавър“.\n"
+        + "х" * 300 + "\n"
+        + "БОТАНИКА\n"
+        + "работят като асистенти по „Медицинска сестра“ и „Акушерка“.\n"
+        + "ФАРМАЦЕВТИЧЕН МЕНИДЖМЪНТ\n"
+        + "х" * 400 + " придобиване на степен „магистър“ по фармацевтичен "
+        + "мениджмънт.\n")
+
+    def test_prose_mention_does_not_anchor_when_page_has_caps_heading(self):
+        spans = cascade.program_region(self.PAGE, "Акушерка", ["Ботаника"])
+        heading = self.PAGE.find("АКУШЕРКА")
+        self.assertEqual(len(spans), 1,
+                         "only the caps heading anchors; nav and foreign "
+                         "prose mentions must not open spans")
+        self.assertEqual(spans[0][0], heading)
+        poison = self.PAGE.find("„магистър“ по фармацевтичен")
+        self.assertFalse(any(lo <= poison < hi for lo, hi in spans),
+                         "the foreign section's degree claim must be "
+                         "outside every span")
+
+    def test_own_section_claim_stays_inside_the_heading_span(self):
+        spans = cascade.program_region(self.PAGE, "Акушерка", ["Ботаника"])
+        claim = self.PAGE.find("степен „бакалавър“")
+        self.assertTrue(any(lo <= claim < hi for lo, hi in spans))
+
+    def test_caps_heading_line_may_carry_zero_width_spaces(self):
+        # Real page renders the heading line as '\u200b \nАКУШЕРКА\n'.
+        page = self.PAGE.replace("АКУШЕРКА\n", "\u200b АКУШЕРКА \u200b\n", 1)
+        spans = cascade.program_region(page, "Акушерка", ["Ботаника"])
+        self.assertEqual(len(spans), 1)
+        self.assertEqual(spans[0][0], page.find("АКУШЕРКА"))
+
+    def test_caps_occurrence_mid_prose_is_not_a_heading(self):
+        # A shouted name sharing its line with other words is not a
+        # section heading; the page falls back to mention anchoring.
+        text = "преди МЕДИЦИНА тяло на секцията АКУШЕРКА след"
+        spans = cascade.program_region(text, "Медицина", ["Акушерка"])
+        self.assertEqual(spans, [(6, 32)])
+
+    def test_page_without_caps_heading_keeps_mention_anchoring(self):
+        # UniRuse/ANIS shape: sections are marked by prose mentions
+        # only. Every occurrence anchors, exactly as before.
+        text = ("списък: софтуерно инженерство и още\n"
+                "Специалност „Софтуерно инженерство“ дава ОКС бакалавър\n"
+                "Специалност „Ботаника“ следва\n")
+        spans = cascade.program_region(
+            text, "Софтуерно инженерство", ["Ботаника"])
+        # both mentions anchor; their windows overlap and merge into one
+        # span opening at the FIRST (nav) mention -- unchanged behavior
+        self.assertEqual(spans[0][0], text.lower().find("софтуерно"))
+        claim = text.find("ОКС бакалавър")
+        self.assertTrue(any(lo <= claim < hi for lo, hi in spans))
+
+
 class SharedPageAttributionTest(unittest.TestCase):
     """On a page shared by >=2 configured programs, tier-G harvest reads
     only the program's own region (program_region). A label match that
@@ -812,6 +888,24 @@ class SharedPageAttributionTest(unittest.TestCase):
         self.assertIsNotNone(r)
         self.assertIn("магистър", r.value)
         self.assertNotIn("бакалавър", r.value)
+
+    def test_definite_okstepen_form_is_harvested(self):
+        # MUVarna Акушерка's real sentence uses the DEFINITE article:
+        # «придобиват образователно-квалификационната степен „бакалавър“»
+        # -- bg-okstepen missed it, so the only candidate the label saw
+        # was a foreign section's «магистър» (measured 2026-08-22).
+        site = _shared_site([
+            {"id": "ak", "name": "Акушерка", "page": self.URL},
+            {"id": "ks", "name": "Кинезитерапия", "page": self.URL},
+        ])
+        text = ("АКУШЕРКА\nЗавършилите специалността придобиват "
+                "образователно-квалификационната степен „бакалавър“ и "
+                "могат да се реализират в лечебни заведения. "
+                "КИНЕЗИТЕРАПИЯ\nдруга секция.")
+        ak = next(x for x in site.programs if x.id == "ak")
+        r = cascade.resolve_field(site, ak, "degree", self._docs(text))
+        self.assertIsNotNone(r)
+        self.assertIn("бакалавър", r.value)
 
     def test_program_never_named_on_shared_page_ships_nothing(self):
         site = _shared_site([
@@ -1121,6 +1215,33 @@ class AnchorNamesProgramTest(unittest.TestCase):
                 "образователна и научна степен доктор")
         r = cascade.resolve_field(site, p, "degree", self._docs(text))
         self.assertIsNotNone(r)
+
+    def test_variant_name_matches_by_its_base_name(self):
+        # ANIS shape (measured 2026-08-22): the programme is configured
+        # as «Управление на човешките ресурси (след неикономически
+        # специалности)» -- an entry-route variant -- while the anchored
+        # catalogue page names only the base «Управление на човешките
+        # ресурси». The trailing parenthetical must not defeat the
+        # names-program check.
+        site = config.parse_site_config({
+            "uni_id": "X", "sources": {},
+            "anchors": {"deg": {
+                "source": "https://x.example/other",
+                "pattern": "(степен „магистър“)",
+                "scope": "names-program"}},
+            "programs": [{
+                "id": "p1",
+                "name": "Управление на човешките ресурси "
+                        "(след неикономически специалности)",
+                "page": "https://x.example/own",
+                "field_anchors": {"degree": "deg"}}],
+        }, origin="anchor-scope-test")
+        p = site.programs[0]
+        text = ("специалността Управление на човешките ресурси завършва "
+                "със степен „магистър“ след защита")
+        r = cascade.resolve_field(site, p, "degree", self._docs(text))
+        self.assertIsNotNone(r)
+        self.assertIn("магистър", r.value)
 
     def test_page_wide_scope_probes_without_the_name(self):
         site = self._site("page-wide")

@@ -206,6 +206,30 @@
       "impact": "any changed cell silently inherited its old verdict — stale 'ok's could green-light unjudged values",
       "status": "fixed",
       "resolution": "2026-08-22 verdicts now bind to the shipped_value they adjudicated; a changed value returns the cell to CHECK. All 8 verdict files backfilled from the runs they judged; mu-nurse tuition bound to «безплатно», so «410 евро» is CHECK pending labeller adjudication."
+    },
+    {
+      "uni_id": "MUVarna",
+      "kind": "trust",
+      "finding": "candidate-selection contamination class: a prose MENTION of a program's name inside a foreign section opened a region there («„Акушерка“» in Медицинска сестра's closing sentence reached the unconfigured ФАРМАЦЕВТИЧЕН МЕНИДЖМЪНТ block and shipped its «магистър»; «\"Медицински оптик\"» inside ОПТОМЕТРИСТ did the reverse). Compounded by bg-okstepen missing the definite form «квалификационната», which hid the true own-section «бакалавър»",
+      "impact": "1 graded WRONG (akusherka degree); the optik span was a live landmine",
+      "status": "fixed",
+      "resolution": "2026-08-22 caps-heading anchoring: when a page marks the program's section with an all-caps line-isolated heading, only heading occurrences anchor regions (mention-anchoring unchanged on pages without caps headings — UniRuse/ANIS verified unaffected); bg-okstepen accepts the definite article. akusherka now ships «бакалавър» from its own section."
+    },
+    {
+      "uni_id": "UniRuse",
+      "kind": "benchmark-integrity",
+      "finding": "bizmgmt admission key held the biology formula that textually closes the Социални дейности block above the БИЗНЕС МЕНИДЖМЪНТ heading; the page's description→formula convention (which the compsystems key itself follows) attributes the икономическа география formula to bizmgmt",
+      "impact": "1 graded WRONG charged to the pipeline was a key error",
+      "status": "fixed",
+      "resolution": "2026-08-22 labeller-confirmed key amendment (recorded in the key entry); UniRuse sample now 0 wrong."
+    },
+    {
+      "uni_id": "ANIS",
+      "kind": "extraction",
+      "finding": "names-program scope initially rejected the УЧР variant «(след неикономически специалности)» because the anchored catalogue names only the base programme",
+      "impact": "1 graded cell regressed ok→miss for one run",
+      "status": "fixed",
+      "resolution": "2026-08-22 a trailing parenthetical qualifier is stripped before the names-program check (base name still names the programme); ANIS back to 24/25."
     }
   ]
 }

@@ -225,7 +225,7 @@ LABEL_PATTERNS = {
         # this program's award; it shipped a master's degree for a
         # bachelor program on the real UniRuse faculty page (2026-08-22).
         ("bg-oks-inline", r'(?<!образованието си в )(ОКС\s*[„"«][А-Яа-я][а-я ]*["”»])'),
-        ("bg-okstepen", r'([Оо]бразователно\s*-?\s*квалификационна степен\s*[–-]?\s*[„"“]\s*[а-я ]+["”“])'),
+        ("bg-okstepen", r'([Оо]бразователно\s*-?\s*квалификационна(?:та)? степен\s*[–-]?\s*[„"“]\s*[а-я ]+["”“])'),
         ("bg-pridobilite", r'Придобилите степен\s+([А-Я][А-Я ]+[А-Я])(?=\s+са)'),
         ("en-equal-degree", r'Educational qualification degree\s+([A-Z]+)'),
         ("vum-dual-bachelor", r'((?:accredited )?(?:Bulgarian )?Professional Bachelor degree from VUM and the British [^.]+? awarded by Cardiff Metropolitan University)'),
@@ -351,6 +351,29 @@ def _find_all(haystack, needle):
 REGION_WINDOW = 2500
 
 
+# a trailing parenthetical on a programme name is an entry-route or
+# cohort qualifier, not part of what pages call the programme
+_BASE_NAME_RX = re.compile(r"\s*\([^)]*\)\s*$")
+
+
+def _is_caps_heading(text, pos, ln):
+    # type: (str, int, int) -> bool
+    """True when the occurrence at POS is fully uppercase and its line
+    holds nothing else (whitespace and zero-width characters aside) --
+    the shape section headings take in rendered page text."""
+    occ = text[pos:pos + ln]
+    if occ != occ.upper() or not any(c.isalpha() for c in occ):
+        return False
+    lo = text.rfind("\n", 0, pos) + 1
+    hi = text.find("\n", pos + ln)
+    if hi < 0:
+        hi = len(text)
+    line = text[lo:hi]
+    for ch in ("\u200b", "\ufeff"):
+        line = line.replace(ch, "")
+    return line.strip() == occ
+
+
 def program_region(text, name, sibling_names):
     # type: (str, str, list) -> list
     """Ordered [(start, end)] spans of a SHARED page that belong to the
@@ -366,6 +389,18 @@ def program_region(text, name, sibling_names):
     before the real heading. Overlapping spans merge. No occurrence of
     NAME at all means NO spans: a shared page that never names the
     program must not feed it values.
+
+    EXCEPT: when the page marks the program's section with a CAPS
+    HEADING -- the name fully uppercase, alone on its line (zero-width
+    spaces and whitespace aside) -- only heading occurrences anchor.
+    A prose MENTION of the name inside a foreign section otherwise
+    opens a window into that section's claims (measured 2026-08-22:
+    MUVarna's «„Акушерка“» in a neighbour's closing sentence reached
+    the unconfigured «ФАРМАЦЕВТИЧЕН МЕНИДЖМЪНТ» block and shipped its
+    «магистър» for the bachelor programme). Pages with no caps heading
+    (UniRuse, ANIS) keep mention anchoring unchanged; the rule only
+    SHRINKS regions, so its failure mode is a null, never a wrong
+    value.
 
     Plain substring matching, deliberately: names are config data, not
     regexes, and a false boundary from a name collision only SHRINKS a
@@ -401,6 +436,9 @@ def program_region(text, name, sibling_names):
         return False
 
     anchors = [a for a in occ[own] if not _suppressed(a, len(own), own)]
+    headings = [a for a in anchors if _is_caps_heading(text, a, len(own))]
+    if headings:
+        anchors = headings
     if not anchors:
         return []
     boundaries = sorted(
@@ -884,9 +922,16 @@ def resolve_field(site, program, field, docs):
             if anchor_cfg.scope == "names-program":
                 # the anchored page must name the program, or the anchor
                 # yields nothing -- an unscoped anchor on an unrelated
-                # page shipped a fabricated degree (measured 2026-08-22)
+                # page shipped a fabricated degree (measured 2026-08-22).
+                # A trailing parenthetical qualifier -- «УЧР (след
+                # неикономически специалности)» -- is an entry-route
+                # variant; the base name still names the programme.
                 page_text = norm(source.text).lower()
-                if not _find_all(page_text, program.name.lower()):
+                names = [program.name.lower()]
+                base = _BASE_NAME_RX.sub("", program.name).strip().lower()
+                if base and base != names[0]:
+                    names.append(base)
+                if not any(_find_all(page_text, n) for n in names):
                     source = None
         if source is not None:
             r = anchor_probe(field, source, anchor_cfg)

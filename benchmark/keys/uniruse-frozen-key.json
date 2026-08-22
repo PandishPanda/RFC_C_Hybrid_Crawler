@@ -35,10 +35,11 @@
     {
       "program_id": "uniruse-bizmgmt",
       "field": "admission",
-      "expected_value": "1) оценка от държавен зрелостен изпит или един избираем изпит по: български език, история на България или биология; 2) оценка от дипломата по български език.",
+      "expected_value": "1) оценка от държавен зрелостен изпит или един избираем изпит по: икономическа география на България, български език, чужд език (английски), история на България, ОТП, ИИТ или математика; 2) оценка от дипломата по български език; 3) оценка от дипломата по математика.",
       "null_reason": null,
-      "snippet": "1) оценка от държавен зрелостен изпит или един избираем изпит по: български език, история на България или биология; 2) оценка от дипломата по български език.",
-      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management"
+      "snippet": "1) оценка от държавен зрелостен изпит или един избираем изпит по: икономическа география на България, български език, чужд език (английски), история на България, ОТП, ИИТ или математика; 2) оценка от дипломата по български език; 3) оценка от дипломата по математика.",
+      "source_url": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
+      "amendment": "amended 2026-08-22, labeller-confirmed: the original biology formula textually closes the Социални дейности block above the БИЗНЕС МЕНИДЖМЪНТ heading; the page's description→formula convention (the same one the compsystems key follows) attributes the икономическа география formula to Бизнес мениджмънт"
     },
     {
       "program_id": "uniruse-compsystems",
