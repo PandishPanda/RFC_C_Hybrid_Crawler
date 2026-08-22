@@ -1,0 +1,204 @@
+{
+  "entries": [
+    {
+      "program_id": "ANIS-rsvu8494-MSC-BG",
+      "field": "degree",
+      "expected_value": "магистър",
+      "null_reason": null,
+      "snippet": "магистър",
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "ANIS-rsvu8494-MSC-BG",
+      "field": "duration",
+      "expected_value": "4 семестъра",
+      "null_reason": null,
+      "snippet": "4 семестъра",
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "ANIS-rsvu8494-MSC-BG",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated on the ANIS admissions pages",
+      "snippet": null,
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "ANIS-rsvu8494-MSC-BG",
+      "field": "tuition",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated on the ANIS admissions pages",
+      "snippet": null,
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "ANIS-rsvu8494-MSC-BG",
+      "field": "admission",
+      "expected_value": "Право на обучение ползват кандидати, които имат минимален успех Добър от диплома за завършена степен на висшето образование (чл. 21, ал. 4 от ЗВО). Успехът на дипломата се формира като средноаритметична оценка от средния успех от семестриалните изпити и оценките от държавните изпити или от защитата на дипломната работа.",
+      "null_reason": null,
+      "snippet": "Право на обучение ползват кандидати, които имат минимален успех Добър от диплома за завършена степен на висшето образование (чл. 21, ал. 4 от ЗВО). Успехът на дипломата се формира като средноаритметична оценка от средния успех от семестриалните изпити и оценките от държавните изпити или от защитата на дипломната работа.",
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "ANIS-rsvu9422-MSC-BG",
+      "field": "degree",
+      "expected_value": "магистър",
+      "null_reason": null,
+      "snippet": "магистър",
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "ANIS-rsvu9422-MSC-BG",
+      "field": "duration",
+      "expected_value": "4 семестъра",
+      "null_reason": null,
+      "snippet": "4 семестъра",
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "ANIS-rsvu9422-MSC-BG",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated on the ANIS admissions pages",
+      "snippet": null,
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "ANIS-rsvu9422-MSC-BG",
+      "field": "tuition",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated on the ANIS admissions pages",
+      "snippet": null,
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "ANIS-rsvu9422-MSC-BG",
+      "field": "admission",
+      "expected_value": "Право на обучение ползват кандидати, които имат минимален успех Добър от диплома за завършена степен на висшето образование (чл. 21, ал. 4 от ЗВО). Успехът на дипломата се формира като средноаритметична оценка от средния успех от семестриалните изпити и оценките от държавните изпити или от защитата на дипломната работа.",
+      "null_reason": null,
+      "snippet": "Право на обучение ползват кандидати, които имат минимален успех Добър от диплома за завършена степен на висшето образование (чл. 21, ал. 4 от ЗВО). Успехът на дипломата се формира като средноаритметична оценка от средния успех от семестриалните изпити и оценките от държавните изпити или от защитата на дипломната работа.",
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "anis-m03",
+      "field": "degree",
+      "expected_value": "магистър",
+      "null_reason": null,
+      "snippet": "магистър",
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "anis-m03",
+      "field": "duration",
+      "expected_value": "4 семестъра",
+      "null_reason": null,
+      "snippet": "4 семестъра",
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "anis-m03",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated on the ANIS admissions pages",
+      "snippet": null,
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "anis-m03",
+      "field": "tuition",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated on the ANIS admissions pages",
+      "snippet": null,
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "anis-m03",
+      "field": "admission",
+      "expected_value": "Право на обучение ползват кандидати, които имат минимален успех Добър от диплома за завършена степен на висшето образование (чл. 21, ал. 4 от ЗВО). Успехът на дипломата се формира като средноаритметична оценка от средния успех от семестриалните изпити и оценките от държавните изпити или от защитата на дипломната работа.",
+      "null_reason": null,
+      "snippet": "Право на обучение ползват кандидати, които имат минимален успех Добър от диплома за завършена степен на висшето образование (чл. 21, ал. 4 от ЗВО). Успехът на дипломата се формира като средноаритметична оценка от средния успех от семестриалните изпити и оценките от държавните изпити или от защитата на дипломната работа.",
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "anis-m06",
+      "field": "degree",
+      "expected_value": "магистър",
+      "null_reason": null,
+      "snippet": "магистър",
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "anis-m06",
+      "field": "duration",
+      "expected_value": "4 семестъра",
+      "null_reason": null,
+      "snippet": "4 семестъра",
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "anis-m06",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated on the ANIS admissions pages",
+      "snippet": null,
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "anis-m06",
+      "field": "tuition",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated on the ANIS admissions pages",
+      "snippet": null,
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "anis-m06",
+      "field": "admission",
+      "expected_value": "Право на обучение ползват кандидати, които имат минимален успех Добър от диплома за завършена степен на висшето образование (чл. 21, ал. 4 от ЗВО). Успехът на дипломата се формира като средноаритметична оценка от средния успех от семестриалните изпити и оценките от държавните изпити или от защитата на дипломната работа.",
+      "null_reason": null,
+      "snippet": "Право на обучение ползват кандидати, които имат минимален успех Добър от диплома за завършена степен на висшето образование (чл. 21, ал. 4 от ЗВО). Успехът на дипломата се формира като средноаритметична оценка от средния успех от семестриалните изпити и оценките от държавните изпити или от защитата на дипломната работа.",
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "anis-m11",
+      "field": "degree",
+      "expected_value": "магистър",
+      "null_reason": null,
+      "snippet": "магистър",
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "anis-m11",
+      "field": "duration",
+      "expected_value": "4 семестъра",
+      "null_reason": null,
+      "snippet": "4 семестъра",
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "anis-m11",
+      "field": "language",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated on the ANIS admissions pages",
+      "snippet": null,
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "anis-m11",
+      "field": "tuition",
+      "expected_value": null,
+      "null_reason": "labeller 2026-08-22: not stated on the ANIS admissions pages",
+      "snippet": null,
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    },
+    {
+      "program_id": "anis-m11",
+      "field": "admission",
+      "expected_value": "Право на обучение ползват кандидати, които имат минимален успех Добър от диплома за завършена степен на висшето образование (чл. 21, ал. 4 от ЗВО). Успехът на дипломата се формира като средноаритметична оценка от средния успех от семестриалните изпити и оценките от държавните изпити или от защитата на дипломната работа.",
+      "null_reason": null,
+      "snippet": "Право на обучение ползват кандидати, които имат минимален успех Добър от диплома за завършена степен на висшето образование (чл. 21, ал. 4 от ЗВО). Успехът на дипломата се формира като средноаритметична оценка от средния успех от семестриалните изпити и оценките от държавните изпити или от защитата на дипломната работа.",
+      "source_url": "https://www.vusi.bg/priem-3/priem-magister/"
+    }
+  ]
+}

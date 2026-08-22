@@ -1,0 +1,28 @@
+{
+  "verdicts": [
+    {
+      "program_id": "ANIS-rsvu8494-MSC-BG",
+      "field": "duration",
+      "verdict": "wrong",
+      "note": "labeller 2026-08-22: restated the key value; shipped statement is not this program's"
+    },
+    {
+      "program_id": "ANIS-rsvu8494-MSC-BG",
+      "field": "admission",
+      "verdict": "wrong",
+      "note": "labeller 2026-08-22: restated the key value; shipped statement is not this program's"
+    },
+    {
+      "program_id": "ANIS-rsvu9422-MSC-BG",
+      "field": "duration",
+      "verdict": "wrong",
+      "note": "labeller 2026-08-22: restated the key value; shipped statement is not this program's"
+    },
+    {
+      "program_id": "ANIS-rsvu9422-MSC-BG",
+      "field": "admission",
+      "verdict": "wrong",
+      "note": "labeller 2026-08-22: restated the key value; shipped statement is not this program's"
+    }
+  ]
+}

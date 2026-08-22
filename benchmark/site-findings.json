@@ -155,6 +155,20 @@
       "finding": "shared-page contamination CONFIRMED at a second university: uniruse-se and uniruse-cs shipped the identical «ОКС „магистър\"» from their shared faculty page, though both were added from UniRuse's BACHELOR index. The single-page control program (Право) showed no contamination — isolating the shared page as the cause",
       "impact": "2 fabrications. With MUVarna this is 4 defects across 2 of the 3 shared-page universities; ANIS is the third and is still ungraded",
       "status": "open"
+    },
+    {
+      "uni_id": "ANIS",
+      "kind": "trust",
+      "finding": "shared-page contamination did NOT occur here, refuting the hypothesis that shared pages are inherently unsafe. ANIS's page-wide statements genuinely apply to every program (single-faculty academy), so identical values are correct. The real risk is a shared page carrying PROGRAM-SPECIFIC claims (MUVarna, UniRuse), not shared pages as such",
+      "impact": "sharpens the defect: the resolver must distinguish claim SCOPE, not avoid shared sources",
+      "status": "accepted"
+    },
+    {
+      "uni_id": "ANIS",
+      "kind": "extraction",
+      "finding": "where a page states two competing values, the cascade takes the first: shipped «2 или 3 семестъра» and «само по документи» where the labeller ruled «4 семестъра» and the ЗВО minimum-grade rule govern",
+      "impact": "4 graded wrong — first-match selection, not attribution error",
+      "status": "open"
     }
   ]
 }
