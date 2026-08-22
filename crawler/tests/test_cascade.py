@@ -858,6 +858,16 @@ class ProgramRegionHeadingAnchorTest(unittest.TestCase):
         self.assertEqual(len(spans), 1)
         self.assertEqual(spans[0][0], page.find("АКУШЕРКА"))
 
+    def test_a_line_with_more_than_the_name_is_not_a_heading(self):
+        # Heading detection is EXACT by design; see _is_caps_heading.
+        # UniRuse's «СОФТУЕРНО ИНЖЕНЕРСТВО -» therefore does NOT anchor,
+        # which is deliberate until the boundary rule lands with it.
+        page = ("МЕДИЦИНА и други специалности\n"
+                "Обучението дава ОКС „магистър“.\n"
+                "БОТАНИКА\n")
+        spans = cascade.program_region(page, "Медицина", ["Ботаника"])
+        self.assertEqual(spans[0][0], 0)  # falls back to mention anchoring
+
     def test_caps_occurrence_mid_prose_is_not_a_heading(self):
         # A shouted name sharing its line with other words is not a
         # section heading; the page falls back to mention anchoring.

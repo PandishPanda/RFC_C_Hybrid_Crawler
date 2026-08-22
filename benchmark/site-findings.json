@@ -246,6 +246,14 @@
       "impact": "10 programs shipped nulls over text that was present in their own sections",
       "status": "fixed",
       "resolution": "2026-08-22 two APPENDED label patterns (bg-prodalzhitelnost, bg-dual-track) — appended so first-hit-wins means they can only fill a null, never pre-empt a passing value. Won duration for akusherka/medicinska-sестра/logopediya and language for medicina (graded MISS -> OK_VALUE). Deliberately does NOT match a bare «...е N семестъра»: Управление на здравните грижи states THREE competing durations for different entry routes, and picking one would repeat the partial-value defect the labeller ruled WRONG on Кинезитерапия's tuition."
+    },
+    {
+      "uni_id": "UniRuse",
+      "kind": "extraction",
+      "finding": "UniRuse writes section headings as «СОФТУЕРНО ИНЖЕНЕРСТВО -» (trailing dash), so the exact-line caps-heading detector does not recognise them and its faculty pages still use mention-anchoring",
+      "impact": "attribution on the fleet's most shared-page university rests on mention anchoring plus the REGION_WINDOW rather than on section structure",
+      "status": "open",
+      "resolution": "MEASURED 2026-08-22 and deliberately NOT shipped: loosening the detector alone removed no bad value and cost two correct ones (uniruse-socialwork's own admission formula is cut off by the word «икономика» — a sibling programme name — appearing in its prose; uniruse-socped's formula sits 27 chars past REGION_WINDOW). The loosening only pays together with the matching BOUNDARY rule: a section must end at the next HEADING, not at a prose mention of a sibling. Ship the two together, with a fleet diff and regrade."
     }
   ]
 }

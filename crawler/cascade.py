@@ -392,6 +392,15 @@ def _is_caps_heading(text, pos, ln):
     line = text[lo:hi]
     for ch in ("\u200b", "\ufeff"):
         line = line.replace(ch, "")
+    # Deliberately EXACT: UniRuse writes «СОФТУЕРНО ИНЖЕНЕРСТВО -», and
+    # accepting a punctuation tail would activate heading-anchoring on
+    # its faculty pages. Measured 2026-08-22: doing so removed no bad
+    # value and cost two correct ones, because those pages need the
+    # matching BOUNDARY rule too (a section must end at the next
+    # HEADING, not at a prose mention of a sibling — «икономика»
+    # occurring in Социални дейности's prose truncated its section
+    # before its own admission formula). Loosen this only together with
+    # that change, and re-measure.
     return line.strip() == occ
 
 
