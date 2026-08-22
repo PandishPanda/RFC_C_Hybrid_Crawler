@@ -1,19 +1,59 @@
 # RFC_C_Hybrid_Crawler
 
 Extraction pipeline for Bulgarian university degree-program data
-(tuition, admission, degree, duration, language), sourced from 51
-heterogeneous university websites (ADR-0006: no external registry), with verbatim
+(tuition, admission, degree, duration, language), sourced from
+heterogeneous Bulgarian university websites (8 configured today) (ADR-0006: no external registry), with verbatim
 provenance on every shipped value.
 
 Design (ADR-0001): a **deterministic extraction cascade** carries the
-structured share (~87% measured on the benchmark, €0 and 0 tokens per
-refresh); a **gated LLM tail** absorbs the prose share for
+structured share (48% of fields across the 8-university benchmark;
+100% at two of them, €0 and 0 tokens per refresh); a **gated LLM tail** absorbs the prose share for
 cascade-nulled fields only; one **mechanical provenance gate** — a pure
 function, no LLM in the loop — decides what ships. Site knowledge is
 config data proposed by onboarding agents and promoted by a human; no
 LLM and no per-site code runs in the production refresh loop for the
 deterministic share. See `CONTEXT.md` for the domain language and
 `docs/adr/` for the decision records.
+
+## Benchmark results — 8 universities, 190 blind-graded cells
+
+Two rendered reports live in `docs/` (open them in a browser):
+
+- **[docs/rfc-c.html](docs/rfc-c.html)** — RFC-C rev. 3, the STA-78 design
+  document, rewritten against the complete evidence.
+- **[docs/scorecard.html](docs/scorecard.html)** — the full scorecard:
+  per-university numbers, every `crawler validate` row, and all 24 recorded
+  site findings.
+
+| | |
+| -- | -- |
+| Universities · programs | 8 · 148 |
+| Fields extracted | 353 / 740 (48%) |
+| Blind-graded cells | 190 (5-program sample per uni) |
+| Graded correct | 125 / 190 (66%) |
+| Wrong values | 12 |
+| **Fabrications** | **3** |
+| Gate failures | **0**, across all 148 programs |
+
+### Read this before quoting the numbers
+
+Earlier revisions of this work led with **“0 fabrications”**. That was true
+across the first 190 graded cells and **is no longer true**. Extending the
+benchmark to all eight universities produced 3 fabrications and 12 wrong
+values, concentrated in one failure mode the earlier samples never reached:
+**misattribution on shared pages** — a program shipping a neighbour's value.
+The value is verbatim in the artifact, so the provenance gate passes it.
+
+The gate's guarantee is real but narrower than we stated:
+
+- it has **never** shipped a value absent from its source artifact — that held
+  across every site shape tested;
+- it **cannot** verify that a value belongs to the program it was attached to.
+
+Every defect above was found by human labels in the blind benchmark. **None was
+found by the pipeline's own checks.** The evidence — frozen keys, verdicts,
+worksheets, findings — is tracked in [`benchmark/`](benchmark/README.md) and by
+protocol can never be regenerated.
 
 ## Pipeline
 
