@@ -607,3 +607,447 @@ class ProgrammeLevelLabelTest(unittest.TestCase):
             'Нещо - магистърска програма НБУ. Степен: ОКС „магистър"')
         r = cascade.harvest_labels("degree", src)
         self.assertEqual(r.method, "label:bg-oks-label")
+
+
+class ProgramRegionTest(unittest.TestCase):
+    """program_region(text, name, sibling_names) -> ordered [(start, end)]
+    spans of the page a program's tier-G harvest may read on a SHARED page.
+
+    Shapes are lifted from measured contamination (2026-08-22 benchmark):
+    nav listings repeat names before the real heading (UniRuse), a
+    program mentioned inside a sibling's sentence must not open the
+    whole rest of the page (MUVarna), and same-named variants must not
+    bound each other (VUM pb/b twins)."""
+
+    def test_span_runs_from_name_to_next_distinct_sibling(self):
+        text = "intro АЛФА alpha body БЕТА beta body"
+        spans = cascade.program_region(text, "АЛФА", ["БЕТА"])
+        self.assertEqual(spans, [(6, 22)])  # «АЛФА alpha body » up to БЕТА
+
+    def test_last_program_extends_to_end_of_text(self):
+        text = "intro АЛФА alpha body БЕТА beta body"
+        spans = cascade.program_region(text, "БЕТА", ["АЛФА"])
+        self.assertEqual(spans, [(22, 36)])
+
+    def test_every_occurrence_anchors_a_span_nav_then_heading(self):
+        # UniRuse shape: the name appears in a nav list (alongside its
+        # sibling) before its real heading. Both occurrences anchor
+        # spans; the nav span is tiny, the real one carries the content.
+        text = "nav: БЕТА АЛФА | БЕТА real content АЛФА end"
+        spans = cascade.program_region(text, "БЕТА", ["АЛФА"])
+        self.assertEqual(spans, [(5, 10), (17, 35)])
+
+    def test_absent_name_yields_no_spans(self):
+        self.assertEqual(
+            cascade.program_region("no such program here", "АЛФА", ["БЕТА"]),
+            [])
+
+    def test_matching_is_case_insensitive(self):
+        # MUVarna shape: config says «Медицина», the heading shouts
+        # «МЕДИЦИНА».
+        text = "преди МЕДИЦИНА тяло на секцията АКУШЕРКА след"
+        spans = cascade.program_region(text, "Медицина", ["Акушерка"])
+        self.assertEqual(spans, [(6, 32)])
+
+    def test_same_named_sibling_is_not_a_boundary(self):
+        # VUM shape: pb/b variants share one name on one page — the twin
+        # must not truncate the region.
+        text = "ЗАГЛАВИЕ Международен бизнес body body"
+        spans = cascade.program_region(
+            text, "Международен бизнес", ["Международен бизнес"])
+        self.assertEqual(spans, [(9, len(text))])
+
+    def test_span_is_capped_at_the_region_window(self):
+        # A span with no following sibling must NOT run to the end of an
+        # arbitrarily long page: configured programs do not tile real
+        # pages, and the measured UniRuse leak sat 3,602 chars past the
+        # last configured heading. Proximity is the attribution signal.
+        text = "АЛФА " + ("x" * (cascade.REGION_WINDOW + 500))
+        spans = cascade.program_region(text, "АЛФА", ["БЕТА"])
+        self.assertEqual(spans, [(0, cascade.REGION_WINDOW)])
+
+    def test_a_near_sibling_bounds_tighter_than_the_window(self):
+        text = "АЛФА тяло БЕТА " + ("y" * cascade.REGION_WINDOW)
+        spans = cascade.program_region(text, "АЛФА", ["БЕТА"])
+        self.assertEqual(spans, [(0, 10)])
+
+    def test_name_inside_a_longer_word_does_not_anchor(self):
+        # measured on ANIS: «Финанси» matched inside «финансиране» and
+        # «финансите», opening a span next to another block's degree
+        # text 7,600 chars from the program's real section.
+        text = "проекти – финансиране и контрол върху финансите на фонда"
+        self.assertEqual(cascade.program_region(text, "Финанси", ["Бета"]),
+                         [])
+
+    def test_name_inside_a_longer_word_does_not_bound_either(self):
+        # a sibling name embedded in a longer word must not truncate
+        # a real span
+        text = "АЛФА тяло с финансиране на дейността и още текст"
+        spans = cascade.program_region(text, "АЛФА", ["Финанси"])
+        self.assertEqual(spans, [(0, len(text))])
+
+    def test_overlapping_spans_merge(self):
+        # two adjacent occurrences of the name with no boundary between
+        # them collapse into one span, not two overlapping ones
+        text = "АЛФА x АЛФА y БЕТА z"
+        spans = cascade.program_region(text, "АЛФА", ["БЕТА"])
+        self.assertEqual(spans, [(0, 14)])
+
+
+def _shared_site(programs):
+    return config.parse_site_config(
+        {"uni_id": "X", "sources": {}, "programs": programs},
+        origin="shared-page-test")
+
+
+class SharedPageAttributionTest(unittest.TestCase):
+    """On a page shared by >=2 configured programs, tier-G harvest reads
+    only the program's own region (program_region). A label match that
+    exists on the page but outside the region must NOT ship — that is
+    exactly the measured MUVarna/UniRuse contamination.
+
+    Fixture texts are miniatures of the real pages the defects shipped
+    from; expected values come from the labeller's frozen keys."""
+
+    URL = "https://x.example/specialnosti"
+
+    def _docs(self, text):
+        return {self.URL: cascade.TextSource(ref="html:" + self.URL,
+                                             text=text)}
+
+    def test_out_of_region_match_does_not_ship(self):
+        # UniRuse shape: two bachelor programs share the page; the only
+        # «ОКС „...“» text lives in a third, unconfigured master's block.
+        site = _shared_site([
+            {"id": "se", "name": "Софтуерно инженерство", "page": self.URL},
+            {"id": "cs", "name": "Компютърни науки", "page": self.URL},
+        ])
+        # geometry mirrors the measured page: the poison block sat
+        # thousands of chars past the last configured heading (5,703 on
+        # the real UniRuse page), well outside the attribution window.
+        filler = "друга неконфигурирана специалност и общи текстове. " * 80
+        text = ("Специалности: Софтуерно инженерство Компютърни науки | "
+                "СОФТУЕРНО ИНЖЕНЕРСТВО студентите се обучават по съвременни "
+                "езици и среди за програмиране. "
+                "КОМПЮТЪРНИ НАУКИ изучават се алгоритми и структури от данни. "
+                + filler +
+                "МАГИСТЪРСКА ФИЛОЛОГИЯ Завършилите получават диплома за "
+                'ОКС „магистър" с квалификация „магистър по филология".')
+        self.assertGreater(text.find("ОКС"),
+                           text.find("КОМПЮТЪРНИ") + cascade.REGION_WINDOW)
+        docs = self._docs(text)
+        for pid in ("se", "cs"):
+            p = next(x for x in site.programs if x.id == pid)
+            r = cascade.resolve_field(site, p, "degree", docs)
+            self.assertIsNone(
+                r, "out-of-region ОКС text leaked into {0}: {1!r}".format(
+                    pid, getattr(r, "value", None)))
+
+    def test_in_region_match_ships_and_stays_with_its_program(self):
+        site = _shared_site([
+            {"id": "a", "name": "Медицина", "page": self.URL},
+            {"id": "b", "name": "Акушерка", "page": self.URL},
+        ])
+        text = ("МЕДИЦИНА студентите придобиват образователно-квалификационна "
+                'степен „магистър" след шест години. '
+                "АКУШЕРКА обучението е практическо и няма посочена степен тук.")
+        docs = self._docs(text)
+        a = next(x for x in site.programs if x.id == "a")
+        b = next(x for x in site.programs if x.id == "b")
+        ra = cascade.resolve_field(site, a, "degree", docs)
+        self.assertIsNotNone(ra)
+        self.assertIn("магистър", ra.value)
+        # the sibling must NOT inherit Медицина's degree
+        self.assertIsNone(cascade.resolve_field(site, b, "degree", docs))
+
+    def test_sole_program_page_is_not_scoped(self):
+        site = _shared_site([
+            {"id": "only", "name": "Право", "page": self.URL},
+        ])
+        # the program's name never appears in the text — on a sole page
+        # that must not matter (today's behavior, preserved)
+        text = 'Тук се придобива ОКС „магистър" по право.'
+        p = site.programs[0]
+        r = cascade.resolve_field(site, p, "degree", self._docs(text))
+        self.assertIsNotNone(r)
+
+    def test_explicitly_routed_pages_stay_unscoped(self):
+        # adm_page is deliberate human routing (VUM/AUBG wire page-wide
+        # admission sources on purpose) — never region-scoped, even when
+        # the main page is shared.
+        adm = "https://x.example/how-to-apply"
+        site = _shared_site([
+            {"id": "a", "name": "Алфа", "page": self.URL, "adm_page": adm},
+            {"id": "b", "name": "Бета", "page": self.URL, "adm_page": adm},
+        ])
+        docs = self._docs("Алфа текст. Бета текст.")
+        docs[adm] = cascade.TextSource(
+            ref="html:" + adm,
+            text=("Applicants must demonstrate English language proficiency "
+                  "equivalent to IELTS 6.5 or above"))
+        for pid in ("a", "b"):
+            p = next(x for x in site.programs if x.id == pid)
+            r = cascade.resolve_field(site, p, "admission", docs)
+            self.assertIsNotNone(r, pid)
+            self.assertIn("IELTS", r.value)
+
+    def test_first_span_value_beats_later_span_poison(self):
+        # MUVarna Медицина shape: the program's own section (first span)
+        # carries a correct окс-степен statement; the program's name is
+        # ALSO mentioned inside a later joint-program sentence whose
+        # «ОКС „бакалавър"» must not win even though bg-oks-inline is
+        # ordered before bg-okstepen in the pattern list.
+        site = _shared_site([
+            {"id": "med", "name": "Медицина", "page": self.URL},
+            {"id": "mil", "name": "Военно осигуряване", "page": self.URL},
+        ])
+        text = ("МЕДИЦИНА придобиват образователно-квалификационна степен "
+                '„магистър" след пълния курс. '
+                "Военно осигуряване приемът на курсанти за степени по "
+                'специалността „Медицина" от МУ и ОКС „бакалавър" по '
+                "военното дело е отделен.")
+        med = next(x for x in site.programs if x.id == "med")
+        r = cascade.resolve_field(site, med, "degree", self._docs(text))
+        self.assertIsNotNone(r)
+        self.assertIn("магистър", r.value)
+        self.assertNotIn("бакалавър", r.value)
+
+    def test_program_never_named_on_shared_page_ships_nothing(self):
+        site = _shared_site([
+            {"id": "a", "name": "Алфа", "page": self.URL},
+            {"id": "b", "name": "Бета", "page": self.URL},
+        ])
+        text = 'Алфа: придобива се ОКС „магистър". И нищо за другата.'
+        b = next(x for x in site.programs if x.id == "b")
+        self.assertIsNone(cascade.resolve_field(site, b, "degree",
+                                                self._docs(text)))
+
+    def test_suppress_labels_still_applies_inside_a_region(self):
+        site = _shared_site([
+            {"id": "a", "name": "Алфа", "page": self.URL,
+             "suppress_labels": {"tuition": ["en-semfee-label"]}},
+            {"id": "b", "name": "Бета", "page": self.URL},
+        ])
+        text = "Алфа Semester fee: 1100 leva. Бета друг текст."
+        a = next(x for x in site.programs if x.id == "a")
+        self.assertIsNone(cascade.resolve_field(site, a, "tuition",
+                                                self._docs(text)))
+
+
+class DegreeFromNameTest(unittest.TestCase):
+    """degree_from_name: the ANIS shape — a sentence that names BOTH the
+    degree level and the program («придобиват образователната степен
+    „магистър“ по специалността „Криминалистика“») is attributed by
+    construction, wherever it sits on a shared page."""
+
+    def test_sentence_naming_the_program_yields_its_level(self):
+        src = cascade.TextSource(
+            "html:https://x.example/m",
+            "Успешно завършилите студенти придобиват образователната "
+            "степен „магистър“ по специалността „Криминалистика“. "
+            "Киберсигурност Специалност „Киберсигурност“ обучава ...")
+        r = cascade.degree_from_name("Криминалистика", src)
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "магистър")
+        self.assertEqual(r.tier, cascade.TIER_G)
+
+    def test_sentence_naming_another_program_does_not_fire(self):
+        src = cascade.TextSource(
+            "html:https://x.example/m",
+            "придобиват образователната степен „магистър“ по "
+            "специалността „Финанси“.")
+        self.assertIsNone(cascade.degree_from_name("Криминалистика", src))
+
+    def test_okvalifikacionna_variant_also_matches(self):
+        src = cascade.TextSource(
+            "html:https://x.example/m",
+            "завършилите придобиват образователно-квалификационна степен "
+            "„магистър“ по специалност „Бизнес администрация“.")
+        r = cascade.degree_from_name("Бизнес администрация", src)
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "магистър")
+
+
+class DegreeFromNameResolveTest(unittest.TestCase):
+    """resolve_field falls back to the name-adjacent rule when a shared
+    page's region yields nothing — the measured ANIS regression risk:
+    region scoping alone would have turned 15 correct degrees to null."""
+
+    URL = "https://x.example/priem"
+
+    def test_region_empty_but_own_sentence_ships(self):
+        site = _shared_site([
+            {"id": "m03", "name": "Криминалистика", "page": self.URL},
+            {"id": "m11", "name": "Финанси", "page": self.URL},
+        ])
+        text = ("Криминалистика Специалност „Криминалистика“ обучава "
+                "висококвалифицирани специалисти. Успешно завършилите "
+                "придобиват образователната степен „магистър“ по "
+                "специалността „Криминалистика“. "
+                "Финанси Специалност „Финанси“ обучава икономисти без "
+                "посочена степен в блока.")
+        m03 = next(x for x in site.programs if x.id == "m03")
+        m11 = next(x for x in site.programs if x.id == "m11")
+        docs = {self.URL: cascade.TextSource(ref="html:" + self.URL,
+                                             text=text)}
+        r = cascade.resolve_field(site, m03, "degree", docs)
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "магистър")
+        # Финанси has no degree statement of its own -> honest null,
+        # never Криминалистика's value
+        self.assertIsNone(cascade.resolve_field(site, m11, "degree", docs))
+
+
+class ProgramRegionOverlapTest(unittest.TestCase):
+    """Longest-name-wins where names nest: «Финанси» is a whole word
+    inside «Международни финанси», so a naive word-boundary match anchors
+    the short-named program at its SIBLING's heading (review finding,
+    2026-08-22; latent live case: SHU's «Английска филология» vs
+    «Английска филология: Лингвистика и превод»)."""
+
+    def test_short_name_does_not_anchor_inside_longer_sibling_name(self):
+        text = "МЕЖДУНАРОДНИ ФИНАНСИ секция на другата програма и още текст"
+        self.assertEqual(
+            cascade.program_region(text, "Финанси",
+                                   ["Международни финанси"]),
+            [])
+
+    def test_longer_sibling_occurrence_does_not_bound_my_span(self):
+        # converse: the short sibling name inside MY longer heading must
+        # not truncate my own span at my own heading
+        text = "МЕЖДУНАРОДНИ ФИНАНСИ моята секция и съдържание"
+        spans = cascade.program_region(text, "Международни финанси",
+                                       ["Финанси"])
+        self.assertEqual(spans, [(0, len(text))])
+
+    def test_short_name_still_anchors_at_its_own_heading(self):
+        text = "МЕЖДУНАРОДНИ ФИНАНСИ чужда секция. ФИНАНСИ моята секция тук"
+        spans = cascade.program_region(text, "Финанси",
+                                       ["Международни финанси"])
+        self.assertEqual(spans, [(35, 59)])
+
+    def test_suffix_embedded_name_does_not_anchor(self):
+        # pins the BEFORE-char half of the word-boundary guard: «бизнес»
+        # as the tail of «агробизнес» is not an occurrence
+        text = "секция за агробизнес и земеделие"
+        self.assertEqual(cascade.program_region(text, "бизнес", ["Бета"]),
+                         [])
+
+    def test_case_expanding_characters_degrade_safely(self):
+        # str.lower() can change string length ('İ' -> 2 chars); indexes
+        # from the lowered text must never mis-slice the original
+        text = ("İ" * 4) + " АЛФА тяло БЕТА край"
+        spans = cascade.program_region(text, "АЛФА", ["БЕТА"])
+        for s0, e0 in spans:
+            self.assertEqual(text[s0:s0 + 4], "АЛФА")
+
+
+class DegreeFromNameBoundaryTest(unittest.TestCase):
+    def test_name_must_end_at_a_word_boundary(self):
+        # «Финанси» must not match inside «Финансови науки»
+        src = cascade.TextSource(
+            "html:https://x.example/m",
+            "придобиват образователната степен „магистър“ по "
+            "специалността „Финансови науки“.")
+        self.assertIsNone(cascade.degree_from_name("Финанси", src))
+
+    def test_resolve_ships_via_the_name_rule_method(self):
+        # pins that the ANIS recovery actually flows through
+        # degree-from-name (review: the earlier test asserted only value)
+        site = _shared_site([
+            {"id": "a", "name": "Криминалистика", "page": "https://x/p"},
+            {"id": "b", "name": "Финанси", "page": "https://x/p"},
+        ])
+        text = ("Криминалистика блок без етикетни съвпадения. Успешно "
+                "завършилите придобиват образователната степен „магистър“ "
+                "по специалността „Криминалистика“. Финанси друг блок.")
+        a = next(x for x in site.programs if x.id == "a")
+        r = cascade.resolve_field(site, a, "degree",
+                                  {"https://x/p": cascade.TextSource(
+                                      ref="html:x", text=text)})
+        self.assertIsNotNone(r)
+        self.assertEqual(r.method, "degree-from-name")
+
+
+class ScopingBypassTest(unittest.TestCase):
+    def test_shared_page_duplicated_as_extra_page_stays_scoped(self):
+        # config listing the SAME url in extra_pages must not smuggle the
+        # unscoped full text back into the harvest
+        url = "https://x.example/shared"
+        site = _shared_site([
+            {"id": "a", "name": "Алфа", "page": url, "extra_pages": [url]},
+            {"id": "b", "name": "Бета", "page": url},
+        ])
+        filler = "неутрален текст на страницата между секциите. " * 60
+        text = ("Алфа секция без степен. Бета секция. " + filler +
+                'НЕКОНФИГУРИРАНА Завършилите получават ОКС „магистър".')
+        a = next(x for x in site.programs if x.id == "a")
+        r = cascade.resolve_field(site, a, "degree",
+                                  {url: cascade.TextSource(ref="html:s",
+                                                           text=text)})
+        self.assertIsNone(r)
+
+
+class ContinuationGuardTest(unittest.TestCase):
+    """«могат да продължат образованието си в ОКС „магистър“» states where
+    graduates may go NEXT, not this program's award — live on the real
+    UniRuse faculty page, where it shipped a master's degree for a
+    bachelor program (socped)."""
+
+    def test_continuation_sentence_does_not_ship_as_degree(self):
+        src = cascade.TextSource(
+            "html:https://x.example/f",
+            "Завършилите могат да продължат образованието си в "
+            'ОКС „магистър"; да получат второ висше образование.')
+        self.assertIsNone(cascade.harvest_labels("degree", src))
+
+    def test_award_sentence_still_ships(self):
+        src = cascade.TextSource(
+            "html:https://x.example/f",
+            "Завършилите успешно студенти получават диплома за "
+            'ОКС „магистър" с професионална квалификация.')
+        r = cascade.harvest_labels("degree", src)
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, 'ОКС „магистър"')
+
+
+class ScopedEmissionGateTest(unittest.TestCase):
+    def test_scoped_emission_passes_the_gate_against_the_full_artifact(self):
+        # segments cut from a span view must stay verbatim substrings of
+        # the FULL page artifact the ref names (review: this seam was
+        # only exercised via frozen configs, which have no shared pages)
+        from crawler.provenance import Artifact, Status as PStatus, gate
+        url = "https://x.example/shared"
+        site = _shared_site([
+            {"id": "a", "name": "Медицина", "page": url},
+            {"id": "b", "name": "Акушерка", "page": url},
+        ])
+        text = ("МЕДИЦИНА    придобиват   образователно-квалификационна "
+                "степен „магистър“ след курса. АКУШЕРКА друго.")
+        a = next(x for x in site.programs if x.id == "a")
+        r = cascade.resolve_field(site, a, "degree",
+                                  {url: cascade.TextSource(ref="html:s",
+                                                           text=text)})
+        self.assertIsNotNone(r)
+        artifact = Artifact(text=text, renderer_id="t",
+                            renderer_version="1", ref="html:s")
+        verdict = gate(r.value, list(r.segments), artifact)
+        self.assertIs(verdict.status, PStatus.PASS, verdict)
+
+
+class ScopingBypassOtherRoutesTest(unittest.TestCase):
+    def test_adm_page_equal_to_shared_page_stays_scoped(self):
+        url = "https://x.example/shared"
+        site = _shared_site([
+            {"id": "a", "name": "Алфа", "page": url, "adm_page": url},
+            {"id": "b", "name": "Бета", "page": url},
+        ])
+        filler = "неутрален текст между секциите на страницата. " * 60
+        text = ("Алфа секция. Бета секция. " + filler +
+                "ЧУЖД БЛОК Applicants must demonstrate English language "
+                "proficiency equivalent to IELTS 6.5 or above")
+        a = next(x for x in site.programs if x.id == "a")
+        r = cascade.resolve_field(site, a, "admission",
+                                  {url: cascade.TextSource(ref="html:s",
+                                                           text=text)})
+        self.assertIsNone(r)

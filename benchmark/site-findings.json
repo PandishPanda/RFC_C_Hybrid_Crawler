@@ -131,9 +131,9 @@
     {
       "uni_id": "MUVarna",
       "kind": "trust",
-      "finding": "PROVEN wrong-row contamination on a shared page: muv-medicina and muv-rentgenov-laborant shipped the IDENTICAL «ОКС „бакалавър\"» snippet, taken from a sentence about a different program (Организация и управление на военни формирования). Medicine is магистър. Both values are verbatim in the artifact, so the provenance gate passed them",
+      "finding": "PROVEN wrong-row contamination on a shared page: muv-medicina and muv-rentgenov-laborant shipped the IDENTICAL «ОКС „бакалавър\"» snippet, taken from a sentence about a different program (Организация и управление на военни формирования). Medicine is магистър. Both values are verbatim in the artifact, so the provenance gate passed them | FIXED 2026-08-22: tier-G harvest is region-scoped via program_region() (word-bounded name anchors, REGION_WINDOW); regrade confirms both programs now ship in-region values",
       "impact": "2 graded wrong. The gate proves presence, not attribution — on a shared page the first match wins regardless of which program is being resolved. UniRuse and ANIS are also shared-page and NOT yet graded",
-      "status": "open"
+      "status": "fixed"
     },
     {
       "uni_id": "MUVarna",
@@ -152,9 +152,9 @@
     {
       "uni_id": "UniRuse",
       "kind": "trust",
-      "finding": "shared-page contamination CONFIRMED at a second university: uniruse-se and uniruse-cs shipped the identical «ОКС „магистър\"» from their shared faculty page, though both were added from UniRuse's BACHELOR index. The single-page control program (Право) showed no contamination — isolating the shared page as the cause",
+      "finding": "shared-page contamination CONFIRMED at a second university: uniruse-se and uniruse-cs shipped the identical «ОКС „магистър\"» from their shared faculty page, though both were added from UniRuse's BACHELOR index. The single-page control program (Право) showed no contamination — isolating the shared page as the cause | FIXED 2026-08-22: same mechanism; regrade confirms both fabrications became honest nulls (OK_NULL vs the frozen key)",
       "impact": "2 fabrications. With MUVarna this is 4 defects across 2 of the 3 shared-page universities; ANIS is the third and is still ungraded",
-      "status": "open"
+      "status": "fixed"
     },
     {
       "uni_id": "ANIS",
@@ -168,6 +168,27 @@
       "kind": "extraction",
       "finding": "where a page states two competing values, the cascade takes the first: shipped «2 или 3 семестъра» and «само по документи» where the labeller ruled «4 семестъра» and the ЗВО minimum-grade rule govern",
       "impact": "4 graded wrong — first-match selection, not attribution error",
+      "status": "open"
+    },
+    {
+      "uni_id": "MUVarna",
+      "kind": "extraction",
+      "finding": "attribution fix EXPOSED a correct-by-accident value: akusherka's old «ОКС „бакалавър\"» was lifted from the wrong sentence yet happened to be right; the in-region candidate is a pharmacy-management continuation sentence near an «Акушерка» mention — wrong. Candidate selection (finding 2), not attribution",
+      "impact": "1 graded wrong that used to look correct; right answers from wrong rows are still defects",
+      "status": "open"
+    },
+    {
+      "uni_id": "UniRuse",
+      "kind": "extraction",
+      "finding": "continuation sentences («могат да продължат образованието си в ОКС „магистър\"») shipped as the program's own degree — live on the faculty pages. FIXED 2026-08-22 with a lookbehind guard on bg-oks-inline; socped now ships its correct bachelor statement",
+      "impact": "was an ungraded wrong entering promoted data; now correct",
+      "status": "fixed"
+    },
+    {
+      "uni_id": "MUVarna",
+      "kind": "trust",
+      "finding": "REGION_WINDOW cannot bound at UNCONFIGURED sections: muv-inspektor's span crosses into the unconfigured «Оптометрист» block within 2,500 chars and ships its «ОКС „Магистър\"». Deterministically unsolvable without page section structure",
+      "impact": "1 known ungraded wrong; the full fix is section-aware candidate selection (finding 2)",
       "status": "open"
     }
   ]

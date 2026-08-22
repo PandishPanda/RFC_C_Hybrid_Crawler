@@ -87,6 +87,8 @@ __all__ = [
     "snippet_around",
     "harvest_labels",
     "language_from_name",
+    "degree_from_name",
+    "program_region",
     "anchor_probe",
     "fee_row_join",
     "sectioned_fee_join",
@@ -218,7 +220,11 @@ def _emit(field, value, segments, source_ref, method, tier, context=None):
 LABEL_PATTERNS = {
     "degree": [
         ("bg-oks-label", r'Степен:\s*(ОКС\s*[„"«][А-Яа-я ]+["”»])'),
-        ("bg-oks-inline", r'(ОКС\s*[„"«][А-Яа-я][а-я ]*["”»])'),
+        # (?<!образованието си в ) — «могат да продължат образованието
+        # си в ОКС „магистър"» states where graduates may go NEXT, not
+        # this program's award; it shipped a master's degree for a
+        # bachelor program on the real UniRuse faculty page (2026-08-22).
+        ("bg-oks-inline", r'(?<!образованието си в )(ОКС\s*[„"«][А-Яа-я][а-я ]*["”»])'),
         ("bg-okstepen", r'([Оо]бразователно\s*-?\s*квалификационна степен\s*[–-]?\s*[„"“]\s*[а-я ]+["”“])'),
         ("bg-pridobilite", r'Придобилите степен\s+([А-Я][А-Я ]+[А-Я])(?=\s+са)'),
         ("en-equal-degree", r'Educational qualification degree\s+([A-Z]+)'),
@@ -310,6 +316,131 @@ def language_from_name(name, source):
     return _emit("language", m.group(1),
                  [snippet_around(text, i, i + len(name), 60)],
                  source.ref, "title-language", TIER_G)
+
+
+def _find_all(haystack, needle):
+    # type: (str, str) -> list
+    """Word-bounded occurrences: a name embedded in a longer word is not
+    an occurrence (measured on ANIS: «Финанси» matched inside
+    «финансиране», opening a span beside another program's block)."""
+    out = []
+    i = haystack.find(needle)
+    while i >= 0:
+        before = haystack[i - 1] if i > 0 else " "
+        after_i = i + len(needle)
+        after = haystack[after_i] if after_i < len(haystack) else " "
+        if not before.isalpha() and not after.isalpha():
+            out.append(i)
+        i = haystack.find(needle, i + 1)
+    return out
+
+
+# The farthest a claim may sit from the program's name and still be
+# attributed to it, in normalized chars. Every measured TRUE section in
+# the 8-university benchmark fits in ~1,600; every measured CONTAMINATION
+# sat >=3,602 past the nearest anchor. Unbounded spans encode the false
+# assumption that configured programs tile the page -- the UniRuse
+# philology block leaked into the LAST configured program's span exactly
+# that way. Too small fails to a null; too large fails to a wrong value;
+# the constant is chosen so measured sections fit with headroom.
+REGION_WINDOW = 2500
+
+
+def program_region(text, name, sibling_names):
+    # type: (str, str, list) -> list
+    """Ordered [(start, end)] spans of a SHARED page that belong to the
+    named program -- the only part of the page its tier-G harvest may
+    read (2026-08-22 attribution work; measured contamination: MUVarna
+    shipped one program's degree to two others, UniRuse gave two
+    bachelor programs a master's degree lifted from a third section).
+
+    Every case-insensitive occurrence of NAME anchors a span; each span
+    runs to the next occurrence of a DISTINCT sibling name (same-named
+    variants -- VUM's pb/b twins -- never bound each other). Multiple
+    occurrences all anchor because real pages repeat names in nav lists
+    before the real heading. Overlapping spans merge. No occurrence of
+    NAME at all means NO spans: a shared page that never names the
+    program must not feed it values.
+
+    Plain substring matching, deliberately: names are config data, not
+    regexes, and a false boundary from a name collision only SHRINKS a
+    span -- the conservative failure is a null, never a wrong value.
+    """
+    low = text.lower()
+    if len(low) != len(text):
+        # str.lower() expanded some character (e.g. 'İ' -> 2 chars), so
+        # lowered indexes would mis-slice the original. Degrade to
+        # case-sensitive matching -- the conservative failure is a
+        # smaller region and a null, never a mis-attributed value.
+        low = text
+    own = name.lower()
+    distinct = []
+    seen = {own}
+    for sib in sibling_names:
+        s = sib.lower()
+        if s not in seen:
+            seen.add(s)
+            distinct.append(s)
+    # Longest-name-wins where names nest: «Финанси» occurring as a whole
+    # word inside «Международни финанси» belongs to the LONGER name, both
+    # as an anchor and as a boundary (review finding, 2026-08-22).
+    occ = {n: _find_all(low, n) for n in [own] + distinct}
+
+    def _suppressed(pos, ln, myname):
+        for other, positions in occ.items():
+            if len(other) <= ln or other == myname:
+                continue
+            for p in positions:
+                if p <= pos and pos + ln <= p + len(other):
+                    return True
+        return False
+
+    anchors = [a for a in occ[own] if not _suppressed(a, len(own), own)]
+    if not anchors:
+        return []
+    boundaries = sorted(
+        b for n in distinct for b in occ[n]
+        if not _suppressed(b, len(n), n))
+    spans = []
+    for a in anchors:
+        end = next((b for b in boundaries if b > a), len(text))
+        spans.append((a, min(end, a + REGION_WINDOW)))
+    spans.sort()
+    merged = [spans[0]]
+    for s0, e0 in spans[1:]:
+        ps, pe = merged[-1]
+        if s0 <= pe:
+            merged[-1] = (ps, max(pe, e0))
+        else:
+            merged.append((s0, e0))
+    return merged
+
+
+_DEGREE_NAME_RX_TEMPLATE = (
+    r'придобиват\s+(?:образователната|образователно-квалификационна)\s+'
+    r'степен\s*[„"«“]\s*([а-я][а-я ]*?)\s*[“”"»]\s*'
+    r'по\s+специалност(?:та)?\s*[„"«“]?\s*{name}')
+
+
+def degree_from_name(name, source):
+    # type: (str, TextSource) -> Optional[Extraction]
+    """The ANIS-family rule (tier G): a sentence stating the degree level
+    AND naming the program — «придобиват образователната степен
+    „магистър“ по специалността „Криминалистика“» — is attributed by
+    construction: it cannot feed any program it does not name. Needed
+    because these sentences END with the program name, so they start
+    BEFORE the name's region anchor and region-scoped harvest alone
+    would null 15 measured-correct ANIS degrees (2026-08-22)."""
+    text = norm(source.text)
+    rx = re.compile(_DEGREE_NAME_RX_TEMPLATE.format(name=re.escape(name)),
+                    re.IGNORECASE)
+    m = rx.search(text)
+    if not m:
+        return None
+    return _emit("degree", norm(m.group(1)),
+                 [snippet_around(text, m.start(), m.end())],
+                 source.ref, "degree-from-name", TIER_G)
+
 
 
 # ------------------------------------------------------- tier B: anchors
@@ -751,10 +882,33 @@ def resolve_field(site, program, field, docs):
 
     page = docs.get(program.page)
 
+    # A page shared by >=2 configured programs is region-scoped: tier-G
+    # harvest may only read the program's own program_region() spans.
+    # A label match elsewhere on the page is a SIBLING's claim -- shipping
+    # it is the measured MUVarna/UniRuse contamination (2026-08-22), and
+    # the provenance gate cannot catch it because the text is verbatim-
+    # present. Spans are harvested in document order, each with the full
+    # pattern list, so a correct value in the program's own section beats
+    # later-span poison regardless of pattern order. Explicitly routed
+    # pages (lang/adm/tuition/extra) are human-attributed config and stay
+    # unscoped; a sole-program page is unscoped too.
     text_docs = []
     if page is not None:
-        text_docs.append(page)
+        siblings = [p.name for p in site.programs
+                    if p.page == program.page and p.id != program.id]
+        if siblings:
+            full = norm(page.text)
+            for s0, e0 in program_region(full, program.name, siblings):
+                text_docs.append(TextSource(ref=page.ref, text=full[s0:e0]))
+        else:
+            text_docs.append(page)
+    shared_page = any(p.page == program.page and p.id != program.id
+                      for p in site.programs)
     for url in program.extra_pages:
+        if url == program.page and shared_page:
+            # the shared page is already present as scoped views; listing
+            # it again in extra_pages must not smuggle the full text back
+            continue
         if docs.get(url) is not None:
             text_docs.append(docs[url])
     for sid in program.extra_sources:
@@ -762,7 +916,8 @@ def resolve_field(site, program, field, docs):
             text_docs.append(docs[sid])
 
     if field == "language" and program.lang_page:
-        if docs.get(program.lang_page) is not None:
+        if (docs.get(program.lang_page) is not None
+                and not (program.lang_page == program.page and shared_page)):
             text_docs.append(docs[program.lang_page])
 
     if field == "admission":
@@ -782,7 +937,8 @@ def resolve_field(site, program, field, docs):
                                    program.admission_join.alias)
                 if r:
                     return r
-        if program.adm_page and docs.get(program.adm_page) is not None:
+        if (program.adm_page and docs.get(program.adm_page) is not None
+                and not (program.adm_page == program.page and shared_page)):
             text_docs.append(docs[program.adm_page])
 
     if field in ("degree", "duration") and program.spravochnik is not None:
@@ -797,6 +953,11 @@ def resolve_field(site, program, field, docs):
     for source in text_docs:
         r = harvest_labels(field, source,
                            skip=program.suppress_labels.get(field, ()))
+        if r:
+            return r
+
+    if field == "degree" and page is not None:
+        r = degree_from_name(program.name, page)
         if r:
             return r
 
@@ -836,7 +997,10 @@ def resolve_field(site, program, field, docs):
                     program.fees_section.section_pattern)
                 if r:
                     return r
-        if program.tuition_page and docs.get(program.tuition_page) is not None:
+        if (program.tuition_page
+                and docs.get(program.tuition_page) is not None
+                and not (program.tuition_page == program.page
+                         and shared_page)):
             r = harvest_labels("tuition", docs[program.tuition_page])
             if r:
                 return r

@@ -41,6 +41,12 @@
       "field": "tuition",
       "verdict": "wrong",
       "note": "labeller 2026-08-21: shipped first-year fee only; the source states a per-year progression"
+    },
+    {
+      "program_id": "muv-akusherka",
+      "field": "degree",
+      "verdict": "wrong",
+      "note": "labeller 2026-08-22: pharmacy-management master's sentence near an Акушерка mention — not this program's degree (candidate-selection residual, finding 2)"
     }
   ]
 }
