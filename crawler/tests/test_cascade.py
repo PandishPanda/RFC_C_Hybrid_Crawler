@@ -322,12 +322,13 @@ class TestGoldenRegression(unittest.TestCase):
     def golden(self, tiers):
         return [r for r in fx.golden_records() if r["tier"] in tiers]
 
-    def test_label_library_is_30_shared_patterns(self):
-        # 30 = 27 + bg-lang-label (2026-08-17 VUM benchmark repair)
+    def test_label_library_is_32_shared_patterns(self):
+        # 32 = 27 + bg-lang-label (2026-08-17 VUM benchmark repair)
         #         + bg-programme-level (2026-08-21 NBU build-out)
         #         + bg-kandidatstva-se (2026-08-22 UniRuse admission)
+        #         + bg-prodalzhitelnost, bg-dual-track (2026-08-22 MUVarna)
         n = sum(len(v) for v in cascade.LABEL_PATTERNS.values())
-        self.assertEqual(n, 30)
+        self.assertEqual(n, 32)
 
     def test_reproduces_every_golden_record(self):
         extractions = benchmark_extractions()
@@ -1172,6 +1173,119 @@ class KandidatstvaSeLabelTest(unittest.TestCase):
             "html:https://x.example/f",
             "Свободен текст за приема без формулата за балообразуване.")
         self.assertIsNone(cascade.harvest_labels("admission", src))
+
+
+class HeadingAnchoringSurvivesNormalizationTest(unittest.TestCase):
+    """The caps-heading rule has to fire on the text the HARVEST sees.
+
+    Measured 2026-08-22: regions were computed on norm(page.text), and
+    norm() collapses newlines, so _is_caps_heading could never find a
+    line — the rule was inert in production while its unit tests (which
+    pass raw text) stayed green. Медицина then took Фармация's «пет
+    години» and Инспектор took ОПТОМЕТРИСТ's «две години», both through
+    prose mentions of their names in foreign sections."""
+
+    URL = "https://x.example/specialnosti"
+
+    def _page(self):
+        # Real shape: caps heading per section, the program's name also
+        # mentioned in prose inside a LATER, unconfigured section that
+        # states a different duration.
+        return (
+            "Специалности\n"
+            "МЕДИЦИНА\n"
+            "(При кандидатстване се изисква завършено средно образование)\n"
+            "Обучението по специалност „Медицина” ( българоезично и "
+            "англоезично обучение ) отговаря на стандартите.\n"
+            "БОТАНИКА\n"
+            "Обучението по специалност „Ботаника“ е в редовна форма.\n"
+            "ФАРМАЦЕВТИЧЕН МЕНИДЖМЪНТ\n"
+            "Програмата е подходяща за магистри по фармация, медицина и "
+            "управление. Обучението е с продължителност пет години и се "
+            "организира в три етапа.\n")
+
+    def _site(self):
+        return _shared_site([
+            {"id": "med", "name": "Медицина", "page": self.URL},
+            {"id": "bot", "name": "Ботаника", "page": self.URL},
+        ])
+
+    def _docs(self, text):
+        return {self.URL: cascade.TextSource(ref="html:" + self.URL,
+                                             text=text)}
+
+    def test_foreign_section_duration_does_not_ship(self):
+        site = self._site()
+        med = next(p for p in site.programs if p.id == "med")
+        r = cascade.resolve_field(site, med, "duration",
+                                  self._docs(self._page()))
+        self.assertIsNone(
+            r, "a prose mention of «медицина» inside ФАРМАЦЕВТИЧЕН "
+               "МЕНИДЖМЪНТ opened a region there: {0!r}".format(
+                   getattr(r, "value", None)))
+
+    def test_own_section_value_still_ships(self):
+        site = self._site()
+        med = next(p for p in site.programs if p.id == "med")
+        r = cascade.resolve_field(site, med, "language",
+                                  self._docs(self._page()))
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "българоезично и англоезично обучение")
+
+
+class MUVarnaSectionLabelTest(unittest.TestCase):
+    """MUVarna family: the specialties page states duration and language
+    in section prose the shared library had no pattern for, so 10
+    programs shipped nulls over text that was right there. Sentences are
+    verbatim from https://www.mu-varna.bg/BG/specialnosti (2026-08-22).
+
+    Both patterns are APPENDED to their field lists: first-hit-wins means
+    an appended pattern can only fill a null, never pre-empt a value that
+    already passes."""
+
+    def _src(self, text):
+        return cascade.TextSource("html:https://x.example/spec", text)
+
+    def test_duration_stated_as_years_in_running_prose(self):
+        r = cascade.harvest_labels("duration", self._src(
+            "Обучението по специалност „Акушерка“ е в редовна форма с "
+            "продължителност четири години и се провежда по учебен план "
+            "и програми, отговарящи на единните държавни изисквания."))
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "с продължителност четири години")
+
+    def test_duration_keeps_the_semester_parenthetical_when_stated(self):
+        # «четири години (осем семестъра)» is the form the labeller keyed
+        # as «8 семестъра» — dropping the parenthetical loses the units
+        # the key is written in.
+        r = cascade.harvest_labels("duration", self._src(
+            "Продължителността на обучението е четири години (осем "
+            "семестъра) и завършва с държавен изпит."))
+        self.assertIsNotNone(r)
+        self.assertIn("осем семестъра", r.value)
+
+    def test_duration_accepts_the_uchebni_godini_variant(self):
+        r = cascade.harvest_labels("duration", self._src(
+            "Обучението за образователно-квалификационна степен "
+            "„бакалавър“ се провежда в редовна форма с продължителност "
+            "четири учебни години."))
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "с продължителност четири учебни години")
+
+    def test_dual_language_track_is_captured_whole(self):
+        # Truncating one language out of «българоезично и англоезично»
+        # would be a wrong claim, the same defect bg-lang-label exists to
+        # avoid.
+        r = cascade.harvest_labels("language", self._src(
+            "Обучението по специалност „Медицина” ( българоезично и "
+            "англоезично обучение ) отговаря на националните стандарти."))
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "българоезично и англоезично обучение")
+
+    def test_prose_without_a_duration_statement_stays_null(self):
+        self.assertIsNone(cascade.harvest_labels("duration", self._src(
+            "Завършилите се реализират в лечебни заведения за болнична "
+            "и извънболнична помощ.")))
 
 
 class AnchorNamesProgramTest(unittest.TestCase):

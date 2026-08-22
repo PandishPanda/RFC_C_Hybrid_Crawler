@@ -247,6 +247,19 @@ LABEL_PATTERNS = {
         ("en-duration-label", r'Duration of training\s+(\d+\s*[–-]\s*\d+\s+semesters)'),
         ("en-years-sem", r'Professional Bachelor\s+(\d(?:\.\d)? years? / \d semesters)'),
         ("en-sem-or-sem", r'(\d semesters or \d semesters)'),
+        # MUVarna family: section prose, not a labelled field. APPENDED
+        # (first hit wins), so it can only fill a null. The semester
+        # parenthetical is captured when stated — «четири години (осем
+        # семестъра)» is what the labeller keyed as «8 семестъра», and
+        # dropping it loses the units the key is written in. Deliberately
+        # does NOT match a bare «...е N семестъра»: the one page phrased
+        # that way (Управление на здравните грижи) states THREE competing
+        # durations for different entry routes, and picking one would be
+        # the partial-value defect the labeller ruled WRONG on
+        # Кинезитерапия's tuition.
+        ("bg-prodalzhitelnost",
+         r'((?:с продължителност|[Пп]родължителността на обучението е)'
+         r'\s+[а-я]+(?: учебни)? години(?:\s*\([а-я]+ семестъра\))?)'),
     ],
     "language": [
         # BG structured label first: a page's own «Език на преподаване»
@@ -258,6 +271,14 @@ LABEL_PATTERNS = {
         ("bg-lang-label", r'Език на преподаване(?:\\n| )+((?:БЪЛГАРСКИ|Български|български|АНГЛИЙСКИ|Английски|английски)(?:(?:(?:\\n| )+(?:И|и|ИЛИ|или)(?:\\n| )+)(?:БЪЛГАРСКИ|Български|български|АНГЛИЙСКИ|Английски|английски))?)'),
         ("en-lang-label", r'Language of instruction\s+(English|Bulgarian|ENGLISH|BULGARIAN)'),
         ("en-taught-in", r'taught entirely in (English)'),
+        # MUVarna states the track in the section's opening line:
+        # «Обучението по специалност „Медицина” ( българоезично и
+        # англоезично обучение )». Captured WHOLE — truncating one
+        # language out would be a wrong claim (same reason bg-lang-label
+        # keeps «БЪЛГАРСКИ ИЛИ АНГЛИЙСКИ» intact).
+        ("bg-dual-track",
+         r'((?:българоезично|англоезично)'
+         r'(?: и (?:българоезично|англоезично))? обучение)'),
     ],
     "tuition": [
         ("en-semfee-label", r'Semester fee:\s*(\d[\d ,.]* (?:leva|лв|евро|EUR|€))'),
@@ -955,9 +976,18 @@ def resolve_field(site, program, field, docs):
         siblings = [p.name for p in site.programs
                     if p.page == program.page and p.id != program.id]
         if siblings:
-            full = norm(page.text)
-            for s0, e0 in program_region(full, program.name, siblings):
-                text_docs.append(TextSource(ref=page.ref, text=full[s0:e0]))
+            # Regions are computed on the RAW page text, then each span is
+            # normalized -- not the other way round. norm() collapses
+            # newlines, and program_region's caps-heading rule needs the
+            # line structure to tell a section HEADING from a prose
+            # mention of the same name. Normalizing first made that rule
+            # inert in production while its unit tests stayed green
+            # (measured 2026-08-22: Медицина took Фармация's «пет
+            # години»).
+            raw = page.text or ""
+            for s0, e0 in program_region(raw, program.name, siblings):
+                text_docs.append(
+                    TextSource(ref=page.ref, text=norm(raw[s0:e0])))
         else:
             text_docs.append(page)
     shared_page = any(p.page == program.page and p.id != program.id

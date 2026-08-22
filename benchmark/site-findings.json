@@ -230,6 +230,22 @@
       "impact": "1 graded cell regressed ok→miss for one run",
       "status": "fixed",
       "resolution": "2026-08-22 a trailing parenthetical qualifier is stripped before the names-program check (base name still names the programme); ANIS back to 24/25."
+    },
+    {
+      "uni_id": "(pipeline)",
+      "kind": "trust",
+      "finding": "the caps-heading region rule shipped 2026-08-22 was INERT IN PRODUCTION: regions were computed on norm(page.text), and norm() collapses newlines, so the heading detector could never find a line. Its unit tests passed raw text with newlines and stayed green — a test that exercised a text shape production never sees",
+      "impact": "4 latent fabrications survived undetected on MUVarna's shared page (Медицина duration from Фармация, Инспектор duration from ОПТОМЕТРИСТ, Инспектор degree «ОКС \"Магистър\"» from ОПТОМЕТРИСТ, Рехабилитатор degree from outside its section). None was in a frozen key, so the benchmark could not see them",
+      "status": "fixed",
+      "resolution": "2026-08-22 regions are now computed on the RAW page text and each span normalized afterwards, so heading detection sees the line structure. Regression test asserts the rule through the resolve_field seam (production path), not against program_region directly. Fleet re-run: MUVarna 4 fabrications removed, 4 correct cells added, ZERO cell changes at the other 7 deterministic universities."
+    },
+    {
+      "uni_id": "MUVarna",
+      "kind": "extraction",
+      "finding": "the specialties page states duration and language in section prose («е в редовна форма с продължителност четири години», «( българоезично и англоезично обучение )») that the shared label library had no pattern for",
+      "impact": "10 programs shipped nulls over text that was present in their own sections",
+      "status": "fixed",
+      "resolution": "2026-08-22 two APPENDED label patterns (bg-prodalzhitelnost, bg-dual-track) — appended so first-hit-wins means they can only fill a null, never pre-empt a passing value. Won duration for akusherka/medicinska-sестра/logopediya and language for medicina (graded MISS -> OK_VALUE). Deliberately does NOT match a bare «...е N семестъра»: Управление на здравните грижи states THREE competing durations for different entry routes, and picking one would repeat the partial-value defect the labeller ruled WRONG on Кинезитерапия's tuition."
     }
   ]
 }
