@@ -13,3 +13,4 @@
 {"id": "check-verdict:VUM:vum-hce.admission", "resolved_at": "2026-08-23T10:19:44Z", "resolved_by": "Alexander Dimitrov", "action": "verdict:ok", "reason": null}
 {"id": "check-verdict:VUM:vum-int-tour.admission", "resolved_at": "2026-08-23T10:19:44Z", "resolved_by": "Alexander Dimitrov", "action": "verdict:ok", "reason": null}
 {"id": "check-verdict:VUM:vum-food.admission", "resolved_at": "2026-08-23T10:19:44Z", "resolved_by": "Alexander Dimitrov", "action": "verdict:ok", "reason": null}
+{"id": "check-verdict:VUM:vum-hm-b.admission", "resolved_at": "2026-08-23T11:20:47Z", "resolved_by": "Alexander Dimitrov", "action": "verdict:ok", "reason": null}

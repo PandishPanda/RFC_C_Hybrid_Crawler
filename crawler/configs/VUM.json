@@ -73,7 +73,8 @@
    },
    "field_anchors": {
     "duration": "vum-ibm-pb-duration",
-    "admission": "vum-ibm-adm"
+    "admission": "vum-ibm-adm",
+    "degree": "vum-ibm-pb-degree"
    }
   },
   {
@@ -86,7 +87,8 @@
    },
    "field_anchors": {
     "duration": "vum-ibm-b-duration",
-    "admission": "vum-ibm-adm"
+    "admission": "vum-ibm-adm",
+    "degree": "vum-ibm-b-degree"
    }
   },
   {
@@ -99,7 +101,8 @@
    },
    "field_anchors": {
     "duration": "vum-hm-pb-duration",
-    "admission": "vum-hm-adm"
+    "admission": "vum-hm-adm",
+    "degree": "vum-hm-pb-degree"
    }
   },
   {
@@ -112,7 +115,8 @@
    },
    "field_anchors": {
     "duration": "vum-hm-b-duration",
-    "admission": "vum-hm-adm"
+    "admission": "vum-hm-adm",
+    "degree": "vum-hm-b-degree"
    }
   },
   {
@@ -240,6 +244,22 @@
   "vum-tour-phd-adm": {
    "source": "https://vum.bg/bg/doktorska-programa-turizam/",
    "pattern": "(Подаване на Заявление до ректора.+?Сключване на договор за обучение\\.)"
+  },
+  "vum-hm-pb-degree": {
+   "source": "https://vum.bg/bg/hotelski-menidjmant",
+   "pattern": "(Професионален бакалавър)\\s+\\d+(?:[.,]\\d+)? години"
+  },
+  "vum-hm-b-degree": {
+   "source": "https://vum.bg/bg/hotelski-menidjmant",
+   "pattern": "(?<!Професионален )(Бакалавър)\\s+\\d+(?:[.,]\\d+)? години"
+  },
+  "vum-ibm-pb-degree": {
+   "source": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/",
+   "pattern": "(Професионален бакалавър)\\s+\\d+(?:[.,]\\d+)? години"
+  },
+  "vum-ibm-b-degree": {
+   "source": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/",
+   "pattern": "(?<!Професионален )(Бакалавър)\\s+\\d+(?:[.,]\\d+)? години"
   }
  }
 }
