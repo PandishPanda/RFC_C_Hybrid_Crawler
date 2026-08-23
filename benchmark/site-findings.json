@@ -357,6 +357,13 @@
    "finding": "RULED 2026-08-23 by the domain owner: where a programme's pages do not state the language, Bulgarian is a safe real-world assumption. MEASURED against the frozen keys and NOT applied: five keys (ANIS, NBU, SHU, SofiaUniversity, UniRuse) record language as genuinely absent, so a defaulted value grades as FABRICATION, not as a wrong value — simulated on NBU's key it turns 5 OK_NULL into 5 FABRICATION, and the rule would touch 102 null language cells fleet-wide. A counterexample sits inside the affected set: nbu-3238 is a joint degree with the University of York whose third year runs at its Europe Campus in Thessaloniki",
    "impact": "language stays an honest null wherever no document states it. The owner's decision: honest nulls are better than fabrications. Shipping derived values would need an ADR amending 0002 (a DERIVED status recording the rule instead of a snippet, excluded from the verbatim guarantee and counted separately) plus a matching grader category — a labeller who wrote 'not stated' is answering a different question from 'what language is it'. Not built",
    "status": "accepted-by-owner"
+  },
+  {
+   "uni_id": "VUM",
+   "kind": "trust",
+   "finding": "MEASURED 2026-08-23: the LLM tail is NOT region-scoped on shared pages, while the deterministic cascade is. cascade.resolve_field slices a shared page to the program's own region via program_region(); llm_tail.candidate_docs adds program.page whole, so on a page serving two degree levels the model must choose and chooses differently per call. Measured on vum.bg/bg/hotelski-menidjmant, which serves vum-hm-pb and vum-hm-b: duration came back SWAPPED (the bachelor took the professional bachelor's 3 години / 6 семестъра and vice versa), and admission came back complete for vum-hm-pb (4 clauses) but fragmentary for vum-hm-b (the first clause only, 178 chars against 875). Same defect on vum.bg/bg/mejdunaroden-biznes-menidvjmant for vum-ibm-b. The gate passes all of it: every fragment is verbatim on the shared page",
+   "impact": "4 graded WRONG in one re-run (3 durations + 1 partial admission) on cells that graded correct before it — so the tail's shared-page attribution is unstable run to run, not merely imperfect. The region-scoping that closed this class for tier G (rev.4) was never extended to the tail, which is a real hole in 'every fix was generic mechanism'. Only VUM runs the tail today, so the blast radius is one university",
+   "status": "open"
   }
  ]
 }
