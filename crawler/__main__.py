@@ -8,6 +8,8 @@
                                        [--replay DIR] [--configs DIR]
                                        [--out DIR] [--max-pages N]
     python3 -m crawler grade <UniID> --run-report PATH --key PATH [--out DIR]
+    python3 -m crawler diff <UniID> --before PATH [--after PATH]
+                                    [--snippets] [--json] [--out DIR]
     python3 -m crawler labelkit <UniID> [--configs DIR] [--out-file PATH]
     python3 -m crawler check-pins <UniID> [--configs DIR] [--list-html PATH]
 
@@ -45,6 +47,15 @@ drift). CHECK entries (a shipped value the key doesn't auto-match) need a
 human verdict via crawler.grader.write_manual_verdict before the gate
 result is anything but PENDING. Exit code: 0 PASS, 1 FAIL, 2 PENDING.
 
+``diff`` compares two run-reports cell by cell for the attribution
+review (docs/agents/attribution-review.md). A cell is reported when its
+status, value, method, artifact ref or verbatim snippets moved — wider
+than crawler.ledger's value-only diff on purpose: a value that stays
+right while its provenance moves is the misattribution class no answer
+key covers. --before is a copy of the run-report taken BEFORE the change
+(``crawler run`` overwrites it in place). Exit code: 0 nothing moved,
+1 there are cells for the review to read — not an error.
+
 ``labelkit`` (ticket 13) generates the BLANK Phase-0 worksheet ``grade``
 needs a key for — every configured program's 5 fields, grouped by page so
 each real page is visited once, with no pipeline-extracted values
@@ -57,7 +68,7 @@ import json
 import sys
 from pathlib import Path
 
-from crawler import grader, labelkit, llm_tail, onboarding, publish as publish_mod, runner, staleness, validate as validate_mod
+from crawler import celldiff, grader, labelkit, llm_tail, onboarding, publish as publish_mod, runner, staleness, validate as validate_mod
 from crawler.config import load_site_config
 
 
@@ -285,6 +296,28 @@ def main(argv=None):
         "--no-archive", action="store_true",
         help="print only; do not write the timestamped archive")
 
+    diff_parser = subparsers.add_parser(
+        "diff", help="changed-cell diff of two run-reports (status, value, "
+                     "method, artifact, snippets) for the attribution "
+                     "review")
+    diff_parser.add_argument(
+        "uni_id", help="university id — a crawler/configs/<UniID>.json")
+    diff_parser.add_argument(
+        "--before", metavar="PATH", required=True,
+        help="run-report.json as it was BEFORE the change (copy it first — "
+             "`crawler run` overwrites the file in place)")
+    diff_parser.add_argument(
+        "--after", metavar="PATH", default=None,
+        help="run-report.json to compare against "
+             "(default: <out>/<UniID>/run-report.json)")
+    diff_parser.add_argument(
+        "--snippets", action="store_true",
+        help="print the verbatim spans on each side")
+    diff_parser.add_argument(
+        "--json", action="store_true", dest="as_json",
+        help="machine-readable output")
+    diff_parser.add_argument("--out", metavar="DIR", default=None)
+
     labelkit_parser = subparsers.add_parser(
         "labelkit", help="generate a BLANK Phase-0 labeling worksheet for "
                          "a human to fill in by reading the real pages "
@@ -298,8 +331,8 @@ def main(argv=None):
 
     args = parser.parse_args(argv)
 
-    if args.command not in ("run", "publish", "onboard",
-                            "grade", "labelkit", "check-pins", "validate"):
+    if args.command not in ("run", "publish", "onboard", "grade", "diff",
+                            "labelkit", "check-pins", "validate"):
         parser.print_help()
         return 2
 
@@ -377,6 +410,21 @@ def main(argv=None):
         print("proposal: {0}/{1}/{2}".format(
             out_root, args.uni_id, onboarding.PROPOSAL_NAME))
         return 0
+
+    if args.command == "diff":
+        out_root = args.out or runner.DEFAULT_OUT_ROOT
+        after_path = args.after or "{0}/{1}/run-report.json".format(
+            out_root, args.uni_id)
+        before = json.loads(Path(args.before).read_text(encoding="utf-8"))
+        after = json.loads(Path(after_path).read_text(encoding="utf-8"))
+        changes = celldiff.changed_cells(before, after)
+        total = len(set(celldiff.cells(before)) | set(celldiff.cells(after)))
+        if args.as_json:
+            print(celldiff.as_json(args.uni_id, changes, total))
+        else:
+            print(celldiff.format_changes(changes, total, args.snippets))
+        # 1 means "the attribution review has cells to read", not an error
+        return 1 if changes else 0
 
     if args.command == "grade":
         out_root = args.out or runner.DEFAULT_OUT_ROOT

@@ -12,6 +12,7 @@ python3 -m crawler run <UniID> [--tail]     # extraction spine for one uni
 python3 -m crawler publish <UniID>          # run + ledger + pointer gates
 python3 -m crawler onboard <UniID> --seed URL  # propose program pages
 python3 -m crawler grade <UniID> --run-report P --key P  # blind benchmark
+python3 -m crawler diff <UniID> --before P   # changed cells, for attribution review
 python3 -m crawler labelkit <UniID>         # blank Phase-0 worksheet
 python3 -m crawler check-pins <UniID>       # version-pin stale-green check
 python3 -m crawler validate                 # the pipeline scorecard
@@ -61,7 +62,7 @@ Local markdown under `.scratch/<feature>/`. See `docs/agents/issue-tracker.md`.
 ### Attribution review
 
 Third review axis for any ticket that can change a shipped value. See
-`docs/agents/attribution-review.md`; helper: `scripts/changed-cells.py`.
+`docs/agents/attribution-review.md`; run `crawler diff` to find the cells.
 
 ### Domain docs
 

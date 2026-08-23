@@ -155,7 +155,14 @@ def diff_runs(ledger_dir, uni_id, run_id_a, run_id_b):
     """Value-level diff of run_id_b against run_id_a (None = no prior
     run — every value in b is reported as 'new'). One entry per
     (program_id, field, academic_year, None) that changed, was
-    added, or was removed."""
+    added, or was removed.
+
+    VALUES ONLY, by design — this drives the dataset expectation checks,
+    which ask what the dataset now says. It cannot see a value that stayed
+    identical while its provenance moved; the ledger does not carry
+    snippets or the artifact ref at all. For that class (the attribution
+    review's whole subject) use crawler.celldiff / `crawler diff`, which
+    reads run-reports rather than the ledger."""
     a = load_run_values(ledger_dir, uni_id, run_id_a) if run_id_a else {}
     b = load_run_values(ledger_dir, uni_id, run_id_b)
     changes = []

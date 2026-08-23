@@ -19,8 +19,8 @@ the first.
 Be honest about what this is: the loader, the provenance gate and the
 dataset expectations are enforced by code. **This one is enforced by the
 ticket's done-check** — it is a process gate, and it holds only as long as
-it is actually run. `crawler diff` (a provenance-aware changed-cell verb) is
-the natural mechanisation; it does not exist yet.
+it is actually run. `crawler diff` mechanises the *finding* of the cells; reading
+them and refuting the reading are the parts no code does.
 
 ## When it runs
 
@@ -59,9 +59,12 @@ diff was complete.
 
 ```bash
 python3 -m crawler run <UniID>
-python3 scripts/changed-cells.py "$SCRATCH/before-<UniID>.json" \
-    crawler-out/<UniID>/run-report.json --snippets
+python3 -m crawler diff <UniID> --before "$SCRATCH/before-<UniID>.json" --snippets
 ```
+
+Exit code is 0 when nothing moved and 1 when there are cells to read —
+"the review has work to do", not an error. `--json` for machine-readable
+output.
 
 A cell is in scope when **any** of status, value, `method`, artifact ref,
 or verbatim snippets changed. Status transitions are labelled on both sides

@@ -96,10 +96,10 @@ refute the first.
 
 This is a process gate, enforced by the ticket's done-check rather than by
 code — the full procedure, the refuter's independence contract and the
-decision rule are in `docs/agents/attribution-review.md`; the changed-cell
-diff (value **and** attribution, which `ledger.diff_runs` does not cover) is
-`scripts/changed-cells.py`. A provenance-aware `crawler diff` verb is the
-natural mechanisation and is not built.
+decision rule are in `docs/agents/attribution-review.md`. The changed-cell
+diff it runs on is `crawler diff` (status, value, method, artifact ref and
+snippets — wider than `ledger.diff_runs`, which compares values alone and
+cannot see a value whose provenance moved).
 
 ## Known open edges
 
