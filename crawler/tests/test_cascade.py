@@ -456,13 +456,12 @@ class TestColumnAwareFeeResolver(unittest.TestCase):
         self.assertEqual(r.tier, "F")
         self.assertEqual(r.method, "fee-join:test")
 
-    def test_a_merged_cell_holding_two_different_values_ships_nothing(self):
-        """A PDF cell merged across rows can collapse several values into
-        one string — and SU's fee table does exactly this, with one layer
-        invisible in the rendered PDF (found by adversarial review,
-        2026-08-23). Taking the first match would ship an arbitrary one
-        with a fully green gate, since both really are printed there.
-        Ambiguity is "can't determine": ship the honest null."""
+    def test_a_fee_cell_stating_two_different_values_ships_nothing(self):
+        """A valid fee cell states ONE fee. Two different values in one
+        cell mean the cell boundary was lost in rendering, not that the
+        table is ambiguous — the domain owner confirms a cell cannot say
+        "exempt" and a price at once (2026-08-23). The true fee may be
+        either or neither, so a broken parse ships an honest null."""
         table = [
             ["специалност", 'ОКС "бакалавър" редовно'],
             ["Компютърни науки", "460 EUR 920 EUR"],
@@ -499,14 +498,15 @@ class TestColumnAwareFeeResolver(unittest.TestCase):
         self.assertIsNone(r)
 
     def test_a_fee_merged_with_an_exemption_ships_nothing(self):
-        """REVERSED 2026-08-23 (was: "takes first fee token"). This cell
-        says one row pays 310 EUR and another is освободени — exempt.
-        Which is THIS program's, the table does not say. Taking the first
-        token could charge an exempt program a fee that really is printed
-        in its cell, so gate() would pass it: the same fabricated-value
-        route the dash-placeholder guard below closes. The old behaviour
-        was locked in by this test with no stated justification; an
-        adversarial review of SU's fee table found the live case."""
+        """REVERSED 2026-08-23 (was: "takes first fee token"), and the
+        domain owner has since confirmed the reversal: a fee cell CANNOT
+        hold both «освободени» and a price. Seeing both proves the cell
+        boundary was lost in rendering, so neither value is known to be
+        this program's. Taking the first token could charge an exempt
+        program a fee that really is printed in its cell, so gate() would
+        pass it — the same fabricated-value route the dash-placeholder
+        guard below closes. The old behaviour was locked in by this test
+        with no stated justification."""
         table = [
             ["специалност", 'ОКС "бакалавър" редовно'],
             ["Физика и информатика", "310 EUR освободени"],

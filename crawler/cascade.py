@@ -756,17 +756,19 @@ def fee_row_join(field, source, join, alias):
                 # printed in that cell.
                 continue
             if join.value_pattern:
-                # A PDF cell merged across rows collapses several rows'
-                # values into one string, and a hidden text layer can add
-                # one that is invisible in the rendered document (SU's
-                # fee table does both: '310 EUR 310 EUR' in the cell that
-                # prices three specialties). Taking the first match would
-                # ship an arbitrary one of them with a fully green gate —
-                # every candidate really is printed in that cell. So:
-                # agree or refuse. Distinct values mean the table does
-                # not say which is this program's, and "can't determine"
-                # ships an honest null (found by adversarial review,
-                # 2026-08-23).
+                # A valid fee cell states ONE fee. Two different values
+                # in one cell — «освободени 310 EUR», or the '310 EUR
+                # 310 EUR' that SU's merged-and-hidden-layer cell yields
+                # — cannot both be this program's fee: the domain owner
+                # confirms a cell cannot say "exempt" and a price at once
+                # (2026-08-23). So their co-occurrence is not ambiguity
+                # in the SOURCE, it is a lost cell boundary in the
+                # RENDERING, and the true value may be either one or
+                # neither. Taking the first match would ship a fee that
+                # is verbatim-present — gate() passes it — for a program
+                # the table may exempt. Refuse: a broken parse is
+                # "can't determine", and that ships an honest null.
+                # Identical repeats are not a conflict and still ship.
                 found = re.findall(join.value_pattern, cell)
                 distinct = {norm(v) for v in found}
                 if len(distinct) > 1:
