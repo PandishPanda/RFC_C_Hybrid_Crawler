@@ -58,6 +58,7 @@ flowchart LR
 | 5 | "Can't determine" ships as null — never a plausible value | gate + `suppress_labels` |
 | 6 | Snapshots append-only; re-extraction from snapshots is cheap (shadow runs) | `store.py`, `publish(report=)` |
 | 7 | The gate proves presence, not truth — semantic wrongs are caught by the blind key + human verdicts | `grader.py` |
+| 8 | The blind key is a sample; a right value from the wrong place is caught by reading every changed cell + an independent refuter | `celldiff.py`, `docs/agents/attribution-review.md` |
 
 ## Current benchmark state (VUM, 2026-08-17)
 
