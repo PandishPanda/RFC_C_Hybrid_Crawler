@@ -107,6 +107,10 @@ class ResolveBlockedPublishTest(unittest.TestCase):
             {"program_id": "p1", "name": "p1", "fields": {
                 "degree": {"status": "PASS", "value": "Бакалавър",
                            "tier": "G", "method": "label:x",
+                           "artifact": {"ref": "html:https://x",
+                                        "renderer_id": "r",
+                                        "renderer_version": "1"},
+                           "verdict_detail": "supported",
                            "provenance": {"value": "Бакалавър",
                                           "source_url": "https://x",
                                           "source_snippets": ["Бакалавър"],

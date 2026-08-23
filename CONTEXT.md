@@ -31,7 +31,7 @@ _Avoid_: general info
 The failure mode where a university publishes next year's data on a new page while the old page stays live and unchanged (HTTP 200, same content hash), so freshness checks stay green while the data goes stale.
 
 **Changed cell**:
-A (Program, field) pair whose status, value, method, Artifact or verbatim snippet differs between two runs. The unit the attribution review reads — deliberately wider than a changed *value*, because a value that stays identical while its provenance moves is the misattribution case. `crawler diff` enumerates them; the append-only ledger's diff compares values alone and cannot.
+A (Program, field) pair whose status, value, method, Artifact, verbatim snippet or derivation differs between two runs. The unit the attribution review reads — deliberately wider than a changed *value*, because a value that stays identical while its provenance moves is the misattribution case. `crawler diff` enumerates them; the append-only ledger's diff compares values alone and cannot. A cell's persisted form is the **Field record** (`crawler/field_record.py`): status, value, and the proof appropriate to the status — Provenance for extracted values, a derivation for Derived values, a verdict detail for rejects. One module constructs, serializes and parses it, so a shape no constructor emits cannot exist and a malformed record fails loudly instead of comparing silently equal.
 _Avoid_: diff row, changed value
 
 **Attribution review**:

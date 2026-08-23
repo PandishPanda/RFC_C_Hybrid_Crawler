@@ -27,7 +27,34 @@ from crawler.grader import (  # noqa: E402
 
 
 def record(status, value=None):
-    return {"status": status, "value": value}
+    # minimal CONSTRUCTOR-VALID record per status: from_dict rejects
+    # shapes the runner never emits, which is the module's point
+    rec = {"status": status, "value": value}
+    if status == "PASS":
+        rec["tier"] = "G"
+        rec["method"] = "label:test"
+        rec["artifact"] = {"ref": "html:https://x.test/p",
+                           "renderer_id": "r", "renderer_version": "1"}
+        rec["verdict_detail"] = "supported"
+        rec["provenance"] = {"value": value,
+                             "source_url": "https://x.test/p",
+                             "source_snippets": [value or ""],
+                             "retrieved_at": "2026-08-15T00:00:00Z",
+                             "method": "label:test"}
+    elif status == "NULL_OK":
+        rec["null_reason"] = "test: nothing stated"
+    elif status == "DERIVED":
+        rec["tier"] = "D"
+        rec["method"] = "derive:test"
+        rec["derivation"] = {"rule": "test", "input": value, "basis": "t"}
+    else:
+        rec["tier"] = "G"
+        rec["method"] = "label:test"
+        rec["artifact"] = {"ref": "html:https://x.test/p",
+                           "renderer_id": "r", "renderer_version": "1"}
+        rec["verdict_detail"] = "rejected"
+        rec["value"] = None
+    return rec
 
 
 def key_entry(program_id, field, expected_value, **kw):

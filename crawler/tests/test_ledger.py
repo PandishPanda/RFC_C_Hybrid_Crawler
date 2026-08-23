@@ -32,10 +32,19 @@ from crawler import expectations, ledger, publish  # noqa: E402
 
 def field_record(status, value=None, snippets=None, method="tier-g",
                  tier="G"):
+    # constructor-valid shapes only: FieldRecord.from_dict rejects a
+    # record the runner could never have emitted, so fixtures can no
+    # longer agree with themselves while disagreeing with production
     rec = {"status": status, "value": value}
     if status == "PASS":
         rec["tier"] = tier
         rec["method"] = method
+        rec["artifact"] = {
+            "ref": "html:https://example.test/page",
+            "renderer_id": "bs4-lxml-canonical:aggressive",
+            "renderer_version": "bs4-4.15.0/lxml-6.1.1",
+        }
+        rec["verdict_detail"] = "supported"
         rec["provenance"] = {
             "value": value,
             "source_url": "https://example.test/page",
@@ -43,6 +52,8 @@ def field_record(status, value=None, snippets=None, method="tier-g",
             "retrieved_at": "2026-08-15T00:00:00Z",
             "method": method,
         }
+    elif status == "NULL_OK":
+        rec["null_reason"] = "test: nothing stated"
     return rec
 
 

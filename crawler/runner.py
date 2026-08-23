@@ -40,6 +40,7 @@ from pathlib import Path
 from typing import Optional
 
 from crawler import cascade, llm_tail
+from crawler.field_record import FieldRecord
 from crawler.artifact_store import (
     ArtifactStore,
     ResolveError,
@@ -205,18 +206,10 @@ def derived_record(field, value, rule):
     exact fabrication this status exists to avoid. What it carries
     instead is the rule that produced it, so a reader can audit the
     assumption rather than the evidence."""
-    return {
-        "status": Status.DERIVED.value,
-        "value": value,
-        "tier": "D",
-        "method": "derive:" + rule,
-        "derivation": {
-            "rule": rule,
-            "input": value,
-            "basis": ("asserted by site config; no document of this "
-                      "program states this field"),
-        },
-    }
+    return FieldRecord.derived(
+        value=value, rule=rule,
+        basis=("asserted by site config; no document of this "
+               "program states this field")).to_dict()
 
 
 def derive_fields(fields, default_language=None):
@@ -247,43 +240,37 @@ def _field_record(program_id, field, extraction, store):
     """
     if extraction is None:
         verdict = gate(None, [], None, null_reason=CASCADE_NULL_REASON)
-        return {
-            "status": verdict.status.value,
-            "value": None,
-            "null_reason": verdict.detail,
-        }, None
+        return FieldRecord.spine_null(verdict.detail).to_dict(), None
 
     artifact = store.artifact(extraction.artifact_ref)
     doc = store.doc(extraction.artifact_ref)
     verdict = gate(extraction.value, list(extraction.segments), artifact)
 
-    record = {
-        "status": verdict.status.value,
-        "tier": extraction.tier,
-        "method": extraction.method,
-        "artifact": {
-            "ref": artifact.ref,
-            "renderer_id": artifact.renderer_id,
-            "renderer_version": artifact.renderer_version,
-        },
-        "verdict_detail": verdict.detail,
+    artifact_block = {
+        "ref": artifact.ref,
+        "renderer_id": artifact.renderer_id,
+        "renderer_version": artifact.renderer_version,
     }
-    if extraction.context:
-        record["context"] = dict(extraction.context)
+    context = dict(extraction.context) if extraction.context else None
 
     if verdict.status is Status.PASS:
-        record["value"] = extraction.value
-        record["provenance"] = {
-            "value": extraction.value,
-            "source_url": doc.source_url,
-            "source_snippets": list(extraction.segments),
-            "retrieved_at": doc.retrieved_at,
-            "method": extraction.method,
-        }
-        return record, None
+        return FieldRecord.spine_pass(
+            value=extraction.value, tier=extraction.tier,
+            method=extraction.method, artifact=artifact_block,
+            provenance={
+                "value": extraction.value,
+                "source_url": doc.source_url,
+                "source_snippets": list(extraction.segments),
+                "retrieved_at": doc.retrieved_at,
+                "method": extraction.method,
+            },
+            verdict_detail=verdict.detail, context=context).to_dict(), None
 
     # gate failure: the value is nulled and queued, never shipped
-    record["value"] = None
+    record = FieldRecord.spine_reject(
+        status=verdict.status.value, tier=extraction.tier,
+        method=extraction.method, artifact=artifact_block,
+        verdict_detail=verdict.detail, context=context).to_dict()
     failure = {
         "program_id": program_id,
         "field": field,
@@ -306,38 +293,38 @@ def _tail_field_record(program_id, field, tail_result, store):
     re-decides.
     """
     verdict = tail_result.verdict
-    record = {
-        "status": verdict.status.value,
-        "verdict_detail": verdict.detail,
-        "tail_attempts": tail_result.attempts,
-        "tail_escalated": tail_result.escalated,
-    }
 
     if verdict.status is Status.PASS:
         ext = tail_result.extraction
         artifact = store.artifact(ext.artifact_ref)
         doc = store.doc(ext.artifact_ref)
-        record["tier"] = ext.tier
-        record["method"] = ext.method
-        record["artifact"] = {
-            "ref": artifact.ref,
-            "renderer_id": artifact.renderer_id,
-            "renderer_version": artifact.renderer_version,
-        }
-        record["value"] = ext.value
-        record["provenance"] = {
-            "value": ext.value,
-            "source_url": doc.source_url,
-            "source_snippets": list(ext.segments),
-            "retrieved_at": doc.retrieved_at,
-            "method": ext.method,
-        }
-        return record, None
+        return FieldRecord.tail_pass(
+            value=ext.value, tier=ext.tier, method=ext.method,
+            artifact={
+                "ref": artifact.ref,
+                "renderer_id": artifact.renderer_id,
+                "renderer_version": artifact.renderer_version,
+            },
+            provenance={
+                "value": ext.value,
+                "source_url": doc.source_url,
+                "source_snippets": list(ext.segments),
+                "retrieved_at": doc.retrieved_at,
+                "method": ext.method,
+            },
+            verdict_detail=verdict.detail,
+            tail_attempts=tail_result.attempts,
+            tail_escalated=tail_result.escalated).to_dict(), None
 
-    record["value"] = None
     if verdict.status is Status.NULL_OK:
-        record["null_reason"] = verdict.detail
-        return record, None
+        return FieldRecord.tail_null(
+            verdict.detail, tail_attempts=tail_result.attempts,
+            tail_escalated=tail_result.escalated).to_dict(), None
+
+    record = FieldRecord.tail_reject(
+        status=verdict.status.value, verdict_detail=verdict.detail,
+        tail_attempts=tail_result.attempts,
+        tail_escalated=tail_result.escalated).to_dict()
 
     # rejection after retry + escalation: nulled and queued, never shipped
     last = tail_result.last_attempt

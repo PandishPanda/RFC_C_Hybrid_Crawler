@@ -62,6 +62,7 @@ from enum import Enum
 from pathlib import Path
 from typing import Dict, List, Mapping, Optional, Tuple
 
+from crawler.field_record import FieldRecord
 from crawler.provenance import (
     normalize,
     _CURRENCY_TOKENS,
@@ -257,8 +258,13 @@ def grade_field(entry, record):
     """The oracle: one key entry x one shipped field record -> a
     GradeCategory. Pure; no IO. See module docstring for the two named
     defects this shape excludes by construction."""
-    status = record["status"]
-    shipped_value = record.get("value")
+    if not isinstance(record, FieldRecord):
+        # accept the raw dict every disk consumer holds; parsing is the
+        # validation — a shape no constructor emits raises instead of
+        # degrading to Nones (crawler/field_record.py)
+        record = FieldRecord.from_dict(record)
+    status = record.status
+    shipped_value = record.value
 
     # Derived values are outside the key's question entirely, whichever
     # way the key answered it (ADR-0007).

@@ -23,6 +23,8 @@ only. The CLI wrapper is ``python3 -m crawler diff``.
 """
 import json
 
+from crawler.field_record import FieldRecord
+
 __all__ = ["cells", "changed_cells", "format_changes", "KINDS"]
 
 # in precedence order: the first that applies is the cell's kind
@@ -34,14 +36,22 @@ def cells(report):
     """{(program_id, field): {status, value, method, artifact_ref, snippets}}"""
     out = {}
     for program in report.get("programs", []):
-        for field, rec in program.get("fields", {}).items():
-            prov = rec.get("provenance") or {}
+        for field, rec_dict in program.get("fields", {}).items():
+            # parsing IS the safety: the .get() era read every axis
+            # defensively, so a renamed key degraded to None on BOTH
+            # sides of the comparison and the cells compared EQUAL --
+            # a silent pass for exactly the misattribution class this
+            # module exists to catch. A malformed record now raises.
+            rec = FieldRecord.from_dict(rec_dict)
             out[(program.get("program_id"), field)] = {
-                "status": rec.get("status"),
-                "value": rec.get("value"),
-                "method": rec.get("method"),
-                "artifact_ref": (rec.get("artifact") or {}).get("ref"),
-                "snippets": list(prov.get("source_snippets") or ()),
+                "status": rec.status,
+                "value": rec.value,
+                "method": rec.method,
+                "artifact_ref": rec.artifact_ref(),
+                "snippets": list(rec.snippets()),
+                # ADR-0007: a Derived value whose RULE changed under an
+                # unchanged value is a changed cell too
+                "derivation": rec.derivation,
             }
     return out
 

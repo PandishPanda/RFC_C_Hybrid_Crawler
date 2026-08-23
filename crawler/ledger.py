@@ -25,6 +25,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional
 
+from crawler.field_record import FieldRecord
+
 __all__ = [
     "LEDGER_NAME", "POINTER_NAME", "SUMMARIES_DIR", "append_run",
     "read_current", "write_current", "load_run_values", "diff_runs",
@@ -99,25 +101,26 @@ def append_run(ledger_dir, uni_id, run_id, report, academic_year):
     ledger_path.parent.mkdir(parents=True, exist_ok=True)
 
     def entries_of(program_id, fields, scope):
-        for field_name, rec in fields.items():
+        for field_name, rec_dict in fields.items():
+            rec = FieldRecord.from_dict(rec_dict)
             # DERIVED ships too (ADR-0007) — keeping it out would make
             # the derivation do nothing for the published dataset — but
             # the status travels with it, so a consumer that wants only
             # gate-proven values can filter on PASS.
-            if rec["status"] not in ("PASS", "DERIVED"):
+            if rec.status not in ("PASS", "DERIVED"):
                 continue
-            prov = rec.get("provenance", {})
+            prov = rec.provenance or {}
             entry = {
                 "run_id": run_id,
                 "program_id": program_id,
                 "field": field_name,
                 "academic_year": infer_academic_year(
-                    prov.get("source_snippets", []), rec["value"],
+                    list(rec.snippets()), rec.value,
                     academic_year, field=field_name),
-                "value": rec["value"],
-                "status": rec["status"],
-                "method": rec.get("method"),
-                "tier": rec.get("tier"),
+                "value": rec.value,
+                "status": rec.status,
+                "method": rec.method,
+                "tier": rec.tier,
                 "source_url": prov.get("source_url"),
                 "retrieved_at": prov.get("retrieved_at"),
                 "recorded_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),

@@ -49,6 +49,14 @@ def field_record(status="PASS", value="Bachelor", method="anchor:a",
                "method": method}}
     if status != "PASS":
         rec["value"] = None if status == "NULL_OK" else value
+        if status == "NULL_OK":
+            rec["null_reason"] = "test: nothing stated"
+            for k in ("tier", "method", "artifact", "provenance"):
+                rec.pop(k, None)
+        else:
+            rec["verdict_detail"] = "rejected"
+            rec.pop("provenance", None)
+            rec["value"] = None
     return rec
 
 
@@ -132,11 +140,11 @@ class AttributionOnlyTest(unittest.TestCase):
 class StatusTest(unittest.TestCase):
     def test_newly_shipping_cell_is_labelled_on_both_sides(self):
         before = make_report({"p-one": {"degree": field_record(
-            status="REJECT_NOT_VERBATIM")}})
+            status="REJECT_SUPPORT")}})
         after = make_report({"p-one": {"degree": field_record()}})
         change = only_change(before, after)
         self.assertEqual(change["kind"], "status")
-        self.assertEqual(change["status_change"], "REJECT_NOT_VERBATIM->PASS")
+        self.assertEqual(change["status_change"], "REJECT_SUPPORT->PASS")
 
     def test_a_cell_that_stops_shipping_carries_no_current_value(self):
         after = make_report({"p-one": {"degree": field_record(status="NULL_OK")},
@@ -147,7 +155,7 @@ class StatusTest(unittest.TestCase):
 
     def test_status_outranks_value_so_it_is_never_read_as_a_restatement(self):
         before = make_report({"p-one": {"degree": field_record(
-            status="REJECT_NOT_VERBATIM", value="Bachelor")}})
+            status="REJECT_SUPPORT", value="Bachelor")}})
         after = make_report({"p-one": {"degree": field_record(value="Doctor")}})
         self.assertEqual(only_change(before, after)["kind"], "status")
 

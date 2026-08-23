@@ -277,7 +277,12 @@ class ResolveSeamTest(unittest.TestCase):
             report = {"uni_id": "U", "programs": [
                 {"program_id": "p1", "name": "p1", "fields": {
                     "degree": {"status": "PASS", "value": "x", "tier": "G",
-                               "method": "label:x", "provenance": {
+                               "method": "label:x",
+                               "artifact": {"ref": "html:u",
+                                            "renderer_id": "r",
+                                            "renderer_version": "1"},
+                               "verdict_detail": "supported",
+                               "provenance": {
                                    "value": "x", "source_url": "u",
                                    "source_snippets": ["x"],
                                    "retrieved_at": T0,
