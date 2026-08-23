@@ -12,7 +12,7 @@ import time
 from pathlib import Path
 from typing import Optional
 
-from crawler import expectations, ledger, runner
+from crawler import attention, expectations, ledger, runner
 
 __all__ = ["publish", "PUBLISH_REPORT_NAME"]
 
@@ -99,4 +99,15 @@ def publish(uni_id, *, configs_dir=None, out_dir=None, replay_dir=None,
     run_dir.mkdir(parents=True, exist_ok=True)
     (run_dir / PUBLISH_REPORT_NAME).write_text(
         json.dumps(publish_report, ensure_ascii=False, indent=1), encoding="utf-8")
+
+    # Attention Ledger (ADR-0005): a blocked publish and every gate
+    # failure become aged items a human works later. Both kinds snapshot
+    # their evidence -- this report and the run report are overwritten
+    # by the next run. A clean publish re-syncs the same scope, lapsing
+    # items whose cause has healed.
+    attention.sync(
+        out_root,
+        attention.detect_blocked_publish(publish_report)
+        + attention.detect_gate_failures(report),
+        kinds=["blocked-publish", "gate-failure"], unis=[uni_id])
     return publish_report

@@ -10,6 +10,12 @@
     python3 -m crawler grade <UniID> --run-report PATH --key PATH [--out DIR]
     python3 -m crawler diff <UniID> --before PATH [--after PATH]
                                     [--snippets] [--json] [--out DIR]
+    python3 -m crawler refresh [--uni U ...] [--tail] [--configs DIR]
+                               [--out DIR]
+    python3 -m crawler attention [--uni U] [--kind K] [--age N]
+                                 [--all] [--json] [--out DIR]
+    python3 -m crawler resolve <item-id> [--reason ..] [--verdict ok|wrong]
+                                         [--note ..] [--shipped-value V]
     python3 -m crawler labelkit <UniID> [--configs DIR] [--out-file PATH]
     python3 -m crawler check-pins <UniID> [--configs DIR] [--list-html PATH]
 
@@ -56,6 +62,27 @@ key covers. --before is a copy of the run-report taken BEFORE the change
 (``crawler run`` overwrites it in place). Exit code: 0 nothing moved,
 1 there are cells for the review to read — not an error.
 
+``refresh`` is the unattended loop (ADR-0005): publish every configured
+university (deterministic by default; --tail is per-invocation opt-in,
+ADR-0001), check version-pin drift, and land everything needing judgment
+in the Attention Ledger. One university's crash becomes a refresh-error
+item and the loop continues. Writes crawler-out/refresh-report.json;
+exits non-zero iff anything NEW needs a human -- weekly cron + exit code
+is the complete v1 alerting story.
+
+``attention`` lists the Attention Ledger (ADR-0005): every unit of work
+only a human can advance, aged from the moment it opened, with the SLA
+state (warn at 7 days, escalate at 30) computed by crawler.policy.
+
+``resolve`` closes one attention item by EXECUTING its resolution through
+the existing gate-disciplined deep functions -- a blocked publish
+promotes via the ledger pointer write (--reason required), a CHECK
+verdict goes through grader.write_manual_verdict (--verdict required).
+It never merely records: a judgment recorded but not performed is a new
+silent-rot channel (ADR-0005). gate-failure, drift and refresh-error
+items have no manual resolve -- their fix is a config or world repair,
+after which the next tick lapses them.
+
 ``labelkit`` (ticket 13) generates the BLANK Phase-0 worksheet ``grade``
 needs a key for — every configured program's 5 fields, grouped by page so
 each real page is visited once, with no pipeline-extracted values
@@ -68,7 +95,7 @@ import json
 import sys
 from pathlib import Path
 
-from crawler import celldiff, grader, labelkit, llm_tail, onboarding, publish as publish_mod, runner, staleness, validate as validate_mod
+from crawler import attention, celldiff, grader, labelkit, ledger, llm_tail, onboarding, policy, publish as publish_mod, refresh as refresh_mod, runner, staleness, validate as validate_mod
 from crawler.config import load_site_config
 
 
@@ -318,6 +345,73 @@ def main(argv=None):
         help="machine-readable output")
     diff_parser.add_argument("--out", metavar="DIR", default=None)
 
+    refresh_parser = subparsers.add_parser(
+        "refresh", help="the unattended tick: publish every configured "
+                        "university, emit attention items, exit non-zero "
+                        "iff anything NEW needs a human (ADR-0005)")
+    refresh_parser.add_argument(
+        "--uni", metavar="UniID", action="append", default=None,
+        help="restrict to these universities (repeatable); default: every "
+             "config in the configs dir")
+    refresh_parser.add_argument("--configs", metavar="DIR", default=None)
+    refresh_parser.add_argument("--out", metavar="DIR", default=None)
+    refresh_parser.add_argument("--replay", metavar="DIR", default=None)
+    refresh_parser.add_argument("--docling-url", metavar="URL", default=None)
+    refresh_parser.add_argument(
+        "--tail", action="store_true",
+        help="enable the gated LLM tail for this tick (default: "
+             "deterministic only, ADR-0001)")
+
+    attention_parser = subparsers.add_parser(
+        "attention", help="list the Attention Ledger — work only a human "
+                          "can advance, aged (ADR-0005)")
+    attention_parser.add_argument("--uni", metavar="UniID", default=None)
+    attention_parser.add_argument(
+        "--kind", metavar="KIND", default=None,
+        help="one of: {0}".format(", ".join(attention.KINDS)))
+    attention_parser.add_argument(
+        "--age", metavar="DAYS", type=int, default=None,
+        help="only items at least this many days open")
+    attention_parser.add_argument(
+        "--all", action="store_true", dest="show_all",
+        help="include resolved and lapsed items")
+    attention_parser.add_argument(
+        "--json", action="store_true", dest="as_json")
+    attention_parser.add_argument("--out", metavar="DIR", default=None)
+    attention_parser.add_argument(
+        "--now", metavar="ISO", default=None, help=argparse.SUPPRESS)
+
+    resolve_parser = subparsers.add_parser(
+        "resolve", help="close one attention item by EXECUTING its "
+                        "resolution through the gate-disciplined deep "
+                        "functions (ADR-0005: resolve never merely "
+                        "records)")
+    resolve_parser.add_argument(
+        "item_id", help="from `crawler attention`, e.g. blocked-publish:VUM")
+    resolve_parser.add_argument(
+        "--reason", default=None,
+        help="required for promote-type actions; appended to the tracked "
+             "resolutions file")
+    resolve_parser.add_argument(
+        "--verdict", choices=("ok", "wrong"), default=None,
+        help="check-verdict items: the human judgment")
+    resolve_parser.add_argument("--note", default="",
+                                help="check-verdict items: context")
+    resolve_parser.add_argument(
+        "--shipped-value", default=None, dest="shipped_value",
+        help="check-verdict items: bind the verdict to the exact value "
+             "judged (a later run shipping anything else returns to CHECK)")
+    resolve_parser.add_argument("--out", metavar="DIR", default=None)
+    resolve_parser.add_argument(
+        "--verdicts-dir", metavar="DIR", default=None, dest="verdicts_dir",
+        help=argparse.SUPPRESS)
+    resolve_parser.add_argument(
+        "--resolutions-path", metavar="PATH", default=None,
+        dest="resolutions_path", help=argparse.SUPPRESS)
+    resolve_parser.add_argument(
+        "--resolved-by", metavar="NAME", default=None, dest="resolved_by",
+        help=argparse.SUPPRESS)
+
     labelkit_parser = subparsers.add_parser(
         "labelkit", help="generate a BLANK Phase-0 labeling worksheet for "
                          "a human to fill in by reading the real pages "
@@ -332,6 +426,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
 
     if args.command not in ("run", "publish", "onboard", "grade", "diff",
+                            "attention", "resolve", "refresh",
                             "labelkit", "check-pins", "validate"):
         parser.print_help()
         return 2
@@ -409,6 +504,148 @@ def main(argv=None):
         print(_summarize_onboarding(report))
         print("proposal: {0}/{1}/{2}".format(
             out_root, args.uni_id, onboarding.PROPOSAL_NAME))
+        # a pending proposal awaits a human promotion decision (ADR-0003)
+        attention.sync(
+            out_root, attention.detect_proposals(report, out_root),
+            kinds=["proposal"], unis=[args.uni_id])
+        return 0
+
+    if args.command == "refresh":
+        from crawler.config import load_configs_dir
+        if args.uni:
+            uni_ids = args.uni
+        else:
+            configs = load_configs_dir(
+                args.configs or runner.DEFAULT_CONFIGS_DIR)
+            uni_ids = sorted(configs)
+        tail_fn = None
+        if args.tail:
+            out_root = args.out or runner.DEFAULT_OUT_ROOT
+
+            def tail_fn(uni_id):
+                usage_ledger = llm_tail.UsageLedger(
+                    "{0}/{1}/llm-usage.jsonl".format(out_root, uni_id))
+                return llm_tail.CLIAdapter(usage_ledger=usage_ledger)
+        report = refresh_mod.refresh(
+            uni_ids, configs_dir=args.configs, out_dir=args.out,
+            replay_dir=args.replay, docling_url=args.docling_url,
+            tail_fn=tail_fn)
+        for u in report["unis"]:
+            line = "  {0:16s} {1:8s}".format(u["uni_id"], u["verdict"])
+            if u["needs_human"]:
+                line += "  needs-human: " + ", ".join(u["needs_human"])
+            if "error" in u:
+                line += "  ERROR: " + u["error"]
+            print(line)
+        att = report["attention"]
+        print("attention: {0} opened, {1} refreshed, {2} lapsed".format(
+            len(att["opened"]), len(att["refreshed"]), len(att["lapsed"])))
+        for iid in att["opened"]:
+            print("  NEW  " + iid)
+        print("report: {0}/{1}".format(
+            args.out or runner.DEFAULT_OUT_ROOT, refresh_mod.REPORT_NAME))
+        return refresh_mod.exit_code(report)
+
+    if args.command == "attention":
+        out_root = args.out or runner.DEFAULT_OUT_ROOT
+        items = list(attention.load_items(out_root).values())
+        if not args.show_all:
+            items = [i for i in items if i["status"] == "open"]
+        if args.uni:
+            items = [i for i in items if i["uni_id"] == args.uni]
+        if args.kind:
+            items = [i for i in items if i["kind"] == args.kind]
+        for item in items:
+            item["age_days"] = attention.age_days(item, now=args.now)
+            item["sla"] = policy.sla_state(item["age_days"])
+        if args.age is not None:
+            items = [i for i in items if i["age_days"] >= args.age]
+        # oldest first: age is the priority signal
+        items.sort(key=lambda i: (-i["age_days"], i["id"]))
+        if args.as_json:
+            print(json.dumps({"items": items}, ensure_ascii=False, indent=2))
+            return 0
+        for item in items:
+            marker = {"escalate": "ESCALATE", "warn": "WARN"}.get(
+                item["sla"], "ok")
+            line = "{0:8s} {1:>4s}  {2:6s} {3}".format(
+                marker, str(item["age_days"]) + "d",
+                item["status"], item["id"])
+            print(line)
+        open_items = [i for i in items if i["status"] == "open"]
+        print("{0} open ({1} warn, {2} escalate)".format(
+            len(open_items),
+            sum(1 for i in open_items if i["sla"] == "warn"),
+            sum(1 for i in open_items if i["sla"] == "escalate")))
+        return 0
+
+    if args.command == "resolve":
+        out_root = args.out or runner.DEFAULT_OUT_ROOT
+        items = attention.load_items(out_root)
+        item = items.get(args.item_id)
+        if item is None:
+            sys.stderr.write(
+                "{0}: no such attention item -- `crawler attention` lists "
+                "the open ones\n".format(args.item_id))
+            return 2
+        kind = item["kind"]
+
+        if kind == "blocked-publish":
+            if not args.reason:
+                sys.stderr.write(
+                    "promoting a blocked run overrides the expectation "
+                    "checks -- --reason is required and is recorded\n")
+                return 2
+            run_id = (item.get("evidence") or {}).get("run_id")
+            # execute-check: the pointer write must promote a run the
+            # ledger actually holds, else "resolved" promotes nothing
+            if not run_id or ledger.read_run_summary(
+                    out_root, item["uni_id"], run_id) is None:
+                sys.stderr.write(
+                    "run {0!r} is not in {1}'s ledger -- refusing to move "
+                    "the pointer at nothing\n".format(
+                        run_id, item["uni_id"]))
+                return 2
+            ledger.write_current(out_root, item["uni_id"], run_id)
+            action = "promoted"
+        elif kind == "check-verdict":
+            if not args.verdict:
+                sys.stderr.write(
+                    "a check-verdict item needs the judgment: "
+                    "--verdict ok|wrong (with optional --note / "
+                    "--shipped-value)\n")
+                return 2
+            program_id, _, field = item["subject"].rpartition(".")
+            grader.write_manual_verdict(
+                args.verdicts_dir, item["uni_id"], program_id, field,
+                args.verdict, note=args.note,
+                shipped_value=args.shipped_value)
+            action = "verdict:" + args.verdict
+        elif kind == "proposal":
+            if not args.reason:
+                sys.stderr.write(
+                    "closing a proposal review records a promotion "
+                    "decision -- --reason is required\n")
+                return 2
+            action = "reviewed"
+        else:
+            # gate-failure, drift, refresh-error: the honest fix is a
+            # config or world repair; when the next tick no longer
+            # detects the condition the item lapses. A manual resolve
+            # here would record a judgment nothing performed.
+            sys.stderr.write(
+                "{0} items have no manual resolve: fix the cause and the "
+                "next tick will lapse the item when it stops being "
+                "detected (ADR-0005: resolve executes, never merely "
+                "records)\n".format(kind))
+            return 2
+
+        resolution = attention.mark_resolved(
+            out_root, args.item_id, action=action, reason=args.reason,
+            resolved_by=args.resolved_by,
+            resolutions_path=args.resolutions_path)
+        print("{0} resolved: {1} by {2}".format(
+            args.item_id, action, resolution["resolved_by"]))
         return 0
 
     if args.command == "diff":
@@ -448,6 +685,16 @@ def main(argv=None):
         key = grader.load_frozen_key(args.key)
         manual = grader.read_manual_verdicts(None, args.uni_id)
         report = grader.grade_report(key, run_report, manual_verdicts=manual)
+        # unresolved CHECK rows are work only a human can advance --
+        # emit them into the Attention Ledger (ADR-0005); adjudicated
+        # ones stop being detected and lapse
+        attention.sync(
+            out_root,
+            attention.detect_check_verdicts(
+                args.uni_id,
+                [{"program_id": r.program_id, "field": r.field,
+                  "category": r.category.value} for r in report.rows]),
+            kinds=["check-verdict"], unis=[args.uni_id])
         print(_summarize_grade(report))
         if report.gate_pass is None:
             return 2
