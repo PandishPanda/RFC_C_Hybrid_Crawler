@@ -48,7 +48,7 @@ mermaid.initialize({startOnLoad:true,theme:'neutral',flowchart:{htmlLabels:true}
 <div class="grid grid-cols-3 gap-4">
 <div class="bg-slate-900 border border-emerald-800 rounded-xl p-4"><p class="font-bold text-emerald-300 mb-2">Held up</p>
 <ul class="text-sm text-slate-300 space-y-2 list-disc ml-4">
-<li><strong>0 gate failures across 164 programs.</strong> No value ever shipped that wasn't in its artifact.</li>
+<li><strong>0 gate failures across 164 programs.</strong> No <em>extracted</em> value ever shipped that wasn't in its artifact. Since ADR-0007 a value that is true but stated in no document — an unstated language of instruction — ships as <code>DERIVED</code>, never as PASS: it carries the rule that produced it instead of a snippet, the gate cannot emit that status, and the blind key scores it in its own category. The guarantee is restated rather than weakened, which is the only way it stays auditable: a consumer wanting proven data filters on PASS, and «0 fabrications» still means what it meant.</li>
 <li><strong>Site knowledge really is config.</strong> Every fix in the attribution round was generic mechanism (regions, scopes, two label variants) plus config data — no per-site code, under real pressure.</li>
 <li><strong>Deterministic-first pays.</strong> AUBG 90/90 and MUPleven 52/85 with <em>zero</em> LLM calls; refresh is €0 and seconds. Only VUM needs the tail.</li>
 <li><strong>Honest nulls are real.</strong> 48 graded cells are nulls the labeller confirmed as genuinely-absent data, not failures.</li></ul></div>
