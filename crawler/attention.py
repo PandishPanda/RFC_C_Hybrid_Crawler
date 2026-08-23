@@ -38,7 +38,7 @@ from pathlib import Path
 __all__ = [
     "KINDS", "SNAPSHOT_KINDS", "LEDGER_NAME", "RESOLUTIONS_PATH",
     "item_id", "load_items", "sync", "age_days", "mark_resolved",
-    "resolver_identity",
+    "resolver_identity", "query", "resolve", "ResolveRefused",
     "detect_blocked_publish", "detect_gate_failures", "detect_proposals",
     "detect_check_verdicts", "detect_drift",
 ]
@@ -210,6 +210,117 @@ def mark_resolved(out_dir, iid, *, action, reason=None, resolved_by=None,
     items[iid]["resolved_at"] = now
     _write_items(out_dir, items)
     return resolution
+
+
+# ------------------------------------------------------------ query/resolve
+class ResolveRefused(Exception):
+    """A resolution the module refuses to record, with the reason a human
+    needs. Every refusal is this one type: the caller's whole error
+    contract is "catch it, show its message" (the CLI maps it to exit 2).
+    """
+
+
+def query(out_dir, *, uni=None, kind=None, min_age=None, show_all=False,
+          now=None):
+    # type: (str, str, str, int, bool, str) -> list
+    """The backlog, aged and SLA-annotated, oldest first.
+
+    Age is the priority signal (ADR-0005: kind + age), so the list is
+    sorted by it descending; each item gains ``age_days`` and ``sla``
+    (crawler.policy's 7d warn / 30d escalate). Open items only, unless
+    show_all. Summary tallies are the caller's one-liner — this returns
+    the items themselves.
+    """
+    from crawler import policy
+    items = list(load_items(out_dir).values())
+    if not show_all:
+        items = [i for i in items if i["status"] == "open"]
+    if uni:
+        items = [i for i in items if i["uni_id"] == uni]
+    if kind:
+        items = [i for i in items if i["kind"] == kind]
+    for item in items:
+        item["age_days"] = age_days(item, now=now)
+        item["sla"] = policy.sla_state(item["age_days"])
+    if min_age is not None:
+        items = [i for i in items if i["age_days"] >= min_age]
+    items.sort(key=lambda i: (-i["age_days"], i["id"]))
+    return items
+
+
+def resolve(out_dir, iid, *, reason=None, verdict=None, note="",
+            shipped_value=None, verdicts_dir=None, resolutions_path=None,
+            resolved_by=None):
+    # type: (...) -> dict
+    """Close one attention item by EXECUTING its resolution through the
+    existing gate-disciplined deep functions — never by merely recording
+    a judgment (ADR-0005: a judgment recorded but not performed is a new
+    silent-rot channel, the exact class the ledger exists to close).
+
+    By kind: blocked-publish promotes via the ledger pointer write, and
+    only after checking the run is actually in the ledger — else
+    "resolved" would promote nothing and record success; check-verdict
+    goes through grader.write_manual_verdict, bound to the exact shipped
+    value judged; proposal records the human's review decision (the
+    config edit IS the execution, ADR-0003). gate-failure, drift and
+    refresh-error have no manual resolve: their only honest fix is a
+    config or world repair, after which the next tick lapses them.
+
+    Raises ResolveRefused for every refusal, with the message a human
+    needs; on success appends to the tracked resolutions file and
+    returns the resolution.
+    """
+    from crawler import grader, ledger
+    items = load_items(out_dir)
+    item = items.get(iid)
+    if item is None:
+        raise ResolveRefused(
+            "{0}: no such attention item -- `crawler attention` lists "
+            "the open ones".format(iid))
+    kind = item["kind"]
+
+    if kind == "blocked-publish":
+        if not reason:
+            raise ResolveRefused(
+                "promoting a blocked run overrides the expectation "
+                "checks -- --reason is required and is recorded")
+        run_id = (item.get("evidence") or {}).get("run_id")
+        # execute-check: the pointer write must promote a run the
+        # ledger actually holds
+        if not run_id or ledger.read_run_summary(
+                out_dir, item["uni_id"], run_id) is None:
+            raise ResolveRefused(
+                "run {0!r} is not in {1}'s ledger -- refusing to move "
+                "the pointer at nothing".format(run_id, item["uni_id"]))
+        ledger.write_current(out_dir, item["uni_id"], run_id)
+        action = "promoted"
+    elif kind == "check-verdict":
+        if not verdict:
+            raise ResolveRefused(
+                "a check-verdict item needs the judgment: "
+                "--verdict ok|wrong (with optional --note / "
+                "--shipped-value)")
+        program_id, _, field = item["subject"].rpartition(".")
+        grader.write_manual_verdict(
+            verdicts_dir, item["uni_id"], program_id, field, verdict,
+            note=note, shipped_value=shipped_value)
+        action = "verdict:" + verdict
+    elif kind == "proposal":
+        if not reason:
+            raise ResolveRefused(
+                "closing a proposal review records a promotion "
+                "decision -- --reason is required")
+        action = "reviewed"
+    else:
+        raise ResolveRefused(
+            "{0} items have no manual resolve: fix the cause and the "
+            "next tick will lapse the item when it stops being "
+            "detected (ADR-0005: resolve executes, never merely "
+            "records)".format(kind))
+
+    return mark_resolved(out_dir, iid, action=action, reason=reason,
+                         resolved_by=resolved_by,
+                         resolutions_path=resolutions_path)
 
 
 # ---------------------------------------------------------------- producers

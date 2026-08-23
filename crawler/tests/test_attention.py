@@ -204,6 +204,168 @@ class ResolutionTest(unittest.TestCase):
                 T2)
 
 
+class QueryTest(unittest.TestCase):
+    """attention.query — the backlog as a deep function (ADR-0005 review:
+    the whole query used to live inside an argparse branch, and its SLA
+    behaviour was asserted by scraping stdout)."""
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.out = self._tmp.name
+        attention.sync(self.out, [
+            {"kind": "blocked-publish", "uni_id": "VUM",
+             "evidence": {"run_id": "r1", "blocked_reasons": ["drop"]}},
+        ], kinds=["blocked-publish"], unis=["VUM"], now=T0)
+        attention.sync(self.out, [
+            {"kind": "check-verdict", "uni_id": "SHU",
+             "subject": "shu-1.tuition", "ref": "x"},
+        ], kinds=["check-verdict"], unis=["SHU"], now=T2)
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def test_items_come_back_aged_annotated_and_oldest_first(self):
+        items = attention.query(self.out, now="2026-08-31T00:00:00Z")
+        self.assertEqual([i["id"] for i in items],
+                         ["blocked-publish:VUM",
+                          "check-verdict:SHU:shu-1.tuition"])
+        self.assertEqual(items[0]["age_days"], 30)
+        self.assertEqual(items[0]["sla"], "escalate")
+        self.assertEqual(items[1]["sla"], "warn")
+
+    def test_filters(self):
+        q = attention.query
+        self.assertEqual([i["uni_id"] for i in
+                          q(self.out, uni="SHU", now=T2)], ["SHU"])
+        self.assertEqual([i["kind"] for i in
+                          q(self.out, kind="blocked-publish", now=T2)],
+                         ["blocked-publish"])
+        self.assertEqual([i["id"] for i in
+                          q(self.out, min_age=10, now=T2)],
+                         ["blocked-publish:VUM"])
+
+    def test_resolved_items_hidden_unless_show_all(self):
+        attention.mark_resolved(
+            self.out, "check-verdict:SHU:shu-1.tuition", action="ok",
+            reason="judged", resolved_by="t",
+            resolutions_path=str(Path(self.out) / "r.jsonl"), now=T2)
+        self.assertNotIn("check-verdict:SHU:shu-1.tuition",
+                         [i["id"] for i in attention.query(self.out,
+                                                           now=T2)])
+        self.assertIn("check-verdict:SHU:shu-1.tuition",
+                      [i["id"] for i in attention.query(self.out,
+                                                        show_all=True,
+                                                        now=T2)])
+
+
+class ResolveSeamTest(unittest.TestCase):
+    """attention.resolve — ADR-0005's central rule ("resolve executes,
+    never merely records") as a module invariant instead of an argparse
+    branch. Every refusal is a typed ResolveRefused."""
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.out = self._tmp.name
+        self.res = str(Path(self.out) / "resolutions.jsonl")
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def _blocked_item(self, run_id="run-1", in_ledger=True):
+        from crawler import ledger
+        if in_ledger:
+            report = {"uni_id": "U", "programs": [
+                {"program_id": "p1", "name": "p1", "fields": {
+                    "degree": {"status": "PASS", "value": "x", "tier": "G",
+                               "method": "label:x", "provenance": {
+                                   "value": "x", "source_url": "u",
+                                   "source_snippets": ["x"],
+                                   "retrieved_at": T0,
+                                   "method": "label:x"}}}}],
+                "gate_failures": [], "summary": {}}
+            ledger.append_run(self.out, "U", run_id, report, "2026/2027")
+            ledger.write_run_summary(self.out, "U", run_id, {"fields": 1})
+        attention.sync(self.out, [
+            {"kind": "blocked-publish", "uni_id": "U",
+             "evidence": {"run_id": run_id, "blocked_reasons": ["d"]}},
+        ], kinds=["blocked-publish"], unis=["U"], now=T0)
+
+    def test_promote_executes_the_pointer_write(self):
+        from crawler import ledger
+        self._blocked_item()
+        r = attention.resolve(self.out, "blocked-publish:U",
+                              reason="drop is real",
+                              resolved_by="tester",
+                              resolutions_path=self.res)
+        self.assertEqual(r["action"], "promoted")
+        self.assertEqual(ledger.read_current(self.out, "U"), "run-1")
+
+    def test_promote_without_reason_is_refused(self):
+        self._blocked_item()
+        with self.assertRaises(attention.ResolveRefused):
+            attention.resolve(self.out, "blocked-publish:U",
+                              resolved_by="t", resolutions_path=self.res)
+
+    def test_a_run_missing_from_the_ledger_is_refused(self):
+        """The execute-check: pointing the pointer at a run the ledger
+        does not hold would promote nothing and record success."""
+        self._blocked_item(run_id="ghost", in_ledger=False)
+        with self.assertRaises(attention.ResolveRefused) as ctx:
+            attention.resolve(self.out, "blocked-publish:U", reason="x",
+                              resolved_by="t", resolutions_path=self.res)
+        self.assertIn("ghost", str(ctx.exception))
+        self.assertEqual(
+            attention.load_items(self.out)["blocked-publish:U"]["status"],
+            "open")
+
+    def test_check_verdict_executes_write_manual_verdict(self):
+        from crawler import grader
+        vdir = str(Path(self.out) / "verdicts")
+        attention.sync(self.out, [
+            {"kind": "check-verdict", "uni_id": "U",
+             "subject": "p1.tuition", "ref": "x"},
+        ], kinds=["check-verdict"], unis=["U"], now=T0)
+        attention.resolve(self.out, "check-verdict:U:p1.tuition",
+                          verdict="ok", note="n", shipped_value="v",
+                          verdicts_dir=vdir, resolved_by="t",
+                          resolutions_path=self.res)
+        v = grader.read_manual_verdicts(vdir, "U")[("p1", "tuition")]
+        self.assertEqual(v["verdict"], "ok")
+        self.assertEqual(v["shipped_value"], "v")
+
+    def test_check_verdict_without_verdict_is_refused(self):
+        attention.sync(self.out, [
+            {"kind": "check-verdict", "uni_id": "U",
+             "subject": "p1.tuition", "ref": "x"},
+        ], kinds=["check-verdict"], unis=["U"], now=T0)
+        with self.assertRaises(attention.ResolveRefused):
+            attention.resolve(self.out, "check-verdict:U:p1.tuition",
+                              resolved_by="t", resolutions_path=self.res)
+
+    def test_lapse_only_kinds_are_refused(self):
+        for kind, subject in (("gate-failure", "p.f"), ("drift", "894"),
+                              ("refresh-error", None)):
+            attention.sync(self.out, [
+                {"kind": kind, "uni_id": "U", "subject": subject,
+                 "evidence": {"x": 1}},
+            ], kinds=[kind], unis=["U"], now=T0)
+            iid = attention.item_id(kind, "U", subject)
+            with self.assertRaises(attention.ResolveRefused) as ctx:
+                attention.resolve(self.out, iid, reason="fixed it",
+                                  resolved_by="t",
+                                  resolutions_path=self.res)
+            self.assertIn("lapse", str(ctx.exception).lower())
+            self.assertEqual(attention.load_items(self.out)[iid]["status"],
+                             "open")
+
+    def test_unknown_item_is_refused_by_name(self):
+        with self.assertRaises(attention.ResolveRefused) as ctx:
+            attention.resolve(self.out, "blocked-publish:Nowhere",
+                              reason="x", resolved_by="t",
+                              resolutions_path=self.res)
+        self.assertIn("blocked-publish:Nowhere", str(ctx.exception))
+
+
 class ProducerTest(unittest.TestCase):
     def test_blocked_publish_snapshots_the_report_evidence(self):
         pr = {"uni_id": "VUM", "run_id": "r9", "promoted": False,

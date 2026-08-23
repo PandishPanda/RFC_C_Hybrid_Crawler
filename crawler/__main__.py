@@ -95,7 +95,7 @@ import json
 import sys
 from pathlib import Path
 
-from crawler import attention, celldiff, grader, labelkit, ledger, llm_tail, onboarding, policy, publish as publish_mod, refresh as refresh_mod, runner, staleness, validate as validate_mod
+from crawler import attention, celldiff, grader, labelkit, llm_tail, onboarding, publish as publish_mod, refresh as refresh_mod, runner, staleness, validate as validate_mod
 from crawler.config import load_site_config
 
 
@@ -548,20 +548,9 @@ def main(argv=None):
 
     if args.command == "attention":
         out_root = args.out or runner.DEFAULT_OUT_ROOT
-        items = list(attention.load_items(out_root).values())
-        if not args.show_all:
-            items = [i for i in items if i["status"] == "open"]
-        if args.uni:
-            items = [i for i in items if i["uni_id"] == args.uni]
-        if args.kind:
-            items = [i for i in items if i["kind"] == args.kind]
-        for item in items:
-            item["age_days"] = attention.age_days(item, now=args.now)
-            item["sla"] = policy.sla_state(item["age_days"])
-        if args.age is not None:
-            items = [i for i in items if i["age_days"] >= args.age]
-        # oldest first: age is the priority signal
-        items.sort(key=lambda i: (-i["age_days"], i["id"]))
+        items = attention.query(out_root, uni=args.uni, kind=args.kind,
+                                min_age=args.age, show_all=args.show_all,
+                                now=args.now)
         if args.as_json:
             print(json.dumps({"items": items}, ensure_ascii=False, indent=2))
             return 0
@@ -581,71 +570,20 @@ def main(argv=None):
 
     if args.command == "resolve":
         out_root = args.out or runner.DEFAULT_OUT_ROOT
-        items = attention.load_items(out_root)
-        item = items.get(args.item_id)
-        if item is None:
-            sys.stderr.write(
-                "{0}: no such attention item -- `crawler attention` lists "
-                "the open ones\n".format(args.item_id))
+        try:
+            resolution = attention.resolve(
+                out_root, args.item_id, reason=args.reason,
+                verdict=args.verdict, note=args.note,
+                shipped_value=args.shipped_value,
+                verdicts_dir=args.verdicts_dir,
+                resolutions_path=args.resolutions_path,
+                resolved_by=args.resolved_by)
+        except attention.ResolveRefused as refusal:
+            sys.stderr.write(str(refusal) + "\n")
             return 2
-        kind = item["kind"]
-
-        if kind == "blocked-publish":
-            if not args.reason:
-                sys.stderr.write(
-                    "promoting a blocked run overrides the expectation "
-                    "checks -- --reason is required and is recorded\n")
-                return 2
-            run_id = (item.get("evidence") or {}).get("run_id")
-            # execute-check: the pointer write must promote a run the
-            # ledger actually holds, else "resolved" promotes nothing
-            if not run_id or ledger.read_run_summary(
-                    out_root, item["uni_id"], run_id) is None:
-                sys.stderr.write(
-                    "run {0!r} is not in {1}'s ledger -- refusing to move "
-                    "the pointer at nothing\n".format(
-                        run_id, item["uni_id"]))
-                return 2
-            ledger.write_current(out_root, item["uni_id"], run_id)
-            action = "promoted"
-        elif kind == "check-verdict":
-            if not args.verdict:
-                sys.stderr.write(
-                    "a check-verdict item needs the judgment: "
-                    "--verdict ok|wrong (with optional --note / "
-                    "--shipped-value)\n")
-                return 2
-            program_id, _, field = item["subject"].rpartition(".")
-            grader.write_manual_verdict(
-                args.verdicts_dir, item["uni_id"], program_id, field,
-                args.verdict, note=args.note,
-                shipped_value=args.shipped_value)
-            action = "verdict:" + args.verdict
-        elif kind == "proposal":
-            if not args.reason:
-                sys.stderr.write(
-                    "closing a proposal review records a promotion "
-                    "decision -- --reason is required\n")
-                return 2
-            action = "reviewed"
-        else:
-            # gate-failure, drift, refresh-error: the honest fix is a
-            # config or world repair; when the next tick no longer
-            # detects the condition the item lapses. A manual resolve
-            # here would record a judgment nothing performed.
-            sys.stderr.write(
-                "{0} items have no manual resolve: fix the cause and the "
-                "next tick will lapse the item when it stops being "
-                "detected (ADR-0005: resolve executes, never merely "
-                "records)\n".format(kind))
-            return 2
-
-        resolution = attention.mark_resolved(
-            out_root, args.item_id, action=action, reason=args.reason,
-            resolved_by=args.resolved_by,
-            resolutions_path=args.resolutions_path)
         print("{0} resolved: {1} by {2}".format(
-            args.item_id, action, resolution["resolved_by"]))
+            args.item_id, resolution["action"],
+            resolution["resolved_by"]))
         return 0
 
     if args.command == "diff":
