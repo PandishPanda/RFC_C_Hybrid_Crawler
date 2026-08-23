@@ -99,7 +99,7 @@
    "finding": "MEASURED (5-program graded sample): duration and admission read as unreachable by the fetch route — 9 of 25 cells. RE-MEASURED 2026-08-23: admission was never a fetch-route problem at all. It is served by a sibling e-catalog tab (P_Menu=admission), plain server-rendered HTML, HTTP 200 — the config simply never fetched it (sources {}, no field_anchors). Wired via adm_page: 18 of 20 programmes now ship it. language and tuition are NOT on the programme pages at all: the labeller confirmed them absent, so those nulls are honest, not losses",
    "impact": "was read as a 36% JS gap; measured, it was 19 cells of unwritten config (admission ×18, duration ×1). NBU graded 16/25 → 20/25, fields 20/100 → 39/100, 0 fabrications, 0 gate failures. No rendering fallback was needed or built",
    "status": "fixed",
-   "resolution": "adm_page wired for all 20 programmes + two shared label patterns (bg-zavurshilite-sredno, bg-prodalzhitelnost-semestri). Config data and generic mechanism — no per-site code, no new dependency"
+   "resolution": "adm_page wired for all 20 programmes + two shared label patterns (bg-zavurshilite-sredno, bg-prodalzhitelnost-semestri). Config data and generic mechanism — no per-site code, no new dependency. The admission pages state a second route as a further bullet («завършилите друго висше образование…»); the shipped value is the first bullet only, which is what the labeller keyed — recorded here so it is not later rediscovered as a partial-value defect"
   },
   {
    "uni_id": "NBU",
