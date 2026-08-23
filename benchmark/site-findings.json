@@ -99,7 +99,7 @@
    "finding": "MEASURED (5-program graded sample): duration and admission read as unreachable by the fetch route — 9 of 25 cells. RE-MEASURED 2026-08-23: admission was never a fetch-route problem at all. It is served by a sibling e-catalog tab (P_Menu=admission), plain server-rendered HTML, HTTP 200 — the config simply never fetched it (sources {}, no field_anchors). Wired via adm_page: 18 of 20 programmes now ship it. language and tuition are NOT on the programme pages at all: the labeller confirmed them absent, so those nulls are honest, not losses",
    "impact": "was read as a 36% JS gap; measured, it was 19 cells of unwritten config (admission ×18, duration ×1). NBU graded 16/25 → 20/25, fields 20/100 → 39/100, 0 fabrications, 0 gate failures. No rendering fallback was needed or built",
    "status": "fixed",
-   "resolution": "adm_page wired for all 20 programmes + two shared label patterns (bg-zavurshilite-sredno, bg-prodalzhitelnost-semestri). Config data and generic mechanism — no per-site code, no new dependency. The admission pages state a second route as a further bullet («завършилите друго висше образование…»); the shipped value is the first bullet only, which is what the labeller keyed — recorded here so it is not later rediscovered as a partial-value defect"
+   "resolution": "adm_page wired for all 20 programmes + two shared label patterns (bg-priem-section, bg-prodalzhitelnost-semestri). Config data and generic mechanism — no per-site code, no new dependency. CORRECTED 2026-08-23 after an adversarial attribution review: the admission pattern first shipped only the opening bullet, cut at its own semicolon, dropping the бал formula AND a second admission route that is exempt from the entrance exam («Кандидатите не се явяват на ТОП») — the shipped fragment made the page say the opposite of what it says for that route. Replaced by a whole-section capture (bg-priem-section, bounded by the next section label, allowed 800 chars via SECTION_SPANS). 18 values restated complete, +1 cell (nbu-3238's own route now ships); NBU 39 -> 40 fields, graded still 20/25"
   },
   {
    "uni_id": "NBU",
@@ -325,6 +325,13 @@
    "kind": "benchmark-integrity",
    "finding": "the frozen key expects duration «8 семестъра» for all 5 sampled programmes, but no server-rendered page states it: «семестъра» appears nowhere across generalinfo / admission / courses_part1 / courses_part2 / teachers for nbu-2520 (checked 2026-08-23). Exactly one of the 20 programmes (nbu-3238) states a duration in prose, and it is now extracted. The programme-schema tab renders to navigation only without JS, so a human browser can count semesters there — but counting them is an inference, not a verbatim claim, and ADR-0002 forbids shipping it",
    "impact": "5 MISS rows that no config change can honestly close; NBU's ceiling on the current key is 20/25, not 25/25. Needs a labeller ruling: amend the 5 duration entries to null-genuinely-absent, or record where the statement was read",
+   "status": "open"
+  },
+  {
+   "uni_id": "NBU",
+   "kind": "trust",
+   "finding": "the 18 «Прием:» sections are BYTE-IDENTICAL across heterogeneous programmes (Информатика, Египтология, Биология, and four studio-art degrees). NBU serves one university-wide admission template under a per-programme heading. Corroboration that the template is not programme-truth: Графичен дизайн's page mentions no portfolio or drawing exam anywhere, which is not a plausible complete admission statement for a studio-art degree",
+   "impact": "18 shipped admission values may be university-wide policy presented as programme-specific fact. NOT closed: the page frames the text as programme-scoped («В програмата могат да кандидатстват»), and the ANIS precedent has the labeller ruling such statements genuinely apply per programme. Needs a labeller ruling, like the 5 duration entries",
    "status": "open"
   }
  ]

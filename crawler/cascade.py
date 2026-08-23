@@ -80,6 +80,7 @@ __all__ = [
     "TableSource",
     "Extraction",
     "LABEL_PATTERNS",
+    "SECTION_SPANS",
     "TIER_G",
     "TIER_F",
     "TIER_B",
@@ -306,19 +307,42 @@ LABEL_PATTERNS = {
         ("en-min-gpa", r'The (recommended minimum GPA for applicants is .+?scale\))'),
         # NBU family: the catalog's admission tab (P_Menu=admission,
         # reached via adm_page — plain server-rendered HTML that was
-        # simply never fetched) enumerates admission routes as bullets.
-        # The first names the secondary-school route and ends at its own
-        # semicolon: running on would compose it with the next bullet, a
-        # different route, into a claim the page never makes. Appended,
-        # so it can only fill a null (2026-08-23: 18 of 20 NBU
-        # programmes state it, 2 state no route and stay null).
-        ("bg-zavurshilite-sredno", r'(завършилите средно образование[^;]*;)'),
+        # simply never fetched) states admission under a «Прием:» label.
+        # Captured WHOLE, to the next section label or the end of the
+        # region, following bg-konkurs-label's shape.
+        #
+        # It first shipped only the opening bullet, cut at its own
+        # semicolon. An adversarial review refuted all 18 cells that
+        # produced (2026-08-23): the section names TWO admission routes
+        # and the dropped one is exempt from the entrance exam
+        # («Кандидатите не се явяват на ТОП»), so the fragment made the
+        # page say the opposite of what it says for that route — while
+        # the бал formula qualifying the FIRST route was dropped too.
+        # Partial values are wrong values: the sibling duration pattern
+        # refuses exactly this (three competing entry-route durations),
+        # and a first-row-only fee schedule was graded WRONG.
+        ("bg-priem-section",
+         r'Прием\s*:\s*(.+?)'
+         r'(?=\s*(?:Обучение\s*:|Реализация\s*:|Конкурс\s*:|Прием\s*:)|$)'),
         # UniRuse family: enumerated балообразуване formula introduced by
         # a literal marker; capture ends at the sentence-final period
         # before the next prose sentence (2026-08-22, 20 graded-MISS
         # cells the frozen key proved exist).
         ("bg-kandidatstva-se", r'Кандидатства се с:\s*(1\).{20,500}?\.)(?=\s+[А-Я]|\s*$)'),
     ],
+}
+
+
+# Patterns whose value is legitimately a whole section rather than a
+# phrase, with the bound each is allowed. The default max_span is a
+# runaway-capture guard tuned for phrase-shaped values; a section-shaped
+# claim must not be silently truncated INTO a phrase, because a partial
+# value is a wrong value. Keep this table tiny and justified.
+SECTION_SPANS = {
+    # NBU's «Прием:» enumerates two admission routes plus the бал
+    # formula: 704 characters on the real pages, and every part of it
+    # qualifies the others (2026-08-23).
+    "bg-priem-section": 800,
 }
 
 
@@ -337,7 +361,8 @@ def harvest_labels(field, source, max_span=400, skip=()):
         if pid in skip:
             continue
         m = re.search(rx, text)
-        if m and len(m.group(1)) <= max_span:
+        span = max(max_span, SECTION_SPANS.get(pid, 0))
+        if m and len(m.group(1)) <= span:
             return _emit(field, norm(m.group(1)),
                          [snippet_around(text, m.start(), m.end())],
                          source.ref, "label:" + pid, TIER_G)

@@ -327,8 +327,10 @@ class TestGoldenRegression(unittest.TestCase):
         #         + bg-programme-level (2026-08-21 NBU build-out)
         #         + bg-kandidatstva-se (2026-08-22 UniRuse admission)
         #         + bg-prodalzhitelnost, bg-dual-track (2026-08-22 MUVarna)
-        #         + bg-zavurshilite-sredno, bg-prodalzhitelnost-semestri
-        #           (2026-08-23 NBU: the admission tab was never fetched)
+        #         + bg-priem-section, bg-prodalzhitelnost-semestri
+        #           (2026-08-23 NBU: the admission tab was never fetched;
+        #            bg-priem-section replaced a first-bullet-only
+        #            pattern an adversarial review refuted as partial)
         n = sum(len(v) for v in cascade.LABEL_PATTERNS.values())
         self.assertEqual(n, 34)
 
@@ -696,43 +698,81 @@ class BgLanguageLabelTest(unittest.TestCase):
 
 class NbuAdmissionLabelTest(unittest.TestCase):
     """NBU states admission on a sibling tab (P_Menu=admission), reached
-    via adm_page. The keyed answer is the first bullet — the route open
-    to secondary-school leavers — ending at its semicolon."""
+    via adm_page. The value is the WHOLE «Прием:» section.
+
+    An earlier version of this pattern shipped only the first bullet,
+    truncated at its own semicolon. An adversarial review refuted all 18
+    cells it produced (2026-08-23): the page names TWO admission routes,
+    and the dropped one is expressly exempt from the entrance exam
+    («Кандидатите не се явяват на ТОП») -- so the shipped fragment made
+    the page say the opposite of what it says for that route. Partial
+    values are wrong values; the same defect is refused for durations
+    (bg-prodalzhitelnost) and was graded WRONG on a fee schedule.
+    """
 
     ADM = ("Прием:\nВ програмата могат да кандидатстват:\n"
            "• завършилите средно образование - с полагане на "
            "кандидатстудентски изпит тест за общообразователна подготовка "
            "(ТОП) и представяне на диплома за средно образование; \n"
-           "Състезателният бал за класиране на кандидат-студентите се "
-           "изчислява в точки.\n"
+           "Състезателният бал за класиране се изчислява в точки.\n"
            "• завършилите друго висше образование, с диплома за "
-           "съответната образователна степен.")
+           "съответната образователна степен. Кандидатите не се явяват "
+           "на ТОП.")
 
-    def test_the_secondary_school_route_is_read(self):
-        src = cascade.TextSource("html:https://ecatalog.example/adm", self.ADM)
-        r = cascade.harvest_labels("admission", src)
-        self.assertIsNotNone(r)
-        self.assertEqual(r.method, "label:bg-zavurshilite-sredno")
-        self.assertTrue(r.value.startswith("завършилите средно образование"))
-        self.assertTrue(r.value.endswith(";"))
-
-    def test_it_stops_at_its_own_semicolon(self):
-        """The second bullet is a different admission route — running on
-        into it would ship a composed claim the page never made."""
-        r = cascade.harvest_labels(
+    def harvest(self, text):
+        return cascade.harvest_labels(
             "admission",
-            cascade.TextSource("html:https://ecatalog.example/adm", self.ADM))
-        self.assertNotIn("друго висше образование", r.value)
-        self.assertNotIn("Състезателният бал", r.value)
+            cascade.TextSource("html:https://ecatalog.example/adm", text))
 
-    def test_a_page_without_the_route_ships_nothing(self):
-        """NBU-3185 and the York joint programme state no such route; an
-        honest null is the right answer, not the nearest prose."""
-        src = cascade.TextSource(
-            "html:https://ecatalog.example/adm",
+    def test_the_whole_section_is_read(self):
+        r = self.harvest(self.ADM)
+        self.assertIsNotNone(r)
+        self.assertEqual(r.method, "label:bg-priem-section")
+        self.assertTrue(r.value.startswith("В програмата могат"))
+        self.assertTrue(r.value.endswith("не се явяват на ТОП."))
+
+    def test_both_admission_routes_survive(self):
+        """The refuted defect, asserted directly: a value that names one
+        route and drops the exam-exempt one misrepresents the page."""
+        value = self.harvest(self.ADM).value
+        self.assertIn("завършилите средно образование", value)
+        self.assertIn("завършилите друго висше образование", value)
+        self.assertIn("Кандидатите не се явяват на ТОП", value)
+
+    def test_a_differently_phrased_section_is_still_read_whole(self):
+        """NBU-3238's joint programme states its own admission route in
+        prose -- a real claim, and it must ship complete too."""
+        r = self.harvest(
             "Прием:\nЗа програмата се кандидатства отделно в CITY College "
-            "и в НБУ, като се попълват съответните формуляри.")
-        self.assertIsNone(cascade.harvest_labels("admission", src))
+            "и в НБУ, като се попълват съответните формуляри. Кандидатите "
+            "трябва да отговарят на изискванията и на двете институции.")
+        self.assertIsNotNone(r)
+        self.assertTrue(r.value.endswith("на двете институции."))
+
+    def test_it_stops_at_the_next_section_label(self):
+        """Running on into a sibling section would ship a composed claim
+        the page never made."""
+        r = self.harvest(self.ADM + "\nРеализация:\nЗавършилите работят "
+                                    "в библиотеки и архиви.")
+        self.assertNotIn("Реализация", r.value)
+        self.assertNotIn("библиотеки", r.value)
+
+    def test_the_section_allowance_is_scoped_to_this_pattern(self):
+        """The 400-char runaway guard still binds every other pattern —
+        only a pattern that legitimately captures a section is allowed
+        more, and truncating a section INTO a phrase is the defect this
+        exists to prevent."""
+        self.assertEqual(set(cascade.SECTION_SPANS), {"bg-priem-section"})
+        long_section = (
+            "Прием:\nВ програмата могат да кандидатстват: " + "дума " * 200)
+        self.assertIsNone(self.harvest(long_section),
+                          "beyond its own bound the section is dropped, "
+                          "not truncated")
+
+    def test_a_page_with_no_admission_section_ships_nothing(self):
+        self.assertIsNone(self.harvest(
+            "Кратко представяне на програмата: Програмата подготвя "
+            "специалисти в областта на англицистиката."))
 
 
 class NbuDurationLabelTest(unittest.TestCase):
