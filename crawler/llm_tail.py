@@ -126,7 +126,47 @@ def candidate_docs(site, program, field, docs):
             source = docs[key]
             seen[source.ref] = source
 
-    add(program.page)
+    def add_own_page():
+        """The program's own page, region-scoped when it is shared.
+
+        The deterministic cascade slices a shared page to the program's
+        own program_region() spans; the tail used to receive the page
+        WHOLE, so on a page serving several programs the model had to
+        choose which section answered the question — and chose
+        differently per call (measured 2026-08-23 at VUM: durations came
+        back swapped between two programs, and one got a complete
+        admission answer while the other got a fragment). The gate
+        cannot catch that: every fragment is verbatim on the page.
+
+        The scoped view keeps the page's artifact ref, because it is the
+        same artifact — the model still quotes a ref the store resolves,
+        and the gate still checks the quoted snippet against the FULL
+        artifact, so scoping can only narrow what the model may read.
+
+        NOTE this cannot separate same-named siblings (VUM's
+        professional-bachelor / bachelor twins): program_region()
+        deliberately refuses to let same-named siblings bound each
+        other, so both get the same span. Those need a tier-B anchor on
+        whatever the page uses to tell them apart.
+        """
+        page = docs.get(program.page)
+        if page is None:
+            return
+        siblings = [p.name for p in site.programs
+                    if p.page == program.page and p.id != program.id]
+        if not siblings or not isinstance(page, cascade.TextSource):
+            seen[page.ref] = page
+            return
+        raw = page.text or ""
+        spans = cascade.program_region(raw, program.name, siblings)
+        if not spans:
+            # the shared page never names this program: tier G would
+            # read nothing from it, and neither may the tail
+            return
+        scoped = "\n".join(raw[s0:e0] for s0, e0 in spans)
+        seen[page.ref] = cascade.TextSource(ref=page.ref, text=scoped)
+
+    add_own_page()
     for url in program.extra_pages:
         add(url)
     for sid in program.extra_sources:

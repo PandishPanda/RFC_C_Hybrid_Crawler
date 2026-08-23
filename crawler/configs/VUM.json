@@ -1,154 +1,184 @@
 {
-  "uni_id": "VUM",
-  "cookies": {},
-  "sources": {
-    "vum-fees": {
-      "url": "https://vum.bg/scholarships-tution-fees-and-funding/",
-      "route": "html",
-      "join": {
-        "kind": "fees-page",
-        "name": "vum",
-        "value_pattern": "\\d{3,4} € per semester for EU and EEA citizens",
-        "window": 120
-      }
-    },
-    "vum-fees-bg": {
-      "url": "https://vum.bg/bg/stipendii-taksi/",
-      "route": "html",
-      "join": {
-        "kind": "fees-page",
-        "name": "vum-bg",
-        "value_pattern": "\\d{3,4} € на семестър за граждани на ЕС и ЕИП",
-        "window": 120
-      }
-    }
+ "uni_id": "VUM",
+ "cookies": {},
+ "sources": {
+  "vum-fees": {
+   "url": "https://vum.bg/scholarships-tution-fees-and-funding/",
+   "route": "html",
+   "join": {
+    "kind": "fees-page",
+    "name": "vum",
+    "value_pattern": "\\d{3,4} € per semester for EU and EEA citizens",
+    "window": 120
+   }
   },
-  "programs": [
-    {
-      "id": "vum-sst",
-      "name": "Software Systems and Technologies",
-      "page": "https://vum.bg/software-systems-and-technologies/",
-      "fees_section": {
-        "source": "vum-fees",
-        "section_pattern": "Tuition Fee Bachelor[’']s Programme \\*"
-      },
-      "adm_page": "https://vum.bg/application-requirement-for-bachelor-degree-programmes/"
-    },
-    {
-      "id": "vum-gca",
-      "name": "Gastronomy and Culinary Arts",
-      "page": "https://vum.bg/gastronomy-and-culinary-arts/",
-      "fees_section": {
-        "source": "vum-fees",
-        "section_pattern": "Tuition Fee Bachelor[’']s Programme in Culinary Arts"
-      },
-      "adm_page": "https://vum.bg/application-requirement-for-bachelor-degree-programmes/"
-    },
-    {
-      "id": "vum-mba",
-      "name": "Master of Business Administration",
-      "page": "https://vum.bg/master-of-business-administration/",
-      "fees_section": {
-        "source": "vum-fees",
-        "section_pattern": "Tuition Fee MBA Programme \\*For semesters 1, 2 and 3"
-      }
-    },
-    {
-      "id": "vum-corr",
-      "name": "Fighting Corruption and Conflict of Interest",
-      "page": "https://vum.bg/coruption/",
-      "suppress_labels": {
-        "tuition": [
-          "en-semfee-label"
-        ]
-      }
-    },
-    {
-      "id": "vum-ibm-pb",
-      "name": "Международен бизнес и мениджмънт",
-      "page": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/",
-      "fees_section": {
-        "source": "vum-fees-bg",
-        "section_pattern": "Такса за обучение – бакалавърска програма \\*"
-      }
-    },
-    {
-      "id": "vum-ibm-b",
-      "name": "Международен бизнес и мениджмънт",
-      "page": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/",
-      "fees_section": {
-        "source": "vum-fees-bg",
-        "section_pattern": "Такса за обучение – бакалавърска програма \\*"
-      }
-    },
-    {
-      "id": "vum-hm-pb",
-      "name": "Хотелски мениджмънт",
-      "page": "https://vum.bg/bg/hotelski-menidjmant",
-      "fees_section": {
-        "source": "vum-fees-bg",
-        "section_pattern": "Такса за обучение – бакалавърска програма \\*"
-      }
-    },
-    {
-      "id": "vum-hm-b",
-      "name": "Хотелски мениджмънт",
-      "page": "https://vum.bg/bg/hotelski-menidjmant",
-      "fees_section": {
-        "source": "vum-fees-bg",
-        "section_pattern": "Такса за обучение – бакалавърска програма \\*"
-      }
-    },
-    {
-      "id": "vum-ped-econ",
-      "name": "Педагогика на обучението по Икономика и мениджмънт",
-      "page": "https://vum.bg/bg/pedagogika-obuchenieto-ikonomika-menidjmant/"
-    },
-    {
-      "id": "vum-ped-hosp",
-      "name": "Педагогика на обучението по хотелиерство и ресторантьорство",
-      "page": "https://vum.bg/bg/pedagogika-obuchenieto-hotelierstvo-restorantiorstvo/"
-    },
-    {
-      "id": "vum-hce",
-      "name": "Хотелиерство и кулинарни изкуства",
-      "page": "https://vum.bg/bg/hotelierstvo-kulinarni-izkustva/",
-      "fees_section": {
-        "source": "vum-fees-bg",
-        "section_pattern": "Такса за обучение – бакалавърска програма \\*"
-      }
-    },
-    {
-      "id": "vum-int-tour",
-      "name": "Международен туризъм",
-      "page": "https://vum.bg/bg/magistratura-mejdunaroden-turizam/",
-      "fees_section": {
-        "source": "vum-fees-bg",
-        "section_pattern": "Такса за обучение – магистърска програма „Международен туризъм“ \\* ?за семестри 1 и 2"
-      }
-    },
-    {
-      "id": "vum-tour-phd",
-      "name": "Туризъм",
-      "page": "https://vum.bg/bg/doktorska-programa-turizam/"
-    },
-    {
-      "id": "vum-food",
-      "name": "Хранителни технологии в кулинарните изкуства",
-      "page": "https://vum.bg/bg/hranitelni-tehnologii-kulinarni-izkustva/",
-      "fees_section": {
-        "source": "vum-fees-bg",
-        "section_pattern": "Такса за обучение в бакалавърска програма по: Кулинарни изкуства"
-      }
-    },
-    {
-      "id": "vum-mkt",
-      "name": "Маркетинг и мениджмънт",
-      "page": "https://vum.bg/bg/marketing-menidjmant/",
-      "fees_section": {
-        "source": "vum-fees-bg",
-        "section_pattern": "Такса за обучение – бакалавърска програма \\*"
-      }
-    }
-  ]
+  "vum-fees-bg": {
+   "url": "https://vum.bg/bg/stipendii-taksi/",
+   "route": "html",
+   "join": {
+    "kind": "fees-page",
+    "name": "vum-bg",
+    "value_pattern": "\\d{3,4} € на семестър за граждани на ЕС и ЕИП",
+    "window": 120
+   }
+  }
+ },
+ "programs": [
+  {
+   "id": "vum-sst",
+   "name": "Software Systems and Technologies",
+   "page": "https://vum.bg/software-systems-and-technologies/",
+   "fees_section": {
+    "source": "vum-fees",
+    "section_pattern": "Tuition Fee Bachelor[’']s Programme \\*"
+   },
+   "adm_page": "https://vum.bg/application-requirement-for-bachelor-degree-programmes/"
+  },
+  {
+   "id": "vum-gca",
+   "name": "Gastronomy and Culinary Arts",
+   "page": "https://vum.bg/gastronomy-and-culinary-arts/",
+   "fees_section": {
+    "source": "vum-fees",
+    "section_pattern": "Tuition Fee Bachelor[’']s Programme in Culinary Arts"
+   },
+   "adm_page": "https://vum.bg/application-requirement-for-bachelor-degree-programmes/"
+  },
+  {
+   "id": "vum-mba",
+   "name": "Master of Business Administration",
+   "page": "https://vum.bg/master-of-business-administration/",
+   "fees_section": {
+    "source": "vum-fees",
+    "section_pattern": "Tuition Fee MBA Programme \\*For semesters 1, 2 and 3"
+   }
+  },
+  {
+   "id": "vum-corr",
+   "name": "Fighting Corruption and Conflict of Interest",
+   "page": "https://vum.bg/coruption/",
+   "suppress_labels": {
+    "tuition": [
+     "en-semfee-label"
+    ]
+   }
+  },
+  {
+   "id": "vum-ibm-pb",
+   "name": "Международен бизнес и мениджмънт",
+   "page": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/",
+   "fees_section": {
+    "source": "vum-fees-bg",
+    "section_pattern": "Такса за обучение – бакалавърска програма \\*"
+   },
+   "field_anchors": {
+    "duration": "vum-ibm-pb-duration"
+   }
+  },
+  {
+   "id": "vum-ibm-b",
+   "name": "Международен бизнес и мениджмънт",
+   "page": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/",
+   "fees_section": {
+    "source": "vum-fees-bg",
+    "section_pattern": "Такса за обучение – бакалавърска програма \\*"
+   },
+   "field_anchors": {
+    "duration": "vum-ibm-b-duration"
+   }
+  },
+  {
+   "id": "vum-hm-pb",
+   "name": "Хотелски мениджмънт",
+   "page": "https://vum.bg/bg/hotelski-menidjmant",
+   "fees_section": {
+    "source": "vum-fees-bg",
+    "section_pattern": "Такса за обучение – бакалавърска програма \\*"
+   },
+   "field_anchors": {
+    "duration": "vum-hm-pb-duration"
+   }
+  },
+  {
+   "id": "vum-hm-b",
+   "name": "Хотелски мениджмънт",
+   "page": "https://vum.bg/bg/hotelski-menidjmant",
+   "fees_section": {
+    "source": "vum-fees-bg",
+    "section_pattern": "Такса за обучение – бакалавърска програма \\*"
+   },
+   "field_anchors": {
+    "duration": "vum-hm-b-duration"
+   }
+  },
+  {
+   "id": "vum-ped-econ",
+   "name": "Педагогика на обучението по Икономика и мениджмънт",
+   "page": "https://vum.bg/bg/pedagogika-obuchenieto-ikonomika-menidjmant/"
+  },
+  {
+   "id": "vum-ped-hosp",
+   "name": "Педагогика на обучението по хотелиерство и ресторантьорство",
+   "page": "https://vum.bg/bg/pedagogika-obuchenieto-hotelierstvo-restorantiorstvo/"
+  },
+  {
+   "id": "vum-hce",
+   "name": "Хотелиерство и кулинарни изкуства",
+   "page": "https://vum.bg/bg/hotelierstvo-kulinarni-izkustva/",
+   "fees_section": {
+    "source": "vum-fees-bg",
+    "section_pattern": "Такса за обучение – бакалавърска програма \\*"
+   }
+  },
+  {
+   "id": "vum-int-tour",
+   "name": "Международен туризъм",
+   "page": "https://vum.bg/bg/magistratura-mejdunaroden-turizam/",
+   "fees_section": {
+    "source": "vum-fees-bg",
+    "section_pattern": "Такса за обучение – магистърска програма „Международен туризъм“ \\* ?за семестри 1 и 2"
+   }
+  },
+  {
+   "id": "vum-tour-phd",
+   "name": "Туризъм",
+   "page": "https://vum.bg/bg/doktorska-programa-turizam/"
+  },
+  {
+   "id": "vum-food",
+   "name": "Хранителни технологии в кулинарните изкуства",
+   "page": "https://vum.bg/bg/hranitelni-tehnologii-kulinarni-izkustva/",
+   "fees_section": {
+    "source": "vum-fees-bg",
+    "section_pattern": "Такса за обучение в бакалавърска програма по: Кулинарни изкуства"
+   }
+  },
+  {
+   "id": "vum-mkt",
+   "name": "Маркетинг и мениджмънт",
+   "page": "https://vum.bg/bg/marketing-menidjmant/",
+   "fees_section": {
+    "source": "vum-fees-bg",
+    "section_pattern": "Такса за обучение – бакалавърска програма \\*"
+   }
+  }
+ ],
+ "anchors": {
+  "vum-hm-pb-duration": {
+   "source": "https://vum.bg/bg/hotelski-menidjmant",
+   "pattern": "Професионален бакалавър\\s+(\\d+(?:[.,]\\d+)? години / \\d+ семестъра)"
+  },
+  "vum-hm-b-duration": {
+   "source": "https://vum.bg/bg/hotelski-menidjmant",
+   "pattern": "(?<!Професионален )Бакалавър\\s+(\\d+(?:[.,]\\d+)? години / \\d+ семестъра)"
+  },
+  "vum-ibm-pb-duration": {
+   "source": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/",
+   "pattern": "Професионален бакалавър\\s+(\\d+(?:[.,]\\d+)? години / \\d+ семестъра)"
+  },
+  "vum-ibm-b-duration": {
+   "source": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/",
+   "pattern": "(?<!Професионален )Бакалавър\\s+(\\d+(?:[.,]\\d+)? години / \\d+ семестъра)"
+  }
+ }
 }
