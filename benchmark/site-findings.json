@@ -113,7 +113,8 @@
    "kind": "trust",
    "finding": "Docling merged a fee row's cells: «освободени 310 EUR» came out as ONE cell and the row lost columns, so the join read «освободени» where the labeller read 310 EUR (su-cult)",
    "impact": "1 graded wrong; a merged cell can silently flip a fee between exempt and charged",
-   "status": "open"
+   "status": "fixed",
+   "resolution": "closed 2026-08-23 by the same change that closed the '310 EUR 310 EUR' case: fee_row_join refuses a cell stating two different values. The domain owner ruled a cell cannot say «освободени» and a price at once, so this is a lost cell boundary in rendering — the true fee may be either or neither. su-cult now ships an honest null instead of the wrong «освободени», and SU's gate went FAIL (5.3% wrong) -> PASS (0%)"
   },
   {
    "uni_id": "SHU",
@@ -325,7 +326,8 @@
    "kind": "benchmark-integrity",
    "finding": "the frozen key expects duration «8 семестъра» for all 5 sampled programmes, but no server-rendered page states it: «семестъра» appears nowhere across generalinfo / admission / courses_part1 / courses_part2 / teachers for nbu-2520 (checked 2026-08-23). Exactly one of the 20 programmes (nbu-3238) states a duration in prose, and it is now extracted. The programme-schema tab renders to navigation only without JS, so a human browser can count semesters there — but counting them is an inference, not a verbatim claim, and ADR-0002 forbids shipping it",
    "impact": "5 MISS rows that no config change can honestly close; NBU's ceiling on the current key is 20/25, not 25/25. Needs a labeller ruling: amend the 5 duration entries to null-genuinely-absent, or record where the statement was read",
-   "status": "open"
+   "status": "accepted-by-owner",
+   "resolution": "RULED 2026-08-23 by the domain owner: counting semesters is a legitimate way to establish a duration the page does not state. MEASURED against that ruling and NOT applied: the semester headings reachable without a browser are incomplete, so counting yields 1 / 5 / 5 / 5 / 7 for the five keyed programmes, never 8 — the курс list is paginated and courses_part2 renders as navigation only. Applying the rule today would ship five NEW wrong values. Decision: the cells stay honest nulls; NBU's ceiling on the current key stays 20/25, and the 5 MISS rows stand as a recorded coverage gap, not a defect. Revisit only if a rendering fallback is built for other reasons"
   },
   {
    "uni_id": "NBU",
@@ -348,6 +350,13 @@
    "finding": "su-bin ships an honest null for admission, but by accident rather than by check: it has no admission_join at all, while 12 siblings do. The data IS in the configured ordinance (su-adm), and the configured row_pattern cannot read it — its (?!Редовн|Задочн) lookahead dies on the name wrapped across two lines ('Библиотечно-' / 'информационни науки Задочна'), exactly as it does for Публични информационни системи",
    "impact": "2 SU programmes silently unreachable for admission; and had the pattern matched it would have shipped one of ~29 coefficient-3 balloting alternatives, i.e. a misattribution. The null is right; the route to it is untested",
    "status": "open"
+  },
+  {
+   "uni_id": "*",
+   "kind": "trust",
+   "finding": "RULED 2026-08-23 by the domain owner: where a programme's pages do not state the language, Bulgarian is a safe real-world assumption. MEASURED against the frozen keys and NOT applied: five keys (ANIS, NBU, SHU, SofiaUniversity, UniRuse) record language as genuinely absent, so a defaulted value grades as FABRICATION, not as a wrong value — simulated on NBU's key it turns 5 OK_NULL into 5 FABRICATION, and the rule would touch 102 null language cells fleet-wide. A counterexample sits inside the affected set: nbu-3238 is a joint degree with the University of York whose third year runs at its Europe Campus in Thessaloniki",
+   "impact": "language stays an honest null wherever no document states it. The owner's decision: honest nulls are better than fabrications. Shipping derived values would need an ADR amending 0002 (a DERIVED status recording the rule instead of a snippet, excluded from the verbatim guarantee and counted separately) plus a matching grader category — a labeller who wrote 'not stated' is answering a different question from 'what language is it'. Not built",
+   "status": "accepted-by-owner"
   }
  ]
 }

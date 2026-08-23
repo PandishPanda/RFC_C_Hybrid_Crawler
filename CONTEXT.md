@@ -38,6 +38,10 @@ _Avoid_: diff row, changed value
 The third review axis on any ticket that can move a shipped value: read the Provenance of every changed cell, then have an independent agent try to refute that reading. Answers "did this value come from the right place?", which the Provenance gate (presence) and the blind benchmark (a sample) both leave open. A process gate, enforced by the ticket's done-check rather than by code.
 _Avoid_: provenance check, spot check, audit
 
+**Derived value**:
+A value that is true but that no document states — a duration reached by counting semesters, a language assumed from the absence of any other. Distinct from an extracted value, which the Artifact says verbatim. The pipeline ships NO derived values: the Provenance gate has nothing to check them against, and the blind key grades one as a fabrication rather than a wrong value, because the labeller recorded the field as genuinely absent. Ruled 2026-08-23: honest nulls are better than fabrications. Shipping them would need ADR-0002 amended with a status that records the rule applied instead of a snippet.
+_Avoid_: inferred value, assumed value, default (those name the method, not the standing)
+
 **Attention (item)**:
 One unit of work only a human can advance: a blocked publish, an open repair-queue row, an unresolved CHECK verdict, a pending onboarding proposal, a drift warning. Attention items age from the moment they open; the pipeline never resolves one on its own. The set of open items is the pipeline's whole claim on human time — anything not an Attention item must be safe to leave unwatched.
 _Avoid_: alert, todo, notification (those are delivery mechanisms, not the work itself)
