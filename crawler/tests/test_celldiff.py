@@ -15,14 +15,16 @@ Four proofs:
    (PASS -> NULL_OK) is labelled with both sides, never as a plain value
    change, and a non-shipping side never presents a value as current.
 4. CLI — `crawler diff` exits 0 when nothing moved and 1 when the
-   attribution review has cells to read; --json is machine-readable.
+   attribution review has cells to read; --json is machine-readable;
+   --after defaults to <out>/<UniID>/run-report.json (the path every
+   reviewer uses), and a missing report is named rather than raised.
 """
 import io
 import json
 import sys
 import tempfile
 import unittest
-from contextlib import redirect_stdout
+from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
@@ -184,6 +186,36 @@ class CliTest(unittest.TestCase):
         _, loud = self._run(BASE, after, "--snippets")
         self.assertNotIn("a wholly different span", quiet)
         self.assertIn("a wholly different span", loud)
+
+    def test_after_defaults_to_the_run_report_under_out(self):
+        """The doc's Step 1 omits --after; that path must actually work."""
+        after = make_report({"p-one": {"degree": field_record(value="Doctor")},
+                             "p-two": {"degree": field_record(value="Master")}})
+        with tempfile.TemporaryDirectory() as tmp:
+            before_path = Path(tmp) / "before.json"
+            before_path.write_text(json.dumps(BASE), encoding="utf-8")
+            out_root = Path(tmp) / "out"
+            (out_root / "TestUni").mkdir(parents=True)
+            (out_root / "TestUni" / "run-report.json").write_text(
+                json.dumps(after), encoding="utf-8")
+            buf = io.StringIO()
+            with redirect_stdout(buf):
+                code = cli_main(["diff", "TestUni", "--before", str(before_path),
+                                 "--out", str(out_root)])
+        self.assertEqual(code, 1)
+        self.assertIn("1 changed cell(s)", buf.getvalue())
+
+    def test_a_missing_report_names_the_path_it_looked_for(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            before_path = Path(tmp) / "before.json"
+            before_path.write_text(json.dumps(BASE), encoding="utf-8")
+            err = io.StringIO()
+            with redirect_stderr(err), redirect_stdout(io.StringIO()):
+                code = cli_main(["diff", "TestUni", "--before", str(before_path),
+                                 "--out", str(Path(tmp) / "nope")])
+        self.assertEqual(code, 2)
+        self.assertIn("nope/TestUni/run-report.json", err.getvalue())
+        self.assertIn("--after", err.getvalue())
 
     def test_json_output_is_machine_readable(self):
         after = make_report({"p-one": {"degree": field_record(value="Doctor")},

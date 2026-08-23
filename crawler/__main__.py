@@ -415,8 +415,23 @@ def main(argv=None):
         out_root = args.out or runner.DEFAULT_OUT_ROOT
         after_path = args.after or "{0}/{1}/run-report.json".format(
             out_root, args.uni_id)
-        before = json.loads(Path(args.before).read_text(encoding="utf-8"))
-        after = json.loads(Path(after_path).read_text(encoding="utf-8"))
+
+        def _load_report(path, flag):
+            # --after defaults to a path the reviewer never typed, and
+            # --before is a copy they were told to take beforehand: both
+            # deserve to be named when they are not there, rather than a
+            # bare FileNotFoundError traceback
+            try:
+                return json.loads(Path(path).read_text(encoding="utf-8"))
+            except FileNotFoundError:
+                sys.stderr.write(
+                    "no run-report at {0} ({1})\n".format(path, flag))
+                return None
+
+        before = _load_report(args.before, "--before")
+        after = _load_report(after_path, "--after")
+        if before is None or after is None:
+            return 2
         changes = celldiff.changed_cells(before, after)
         total = len(set(celldiff.cells(before)) | set(celldiff.cells(after)))
         if args.as_json:

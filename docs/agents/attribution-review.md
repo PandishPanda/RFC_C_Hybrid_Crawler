@@ -49,11 +49,13 @@ the "before" side has to be captured before you touch anything:
 cp crawler-out/<UniID>/run-report.json "$SCRATCH/before-<UniID>.json"
 ```
 
-If you forgot: `crawler.ledger` keeps every prior run append-only under
-`crawler-out/<UniID>/`, carrying value, `method`, `tier` and `source_url`
-per cell — enough to reconstruct most of the comparison, but **not** the
-verbatim snippets. Note the gap in the review rather than pretending the
-diff was complete.
+If you forgot, there is no second operand and `crawler diff` cannot help:
+it takes two run-reports and reads no ledger. The manual fallback is
+`crawler.ledger`, which keeps every prior run append-only under
+`crawler-out/<UniID>/` carrying value, `method`, `tier` and `source_url`
+per cell — enough to reconstruct much of the comparison by hand, but
+**not** the verbatim snippets, so snippet-only moves stay invisible. Say
+so in the review rather than presenting a partial diff as a complete one.
 
 ## Step 1 — the changed-cell set
 

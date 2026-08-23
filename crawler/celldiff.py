@@ -36,7 +36,7 @@ def cells(report):
     for program in report.get("programs", []):
         for field, rec in program.get("fields", {}).items():
             prov = rec.get("provenance") or {}
-            out[(program["program_id"], field)] = {
+            out[(program.get("program_id"), field)] = {
                 "status": rec.get("status"),
                 "value": rec.get("value"),
                 "method": rec.get("method"),
