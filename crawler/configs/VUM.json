@@ -72,7 +72,8 @@
     "section_pattern": "Такса за обучение – бакалавърска програма \\*"
    },
    "field_anchors": {
-    "duration": "vum-ibm-pb-duration"
+    "duration": "vum-ibm-pb-duration",
+    "admission": "vum-ibm-adm"
    }
   },
   {
@@ -84,7 +85,8 @@
     "section_pattern": "Такса за обучение – бакалавърска програма \\*"
    },
    "field_anchors": {
-    "duration": "vum-ibm-b-duration"
+    "duration": "vum-ibm-b-duration",
+    "admission": "vum-ibm-adm"
    }
   },
   {
@@ -96,7 +98,8 @@
     "section_pattern": "Такса за обучение – бакалавърска програма \\*"
    },
    "field_anchors": {
-    "duration": "vum-hm-pb-duration"
+    "duration": "vum-hm-pb-duration",
+    "admission": "vum-hm-adm"
    }
   },
   {
@@ -108,18 +111,25 @@
     "section_pattern": "Такса за обучение – бакалавърска програма \\*"
    },
    "field_anchors": {
-    "duration": "vum-hm-b-duration"
+    "duration": "vum-hm-b-duration",
+    "admission": "vum-hm-adm"
    }
   },
   {
    "id": "vum-ped-econ",
    "name": "Педагогика на обучението по Икономика и мениджмънт",
-   "page": "https://vum.bg/bg/pedagogika-obuchenieto-ikonomika-menidjmant/"
+   "page": "https://vum.bg/bg/pedagogika-obuchenieto-ikonomika-menidjmant/",
+   "field_anchors": {
+    "admission": "vum-ped-econ-adm"
+   }
   },
   {
    "id": "vum-ped-hosp",
    "name": "Педагогика на обучението по хотелиерство и ресторантьорство",
-   "page": "https://vum.bg/bg/pedagogika-obuchenieto-hotelierstvo-restorantiorstvo/"
+   "page": "https://vum.bg/bg/pedagogika-obuchenieto-hotelierstvo-restorantiorstvo/",
+   "field_anchors": {
+    "admission": "vum-ped-hosp-adm"
+   }
   },
   {
    "id": "vum-hce",
@@ -128,6 +138,9 @@
    "fees_section": {
     "source": "vum-fees-bg",
     "section_pattern": "Такса за обучение – бакалавърска програма \\*"
+   },
+   "field_anchors": {
+    "admission": "vum-hce-adm"
    }
   },
   {
@@ -137,12 +150,18 @@
    "fees_section": {
     "source": "vum-fees-bg",
     "section_pattern": "Такса за обучение – магистърска програма „Международен туризъм“ \\* ?за семестри 1 и 2"
+   },
+   "field_anchors": {
+    "admission": "vum-int-tour-adm"
    }
   },
   {
    "id": "vum-tour-phd",
    "name": "Туризъм",
-   "page": "https://vum.bg/bg/doktorska-programa-turizam/"
+   "page": "https://vum.bg/bg/doktorska-programa-turizam/",
+   "field_anchors": {
+    "admission": "vum-tour-phd-adm"
+   }
   },
   {
    "id": "vum-food",
@@ -151,6 +170,9 @@
    "fees_section": {
     "source": "vum-fees-bg",
     "section_pattern": "Такса за обучение в бакалавърска програма по: Кулинарни изкуства"
+   },
+   "field_anchors": {
+    "admission": "vum-food-adm"
    }
   },
   {
@@ -160,6 +182,9 @@
    "fees_section": {
     "source": "vum-fees-bg",
     "section_pattern": "Такса за обучение – бакалавърска програма \\*"
+   },
+   "field_anchors": {
+    "admission": "vum-mkt-adm"
    }
   }
  ],
@@ -179,6 +204,42 @@
   "vum-ibm-b-duration": {
    "source": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/",
    "pattern": "(?<!Професионален )Бакалавър\\s+(\\d+(?:[.,]\\d+)? години / \\d+ семестъра)"
+  },
+  "vum-hm-adm": {
+   "source": "https://vum.bg/bg/hotelski-menidjmant",
+   "pattern": "Изисквания за прием(?! и стъпки)\\s*(.+?)\\s*Изисквания за прием и стъпки за кандидатстване"
+  },
+  "vum-ibm-adm": {
+   "source": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/",
+   "pattern": "Изисквания за прием(?! и стъпки)\\s*(.+?)\\s*Изисквания за прием и стъпки за кандидатстване"
+  },
+  "vum-hce-adm": {
+   "source": "https://vum.bg/bg/hotelierstvo-kulinarni-izkustva/",
+   "pattern": "Изисквания за прием(?! и стъпки)\\s*(.+?)\\s*Изисквания за прием и стъпки за кандидатстване"
+  },
+  "vum-int-tour-adm": {
+   "source": "https://vum.bg/bg/magistratura-mejdunaroden-turizam/",
+   "pattern": "Изисквания за прием(?! и стъпки)\\s*(.+?)\\s*Изисквания за прием и стъпки за кандидатстване"
+  },
+  "vum-ped-econ-adm": {
+   "source": "https://vum.bg/bg/pedagogika-obuchenieto-ikonomika-menidjmant/",
+   "pattern": "(Основните изисквания към студентите са висока мотивираност[^.]*\\.\\s*Владеенето на английски език[^.]*\\.\\s*В процеса на прием[^.]*\\.)"
+  },
+  "vum-ped-hosp-adm": {
+   "source": "https://vum.bg/bg/pedagogika-obuchenieto-hotelierstvo-restorantiorstvo/",
+   "pattern": "(Основните изисквания към студентите са висока мотивираност[^.]*\\.\\s*Владеенето на английски език[^.]*\\.\\s*В процеса на прием[^.]*\\.)"
+  },
+  "vum-food-adm": {
+   "source": "https://vum.bg/bg/hranitelni-tehnologii-kulinarni-izkustva/",
+   "pattern": "(Основните изисквания към студентите са висока мотивираност[^.]*\\.\\s*Владеенето на английски език[^.]*\\.\\s*В процеса на прием[^.]*\\.)"
+  },
+  "vum-mkt-adm": {
+   "source": "https://vum.bg/bg/marketing-menidjmant/",
+   "pattern": "(Основните изисквания към студентите са висока мотивираност[^.]*\\.\\s*В процеса на прием[^.]*\\.)"
+  },
+  "vum-tour-phd-adm": {
+   "source": "https://vum.bg/bg/doktorska-programa-turizam/",
+   "pattern": "(Подаване на Заявление до ректора.+?Сключване на договор за обучение\\.)"
   }
  }
 }
