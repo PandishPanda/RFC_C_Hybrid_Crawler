@@ -6,102 +6,122 @@
     {
       "id": "nbu-3238",
       "name": "Английски език и професионална комуникация (Съвместна програма с университета Йорк)",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=3238&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=3238&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=3238&TabIndex=1&l=0"
     },
     {
       "id": "nbu-2520",
       "name": "Англицистика (Английски език, култура и литература)",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2520&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2520&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=2520&TabIndex=1&l=0"
     },
     {
       "id": "nbu-1835",
       "name": "Анимационно кино",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=1835&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=1835&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=1835&TabIndex=1&l=0"
     },
     {
       "id": "nbu-821",
       "name": "Антропология",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=821&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=821&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=821&TabIndex=1&l=0"
     },
     {
       "id": "nbu-2539",
       "name": "Арабистика (Арабски език, култура и литература)",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2539&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2539&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=2539&TabIndex=1&l=0"
     },
     {
       "id": "nbu-3185",
       "name": "Бизнес икономика (съвместна програма с университета в Йорк)",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=3185&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=3185&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=3185&TabIndex=1&l=0"
     },
     {
       "id": "nbu-2306",
       "name": "Биология - обща и приложна",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2306&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2306&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=2306&TabIndex=1&l=0"
     },
     {
       "id": "nbu-2527",
       "name": "Българистика (Български език, култура и литература)",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2527&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2527&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=2527&TabIndex=1&l=0"
     },
     {
       "id": "nbu-2876",
       "name": "Визуални изкуства",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2876&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2876&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=2876&TabIndex=1&l=0"
     },
     {
       "id": "nbu-2209",
       "name": "Връзки с обществеността",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2209&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2209&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=2209&TabIndex=1&l=0"
     },
     {
       "id": "nbu-2962",
       "name": "Германистика (с втори чужд език английски)",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2962&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2962&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=2962&TabIndex=1&l=0"
     },
     {
       "id": "nbu-1734",
       "name": "Гражданска и корпоративна сигурност",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=1734&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=1734&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=1734&TabIndex=1&l=0"
     },
     {
       "id": "nbu-1841",
       "name": "Графичен дизайн",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=1841&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=1841&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=1841&TabIndex=1&l=0"
     },
     {
       "id": "nbu-2533",
       "name": "Египтология (Египетски език, култура и литература)",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2533&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2533&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=2533&TabIndex=1&l=0"
     },
     {
       "id": "nbu-2349",
       "name": "Екология и опазване на околната среда",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2349&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2349&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=2349&TabIndex=1&l=0"
     },
     {
       "id": "nbu-2212",
       "name": "Журналистика",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2212&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2212&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=2212&TabIndex=1&l=0"
     },
     {
       "id": "nbu-1948",
       "name": "Изкуствознание и артмениджмънт",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=1948&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=1948&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=1948&TabIndex=1&l=0"
     },
     {
       "id": "nbu-1796",
       "name": "Интериорен дизайн",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=1796&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=1796&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=1796&TabIndex=1&l=0"
     },
     {
       "id": "nbu-832",
       "name": "Информатика",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=832&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=832&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=832&TabIndex=1&l=0"
     },
     {
       "id": "nbu-2206",
       "name": "Информационни технологии",
-      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2206&TabIndex=1&l=0"
+      "page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2206&TabIndex=1&l=0",
+      "adm_page": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=admission&Fac_ID=3&M_PHD=0&P_ID=2206&TabIndex=1&l=0"
     }
   ]
 }

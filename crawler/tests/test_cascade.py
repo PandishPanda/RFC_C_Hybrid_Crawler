@@ -322,13 +322,15 @@ class TestGoldenRegression(unittest.TestCase):
     def golden(self, tiers):
         return [r for r in fx.golden_records() if r["tier"] in tiers]
 
-    def test_label_library_is_32_shared_patterns(self):
-        # 32 = 27 + bg-lang-label (2026-08-17 VUM benchmark repair)
+    def test_label_library_is_34_shared_patterns(self):
+        # 34 = 27 + bg-lang-label (2026-08-17 VUM benchmark repair)
         #         + bg-programme-level (2026-08-21 NBU build-out)
         #         + bg-kandidatstva-se (2026-08-22 UniRuse admission)
         #         + bg-prodalzhitelnost, bg-dual-track (2026-08-22 MUVarna)
+        #         + bg-zavurshilite-sredno, bg-prodalzhitelnost-semestri
+        #           (2026-08-23 NBU: the admission tab was never fetched)
         n = sum(len(v) for v in cascade.LABEL_PATTERNS.values())
-        self.assertEqual(n, 32)
+        self.assertEqual(n, 34)
 
     def test_reproduces_every_golden_record(self):
         extractions = benchmark_extractions()
@@ -690,6 +692,72 @@ class BgLanguageLabelTest(unittest.TestCase):
         self.assertIsNotNone(r)
         self.assertEqual(r.value, "БЪЛГАРСКИ")
         self.assertEqual(r.method, "label:bg-lang-label")
+
+
+class NbuAdmissionLabelTest(unittest.TestCase):
+    """NBU states admission on a sibling tab (P_Menu=admission), reached
+    via adm_page. The keyed answer is the first bullet — the route open
+    to secondary-school leavers — ending at its semicolon."""
+
+    ADM = ("Прием:\nВ програмата могат да кандидатстват:\n"
+           "• завършилите средно образование - с полагане на "
+           "кандидатстудентски изпит тест за общообразователна подготовка "
+           "(ТОП) и представяне на диплома за средно образование; \n"
+           "Състезателният бал за класиране на кандидат-студентите се "
+           "изчислява в точки.\n"
+           "• завършилите друго висше образование, с диплома за "
+           "съответната образователна степен.")
+
+    def test_the_secondary_school_route_is_read(self):
+        src = cascade.TextSource("html:https://ecatalog.example/adm", self.ADM)
+        r = cascade.harvest_labels("admission", src)
+        self.assertIsNotNone(r)
+        self.assertEqual(r.method, "label:bg-zavurshilite-sredno")
+        self.assertTrue(r.value.startswith("завършилите средно образование"))
+        self.assertTrue(r.value.endswith(";"))
+
+    def test_it_stops_at_its_own_semicolon(self):
+        """The second bullet is a different admission route — running on
+        into it would ship a composed claim the page never made."""
+        r = cascade.harvest_labels(
+            "admission",
+            cascade.TextSource("html:https://ecatalog.example/adm", self.ADM))
+        self.assertNotIn("друго висше образование", r.value)
+        self.assertNotIn("Състезателният бал", r.value)
+
+    def test_a_page_without_the_route_ships_nothing(self):
+        """NBU-3185 and the York joint programme state no such route; an
+        honest null is the right answer, not the nearest prose."""
+        src = cascade.TextSource(
+            "html:https://ecatalog.example/adm",
+            "Прием:\nЗа програмата се кандидатства отделно в CITY College "
+            "и в НБУ, като се попълват съответните формуляри.")
+        self.assertIsNone(cascade.harvest_labels("admission", src))
+
+
+class NbuDurationLabelTest(unittest.TestCase):
+    """One NBU programme states its length in prose; the other 19 state
+    it nowhere, and null is the honest answer for those."""
+
+    def test_semester_count_in_prose_is_read(self):
+        src = cascade.TextSource(
+            "html:https://ecatalog.example/p",
+            "Обучението е с продължителност 8 семестъра, като обучението "
+            "в третата година се провежда в Сити колидж.")
+        r = cascade.harvest_labels("duration", src)
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "8 семестъра")
+        self.assertEqual(r.method, "label:bg-prodalzhitelnost-semestri")
+
+    def test_a_two_semester_course_is_not_a_programme_duration(self):
+        """«двусеместриални курсове» describes a course, not the degree —
+        the loose reading of this phrase is why the scan that found it
+        had to be redone."""
+        src = cascade.TextSource(
+            "html:https://ecatalog.example/p",
+            "обучение по основни научни направления в двусеместриални "
+            "курсове: Наука за езика, Антропология.")
+        self.assertIsNone(cascade.harvest_labels("duration", src))
 
 
 class ProgrammeLevelLabelTest(unittest.TestCase):

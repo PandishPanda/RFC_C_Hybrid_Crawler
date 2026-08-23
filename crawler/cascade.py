@@ -260,6 +260,16 @@ LABEL_PATTERNS = {
         ("bg-prodalzhitelnost",
          r'((?:с продължителност|[Пп]родължителността на обучението е)'
          r'\s+[а-я]+(?: учебни)? години(?:\s*\([а-я]+ семестъра\))?)'),
+        # Same statement, counted in semesters and in digits — NBU's
+        # catalog prose («Обучението е с продължителност 8 семестъра»).
+        # Anchored to the lead-in on purpose: a bare "N семестъра" also
+        # matches «двусеместриални курсове» and the per-semester course
+        # grids, neither of which states the PROGRAMME's length. Exactly
+        # one of NBU's 20 programmes states it at all; the rest ship the
+        # honest null (2026-08-23).
+        ("bg-prodalzhitelnost-semestri",
+         r'(?:с продължителност|[Пп]родължителността на обучението е)'
+         r'\s+(\d+\s*семестъра)'),
     ],
     "language": [
         # BG structured label first: a page's own «Език на преподаване»
@@ -294,6 +304,15 @@ LABEL_PATTERNS = {
         ("en-required-min", r'Applicants are required to have obtained a (minimum of a bachelor[’\']s degree from an accredited institution of higher education)'),
         ("en-dzi-b2", r'(?:may also be admitted based on their result from the )(State Matriculation Examination \(DZI\) in English language, provided that the exam corresponds to CEFR level B2 and the final grade is at least Very Good \(5\.00\))'),
         ("en-min-gpa", r'The (recommended minimum GPA for applicants is .+?scale\))'),
+        # NBU family: the catalog's admission tab (P_Menu=admission,
+        # reached via adm_page — plain server-rendered HTML that was
+        # simply never fetched) enumerates admission routes as bullets.
+        # The first names the secondary-school route and ends at its own
+        # semicolon: running on would compose it with the next bullet, a
+        # different route, into a claim the page never makes. Appended,
+        # so it can only fill a null (2026-08-23: 18 of 20 NBU
+        # programmes state it, 2 state no route and stay null).
+        ("bg-zavurshilite-sredno", r'(завършилите средно образование[^;]*;)'),
         # UniRuse family: enumerated балообразуване formula introduced by
         # a literal marker; capture ends at the sentence-final period
         # before the next prose sentence (2026-08-22, 20 graded-MISS

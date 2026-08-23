@@ -1,323 +1,331 @@
 {
-  "date": "2026-08-21",
-  "note": "Per-university negative findings observed during the 8x20 build-out. These are DURABLE records of what each site cost us -- read by `crawler validate`, never recomputed. A finding is retired only by fixing it, not by a later run happening to look fine.",
-  "findings": [
-    {
-      "uni_id": "SofiaUniversity",
-      "kind": "discovery",
-      "finding": "fragmented faculty subsites — no single program index; three seeds needed (FMI, PHLS, chemistry) and each faculty is a separate host/path shape",
-      "impact": "onboarding survey works, but seeds are hand-found per faculty",
-      "status": "accepted"
-    },
-    {
-      "uni_id": "SofiaUniversity",
-      "kind": "extraction",
-      "finding": "language of instruction is NOT stated on any SU program page (0/20 probed 2026-08-22). Earlier versions of this finding said the opposite in both directions; the probe settles it. The frozen key's «Български» entries were labeller inferences, since amended to null",
-      "impact": "18 language nulls are HONEST, not recoverable; matrix bucket corrected",
-      "status": "accepted"
-    },
-    {
-      "uni_id": "UniRuse",
-      "kind": "freshness",
-      "finding": "fee source still states the 2025/2026 cycle; the year-lag check fires on every run (20 values)",
-      "impact": "publish blocks every time; promoted only by standing human clear",
-      "status": "accepted-by-owner"
-    },
-    {
-      "uni_id": "UniRuse",
-      "kind": "extraction",
-      "finding": "many programs share one faculty page, so per-program field resolution is weak",
-      "impact": "36/100 fields extract",
-      "status": "open"
-    },
-    {
-      "uni_id": "ANIS",
-      "kind": "discovery",
-      "finding": "every program lives on one admissions page; the onboarding link survey has nothing to propose (0 proposals, $0.35 spent to learn it)",
-      "impact": "programs enumerated by hand from page text",
-      "status": "open"
-    },
-    {
-      "uni_id": "ANIS",
-      "kind": "extraction",
-      "finding": "shared admissions page yields few per-program values",
-      "impact": "24/90 fields extract",
-      "status": "open"
-    },
-    {
-      "uni_id": "AUBG",
-      "kind": "discovery",
-      "finding": "site redirects browser-like user agents to a /region-selector/ interstitial; our fetcher sends a real browser UA by design, so link discovery saw 1 link on a 99-link page. Region choices are JS-rendered, so no cookie can be lifted",
-      "impact": "discovery only possible via sitemap.xml",
-      "status": "mitigated"
-    },
-    {
-      "uni_id": "AUBG",
-      "kind": "coverage",
-      "finding": "17 bachelor majors + 1 EMBA is the whole degree catalogue; the rest of /bachelor-degrees/ are minors and short courses",
-      "impact": "18 programs, not 20 — padding would ship non-degrees as Programs",
-      "status": "accepted"
-    },
-    {
-      "uni_id": "MUVarna",
-      "kind": "discovery",
-      "finding": "sitemap carries no program pages; all programs named on one shared specialties page",
-      "impact": "enumerated by hand; 15 programs is all the page lists",
-      "status": "accepted"
-    },
-    {
-      "uni_id": "MUVarna",
-      "kind": "extraction",
-      "finding": "shared specialties page carries little per-program data",
-      "impact": "26/75 fields extract",
-      "status": "open"
-    },
-    {
-      "uni_id": "MUPleven",
-      "kind": "extraction",
-      "finding": "three programs have no row in the fee order (Медицинска рехабилитация, Медико-социални дейности, Обществено здраве и здравен мениджмънт)",
-      "impact": "tuition ships as an honest null for those three",
-      "status": "accepted"
-    },
-    {
-      "uni_id": "SHU",
-      "kind": "discovery",
-      "finding": "site is a catch-all — /, /specialnosti/ and /kandidatstudentski-kampanii/ return byte-identical HTML; the 4,819-URL sitemap holds news and projects but no program pages",
-      "impact": "programs found only via per-faculty specialnosti pages linking per-program PDFs",
-      "status": "mitigated"
-    },
-    {
-      "uni_id": "SHU",
-      "kind": "trust",
-      "finding": "a 460k-char candidate handbook names every program and was REJECTED as a shared page: all 20 programs would extract the same first-match values, verbatim-present and therefore invisible to the provenance gate",
-      "impact": "would have manufactured 20 confidently wrong programs; per-program PDFs used instead",
-      "status": "avoided"
-    },
-    {
-      "uni_id": "NBU",
-      "kind": "extraction",
-      "finding": "MEASURED (5-program graded sample): duration and admission are visible to a human browser but unreachable by the fetch route — 9 of 25 cells. language and tuition are NOT on the programme pages at all: the labeller confirmed them absent, so those nulls are honest, not losses",
-      "impact": "JS gap costs 36% of graded cells (9/25); 44% (11/25) of nulls are genuinely-absent data. Every shipped degree graded correct (5/5)",
-      "status": "open"
-    },
-    {
-      "uni_id": "NBU",
-      "kind": "discovery",
-      "finding": "on-site program index is JS-loaded and the 74 gzipped sub-sitemaps carry no programmes; only the separate e-catalog serves static per-programme pages",
-      "impact": "discovery via ecatalog.nbu.bg only",
-      "status": "mitigated"
-    },
-    {
-      "uni_id": "SofiaUniversity",
-      "kind": "trust",
-      "finding": "Docling merged a fee row's cells: «освободени 310 EUR» came out as ONE cell and the row lost columns, so the join read «освободени» where the labeller read 310 EUR (su-cult)",
-      "impact": "1 graded wrong; a merged cell can silently flip a fee between exempt and charged",
-      "status": "open"
-    },
-    {
-      "uni_id": "SHU",
-      "kind": "coverage",
-      "finding": "MEASURED: the 15 programs added in the build-out have no fee or admission joins wired, so duration/tuition/admission ship null. shu-122 (Икономика) ships NOTHING at all — even degree — while every other program manages it",
-      "impact": "12 of 25 graded cells are MISS; all are unwired config, not extraction errors",
-      "status": "open"
-    },
-    {
-      "uni_id": "SHU",
-      "kind": "trust",
-      "finding": "refusing the 460k-char handbook as a shared source cost NO tuition coverage: the labeller found every fee in the properly-structured fee orders, which per-program joins can reach safely",
-      "impact": "the safe choice was also the complete one — recorded so it is not revisited",
-      "status": "avoided"
-    },
-    {
-      "uni_id": "MUVarna",
-      "kind": "trust",
-      "finding": "PROVEN wrong-row contamination on a shared page: muv-medicina and muv-rentgenov-laborant shipped the IDENTICAL «ОКС „бакалавър\"» snippet, taken from a sentence about a different program (Организация и управление на военни формирования). Medicine is магистър. Both values are verbatim in the artifact, so the provenance gate passed them | FIXED 2026-08-22: tier-G harvest is region-scoped via program_region() (word-bounded name anchors, REGION_WINDOW); regrade confirms both programs now ship in-region values",
-      "impact": "2 graded wrong. The gate proves presence, not attribution — on a shared page the first match wins regardless of which program is being resolved. UniRuse and ANIS are also shared-page and NOT yet graded",
-      "status": "fixed"
-    },
-    {
-      "uni_id": "MUVarna",
-      "kind": "trust",
-      "finding": "first FABRICATION in the benchmark: Патофизиология degree came from an EU-project announcement about dissertation defence — an anchor pointing at an unrelated page",
-      "impact": "1 fabrication in 215 graded cells; a bad anchor can assert what no source states",
-      "status": "fixed",
-      "resolution": "2026-08-22 anchor-scope validation: every off-page anchor must declare scope (names-program: emits only when the page names the program; page-wide: human-attested university-wide claim). The loader rejects unscoped off-page anchors (ConfigError). phd-degree-project DELETED — its 3 degree cells (Патофизиология + 2 ungraded PhD siblings) removed from the published pointer. Regrade: fabrications 1 → 0 fleet-wide."
-    },
-    {
-      "uni_id": "MUVarna",
-      "kind": "extraction",
-      "finding": "fee join reads a single figure where the source states a per-year progression (Кинезитерапия: shipped «500 евро», source says 500 € first year then 410 €)",
-      "impact": "1 graded wrong; understates multi-year fees",
-      "status": "open"
-    },
-    {
-      "uni_id": "UniRuse",
-      "kind": "trust",
-      "finding": "shared-page contamination CONFIRMED at a second university: uniruse-se and uniruse-cs shipped the identical «ОКС „магистър\"» from their shared faculty page, though both were added from UniRuse's BACHELOR index. The single-page control program (Право) showed no contamination — isolating the shared page as the cause | FIXED 2026-08-22: same mechanism; regrade confirms both fabrications became honest nulls (OK_NULL vs the frozen key)",
-      "impact": "2 fabrications. With MUVarna this is 4 defects across 2 of the 3 shared-page universities; ANIS is the third and is still ungraded",
-      "status": "fixed"
-    },
-    {
-      "uni_id": "ANIS",
-      "kind": "trust",
-      "finding": "shared-page contamination did NOT occur here, refuting the hypothesis that shared pages are inherently unsafe. ANIS's page-wide statements genuinely apply to every program (single-faculty academy), so identical values are correct. The real risk is a shared page carrying PROGRAM-SPECIFIC claims (MUVarna, UniRuse), not shared pages as such",
-      "impact": "sharpens the defect: the resolver must distinguish claim SCOPE, not avoid shared sources",
-      "status": "accepted"
-    },
-    {
-      "uni_id": "ANIS",
-      "kind": "extraction",
-      "finding": "where a page states two competing values, the cascade takes the first: shipped «2 или 3 семестъра» and «само по документи» where the labeller ruled «4 семестъра» and the ЗВО minimum-grade rule govern",
-      "impact": "4 graded wrong — first-match selection, not attribution error",
-      "status": "open"
-    },
-    {
-      "uni_id": "MUVarna",
-      "kind": "extraction",
-      "finding": "attribution fix EXPOSED a correct-by-accident value: akusherka's old «ОКС „бакалавър\"» was lifted from the wrong sentence yet happened to be right; the in-region candidate is a pharmacy-management continuation sentence near an «Акушерка» mention — wrong. Candidate selection (finding 2), not attribution",
-      "impact": "1 graded wrong that used to look correct; right answers from wrong rows are still defects",
-      "status": "open"
-    },
-    {
-      "uni_id": "UniRuse",
-      "kind": "extraction",
-      "finding": "continuation sentences («могат да продължат образованието си в ОКС „магистър\"») shipped as the program's own degree — live on the faculty pages. FIXED 2026-08-22 with a lookbehind guard on bg-oks-inline; socped now ships its correct bachelor statement",
-      "impact": "was an ungraded wrong entering promoted data; now correct",
-      "status": "fixed"
-    },
-    {
-      "uni_id": "MUVarna",
-      "kind": "trust",
-      "finding": "REGION_WINDOW cannot bound at UNCONFIGURED sections: muv-inspektor's span crosses into the unconfigured «Оптометрист» block within 2,500 chars and ships its «ОКС „Магистър\"». Deterministically unsolvable without page section structure",
-      "impact": "1 known ungraded wrong; the full fix is section-aware candidate selection (finding 2)",
-      "status": "open"
-    },
-    {
-      "uni_id": "ANIS",
-      "kind": "extraction",
-      "finding": "FIXED 2026-08-22: the ЗВО admission rule and 4-semester duration — page-wide claims the labeller ruled applicable during grading — promoted into config anchors on all 18 programs (the ADR-0003 escape hatch). Regrade 24/25, 0 wrong (was 14/25 with 4 wrong)",
-      "impact": "+30 shipped cells, all grading correct",
-      "status": "fixed"
-    },
-    {
-      "uni_id": "MUPleven",
-      "kind": "benchmark-integrity",
-      "finding": "stale manual verdict: the labeller's 'wrong' on mu-nurse tuition adjudicated «безплатно» (the decree anchor), but after the fee-order join shipped «410 евро» the byte-identical verdict carry-over re-applied it to a value no human had judged",
-      "impact": "any changed cell silently inherited its old verdict — stale 'ok's could green-light unjudged values",
-      "status": "fixed",
-      "resolution": "2026-08-22 verdicts now bind to the shipped_value they adjudicated; a changed value returns the cell to CHECK. All 8 verdict files backfilled from the runs they judged; mu-nurse tuition bound to «безплатно», so «410 евро» is CHECK pending labeller adjudication."
-    },
-    {
-      "uni_id": "MUVarna",
-      "kind": "trust",
-      "finding": "candidate-selection contamination class: a prose MENTION of a program's name inside a foreign section opened a region there («„Акушерка“» in Медицинска сестра's closing sentence reached the unconfigured ФАРМАЦЕВТИЧЕН МЕНИДЖМЪНТ block and shipped its «магистър»; «\"Медицински оптик\"» inside ОПТОМЕТРИСТ did the reverse). Compounded by bg-okstepen missing the definite form «квалификационната», which hid the true own-section «бакалавър»",
-      "impact": "1 graded WRONG (akusherka degree); the optik span was a live landmine",
-      "status": "fixed",
-      "resolution": "2026-08-22 caps-heading anchoring: when a page marks the program's section with an all-caps line-isolated heading, only heading occurrences anchor regions (mention-anchoring unchanged on pages without caps headings — UniRuse/ANIS verified unaffected); bg-okstepen accepts the definite article. akusherka now ships «бакалавър» from its own section."
-    },
-    {
-      "uni_id": "UniRuse",
-      "kind": "benchmark-integrity",
-      "finding": "bizmgmt admission key held the biology formula that textually closes the Социални дейности block above the БИЗНЕС МЕНИДЖМЪНТ heading; the page's description→formula convention (which the compsystems key itself follows) attributes the икономическа география formula to bizmgmt",
-      "impact": "1 graded WRONG charged to the pipeline was a key error",
-      "status": "fixed",
-      "resolution": "2026-08-22 labeller-confirmed key amendment (recorded in the key entry); UniRuse sample now 0 wrong."
-    },
-    {
-      "uni_id": "ANIS",
-      "kind": "extraction",
-      "finding": "names-program scope initially rejected the УЧР variant «(след неикономически специалности)» because the anchored catalogue names only the base programme",
-      "impact": "1 graded cell regressed ok→miss for one run",
-      "status": "fixed",
-      "resolution": "2026-08-22 a trailing parenthetical qualifier is stripped before the names-program check (base name still names the programme); ANIS back to 24/25."
-    },
-    {
-      "uni_id": "(pipeline)",
-      "kind": "trust",
-      "finding": "the caps-heading region rule shipped 2026-08-22 was INERT IN PRODUCTION: regions were computed on norm(page.text), and norm() collapses newlines, so the heading detector could never find a line. Its unit tests passed raw text with newlines and stayed green — a test that exercised a text shape production never sees",
-      "impact": "4 latent fabrications survived undetected on MUVarna's shared page (Медицина duration from Фармация, Инспектор duration from ОПТОМЕТРИСТ, Инспектор degree «ОКС \"Магистър\"» from ОПТОМЕТРИСТ, Рехабилитатор degree from outside its section). None was in a frozen key, so the benchmark could not see them",
-      "status": "fixed",
-      "resolution": "2026-08-22 regions are now computed on the RAW page text and each span normalized afterwards, so heading detection sees the line structure. Regression test asserts the rule through the resolve_field seam (production path), not against program_region directly. Fleet re-run: MUVarna 4 fabrications removed, 4 correct cells added, ZERO cell changes at the other 7 deterministic universities."
-    },
-    {
-      "uni_id": "MUVarna",
-      "kind": "extraction",
-      "finding": "the specialties page states duration and language in section prose («е в редовна форма с продължителност четири години», «( българоезично и англоезично обучение )») that the shared label library had no pattern for",
-      "impact": "10 programs shipped nulls over text that was present in their own sections",
-      "status": "fixed",
-      "resolution": "2026-08-22 two APPENDED label patterns (bg-prodalzhitelnost, bg-dual-track) — appended so first-hit-wins means they can only fill a null, never pre-empt a passing value. Won duration for akusherka/medicinska-sестра/logopediya and language for medicina (graded MISS -> OK_VALUE). Deliberately does NOT match a bare «...е N семестъра»: Управление на здравните грижи states THREE competing durations for different entry routes, and picking one would repeat the partial-value defect the labeller ruled WRONG on Кинезитерапия's tuition."
-    },
-    {
-      "uni_id": "UniRuse",
-      "kind": "extraction",
-      "finding": "UniRuse writes section headings as «СОФТУЕРНО ИНЖЕНЕРСТВО -» (trailing dash), so the exact-line caps-heading detector does not recognise them and its faculty pages still use mention-anchoring",
-      "impact": "attribution on the fleet's most shared-page university rests on mention anchoring plus the REGION_WINDOW rather than on section structure",
-      "status": "open",
-      "resolution": "MEASURED 2026-08-22 and deliberately NOT shipped: loosening the detector alone removed no bad value and cost two correct ones (uniruse-socialwork's own admission formula is cut off by the word «икономика» — a sibling programme name — appearing in its prose; uniruse-socped's formula sits 27 chars past REGION_WINDOW). The loosening only pays together with the matching BOUNDARY rule: a section must end at the next HEADING, not at a prose mention of a sibling. Ship the two together, with a fleet diff and regrade."
-    },
-    {
-      "uni_id": "MUPleven",
-      "kind": "trust",
-      "finding": "PRE-EXISTING latent fabrication found by the adversarial audit: mu-health-care-management-maste shipped «230 евро», the BACHELOR's fee, off fee-order row «4.1 Управление на здравните грижи 230 260 460 230» — byte-identical provenance to the bachelor programme's cell. Column offsets put 230 under «бакалавър/задочно» and the master's own «магистър след бакалавър» column at 260",
-      "impact": "a wrong fee shipped into promoted data, verbatim-present and therefore gate-clean; ungraded, so the benchmark could not see it",
-      "status": "fixed",
-      "resolution": "2026-08-23 tuition_join removed for the master programme. The sectioned-fee-row join matches at ROW level by design (this family's Docling grid shifts columns per row), so it cannot express «take the магистър след бакалавър column»; a null is the honest output. Independently re-verified against pdftotext -layout."
-    },
-    {
-      "uni_id": "MUPleven",
-      "kind": "extraction",
-      "finding": "the spravochnik admission_pattern bound Чл. 30 («За специалностите от този раздел...») to four programmes that are NOT in Раздел III — Ветеринарна медицина, ОЗЗМ, and both Управление на здравните грижи tracks each have their own rule (Чл. 43(1), Чл. 39, Чл. 41(1)/42)",
-      "impact": "4 admission cells shipped a rule belonging to a different group of specialties",
-      "status": "fixed",
-      "resolution": "2026-08-23 the four cells were dropped to null during the recoverable-cells pass; their own articles are not yet wired."
-    },
-    {
-      "uni_id": "SofiaUniversity",
-      "kind": "trust",
-      "finding": "PRE-EXISTING: su-philo (Философия, taught in Bulgarian) shipped the admission clause that explicitly names «специалност Философия (на английски език)» — the alias «Философия» matches inside the English programme's name and the join re.escape()s aliases, so no lookahead can exclude it",
-      "impact": "an ungraded programme shipped a different programme's admission requirement",
-      "status": "fixed",
-      "resolution": "2026-08-23 admission_join removed for su-philo (null). A per-alias exclusion would need the join to stop escaping aliases, which would make every alias a regex — not worth that blast radius for one cell."
-    },
-    {
-      "uni_id": "SofiaUniversity",
-      "kind": "extraction",
-      "finding": "su-cult's balloobrazuvane row interleaves merged table columns, so the widened row_pattern took list item 4 («ДЗИ по английски език») when item 1 is «ДЗИ по философия». SU's established, human-blessed convention is item 1 of the «С коефициент 3» list (su-kn, su-psy, su-inf, su-polit, su-euro all follow it)",
-      "impact": "1 graded cell would have shipped the wrong entrance exam",
-      "status": "fixed",
-      "resolution": "2026-08-23 admission_join removed for su-cult; the cell returns to an honest MISS. su-pubadm and su-socio, whose rows are not column-merged, correctly take item 1 and were kept."
-    },
-    {
-      "uni_id": "(pipeline)",
-      "kind": "freshness",
-      "finding": "the year-lag gate read «(до уч. 2020/2021 г. „Философски цикъл“)» — a footnote dating a subject's FORMER NAME — as the validity year of two SU admission values, and blocked publishing a document that is current (SU's 2026/2027 balloobrazuvane ordinance)",
-      "impact": "a false-positive publish block that would recur every run and need a human clear",
-      "status": "fixed",
-      "resolution": "2026-08-23 infer_academic_year now skips a year introduced by «до уч.»/«до учебната» and keeps scanning; a genuinely stated older cycle is still caught. SU publishes clean."
-    },
-    {
-      "uni_id": "SHU",
-      "kind": "benchmark-integrity",
-      "finding": "frozen-key defect reported by the wiring agent: the shu-122 tuition key expects «175 €» sourced to taksi-DP-profBak-i-bak_2026-2027.pdf, but that fee order contains no 3.8 Икономика direction at all",
-      "impact": "a key entry that no source can satisfy; the cell can only ever MISS",
-      "status": "open",
-      "resolution": "needs labeller review of where the 175 € figure was read."
-    },
-    {
-      "uni_id": "SHU",
-      "kind": "extraction",
-      "finding": "shu-907's admission value carries a pdftotext artifact — «тест по информатика; ДЗИ по 16 информатика; ...» — where the page-16 footer folds into the middle of the list",
-      "impact": "cosmetically corrupted but verbatim and gate-clean; a labeller will query it",
-      "status": "open",
-      "resolution": "correcting the text would fail the containment gate; needs a renderer-level footer strip."
-    },
-    {
-      "uni_id": "MUPleven",
-      "kind": "benchmark-integrity",
-      "finding": "the recorded reason for 3 of the 4 missing tuition cells ('those programmes have no fee-order row') is FALSE — the wiring agent found verbatim docling rows for them in taksi_za_kandidatstvane_obuchenie_2026_2027.pdf",
-      "impact": "a closed 'honest null' bucket that is actually recoverable coverage",
-      "status": "open",
-      "resolution": "not wired in this pass (out of the agent's scope); revisit with the column caveat above in mind."
-    }
-  ]
+ "date": "2026-08-21",
+ "note": "Per-university negative findings observed during the 8x20 build-out. These are DURABLE records of what each site cost us -- read by `crawler validate`, never recomputed. A finding is retired only by fixing it, not by a later run happening to look fine.",
+ "findings": [
+  {
+   "uni_id": "SofiaUniversity",
+   "kind": "discovery",
+   "finding": "fragmented faculty subsites — no single program index; three seeds needed (FMI, PHLS, chemistry) and each faculty is a separate host/path shape",
+   "impact": "onboarding survey works, but seeds are hand-found per faculty",
+   "status": "accepted"
+  },
+  {
+   "uni_id": "SofiaUniversity",
+   "kind": "extraction",
+   "finding": "language of instruction is NOT stated on any SU program page (0/20 probed 2026-08-22). Earlier versions of this finding said the opposite in both directions; the probe settles it. The frozen key's «Български» entries were labeller inferences, since amended to null",
+   "impact": "18 language nulls are HONEST, not recoverable; matrix bucket corrected",
+   "status": "accepted"
+  },
+  {
+   "uni_id": "UniRuse",
+   "kind": "freshness",
+   "finding": "fee source still states the 2025/2026 cycle; the year-lag check fires on every run (20 values)",
+   "impact": "publish blocks every time; promoted only by standing human clear",
+   "status": "accepted-by-owner"
+  },
+  {
+   "uni_id": "UniRuse",
+   "kind": "extraction",
+   "finding": "many programs share one faculty page, so per-program field resolution is weak",
+   "impact": "36/100 fields extract",
+   "status": "open"
+  },
+  {
+   "uni_id": "ANIS",
+   "kind": "discovery",
+   "finding": "every program lives on one admissions page; the onboarding link survey has nothing to propose (0 proposals, $0.35 spent to learn it)",
+   "impact": "programs enumerated by hand from page text",
+   "status": "open"
+  },
+  {
+   "uni_id": "ANIS",
+   "kind": "extraction",
+   "finding": "shared admissions page yields few per-program values",
+   "impact": "24/90 fields extract",
+   "status": "open"
+  },
+  {
+   "uni_id": "AUBG",
+   "kind": "discovery",
+   "finding": "site redirects browser-like user agents to a /region-selector/ interstitial; our fetcher sends a real browser UA by design, so link discovery saw 1 link on a 99-link page. Region choices are JS-rendered, so no cookie can be lifted",
+   "impact": "discovery only possible via sitemap.xml",
+   "status": "mitigated"
+  },
+  {
+   "uni_id": "AUBG",
+   "kind": "coverage",
+   "finding": "17 bachelor majors + 1 EMBA is the whole degree catalogue; the rest of /bachelor-degrees/ are minors and short courses",
+   "impact": "18 programs, not 20 — padding would ship non-degrees as Programs",
+   "status": "accepted"
+  },
+  {
+   "uni_id": "MUVarna",
+   "kind": "discovery",
+   "finding": "sitemap carries no program pages; all programs named on one shared specialties page",
+   "impact": "enumerated by hand; 15 programs is all the page lists",
+   "status": "accepted"
+  },
+  {
+   "uni_id": "MUVarna",
+   "kind": "extraction",
+   "finding": "shared specialties page carries little per-program data",
+   "impact": "26/75 fields extract",
+   "status": "open"
+  },
+  {
+   "uni_id": "MUPleven",
+   "kind": "extraction",
+   "finding": "three programs have no row in the fee order (Медицинска рехабилитация, Медико-социални дейности, Обществено здраве и здравен мениджмънт)",
+   "impact": "tuition ships as an honest null for those three",
+   "status": "accepted"
+  },
+  {
+   "uni_id": "SHU",
+   "kind": "discovery",
+   "finding": "site is a catch-all — /, /specialnosti/ and /kandidatstudentski-kampanii/ return byte-identical HTML; the 4,819-URL sitemap holds news and projects but no program pages",
+   "impact": "programs found only via per-faculty specialnosti pages linking per-program PDFs",
+   "status": "mitigated"
+  },
+  {
+   "uni_id": "SHU",
+   "kind": "trust",
+   "finding": "a 460k-char candidate handbook names every program and was REJECTED as a shared page: all 20 programs would extract the same first-match values, verbatim-present and therefore invisible to the provenance gate",
+   "impact": "would have manufactured 20 confidently wrong programs; per-program PDFs used instead",
+   "status": "avoided"
+  },
+  {
+   "uni_id": "NBU",
+   "kind": "extraction",
+   "finding": "MEASURED (5-program graded sample): duration and admission read as unreachable by the fetch route — 9 of 25 cells. RE-MEASURED 2026-08-23: admission was never a fetch-route problem at all. It is served by a sibling e-catalog tab (P_Menu=admission), plain server-rendered HTML, HTTP 200 — the config simply never fetched it (sources {}, no field_anchors). Wired via adm_page: 18 of 20 programmes now ship it. language and tuition are NOT on the programme pages at all: the labeller confirmed them absent, so those nulls are honest, not losses",
+   "impact": "was read as a 36% JS gap; measured, it was 19 cells of unwritten config (admission ×18, duration ×1). NBU graded 16/25 → 20/25, fields 20/100 → 39/100, 0 fabrications, 0 gate failures. No rendering fallback was needed or built",
+   "status": "fixed",
+   "resolution": "adm_page wired for all 20 programmes + two shared label patterns (bg-zavurshilite-sredno, bg-prodalzhitelnost-semestri). Config data and generic mechanism — no per-site code, no new dependency"
+  },
+  {
+   "uni_id": "NBU",
+   "kind": "discovery",
+   "finding": "on-site program index is JS-loaded and the 74 gzipped sub-sitemaps carry no programmes; only the separate e-catalog serves static per-programme pages",
+   "impact": "discovery via ecatalog.nbu.bg only",
+   "status": "mitigated"
+  },
+  {
+   "uni_id": "SofiaUniversity",
+   "kind": "trust",
+   "finding": "Docling merged a fee row's cells: «освободени 310 EUR» came out as ONE cell and the row lost columns, so the join read «освободени» where the labeller read 310 EUR (su-cult)",
+   "impact": "1 graded wrong; a merged cell can silently flip a fee between exempt and charged",
+   "status": "open"
+  },
+  {
+   "uni_id": "SHU",
+   "kind": "coverage",
+   "finding": "MEASURED: the 15 programs added in the build-out have no fee or admission joins wired, so duration/tuition/admission ship null. shu-122 (Икономика) ships NOTHING at all — even degree — while every other program manages it",
+   "impact": "12 of 25 graded cells are MISS; all are unwired config, not extraction errors",
+   "status": "open"
+  },
+  {
+   "uni_id": "SHU",
+   "kind": "trust",
+   "finding": "refusing the 460k-char handbook as a shared source cost NO tuition coverage: the labeller found every fee in the properly-structured fee orders, which per-program joins can reach safely",
+   "impact": "the safe choice was also the complete one — recorded so it is not revisited",
+   "status": "avoided"
+  },
+  {
+   "uni_id": "MUVarna",
+   "kind": "trust",
+   "finding": "PROVEN wrong-row contamination on a shared page: muv-medicina and muv-rentgenov-laborant shipped the IDENTICAL «ОКС „бакалавър\"» snippet, taken from a sentence about a different program (Организация и управление на военни формирования). Medicine is магистър. Both values are verbatim in the artifact, so the provenance gate passed them | FIXED 2026-08-22: tier-G harvest is region-scoped via program_region() (word-bounded name anchors, REGION_WINDOW); regrade confirms both programs now ship in-region values",
+   "impact": "2 graded wrong. The gate proves presence, not attribution — on a shared page the first match wins regardless of which program is being resolved. UniRuse and ANIS are also shared-page and NOT yet graded",
+   "status": "fixed"
+  },
+  {
+   "uni_id": "MUVarna",
+   "kind": "trust",
+   "finding": "first FABRICATION in the benchmark: Патофизиология degree came from an EU-project announcement about dissertation defence — an anchor pointing at an unrelated page",
+   "impact": "1 fabrication in 215 graded cells; a bad anchor can assert what no source states",
+   "status": "fixed",
+   "resolution": "2026-08-22 anchor-scope validation: every off-page anchor must declare scope (names-program: emits only when the page names the program; page-wide: human-attested university-wide claim). The loader rejects unscoped off-page anchors (ConfigError). phd-degree-project DELETED — its 3 degree cells (Патофизиология + 2 ungraded PhD siblings) removed from the published pointer. Regrade: fabrications 1 → 0 fleet-wide."
+  },
+  {
+   "uni_id": "MUVarna",
+   "kind": "extraction",
+   "finding": "fee join reads a single figure where the source states a per-year progression (Кинезитерапия: shipped «500 евро», source says 500 € first year then 410 €)",
+   "impact": "1 graded wrong; understates multi-year fees",
+   "status": "open"
+  },
+  {
+   "uni_id": "UniRuse",
+   "kind": "trust",
+   "finding": "shared-page contamination CONFIRMED at a second university: uniruse-se and uniruse-cs shipped the identical «ОКС „магистър\"» from their shared faculty page, though both were added from UniRuse's BACHELOR index. The single-page control program (Право) showed no contamination — isolating the shared page as the cause | FIXED 2026-08-22: same mechanism; regrade confirms both fabrications became honest nulls (OK_NULL vs the frozen key)",
+   "impact": "2 fabrications. With MUVarna this is 4 defects across 2 of the 3 shared-page universities; ANIS is the third and is still ungraded",
+   "status": "fixed"
+  },
+  {
+   "uni_id": "ANIS",
+   "kind": "trust",
+   "finding": "shared-page contamination did NOT occur here, refuting the hypothesis that shared pages are inherently unsafe. ANIS's page-wide statements genuinely apply to every program (single-faculty academy), so identical values are correct. The real risk is a shared page carrying PROGRAM-SPECIFIC claims (MUVarna, UniRuse), not shared pages as such",
+   "impact": "sharpens the defect: the resolver must distinguish claim SCOPE, not avoid shared sources",
+   "status": "accepted"
+  },
+  {
+   "uni_id": "ANIS",
+   "kind": "extraction",
+   "finding": "where a page states two competing values, the cascade takes the first: shipped «2 или 3 семестъра» and «само по документи» where the labeller ruled «4 семестъра» and the ЗВО minimum-grade rule govern",
+   "impact": "4 graded wrong — first-match selection, not attribution error",
+   "status": "open"
+  },
+  {
+   "uni_id": "MUVarna",
+   "kind": "extraction",
+   "finding": "attribution fix EXPOSED a correct-by-accident value: akusherka's old «ОКС „бакалавър\"» was lifted from the wrong sentence yet happened to be right; the in-region candidate is a pharmacy-management continuation sentence near an «Акушерка» mention — wrong. Candidate selection (finding 2), not attribution",
+   "impact": "1 graded wrong that used to look correct; right answers from wrong rows are still defects",
+   "status": "open"
+  },
+  {
+   "uni_id": "UniRuse",
+   "kind": "extraction",
+   "finding": "continuation sentences («могат да продължат образованието си в ОКС „магистър\"») shipped as the program's own degree — live on the faculty pages. FIXED 2026-08-22 with a lookbehind guard on bg-oks-inline; socped now ships its correct bachelor statement",
+   "impact": "was an ungraded wrong entering promoted data; now correct",
+   "status": "fixed"
+  },
+  {
+   "uni_id": "MUVarna",
+   "kind": "trust",
+   "finding": "REGION_WINDOW cannot bound at UNCONFIGURED sections: muv-inspektor's span crosses into the unconfigured «Оптометрист» block within 2,500 chars and ships its «ОКС „Магистър\"». Deterministically unsolvable without page section structure",
+   "impact": "1 known ungraded wrong; the full fix is section-aware candidate selection (finding 2)",
+   "status": "open"
+  },
+  {
+   "uni_id": "ANIS",
+   "kind": "extraction",
+   "finding": "FIXED 2026-08-22: the ЗВО admission rule and 4-semester duration — page-wide claims the labeller ruled applicable during grading — promoted into config anchors on all 18 programs (the ADR-0003 escape hatch). Regrade 24/25, 0 wrong (was 14/25 with 4 wrong)",
+   "impact": "+30 shipped cells, all grading correct",
+   "status": "fixed"
+  },
+  {
+   "uni_id": "MUPleven",
+   "kind": "benchmark-integrity",
+   "finding": "stale manual verdict: the labeller's 'wrong' on mu-nurse tuition adjudicated «безплатно» (the decree anchor), but after the fee-order join shipped «410 евро» the byte-identical verdict carry-over re-applied it to a value no human had judged",
+   "impact": "any changed cell silently inherited its old verdict — stale 'ok's could green-light unjudged values",
+   "status": "fixed",
+   "resolution": "2026-08-22 verdicts now bind to the shipped_value they adjudicated; a changed value returns the cell to CHECK. All 8 verdict files backfilled from the runs they judged; mu-nurse tuition bound to «безплатно», so «410 евро» is CHECK pending labeller adjudication."
+  },
+  {
+   "uni_id": "MUVarna",
+   "kind": "trust",
+   "finding": "candidate-selection contamination class: a prose MENTION of a program's name inside a foreign section opened a region there («„Акушерка“» in Медицинска сестра's closing sentence reached the unconfigured ФАРМАЦЕВТИЧЕН МЕНИДЖМЪНТ block and shipped its «магистър»; «\"Медицински оптик\"» inside ОПТОМЕТРИСТ did the reverse). Compounded by bg-okstepen missing the definite form «квалификационната», which hid the true own-section «бакалавър»",
+   "impact": "1 graded WRONG (akusherka degree); the optik span was a live landmine",
+   "status": "fixed",
+   "resolution": "2026-08-22 caps-heading anchoring: when a page marks the program's section with an all-caps line-isolated heading, only heading occurrences anchor regions (mention-anchoring unchanged on pages without caps headings — UniRuse/ANIS verified unaffected); bg-okstepen accepts the definite article. akusherka now ships «бакалавър» from its own section."
+  },
+  {
+   "uni_id": "UniRuse",
+   "kind": "benchmark-integrity",
+   "finding": "bizmgmt admission key held the biology formula that textually closes the Социални дейности block above the БИЗНЕС МЕНИДЖМЪНТ heading; the page's description→formula convention (which the compsystems key itself follows) attributes the икономическа география formula to bizmgmt",
+   "impact": "1 graded WRONG charged to the pipeline was a key error",
+   "status": "fixed",
+   "resolution": "2026-08-22 labeller-confirmed key amendment (recorded in the key entry); UniRuse sample now 0 wrong."
+  },
+  {
+   "uni_id": "ANIS",
+   "kind": "extraction",
+   "finding": "names-program scope initially rejected the УЧР variant «(след неикономически специалности)» because the anchored catalogue names only the base programme",
+   "impact": "1 graded cell regressed ok→miss for one run",
+   "status": "fixed",
+   "resolution": "2026-08-22 a trailing parenthetical qualifier is stripped before the names-program check (base name still names the programme); ANIS back to 24/25."
+  },
+  {
+   "uni_id": "(pipeline)",
+   "kind": "trust",
+   "finding": "the caps-heading region rule shipped 2026-08-22 was INERT IN PRODUCTION: regions were computed on norm(page.text), and norm() collapses newlines, so the heading detector could never find a line. Its unit tests passed raw text with newlines and stayed green — a test that exercised a text shape production never sees",
+   "impact": "4 latent fabrications survived undetected on MUVarna's shared page (Медицина duration from Фармация, Инспектор duration from ОПТОМЕТРИСТ, Инспектор degree «ОКС \"Магистър\"» from ОПТОМЕТРИСТ, Рехабилитатор degree from outside its section). None was in a frozen key, so the benchmark could not see them",
+   "status": "fixed",
+   "resolution": "2026-08-22 regions are now computed on the RAW page text and each span normalized afterwards, so heading detection sees the line structure. Regression test asserts the rule through the resolve_field seam (production path), not against program_region directly. Fleet re-run: MUVarna 4 fabrications removed, 4 correct cells added, ZERO cell changes at the other 7 deterministic universities."
+  },
+  {
+   "uni_id": "MUVarna",
+   "kind": "extraction",
+   "finding": "the specialties page states duration and language in section prose («е в редовна форма с продължителност четири години», «( българоезично и англоезично обучение )») that the shared label library had no pattern for",
+   "impact": "10 programs shipped nulls over text that was present in their own sections",
+   "status": "fixed",
+   "resolution": "2026-08-22 two APPENDED label patterns (bg-prodalzhitelnost, bg-dual-track) — appended so first-hit-wins means they can only fill a null, never pre-empt a passing value. Won duration for akusherka/medicinska-sестра/logopediya and language for medicina (graded MISS -> OK_VALUE). Deliberately does NOT match a bare «...е N семестъра»: Управление на здравните грижи states THREE competing durations for different entry routes, and picking one would repeat the partial-value defect the labeller ruled WRONG on Кинезитерапия's tuition."
+  },
+  {
+   "uni_id": "UniRuse",
+   "kind": "extraction",
+   "finding": "UniRuse writes section headings as «СОФТУЕРНО ИНЖЕНЕРСТВО -» (trailing dash), so the exact-line caps-heading detector does not recognise them and its faculty pages still use mention-anchoring",
+   "impact": "attribution on the fleet's most shared-page university rests on mention anchoring plus the REGION_WINDOW rather than on section structure",
+   "status": "open",
+   "resolution": "MEASURED 2026-08-22 and deliberately NOT shipped: loosening the detector alone removed no bad value and cost two correct ones (uniruse-socialwork's own admission formula is cut off by the word «икономика» — a sibling programme name — appearing in its prose; uniruse-socped's formula sits 27 chars past REGION_WINDOW). The loosening only pays together with the matching BOUNDARY rule: a section must end at the next HEADING, not at a prose mention of a sibling. Ship the two together, with a fleet diff and regrade."
+  },
+  {
+   "uni_id": "MUPleven",
+   "kind": "trust",
+   "finding": "PRE-EXISTING latent fabrication found by the adversarial audit: mu-health-care-management-maste shipped «230 евро», the BACHELOR's fee, off fee-order row «4.1 Управление на здравните грижи 230 260 460 230» — byte-identical provenance to the bachelor programme's cell. Column offsets put 230 under «бакалавър/задочно» and the master's own «магистър след бакалавър» column at 260",
+   "impact": "a wrong fee shipped into promoted data, verbatim-present and therefore gate-clean; ungraded, so the benchmark could not see it",
+   "status": "fixed",
+   "resolution": "2026-08-23 tuition_join removed for the master programme. The sectioned-fee-row join matches at ROW level by design (this family's Docling grid shifts columns per row), so it cannot express «take the магистър след бакалавър column»; a null is the honest output. Independently re-verified against pdftotext -layout."
+  },
+  {
+   "uni_id": "MUPleven",
+   "kind": "extraction",
+   "finding": "the spravochnik admission_pattern bound Чл. 30 («За специалностите от този раздел...») to four programmes that are NOT in Раздел III — Ветеринарна медицина, ОЗЗМ, and both Управление на здравните грижи tracks each have their own rule (Чл. 43(1), Чл. 39, Чл. 41(1)/42)",
+   "impact": "4 admission cells shipped a rule belonging to a different group of specialties",
+   "status": "fixed",
+   "resolution": "2026-08-23 the four cells were dropped to null during the recoverable-cells pass; their own articles are not yet wired."
+  },
+  {
+   "uni_id": "SofiaUniversity",
+   "kind": "trust",
+   "finding": "PRE-EXISTING: su-philo (Философия, taught in Bulgarian) shipped the admission clause that explicitly names «специалност Философия (на английски език)» — the alias «Философия» matches inside the English programme's name and the join re.escape()s aliases, so no lookahead can exclude it",
+   "impact": "an ungraded programme shipped a different programme's admission requirement",
+   "status": "fixed",
+   "resolution": "2026-08-23 admission_join removed for su-philo (null). A per-alias exclusion would need the join to stop escaping aliases, which would make every alias a regex — not worth that blast radius for one cell."
+  },
+  {
+   "uni_id": "SofiaUniversity",
+   "kind": "extraction",
+   "finding": "su-cult's balloobrazuvane row interleaves merged table columns, so the widened row_pattern took list item 4 («ДЗИ по английски език») when item 1 is «ДЗИ по философия». SU's established, human-blessed convention is item 1 of the «С коефициент 3» list (su-kn, su-psy, su-inf, su-polit, su-euro all follow it)",
+   "impact": "1 graded cell would have shipped the wrong entrance exam",
+   "status": "fixed",
+   "resolution": "2026-08-23 admission_join removed for su-cult; the cell returns to an honest MISS. su-pubadm and su-socio, whose rows are not column-merged, correctly take item 1 and were kept."
+  },
+  {
+   "uni_id": "(pipeline)",
+   "kind": "freshness",
+   "finding": "the year-lag gate read «(до уч. 2020/2021 г. „Философски цикъл“)» — a footnote dating a subject's FORMER NAME — as the validity year of two SU admission values, and blocked publishing a document that is current (SU's 2026/2027 balloobrazuvane ordinance)",
+   "impact": "a false-positive publish block that would recur every run and need a human clear",
+   "status": "fixed",
+   "resolution": "2026-08-23 infer_academic_year now skips a year introduced by «до уч.»/«до учебната» and keeps scanning; a genuinely stated older cycle is still caught. SU publishes clean."
+  },
+  {
+   "uni_id": "SHU",
+   "kind": "benchmark-integrity",
+   "finding": "frozen-key defect reported by the wiring agent: the shu-122 tuition key expects «175 €» sourced to taksi-DP-profBak-i-bak_2026-2027.pdf, but that fee order contains no 3.8 Икономика direction at all",
+   "impact": "a key entry that no source can satisfy; the cell can only ever MISS",
+   "status": "open",
+   "resolution": "needs labeller review of where the 175 € figure was read."
+  },
+  {
+   "uni_id": "SHU",
+   "kind": "extraction",
+   "finding": "shu-907's admission value carries a pdftotext artifact — «тест по информатика; ДЗИ по 16 информатика; ...» — where the page-16 footer folds into the middle of the list",
+   "impact": "cosmetically corrupted but verbatim and gate-clean; a labeller will query it",
+   "status": "open",
+   "resolution": "correcting the text would fail the containment gate; needs a renderer-level footer strip."
+  },
+  {
+   "uni_id": "MUPleven",
+   "kind": "benchmark-integrity",
+   "finding": "the recorded reason for 3 of the 4 missing tuition cells ('those programmes have no fee-order row') is FALSE — the wiring agent found verbatim docling rows for them in taksi_za_kandidatstvane_obuchenie_2026_2027.pdf",
+   "impact": "a closed 'honest null' bucket that is actually recoverable coverage",
+   "status": "open",
+   "resolution": "not wired in this pass (out of the agent's scope); revisit with the column caveat above in mind."
+  },
+  {
+   "uni_id": "NBU",
+   "kind": "benchmark-integrity",
+   "finding": "the frozen key expects duration «8 семестъра» for all 5 sampled programmes, but no server-rendered page states it: «семестъра» appears nowhere across generalinfo / admission / courses_part1 / courses_part2 / teachers for nbu-2520 (checked 2026-08-23). Exactly one of the 20 programmes (nbu-3238) states a duration in prose, and it is now extracted. The programme-schema tab renders to navigation only without JS, so a human browser can count semesters there — but counting them is an inference, not a verbatim claim, and ADR-0002 forbids shipping it",
+   "impact": "5 MISS rows that no config change can honestly close; NBU's ceiling on the current key is 20/25, not 25/25. Needs a labeller ruling: amend the 5 duration entries to null-genuinely-absent, or record where the statement was read",
+   "status": "open"
+  }
+ ]
 }
