@@ -50,6 +50,11 @@ re-detection never resets it. **WARN at 7 days open, ESCALATE at 30**
 | `drift` | a pinned plan was superseded in the listing | snapshot (listing is live) | lapse only: repin config, next tick |
 | `refresh-error` | a university's tick crashed | snapshot (traceback is tick-local) | lapse only: next clean tick |
 
+After reviewing a proposal batch, empty (or regenerate) the
+university's `onboarding-proposal.json` and record the disposition in
+its note — the file is regenerable output, and a leftover pending list
+would reopen the resolved item on the next tick.
+
 An open item that stops being detected closes as `lapsed` — the world
 fixed itself, and the ledger says so instead of showing phantom work.
 
