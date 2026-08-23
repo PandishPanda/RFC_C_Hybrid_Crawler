@@ -16,6 +16,9 @@ python3 -m crawler diff <UniID> --before P   # changed cells, for attribution re
 python3 -m crawler labelkit <UniID>         # blank Phase-0 worksheet
 python3 -m crawler check-pins <UniID>       # version-pin stale-green check
 python3 -m crawler validate                 # the pipeline scorecard
+python3 -m crawler refresh [--tail]         # unattended tick -> attention items
+python3 -m crawler attention                # the human backlog, aged
+python3 -m crawler resolve <item-id>        # execute one resolution
 docker compose up -d                        # docling (table-pdf route only)
 ```
 
@@ -63,6 +66,12 @@ Local markdown under `.scratch/<feature>/`. See `docs/agents/issue-tracker.md`.
 
 Third review axis for any ticket that can change a shipped value. See
 `docs/agents/attribution-review.md`; run `crawler diff` to find the cells.
+
+### Operations
+
+The unattended loop (ADR-0005): weekly `crawler refresh` cron, the
+attention backlog, resolve workflow, seasonal cadence. See
+`docs/operations.md`.
 
 ### Domain docs
 

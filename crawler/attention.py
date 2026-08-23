@@ -167,7 +167,7 @@ def age_days(item, now=None):
     now_t = time.strptime(now or _utcnow(), fmt)
     opened_t = time.strptime(item["opened_at"], fmt)
     delta = calendar.timegm(now_t) - calendar.timegm(opened_t)
-    return int(delta // 86400)
+    return max(0, int(delta // 86400))
 
 
 def resolver_identity():

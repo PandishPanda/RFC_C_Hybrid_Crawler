@@ -101,6 +101,16 @@ diff it runs on is `crawler diff` (status, value, method, artifact ref and
 snippets — wider than `ledger.diff_runs`, which compares values alone and
 cannot see a value whose provenance moved).
 
+## The unattended loop (ADR-0005)
+
+`crawler refresh` runs the publish flow above for every configured
+university on a weekly cron, adds the version-pin drift check, and lands
+everything needing judgment in the Attention Ledger — `crawler
+attention` is the operator's backlog (aged; WARN 7d / ESCALATE 30d),
+`crawler resolve` executes resolutions through the same gates. Exit is
+non-zero only when a tick opens NEW work. See `docs/operations.md` for
+the cron recipe and per-kind lifecycle.
+
 ## Known open edges
 
 - **JS-injected content is invisible to the fetch route** — vum-tour-phd's
