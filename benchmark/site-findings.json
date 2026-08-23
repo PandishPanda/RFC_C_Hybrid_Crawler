@@ -302,8 +302,8 @@
    "kind": "benchmark-integrity",
    "finding": "frozen-key defect reported by the wiring agent: the shu-122 tuition key expects «175 €» sourced to taksi-DP-profBak-i-bak_2026-2027.pdf, but that fee order contains no 3.8 Икономика direction at all",
    "impact": "a key entry that no source can satisfy; the cell can only ever MISS",
-   "status": "open",
-   "resolution": "needs labeller review of where the 175 € figure was read."
+   "status": "fixed",
+   "resolution": "RESOLVED 2026-08-23 by the domain owner after checking all five 2026-27 fee orders live: 175 € exists nowhere for 3.8 Икономика; the programme is offered paid-задочно only (PLOb 383 €). Key amended to null with the real figures recorded in the reason. If paid-track fees ever become a keyed field, the PLOb order is the source to wire"
   },
   {
    "uni_id": "SHU",
@@ -334,7 +334,8 @@
    "kind": "trust",
    "finding": "the 18 «Прием:» sections are BYTE-IDENTICAL across heterogeneous programmes (Информатика, Египтология, Биология, and four studio-art degrees). NBU serves one university-wide admission template under a per-programme heading. Corroboration that the template is not programme-truth: Графичен дизайн's page mentions no portfolio or drawing exam anywhere, which is not a plausible complete admission statement for a studio-art degree",
    "impact": "18 shipped admission values may be university-wide policy presented as programme-specific fact. NOT closed: the page frames the text as programme-scoped («В програмата могат да кандидатстват»), and the ANIS precedent has the labeller ruling such statements genuinely apply per programme. Needs a labeller ruling, like the 5 duration entries",
-   "status": "open"
+   "status": "accepted-by-owner",
+   "resolution": "RULED 2026-08-23 by the domain owner, per the ANIS precedent: the e-catalog's admission statement genuinely applies per programme — the 18 values STAND for the 14 non-studio programmes. The four studio-art degrees (Анимационно кино nbu-1835, Графичен дизайн nbu-1841, Интериорен дизайн nbu-1796, Визуални изкуства nbu-2876) stay FLAGGED in a follow-up finding: their pages mention no portfolio or drawing exam, which is not a plausible complete admission statement for a studio degree"
   },
   {
    "uni_id": "SofiaUniversity",
@@ -365,6 +366,13 @@
    "impact": "4 graded WRONG in one re-run (3 durations + 1 partial admission) on cells that graded correct before it — so the tail's shared-page attribution is unstable run to run, not merely imperfect. The region-scoping that closed this class for tier G (rev.4) was never extended to the tail, which is a real hole in 'every fix was generic mechanism'. Only VUM runs the tail today, so the blast radius is one university",
    "status": "fixed",
    "resolution": "TWO fixes, because the diagnosis was incomplete. (1) The general gap: llm_tail.candidate_docs now region-scopes a shared page the way the cascade does, keeping the artifact ref. (2) That does NOT fix the measured case, and a fix that relied on it would silently not work: vum-hm-pb/vum-hm-b and vum-ibm-pb/vum-ibm-b are config-identical except for their id — same NAME, same page, same fees_section — and program_region deliberately refuses to let same-named siblings bound each other, so both twins get the same span. Nothing in the data told the pipeline them apart; the tail was coin-flipping between indistinguishable entries. Separated by tier-B anchors on the page's own degree-level table rows («Професионален бакалавър» -> 3 години / 6 семестъра, «Бакалавър» -> 4 години / 8 семестъра). All 4 twin durations now resolve deterministically at tier B and grade ok_value; the tail is no longer asked for them"
+  },
+  {
+   "uni_id": "NBU",
+   "kind": "trust",
+   "finding": "FLAGGED by the domain owner 2026-08-23: the four studio-art programmes (nbu-1835 Анимационно кино, nbu-1841 Графичен дизайн, nbu-1796 Интериорен дизайн, nbu-2876 Визуални изкуства) ship the university-wide admission section, and their pages mention no portfolio or drawing exam anywhere. Their shipped values are verbatim and match the general policy, but NBU's real admission practice for art degrees is unverified",
+   "impact": "4 admission cells stand with a recorded caveat; if NBU's art faculties do run portfolio exams stated elsewhere, these values are incomplete, not wrong",
+   "status": "open"
   }
  ]
 }

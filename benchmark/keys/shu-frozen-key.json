@@ -67,10 +67,11 @@
     {
       "program_id": "shu-122",
       "field": "tuition",
-      "expected_value": "175 €",
-      "null_reason": null,
-      "snippet": "175 €",
-      "source_url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/students/taksi-DP-profBak-i-bak_2026-2027.pdf"
+      "expected_value": null,
+      "null_reason": "amended 2026-08-23, labeller-confirmed against all five 2026-27 fee orders: «175 €» appears in none of them for direction 3.8 Икономика (the DP order's 175.00 € rows price Социални дейности and География — a likely adjacent-row misread). The programme has NO state-commission fee: the DP order omits 3.8 entirely; it is offered paid-задочно only (PLOb: 383.00 € first-year semester, 339.84 € second, 269.76 € third/fourth; чл.95: 750/450 €). Keyed null to keep the key's semantics — every SHU fee entry prices state-commission редовно",
+      "snippet": null,
+      "source_url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/students/taksi-DP-profBak-i-bak_2026-2027.pdf",
+      "amendment": "amended 2026-08-23 by the domain owner: the 175 € entry was unsatisfiable by any source and is retired"
     },
     {
       "program_id": "shu-122",

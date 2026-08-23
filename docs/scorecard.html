@@ -5,7 +5,7 @@
 <div><h1 class="text-3xl font-bold">Crawler scorecard — complete</h1>
 <p class="text-slate-400 mt-1">9 universities · 164 programs · 558/820 fields extracted (68%) + 104 derived (ADR-0007) · 265 cells blind-graded · 2026-08-23</p></div>
 <div class="flex gap-3 text-center">
-<div class="bg-slate-800 border border-slate-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold">90.8%</p><p class="text-xs text-slate-300">graded correct (217/239 extracted)</p></div>
+<div class="bg-slate-800 border border-slate-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold">93.3%</p><p class="text-xs text-slate-300">graded correct (223/239 extracted)</p></div>
 <div class="bg-emerald-900/50 border border-emerald-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold text-emerald-300">0</p><p class="text-xs text-emerald-200">fabrications</p></div>
 <div class="bg-slate-800 border border-slate-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold">4</p><p class="text-xs text-slate-300">wrong (1.7%)</p></div>
 <div class="bg-amber-900/50 border border-amber-600 rounded-xl px-5 py-2"><p class="text-2xl font-bold text-amber-300">15</p><p class="text-xs text-amber-200">open findings</p></div></div></header>
@@ -33,7 +33,7 @@
 <td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:67%"></div></div></td>
 <td class="p-2 text-right text-xs text-slate-400">B:34 · F:17 · G:16</td>
 <td class="p-2 text-right">5 prog / 25 cells</td>
-<td class="p-2 text-right font-semibold">95%</td>
+<td class="p-2 text-right font-semibold">100%</td>
 <td class="p-2 text-right">—</td><td class="p-2 text-right">0</td><td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
 <td class="p-2 font-medium">ANIS</td><td class="p-2 text-right">18</td>
 <td class="p-2 text-right">49/90</td><td class="p-2 text-right text-sky-300">18</td>
@@ -75,7 +75,7 @@
 <td class="p-2"><div class="h-2 w-24 rounded bg-slate-800"><div class="h-2 rounded bg-emerald-500" style="width:40%"></div></div></td>
 <td class="p-2 text-right text-xs text-slate-400">G:40</td>
 <td class="p-2 text-right">5 prog / 25 cells</td>
-<td class="p-2 text-right font-semibold">75%</td>
+<td class="p-2 text-right font-semibold">100%</td>
 <td class="p-2 text-right">—</td><td class="p-2 text-right">0</td><td class="p-2 text-right">0</td></tr><tr class="border-t border-slate-800">
 <td class="p-2 font-medium">MUVarna</td><td class="p-2 text-right">15</td>
 <td class="p-2 text-right">35/75</td><td class="p-2 text-right text-sky-300">5</td>
@@ -86,7 +86,7 @@
 <td class="p-2 text-right">—</td><td class="p-2 text-right">0</td><td class="p-2 text-right">0</td></tr>
 <tr class="bg-slate-800 font-bold border-t border-slate-600"><td class="p-2">TOTAL</td><td class="p-2 text-right">164</td>
 <td class="p-2 text-right">558/820</td><td class="p-2 text-right text-sky-300">104</td><td class="p-2"></td><td class="p-2"></td>
-<td class="p-2 text-right">265 cells</td><td class="p-2 text-right">90.8%</td>
+<td class="p-2 text-right">265 cells</td><td class="p-2 text-right">93.3%</td>
 <td class="p-2 text-right">4</td><td class="p-2 text-right">0</td><td class="p-2 text-right">0</td></tr></tbody></table>
 <p class="text-xs text-slate-500 mb-6">Accuracy = correct-or-honest-null share of graded EXTRACTED cells; derived cells (ADR-0007: true but stated in no document, shipped under their own status) are counted apart and can be neither correct nor fabricated against a key that asked what the page says. Samples: 5 programs per university (all 15 at VUM; 4 where the key covers 4). Tier B = config anchors, F = family joins, G = shared labels, llm-tail = the gated LLM tail (VUM only, 40 → 20 calls after the pinning round).</p>
 
@@ -96,11 +96,11 @@
 <ul class="space-y-1 text-slate-300 list-disc ml-4">
 <li><b>AUBG degree ×3</b> — «Bachelor of Arts» shipped where the labeller ruled «Major» governs. A definitional ruling, recorded; not an extraction defect.</li>
 <li><b>VUM vum-corr tuition</b> — the page still states last cycle's «1100 leva»; ruled wrong three times (each re-phrasing re-bound), site staleness, not extraction. The former fifth wrong — SU su-cult's merged-cell «освободени» — became an honest null when the fee join learned to refuse a cell stating two different values.</li></ul>
-<p class="text-slate-400 mt-2 text-xs">UniRuse and MUPleven grade clean; SHU and ANIS at 19/20 extracted with one miss each; VUM at 73/75 with every CHECK bound to a byte-stable anchored value.</p></div>
+<p class="text-slate-400 mt-2 text-xs">UniRuse, MUPleven, SHU and NBU grade clean (20/20 extracted); ANIS at 19/20 with one miss; VUM at 73/75 with every CHECK bound to a byte-stable anchored value.</p></div>
 <div class="bg-slate-900 border border-slate-700 rounded-xl p-4">
 <p class="font-bold text-indigo-300 mb-2">Findings ledger (benchmark/site-findings.json)</p>
-<p class="text-slate-300 mb-2">49 recorded findings: <b class="text-emerald-300">20 fixed</b> (each closed by a measured regrade), <b class="text-amber-300">15 open</b>, 9 accepted (3 by owner ruling), 3 mitigated, 2 avoided.</p>
-<p class="text-slate-400 text-xs">Biggest open items: NBU's 18 byte-identical admission sections (university template or per-programme fact — needs a labeller ruling), NBU's 5 duration key entries no server-rendered page states, su-bin's admission null that is right but reached without a working join, and UniRuse's trailing-dash headings keeping mention-anchoring. See the missing-data matrix.</p></div></div>
+<p class="text-slate-300 mb-2">50 recorded findings: <b class="text-emerald-300">21 fixed</b> (each closed by a measured regrade), <b class="text-amber-300">14 open</b>, 10 accepted (4 by owner ruling), 3 mitigated, 2 avoided.</p>
+<p class="text-slate-400 text-xs">The labeller session (2026-08-23) settled the three standing rulings: NBU's admission sections stand per programme (four studio-art degrees stay flagged — no portfolio exam on their pages), the five NBU duration keys amended to null, shu-122's unsatisfiable 175 € retired. Biggest open items now: the flagged art-degree admissions, su-bin's admission null reached without a working join, UniRuse's trailing-dash headings, MUVarna's recipe-less programmes. See the missing-data matrix.</p></div></div>
 
 <h2 class="text-xl font-semibold text-indigo-300 mb-2">What the benchmark measures</h2>
 <p class="text-sm text-slate-300 mb-2">Frozen answer keys are written by a human labeller reading the live pages <i>before</i> seeing pipeline output. Verdicts on ambiguous cells are the labeller's and are bound to the exact shipped value judged — if a later run ships something else, the cell returns to CHECK rather than inheriting an old ruling. That binding is why VUM's tail cells were pinned to deterministic anchors: the tail re-phrased on every run, and one cell re-opened CHECK over a single semicolon. Key amendments happen only with a recorded, labeller-confirmed reason (3 to date). What sampled grading cannot do is police attribution — 18 NBU cells graded correct while shipping half a claim — which is the standing third review axis's job (docs/agents/attribution-review.md).</p>

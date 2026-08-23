@@ -11,10 +11,11 @@
     {
       "program_id": "nbu-2520",
       "field": "duration",
-      "expected_value": "8 семестъра",
-      "null_reason": null,
-      "snippet": "8 семестъра",
-      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2520&TabIndex=1&l=0"
+      "expected_value": null,
+      "null_reason": "amended 2026-08-23, labeller-confirmed: «8 семестъра» is stated on no server-rendered page (checked all five tabs); the figure was a browser-side reading of the JS-loaded programme-schema tab, and counting the headings reachable without JS yields 1/5/5/5/7 — an inference, which the worksheet's own protocol scores as NOT STATED. The owner's counting rule was measured against this and not applied",
+      "snippet": null,
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2520&TabIndex=1&l=0",
+      "amendment": "amended 2026-08-23 by the domain owner: duration ruled genuinely absent from the fetchable pages"
     },
     {
       "program_id": "nbu-2520",
@@ -51,10 +52,11 @@
     {
       "program_id": "nbu-1835",
       "field": "duration",
-      "expected_value": "8 семестъра",
-      "null_reason": null,
-      "snippet": "8 семестъра",
-      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=1835&TabIndex=1&l=0"
+      "expected_value": null,
+      "null_reason": "amended 2026-08-23, labeller-confirmed: «8 семестъра» is stated on no server-rendered page (checked all five tabs); the figure was a browser-side reading of the JS-loaded programme-schema tab, and counting the headings reachable without JS yields 1/5/5/5/7 — an inference, which the worksheet's own protocol scores as NOT STATED. The owner's counting rule was measured against this and not applied",
+      "snippet": null,
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=1835&TabIndex=1&l=0",
+      "amendment": "amended 2026-08-23 by the domain owner: duration ruled genuinely absent from the fetchable pages"
     },
     {
       "program_id": "nbu-1835",
@@ -91,10 +93,11 @@
     {
       "program_id": "nbu-821",
       "field": "duration",
-      "expected_value": "8 семестъра",
-      "null_reason": null,
-      "snippet": "8 семестъра",
-      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=821&TabIndex=1&l=0"
+      "expected_value": null,
+      "null_reason": "amended 2026-08-23, labeller-confirmed: «8 семестъра» is stated on no server-rendered page (checked all five tabs); the figure was a browser-side reading of the JS-loaded programme-schema tab, and counting the headings reachable without JS yields 1/5/5/5/7 — an inference, which the worksheet's own protocol scores as NOT STATED. The owner's counting rule was measured against this and not applied",
+      "snippet": null,
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=821&TabIndex=1&l=0",
+      "amendment": "amended 2026-08-23 by the domain owner: duration ruled genuinely absent from the fetchable pages"
     },
     {
       "program_id": "nbu-821",
@@ -131,10 +134,11 @@
     {
       "program_id": "nbu-2539",
       "field": "duration",
-      "expected_value": "8 семестъра",
-      "null_reason": null,
-      "snippet": "8 семестъра",
-      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2539&TabIndex=1&l=0"
+      "expected_value": null,
+      "null_reason": "amended 2026-08-23, labeller-confirmed: «8 семестъра» is stated on no server-rendered page (checked all five tabs); the figure was a browser-side reading of the JS-loaded programme-schema tab, and counting the headings reachable without JS yields 1/5/5/5/7 — an inference, which the worksheet's own protocol scores as NOT STATED. The owner's counting rule was measured against this and not applied",
+      "snippet": null,
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=2539&TabIndex=1&l=0",
+      "amendment": "amended 2026-08-23 by the domain owner: duration ruled genuinely absent from the fetchable pages"
     },
     {
       "program_id": "nbu-2539",
@@ -171,10 +175,11 @@
     {
       "program_id": "nbu-3185",
       "field": "duration",
-      "expected_value": "8 семестъра",
-      "null_reason": null,
-      "snippet": "8 семестъра",
-      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=3185&TabIndex=1&l=0"
+      "expected_value": null,
+      "null_reason": "amended 2026-08-23, labeller-confirmed: «8 семестъра» is stated on no server-rendered page (checked all five tabs); the figure was a browser-side reading of the JS-loaded programme-schema tab, and counting the headings reachable without JS yields 1/5/5/5/7 — an inference, which the worksheet's own protocol scores as NOT STATED. The owner's counting rule was measured against this and not applied",
+      "snippet": null,
+      "source_url": "https://ecatalog.nbu.bg/default.asp?V_Year=2026&PageShow=programpresent&P_Menu=generalinfo&Fac_ID=3&M_PHD=0&P_ID=3185&TabIndex=1&l=0",
+      "amendment": "amended 2026-08-23 by the domain owner: duration ruled genuinely absent from the fetchable pages"
     },
     {
       "program_id": "nbu-3185",
