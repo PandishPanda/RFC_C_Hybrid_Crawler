@@ -456,6 +456,35 @@ class TestColumnAwareFeeResolver(unittest.TestCase):
         self.assertEqual(r.tier, "F")
         self.assertEqual(r.method, "fee-join:test")
 
+    def test_a_merged_cell_holding_two_different_values_ships_nothing(self):
+        """A PDF cell merged across rows can collapse several values into
+        one string — and SU's fee table does exactly this, with one layer
+        invisible in the rendered PDF (found by adversarial review,
+        2026-08-23). Taking the first match would ship an arbitrary one
+        with a fully green gate, since both really are printed there.
+        Ambiguity is "can't determine": ship the honest null."""
+        table = [
+            ["специалност", 'ОКС "бакалавър" редовно'],
+            ["Компютърни науки", "460 EUR 920 EUR"],
+        ]
+        r = cascade.fee_row_join("tuition", table_source(table),
+                                 synthetic_join(), "Компютърни науки")
+        self.assertIsNone(r)
+
+    def test_a_merged_cell_repeating_one_value_still_ships_it(self):
+        """The su-bin case: the same fee twice over. Nothing is ambiguous
+        — every reading agrees — so refusing here would drop a value the
+        table unambiguously states."""
+        table = [
+            ["специалност", 'ОКС "бакалавър" редовно'],
+            ["Библиотечно - информационни науки", "310 EUR 310 EUR"],
+        ]
+        r = cascade.fee_row_join("tuition", table_source(table),
+                                 synthetic_join(),
+                                 "Библиотечно - информационни науки")
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "310 EUR")
+
     def test_empty_value_cell_never_bleeds_into_neighbour_column(self):
         """The resolver-side fix for the gate's documented blind spot
         (truthful snippet, wrong column — RFC v2 Q4): an alias row whose
@@ -469,14 +498,22 @@ class TestColumnAwareFeeResolver(unittest.TestCase):
                                  synthetic_join(), "Компютърни науки")
         self.assertIsNone(r)
 
-    def test_merged_cell_value_pattern_takes_first_fee_token(self):
+    def test_a_fee_merged_with_an_exemption_ships_nothing(self):
+        """REVERSED 2026-08-23 (was: "takes first fee token"). This cell
+        says one row pays 310 EUR and another is освободени — exempt.
+        Which is THIS program's, the table does not say. Taking the first
+        token could charge an exempt program a fee that really is printed
+        in its cell, so gate() would pass it: the same fabricated-value
+        route the dash-placeholder guard below closes. The old behaviour
+        was locked in by this test with no stated justification; an
+        adversarial review of SU's fee table found the live case."""
         table = [
             ["специалност", 'ОКС "бакалавър" редовно'],
             ["Физика и информатика", "310 EUR освободени"],
         ]
         r = cascade.fee_row_join("tuition", table_source(table),
                                  synthetic_join(), "Физика и информатика")
-        self.assertEqual(r.value, "310 EUR")
+        self.assertIsNone(r)
 
     def test_reads_actual_tsv_artifact_files(self):
         source = cascade.TableSource.from_tsv_dir(

@@ -756,9 +756,23 @@ def fee_row_join(field, source, join, alias):
                 # printed in that cell.
                 continue
             if join.value_pattern:
-                m = re.match(join.value_pattern, cell)
-                if m:
-                    cell = m.group(1)
+                # A PDF cell merged across rows collapses several rows'
+                # values into one string, and a hidden text layer can add
+                # one that is invisible in the rendered document (SU's
+                # fee table does both: '310 EUR 310 EUR' in the cell that
+                # prices three specialties). Taking the first match would
+                # ship an arbitrary one of them with a fully green gate —
+                # every candidate really is printed in that cell. So:
+                # agree or refuse. Distinct values mean the table does
+                # not say which is this program's, and "can't determine"
+                # ships an honest null (found by adversarial review,
+                # 2026-08-23).
+                found = re.findall(join.value_pattern, cell)
+                distinct = {norm(v) for v in found}
+                if len(distinct) > 1:
+                    continue
+                if found:
+                    cell = norm(found[0])
             context = dict(join.context)
             context["currency"] = "EUR" if "EUR" in cell else None
             segments = [norm(" ".join(row))]
