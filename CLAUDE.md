@@ -32,7 +32,12 @@ changing anything:
 - ADR-0001 — deterministic core + gated LLM tail; site knowledge is
   CONFIG DATA, no per-site code, no LLM in the refresh loop
 - ADR-0002 — Artifacts constructed only by render/artifact-store; every
-  value gate-checked against verbatim provenance
+  EXTRACTED value gate-checked against verbatim provenance
+- ADR-0007 — a value that is true but stated in no document ships as
+  status DERIVED (tier D, a `derivation` block instead of snippets),
+  never as PASS; the rule is per-site config (`default_language`), it
+  fires only where the spine produced nothing, and the blind key grades
+  it in its own category — so "0 fabrications" keeps meaning what it meant
 - ADR-0003 — onboarding proposes, humans promote
 - ADR-0004 — superseded by ADR-0006
 - ADR-0006 — RSVU registry dropped entirely; config program entries are

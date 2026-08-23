@@ -85,6 +85,7 @@ __all__ = [
 MANUAL_VERDICTS_NAME = "manual-verdicts.json"
 
 _STATUS_PASS = "PASS"
+_STATUS_DERIVED = "DERIVED"
 _STATUS_NULL_OK = "NULL_OK"
 _STATUS_PARSE_FAILURE = "PARSE_FAILURE"
 _STATUS_REJECT_CONTAINMENT = "REJECT_CONTAINMENT"
@@ -103,6 +104,12 @@ class GradeCategory(Enum):
     MISS = "miss"
     MISS_GATE = "miss_gate"
     PARSE_FAILURE = "parse_failure"
+    # ADR-0007: the value was derived, not extracted. The key answers
+    # "what does the page say"; a derived value answers "what is true",
+    # so scoring it against the key either way is a category error --
+    # FABRICATION would charge the pipeline for a value the owner
+    # asserted, OK_VALUE would let an assumption inflate correctness.
+    DERIVED = "derived"
 
 
 # categories a human has affirmed or that need no human affirmation --
@@ -252,6 +259,11 @@ def grade_field(entry, record):
     defects this shape excludes by construction."""
     status = record["status"]
     shipped_value = record.get("value")
+
+    # Derived values are outside the key's question entirely, whichever
+    # way the key answered it (ADR-0007).
+    if status == _STATUS_DERIVED:
+        return GradeCategory.DERIVED
 
     if entry.expected_value is None:
         if status == _STATUS_PASS:

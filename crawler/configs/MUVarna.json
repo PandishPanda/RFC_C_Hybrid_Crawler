@@ -1,254 +1,255 @@
 {
-  "uni_id": "MUVarna",
-  "cookies": {},
-  "sources": {
-    "muv-fees": {
-      "url": "https://www.mu-varna.bg/BG/Admission/Documents/2026/Taksi%202026-2027.pdf",
-      "route": "table-pdf",
-      "join": {
-        "kind": "sectioned-fee-row",
-        "name": "muv",
-        "sections": [
-          {
-            "track": "чуждестранни граждани по чл. 95",
-            "match": "по чл. 95",
-            "foreign": true
-          },
-          {
-            "track": "обучение на английски език",
-            "match": "Обучение на английски език"
-          },
-          {
-            "track": "обучение на български език",
-            "match": "обучение на български език"
-          }
-        ],
-        "fee_pattern": "\\d{3,4},\\d{2} (\\d{3,4})\\b",
-        "currency_suffix": "евро",
-        "context": {
-          "year": "2026/2027",
-          "currency": "EUR",
-          "fee_basis": "годишна такса, субсидирано обучение, редовна форма (колона 'Субсидирано обучение евро')"
-        },
-        "compose_bands": true,
-        "row_exclude": "задочна"
-      }
+ "uni_id": "MUVarna",
+ "default_language": "български",
+ "cookies": {},
+ "sources": {
+  "muv-fees": {
+   "url": "https://www.mu-varna.bg/BG/Admission/Documents/2026/Taksi%202026-2027.pdf",
+   "route": "table-pdf",
+   "join": {
+    "kind": "sectioned-fee-row",
+    "name": "muv",
+    "sections": [
+     {
+      "track": "чуждестранни граждани по чл. 95",
+      "match": "по чл. 95",
+      "foreign": true
+     },
+     {
+      "track": "обучение на английски език",
+      "match": "Обучение на английски език"
+     },
+     {
+      "track": "обучение на български език",
+      "match": "обучение на български език"
+     }
+    ],
+    "fee_pattern": "\\d{3,4},\\d{2} (\\d{3,4})\\b",
+    "currency_suffix": "евро",
+    "context": {
+     "year": "2026/2027",
+     "currency": "EUR",
+     "fee_basis": "годишна такса, субсидирано обучение, редовна форма (колона 'Субсидирано обучение евро')"
     },
-    "muv-phd-fees": {
-      "url": "https://www.mu-varna.bg/BG/Research/taksi-doktorantsko-uchiliste",
-      "route": "html",
-      "join": {
-        "kind": "fees-page",
-        "name": "muv-phd",
-        "value_pattern": "\\d{3},\\d{2} €",
-        "window": 40
-      }
-    }
+    "compose_bands": true,
+    "row_exclude": "задочна"
+   }
   },
-  "anchors": {
-    "kinezi-degree": {
-      "source": "https://www.mu-varna.bg/BG/specialnosti",
-      "pattern": "Обучението\\ по\\ специалност\\ „Кинезитерапия\"\\ за\\ (образователно\\-квалификационна\\ степен\\ „бакалавър\")\\ е\\ в\\ редовна\\ форма"
-    },
-    "kinezi-duration": {
-      "source": "https://www.mu-varna.bg/BG/specialnosti",
-      "pattern": "Обучението\\ по\\ специалност\\ „Кинезитерапия\"\\ за\\ образователно\\-квалификационна\\ степен\\ „бакалавър\"\\ е\\ в\\ редовна\\ форма.{0,220}?Продължителността\\ на\\ обучението\\ е\\ (четири\\ години\\ \\(осем\\ семестъра\\))"
-    },
-    "pharm-duration": {
-      "source": "https://www.mu-varna.bg/BG/AboutUs/Pharmacy/Pages/Specialities.aspx",
-      "pattern": "Обучението\\ на\\ студентите\\ по\\ фармация\\ е\\ организирано\\ в\\ три\\ етапа\\ /(5\\ години)/"
-    },
-    "pharm-adm": {
-      "source": "https://www.mu-varna.bg/BG/baloobrazuvane",
-      "pattern": "Балът\\ за\\ класиране\\ по\\ специалностите\\ „Медицина\",\\ „Дентална\\ медицина\"\\ и\\ „Фармация\"\\ се\\ образува\\ като\\ сбор\\ от:\\ (оценката\\ от\\ държавния\\ зрелостен\\ изпит\\ по\\ български\\ език\\ и\\ литература\\ и\\ утроените\\ оценки\\ от\\ конкурсните\\ изпити\\ по\\ биология\\ и\\ химия\\ в\\ МУ\\-Варна)",
-      "scope": "names-program"
-    },
-    "kinezi-adm": {
-      "source": "https://www.mu-varna.bg/BG/baloobrazuvane",
-      "pattern": "„Кинезитерапия\"\\ \\(ОКС\\ „бакалавър“\\).{0,260}?се\\ образува\\ като\\ сбор\\ от:\\ (оценката\\ от\\ държавния\\ зрелостен\\ изпит\\ по\\ български\\ език\\ и\\ литература\\ и\\ утроената\\ оценка\\ от\\ конкурсния\\ изпит\\ тест\\ по\\ биология\\ в\\ МУ\\-Варна)",
-      "scope": "names-program"
-    },
-    "phd-degree-mobility": {
-      "source": "https://www.mu-varna.bg/BG/Research/Pages/aktualno-info-doktoranti.aspx",
-      "pattern": "всички\\ обучаващи\\ се\\ в\\ (ОНС\\ „доктор“)\\ могат\\ да\\ предприемат",
-      "scope": "names-program"
-    },
-    "phd-adm-exams": {
-      "source": "https://www.mu-varna.bg/BG/Research/Pages/Прием-на-редовни-документи.aspx",
-      "pattern": "Кандидатите\\ за\\ докторанти\\ полагат\\ (изпит\\ по\\ специалността\\ и\\ по\\ един\\ избран\\ от\\ тях\\ чужд\\ език\\ \\(английски,\\ немски,\\ руски\\ език\\))",
-      "scope": "page-wide"
-    }
+  "muv-phd-fees": {
+   "url": "https://www.mu-varna.bg/BG/Research/taksi-doktorantsko-uchiliste",
+   "route": "html",
+   "join": {
+    "kind": "fees-page",
+    "name": "muv-phd",
+    "value_pattern": "\\d{3},\\d{2} €",
+    "window": 40
+   }
+  }
+ },
+ "anchors": {
+  "kinezi-degree": {
+   "source": "https://www.mu-varna.bg/BG/specialnosti",
+   "pattern": "Обучението\\ по\\ специалност\\ „Кинезитерапия\"\\ за\\ (образователно\\-квалификационна\\ степен\\ „бакалавър\")\\ е\\ в\\ редовна\\ форма"
   },
-  "programs": [
-    {
-      "id": "MUVarna-rsvu4414-IMSC-BG",
-      "name": "Фармация",
-      "page": "https://www.mu-varna.bg/BG/AboutUs/Pharmacy/Pages/Specialities.aspx",
-      "tuition_join": {
-        "source": "muv-fees",
-        "alias_pattern": "Фармация \\(I курс\\)"
-      },
-      "language_tracks": {
-        "source": "muv-fees",
-        "alias_pattern": "Фармация"
-      },
-      "field_anchors": {
-        "duration": "pharm-duration",
-        "admission": "pharm-adm"
-      }
-    },
-    {
-      "id": "MUVarna-rsvu31893-BSC-BG",
-      "name": "Кинезитерапия",
-      "page": "https://www.mu-varna.bg/BG/specialnosti",
-      "tuition_join": {
-        "source": "muv-fees",
-        "alias_pattern": "Кинезитерапия \\((?:I|II|III|III\\-IV) курс\\)"
-      },
-      "language_tracks": {
-        "source": "muv-fees",
-        "alias_pattern": "Кинезитерапия"
-      },
-      "field_anchors": {
-        "degree": "kinezi-degree",
-        "duration": "kinezi-duration",
-        "admission": "kinezi-adm"
-      }
-    },
-    {
-      "id": "MUVarna-rsvu11227-PHD-BG",
-      "name": "Патофизиология",
-      "page": "https://www.mu-varna.bg/BG/Research/obyava-priem-doktoranti",
-      "fees_section": {
-        "source": "muv-phd-fees",
-        "section_pattern": "7\\.1\\. Медицина"
-      },
-      "field_anchors": {
-        "admission": "phd-adm-exams"
-      }
-    },
-    {
-      "id": "MUVarna-rsvu30580-PHD-BG",
-      "name": "Анатомия, хистология и цитология",
-      "page": "https://www.mu-varna.bg/BG/Research/obyava-priem-doktoranti",
-      "fees_section": {
-        "source": "muv-phd-fees",
-        "section_pattern": "7\\.1\\. Медицина"
-      },
-      "field_anchors": {
-        "admission": "phd-adm-exams"
-      }
-    },
-    {
-      "id": "MUVarna-rsvu29924-PHD-BG",
-      "name": "Технология на лекарствените форми и биофармация",
-      "page": "https://www.mu-varna.bg/BG/Research/priem-doktoranti-63-01-08-2025",
-      "fees_section": {
-        "source": "muv-phd-fees",
-        "section_pattern": "7\\.3\\. Фармация"
-      },
-      "field_anchors": {
-        "degree": "phd-degree-mobility",
-        "admission": "phd-adm-exams"
-      }
-    },
-    {
-      "id": "muv-medicina",
-      "name": "Медицина",
-      "page": "https://www.mu-varna.bg/BG/specialnosti"
-    },
-    {
-      "id": "muv-medicinska-sestra",
-      "name": "Медицинска сестра",
-      "page": "https://www.mu-varna.bg/BG/specialnosti",
-      "language_tracks": {
-        "source": "muv-fees",
-        "alias_pattern": "Медицинска сестра"
-      }
-    },
-    {
-      "id": "muv-medicinsko-osiguryavane-na",
-      "name": "Медицинско осигуряване на въоръжените сили",
-      "page": "https://www.mu-varna.bg/BG/specialnosti"
-    },
-    {
-      "id": "muv-akusherka",
-      "name": "Акушерка",
-      "page": "https://www.mu-varna.bg/BG/specialnosti",
-      "language_tracks": {
-        "source": "muv-fees",
-        "alias_pattern": "Акушерка"
-      }
-    },
-    {
-      "id": "muv-logopediya",
-      "name": "Логопедия",
-      "page": "https://www.mu-varna.bg/BG/specialnosti",
-      "tuition_join": {
-        "source": "muv-fees",
-        "alias_pattern": "Логопедия \\((?:I|II|III|III\\-IV) курс\\)"
-      },
-      "language_tracks": {
-        "source": "muv-fees",
-        "alias_pattern": "Логопедия"
-      }
-    },
-    {
-      "id": "muv-upravlenie-na-zdravnite-gr",
-      "name": "Управление на здравните грижи",
-      "page": "https://www.mu-varna.bg/BG/specialnosti"
-    },
-    {
-      "id": "muv-pomoshtnikfarmacevt",
-      "name": "Помощник-фармацевт",
-      "page": "https://www.mu-varna.bg/BG/specialnosti",
-      "tuition_join": {
-        "source": "muv-fees",
-        "alias_pattern": "Помощник\\-фармацевт \\((?:I|II|III|III\\-IV) курс\\)"
-      },
-      "language_tracks": {
-        "source": "muv-fees",
-        "alias_pattern": "Помощник-фармацевт"
-      }
-    },
-    {
-      "id": "muv-rehabilitator",
-      "name": "Рехабилитатор",
-      "page": "https://www.mu-varna.bg/BG/specialnosti",
-      "tuition_join": {
-        "source": "muv-fees",
-        "alias_pattern": "Рехабилитатор \\((?:I|II|III|III\\-IV) курс\\)"
-      },
-      "language_tracks": {
-        "source": "muv-fees",
-        "alias_pattern": "Рехабилитатор"
-      }
-    },
-    {
-      "id": "muv-inspektor-po-obshtestveno",
-      "name": "Инспектор по обществено здраве",
-      "page": "https://www.mu-varna.bg/BG/specialnosti",
-      "tuition_join": {
-        "source": "muv-fees",
-        "alias_pattern": "Инспектор по обществено здраве \\((?:I|II|III|III\\-IV) курс\\)"
-      },
-      "language_tracks": {
-        "source": "muv-fees",
-        "alias_pattern": "Инспектор по обществено здраве"
-      }
-    },
-    {
-      "id": "muv-rentgenov-laborant",
-      "name": "Рентгенов лаборант",
-      "page": "https://www.mu-varna.bg/BG/specialnosti",
-      "tuition_join": {
-        "source": "muv-fees",
-        "alias_pattern": "Рентгенов лаборант \\((?:I|II|III|III\\-IV) курс\\)"
-      },
-      "language_tracks": {
-        "source": "muv-fees",
-        "alias_pattern": "Рентгенов лаборант"
-      }
-    }
-  ]
+  "kinezi-duration": {
+   "source": "https://www.mu-varna.bg/BG/specialnosti",
+   "pattern": "Обучението\\ по\\ специалност\\ „Кинезитерапия\"\\ за\\ образователно\\-квалификационна\\ степен\\ „бакалавър\"\\ е\\ в\\ редовна\\ форма.{0,220}?Продължителността\\ на\\ обучението\\ е\\ (четири\\ години\\ \\(осем\\ семестъра\\))"
+  },
+  "pharm-duration": {
+   "source": "https://www.mu-varna.bg/BG/AboutUs/Pharmacy/Pages/Specialities.aspx",
+   "pattern": "Обучението\\ на\\ студентите\\ по\\ фармация\\ е\\ организирано\\ в\\ три\\ етапа\\ /(5\\ години)/"
+  },
+  "pharm-adm": {
+   "source": "https://www.mu-varna.bg/BG/baloobrazuvane",
+   "pattern": "Балът\\ за\\ класиране\\ по\\ специалностите\\ „Медицина\",\\ „Дентална\\ медицина\"\\ и\\ „Фармация\"\\ се\\ образува\\ като\\ сбор\\ от:\\ (оценката\\ от\\ държавния\\ зрелостен\\ изпит\\ по\\ български\\ език\\ и\\ литература\\ и\\ утроените\\ оценки\\ от\\ конкурсните\\ изпити\\ по\\ биология\\ и\\ химия\\ в\\ МУ\\-Варна)",
+   "scope": "names-program"
+  },
+  "kinezi-adm": {
+   "source": "https://www.mu-varna.bg/BG/baloobrazuvane",
+   "pattern": "„Кинезитерапия\"\\ \\(ОКС\\ „бакалавър“\\).{0,260}?се\\ образува\\ като\\ сбор\\ от:\\ (оценката\\ от\\ държавния\\ зрелостен\\ изпит\\ по\\ български\\ език\\ и\\ литература\\ и\\ утроената\\ оценка\\ от\\ конкурсния\\ изпит\\ тест\\ по\\ биология\\ в\\ МУ\\-Варна)",
+   "scope": "names-program"
+  },
+  "phd-degree-mobility": {
+   "source": "https://www.mu-varna.bg/BG/Research/Pages/aktualno-info-doktoranti.aspx",
+   "pattern": "всички\\ обучаващи\\ се\\ в\\ (ОНС\\ „доктор“)\\ могат\\ да\\ предприемат",
+   "scope": "names-program"
+  },
+  "phd-adm-exams": {
+   "source": "https://www.mu-varna.bg/BG/Research/Pages/Прием-на-редовни-документи.aspx",
+   "pattern": "Кандидатите\\ за\\ докторанти\\ полагат\\ (изпит\\ по\\ специалността\\ и\\ по\\ един\\ избран\\ от\\ тях\\ чужд\\ език\\ \\(английски,\\ немски,\\ руски\\ език\\))",
+   "scope": "page-wide"
+  }
+ },
+ "programs": [
+  {
+   "id": "MUVarna-rsvu4414-IMSC-BG",
+   "name": "Фармация",
+   "page": "https://www.mu-varna.bg/BG/AboutUs/Pharmacy/Pages/Specialities.aspx",
+   "tuition_join": {
+    "source": "muv-fees",
+    "alias_pattern": "Фармация \\(I курс\\)"
+   },
+   "language_tracks": {
+    "source": "muv-fees",
+    "alias_pattern": "Фармация"
+   },
+   "field_anchors": {
+    "duration": "pharm-duration",
+    "admission": "pharm-adm"
+   }
+  },
+  {
+   "id": "MUVarna-rsvu31893-BSC-BG",
+   "name": "Кинезитерапия",
+   "page": "https://www.mu-varna.bg/BG/specialnosti",
+   "tuition_join": {
+    "source": "muv-fees",
+    "alias_pattern": "Кинезитерапия \\((?:I|II|III|III\\-IV) курс\\)"
+   },
+   "language_tracks": {
+    "source": "muv-fees",
+    "alias_pattern": "Кинезитерапия"
+   },
+   "field_anchors": {
+    "degree": "kinezi-degree",
+    "duration": "kinezi-duration",
+    "admission": "kinezi-adm"
+   }
+  },
+  {
+   "id": "MUVarna-rsvu11227-PHD-BG",
+   "name": "Патофизиология",
+   "page": "https://www.mu-varna.bg/BG/Research/obyava-priem-doktoranti",
+   "fees_section": {
+    "source": "muv-phd-fees",
+    "section_pattern": "7\\.1\\. Медицина"
+   },
+   "field_anchors": {
+    "admission": "phd-adm-exams"
+   }
+  },
+  {
+   "id": "MUVarna-rsvu30580-PHD-BG",
+   "name": "Анатомия, хистология и цитология",
+   "page": "https://www.mu-varna.bg/BG/Research/obyava-priem-doktoranti",
+   "fees_section": {
+    "source": "muv-phd-fees",
+    "section_pattern": "7\\.1\\. Медицина"
+   },
+   "field_anchors": {
+    "admission": "phd-adm-exams"
+   }
+  },
+  {
+   "id": "MUVarna-rsvu29924-PHD-BG",
+   "name": "Технология на лекарствените форми и биофармация",
+   "page": "https://www.mu-varna.bg/BG/Research/priem-doktoranti-63-01-08-2025",
+   "fees_section": {
+    "source": "muv-phd-fees",
+    "section_pattern": "7\\.3\\. Фармация"
+   },
+   "field_anchors": {
+    "degree": "phd-degree-mobility",
+    "admission": "phd-adm-exams"
+   }
+  },
+  {
+   "id": "muv-medicina",
+   "name": "Медицина",
+   "page": "https://www.mu-varna.bg/BG/specialnosti"
+  },
+  {
+   "id": "muv-medicinska-sestra",
+   "name": "Медицинска сестра",
+   "page": "https://www.mu-varna.bg/BG/specialnosti",
+   "language_tracks": {
+    "source": "muv-fees",
+    "alias_pattern": "Медицинска сестра"
+   }
+  },
+  {
+   "id": "muv-medicinsko-osiguryavane-na",
+   "name": "Медицинско осигуряване на въоръжените сили",
+   "page": "https://www.mu-varna.bg/BG/specialnosti"
+  },
+  {
+   "id": "muv-akusherka",
+   "name": "Акушерка",
+   "page": "https://www.mu-varna.bg/BG/specialnosti",
+   "language_tracks": {
+    "source": "muv-fees",
+    "alias_pattern": "Акушерка"
+   }
+  },
+  {
+   "id": "muv-logopediya",
+   "name": "Логопедия",
+   "page": "https://www.mu-varna.bg/BG/specialnosti",
+   "tuition_join": {
+    "source": "muv-fees",
+    "alias_pattern": "Логопедия \\((?:I|II|III|III\\-IV) курс\\)"
+   },
+   "language_tracks": {
+    "source": "muv-fees",
+    "alias_pattern": "Логопедия"
+   }
+  },
+  {
+   "id": "muv-upravlenie-na-zdravnite-gr",
+   "name": "Управление на здравните грижи",
+   "page": "https://www.mu-varna.bg/BG/specialnosti"
+  },
+  {
+   "id": "muv-pomoshtnikfarmacevt",
+   "name": "Помощник-фармацевт",
+   "page": "https://www.mu-varna.bg/BG/specialnosti",
+   "tuition_join": {
+    "source": "muv-fees",
+    "alias_pattern": "Помощник\\-фармацевт \\((?:I|II|III|III\\-IV) курс\\)"
+   },
+   "language_tracks": {
+    "source": "muv-fees",
+    "alias_pattern": "Помощник-фармацевт"
+   }
+  },
+  {
+   "id": "muv-rehabilitator",
+   "name": "Рехабилитатор",
+   "page": "https://www.mu-varna.bg/BG/specialnosti",
+   "tuition_join": {
+    "source": "muv-fees",
+    "alias_pattern": "Рехабилитатор \\((?:I|II|III|III\\-IV) курс\\)"
+   },
+   "language_tracks": {
+    "source": "muv-fees",
+    "alias_pattern": "Рехабилитатор"
+   }
+  },
+  {
+   "id": "muv-inspektor-po-obshtestveno",
+   "name": "Инспектор по обществено здраве",
+   "page": "https://www.mu-varna.bg/BG/specialnosti",
+   "tuition_join": {
+    "source": "muv-fees",
+    "alias_pattern": "Инспектор по обществено здраве \\((?:I|II|III|III\\-IV) курс\\)"
+   },
+   "language_tracks": {
+    "source": "muv-fees",
+    "alias_pattern": "Инспектор по обществено здраве"
+   }
+  },
+  {
+   "id": "muv-rentgenov-laborant",
+   "name": "Рентгенов лаборант",
+   "page": "https://www.mu-varna.bg/BG/specialnosti",
+   "tuition_join": {
+    "source": "muv-fees",
+    "alias_pattern": "Рентгенов лаборант \\((?:I|II|III|III\\-IV) курс\\)"
+   },
+   "language_tracks": {
+    "source": "muv-fees",
+    "alias_pattern": "Рентгенов лаборант"
+   }
+  }
+ ]
 }

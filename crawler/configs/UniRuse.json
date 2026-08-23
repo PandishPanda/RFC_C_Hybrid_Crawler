@@ -1,398 +1,399 @@
 {
-  "uni_id": "UniRuse",
-  "cookies": {},
-  "sources": {
-    "fees-state-redovno": {
-      "url": "https://www.uni-ruse.bg/education/students/Documents/Zapoved_taksi_2025_2026_3811_14.10.2025_%d0%bf%d1%80%d0%b8%d0%b5%d0%bc%202025-2026n.xlsx",
-      "route": "spreadsheet",
-      "join": {
-        "kind": "fee-row",
-        "name": "uniruse-state-redovno",
-        "match_header": "специалност",
-        "value_headers": [
-          "редовно",
-          "евро"
-        ],
-        "table_marker": "СЕМЕСТРИАЛНИ ТАКСИ съгласно Решение № 362 от 05.06.2025 г. на Министерския съвет, за специалностите, по които Русенският университет ще провежда обучение на държавна издръжка на студентите за ОКС “бакалавър” и специалност Право за ОКС \"магистър\" след средно образование за учебната 2025/2026 г.",
-        "funding": "на държавна издръжка"
-      }
-    },
-    "fees-state-zadochno": {
-      "url": "https://www.uni-ruse.bg/education/students/Documents/Zapoved_taksi_2025_2026_3811_14.10.2025_%d0%bf%d1%80%d0%b8%d0%b5%d0%bc%202025-2026n.xlsx",
-      "route": "spreadsheet",
-      "join": {
-        "kind": "fee-row",
-        "name": "uniruse-state-zadochno",
-        "match_header": "специалност",
-        "value_headers": [
-          "задочно",
-          "евро"
-        ],
-        "table_marker": "СЕМЕСТРИАЛНИ ТАКСИ съгласно Решение № 362 от 05.06.2025 г. на Министерския съвет, за специалностите, по които Русенският университет ще провежда обучение на държавна издръжка на студентите за ОКС “бакалавър” и специалност Право за ОКС \"магистър\" след средно образование за учебната 2025/2026 г.",
-        "funding": "на държавна издръжка"
-      }
-    },
-    "fees-paid-distancionna": {
-      "url": "https://www.uni-ruse.bg/education/students/Documents/Zapoved_taksi_2025_2026_3811_14.10.2025_%d0%bf%d1%80%d0%b8%d0%b5%d0%bc%202025-2026n.xlsx",
-      "route": "spreadsheet",
-      "join": {
-        "kind": "fee-row",
-        "name": "uniruse-paid-distancionna",
-        "match_header": "специалност",
-        "value_headers": [
-          "дистанционна",
-          "евро"
-        ],
-        "table_marker": "СЕМЕСТРИАЛНИ ТАКСИ съгласно Решение на Академичния съвет № 8.15 от 22.04.2025 г., за специалностите, по които Русенският университет ще провежда обучение срещу заплащане за ОКС “бакалавър” и специалност Право за ОКС \"магистър\" след средно образование за учебната 2025/2026 г. ПРИЕМ 2025/2026",
-        "funding": "срещу заплащане"
-      }
-    },
-    "fees-paid-redovno": {
-      "url": "https://www.uni-ruse.bg/education/students/Documents/Zapoved_taksi_2025_2026_3811_14.10.2025_%d0%bf%d1%80%d0%b8%d0%b5%d0%bc%202025-2026n.xlsx",
-      "route": "spreadsheet",
-      "join": {
-        "kind": "fee-row",
-        "name": "uniruse-paid-redovno",
-        "match_header": "специалност",
-        "value_headers": [
-          "редовно",
-          "евро"
-        ],
-        "table_marker": "СЕМЕСТРИАЛНИ ТАКСИ съгласно Решение на Академичния съвет № 8.15 от 22.04.2025 г., за специалностите, по които Русенският университет ще провежда обучение срещу заплащане за ОКС “бакалавър” и специалност Право за ОКС \"магистър\" след средно образование за учебната 2025/2026 г. ПРИЕМ 2025/2026",
-        "funding": "срещу заплащане"
-      }
-    }
+ "uni_id": "UniRuse",
+ "default_language": "български",
+ "cookies": {},
+ "sources": {
+  "fees-state-redovno": {
+   "url": "https://www.uni-ruse.bg/education/students/Documents/Zapoved_taksi_2025_2026_3811_14.10.2025_%d0%bf%d1%80%d0%b8%d0%b5%d0%bc%202025-2026n.xlsx",
+   "route": "spreadsheet",
+   "join": {
+    "kind": "fee-row",
+    "name": "uniruse-state-redovno",
+    "match_header": "специалност",
+    "value_headers": [
+     "редовно",
+     "евро"
+    ],
+    "table_marker": "СЕМЕСТРИАЛНИ ТАКСИ съгласно Решение № 362 от 05.06.2025 г. на Министерския съвет, за специалностите, по които Русенският университет ще провежда обучение на държавна издръжка на студентите за ОКС “бакалавър” и специалност Право за ОКС \"магистър\" след средно образование за учебната 2025/2026 г.",
+    "funding": "на държавна издръжка"
+   }
   },
-  "programs": [
-    {
-      "id": "uniruse-bizmgmt",
-      "name": "Бизнес мениджмънт",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
-      "tuition_join": {
-        "source": "fees-state-redovno",
-        "alias": "Бизнес мениджмънт"
-      },
-      "field_anchors": {
-        "degree": "uniruse-bizmgmt-plan-degree"
-      },
-      "extra_pages": [
-        "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.7.4.1&version=5",
-        "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CBD3.7.4.11&version=1"
-      ]
-    },
-    {
-      "id": "uniruse-digmgmt",
-      "name": "Дигитален мениджмънт и иновации",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
-      "tuition_join": {
-        "source": "fees-paid-distancionna",
-        "alias": "Дигитален мениджмънт и иновации"
-      },
-      "field_anchors": {
-        "degree": "uniruse-digmgmt-plan-degree"
-      }
-    },
-    {
-      "id": "uniruse-pubadmin",
-      "name": "Публична администрация",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
-      "tuition_join": {
-        "source": "fees-state-zadochno",
-        "alias": "Публична администрация"
-      },
-      "field_anchors": {
-        "degree": "uniruse-pubadmin-plan-degree"
-      }
-    },
-    {
-      "id": "uniruse-electropower",
-      "name": "Електроенергетика и електрообзавеждане",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
-      "tuition_join": {
-        "source": "fees-state-redovno",
-        "alias": "Електроенергетика и електрообзавеждане"
-      },
-      "field_anchors": {
-        "degree": "uniruse-electropower-plan-degree"
-      }
-    },
-    {
-      "id": "uniruse-electronics",
-      "name": "Електроника",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
-      "tuition_join": {
-        "source": "fees-state-redovno",
-        "alias": "Електроника"
-      },
-      "field_anchors": {
-        "degree": "uniruse-electronics-plan-degree"
-      }
-    },
-    {
-      "id": "uniruse-compctrl",
-      "name": "Компютърно управление и автоматизация",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
-      "tuition_join": {
-        "source": "fees-state-redovno",
-        "alias": "Компютърно управление и автоматизация"
-      },
-      "field_anchors": {
-        "degree": "uniruse-compctrl-plan-degree"
-      }
-    },
-    {
-      "id": "uniruse-internetmobile",
-      "name": "Интернет и мобилни комуникации",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
-      "tuition_join": {
-        "source": "fees-state-redovno",
-        "alias": "Интернет и мобилни комуникации"
-      },
-      "field_anchors": {
-        "degree": "uniruse-internetmobile-plan-degree"
-      }
-    },
-    {
-      "id": "uniruse-compsystems",
-      "name": "Компютърни системи и технологии",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
-      "tuition_join": {
-        "source": "fees-state-redovno",
-        "alias": "Компютърни системи и технологии"
-      },
-      "field_anchors": {
-        "degree": "uniruse-compsystems-plan-degree"
-      }
-    },
-    {
-      "id": "uniruse-economics",
-      "name": "Икономика",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
-      "tuition_join": {
-        "source": "fees-state-redovno",
-        "alias": "Икономика"
-      },
-      "field_anchors": {
-        "degree": "uniruse-economics-plan-degree"
-      }
-    },
-    {
-      "id": "uniruse-indmgmt",
-      "name": "Индустриален мениджмънт",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
-      "tuition_join": {
-        "source": "fees-state-redovno",
-        "alias": "Индустриален мениджмънт"
-      },
-      "field_anchors": {
-        "degree": "uniruse-indmgmt-plan-degree",
-        "admission": "uniruse-indmgmt-page-admission"
-      }
-    },
-    {
-      "id": "uniruse-socialwork",
-      "name": "Социални дейности",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
-      "tuition_join": {
-        "source": "fees-state-redovno",
-        "alias": "Социални дейности"
-      },
-      "field_anchors": {
-        "degree": "uniruse-socialwork-plan-degree"
-      }
-    },
-    {
-      "id": "uniruse-se",
-      "name": "Софтуерно инженерство",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
-      "tuition_join": {
-        "source": "fees-state-redovno",
-        "alias": "Софтуерно инженерство"
-      },
-      "field_anchors": {
-        "admission": "uniruse-se-page-admission"
-      }
-    },
-    {
-      "id": "uniruse-cs",
-      "name": "Компютърни науки",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
-      "tuition_join": {
-        "source": "fees-state-redovno",
-        "alias": "Компютърни науки"
-      }
-    },
-    {
-      "id": "uniruse-finmath",
-      "name": "Финансова математика",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
-      "tuition_join": {
-        "source": "fees-state-redovno",
-        "alias": "Финансова математика"
-      },
-      "field_anchors": {
-        "degree": "uniruse-finmath-plan-degree"
-      }
-    },
-    {
-      "id": "uniruse-socped",
-      "name": "Социална педагогика",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
-      "tuition_join": {
-        "source": "fees-state-redovno",
-        "alias": "Социална педагогика"
-      }
-    },
-    {
-      "id": "uniruse-law",
-      "name": "Право",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-law-studies",
-      "tuition_join": {
-        "source": "fees-state-redovno",
-        "alias": "Право"
-      },
-      "field_anchors": {
-        "degree": "uniruse-law-page-degree"
-      }
-    },
-    {
-      "id": "uniruse-mecheng",
-      "name": "Машинно инженерство",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-mechanical-and-manufacturing-engineering",
-      "tuition_join": {
-        "source": "fees-state-redovno",
-        "alias": "Машинно инженерство"
-      },
-      "field_anchors": {
-        "degree": "uniruse-mecheng-plan-degree"
-      }
-    },
-    {
-      "id": "uniruse-transport",
-      "name": "Транспортна техника и технологии",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-automotive-and-transport-engineering",
-      "tuition_join": {
-        "source": "fees-state-redovno",
-        "alias": "Транспортна техника и технологии"
-      }
-    },
-    {
-      "id": "uniruse-agritech",
-      "name": "Земеделска техника и технологии",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-agricultural-mechanisation",
-      "tuition_join": {
-        "source": "fees-state-redovno",
-        "alias": "Земеделска техника и технологии"
-      },
-      "field_anchors": {
-        "degree": "uniruse-agritech-plan-degree"
-      }
-    },
-    {
-      "id": "uniruse-design",
-      "name": "Дизайн",
-      "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-agricultural-mechanisation",
-      "tuition_join": {
-        "source": "fees-state-redovno",
-        "alias": "Дизайн"
-      },
-      "field_anchors": {
-        "degree": "uniruse-design-plan-degree",
-        "admission": "uniruse-design-page-admission"
-      }
-    }
-  ],
-  "anchors": {
-    "uniruse-bizmgmt-plan-degree": {
-      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.7.4.1&version=5",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
-      "scope": "names-program"
-    },
-    "uniruse-digmgmt-plan-degree": {
-      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.7.9.1&version=2",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
-      "scope": "names-program"
-    },
-    "uniruse-pubadmin-plan-degree": {
-      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.7.3.1&version=4",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
-      "scope": "names-program"
-    },
-    "uniruse-electropower-plan-degree": {
-      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.2.1.1&version=6",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
-      "scope": "names-program"
-    },
-    "uniruse-electronics-plan-degree": {
-      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.2.2.1&version=5",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
-      "scope": "names-program"
-    },
-    "uniruse-compctrl-plan-degree": {
-      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.2.5.1&version=4",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
-      "scope": "names-program"
-    },
-    "uniruse-internetmobile-plan-degree": {
-      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.3.9.1&version=5",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
-      "scope": "names-program"
-    },
-    "uniruse-compsystems-plan-degree": {
-      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.3.1.1&version=5",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
-      "scope": "names-program"
-    },
-    "uniruse-economics-plan-degree": {
-      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.8.4.1&version=4",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
-      "scope": "names-program"
-    },
-    "uniruse-indmgmt-plan-degree": {
-      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.13.4.1&version=5",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
-      "scope": "names-program"
-    },
-    "uniruse-socialwork-plan-degree": {
-      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.4.1.1&version=3",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
-      "scope": "names-program"
-    },
-    "uniruse-indmgmt-page-admission": {
-      "source": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
-      "pattern": "Специалност ИНДУСТРИАЛЕН МЕНИДЖМЪНТ(?:(?!Специалност).)*?Кандидатства се с:\\s*((?:(?!Специалност).){20,600}?\\.)(?=\\s+[А-Я]|\\s*$)"
-    },
-    "uniruse-se-page-admission": {
-      "source": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
-      "pattern": "Специалност СОФТУЕРНО ИНЖЕНЕРСТВО(?:(?!Специалност).)*?Кандидатства се с:\\s*((?:(?!Специалност).){20,600}?\\.)(?=\\s+[А-Я]|\\s*$)"
-    },
-    "uniruse-finmath-plan-degree": {
-      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB4.5.1.1&version=5",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
-      "scope": "names-program"
-    },
-    "uniruse-law-page-degree": {
-      "source": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-law-studies",
-      "pattern": "Специалност ПРАВО(?:(?!Специалност).)*?получават диплома за образователно-квалификационната[^\"]{0,20}\"([^\"]+)\""
-    },
-    "uniruse-mecheng-plan-degree": {
-      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.1.8.1&version=5",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
-      "scope": "names-program"
-    },
-    "uniruse-agritech-plan-degree": {
-      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.1.1.1&version=5",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
-      "scope": "names-program"
-    },
-    "uniruse-design-plan-degree": {
-      "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.13.17.1&version=5",
-      "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
-      "scope": "names-program"
-    },
-    "uniruse-design-page-admission": {
-      "source": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-agricultural-mechanisation",
-      "pattern": "Специалност ДИЗАЙН(?:(?!Специалност).)*?Кандидатства се с:\\s*((?:(?!Специалност).){20,700}?\\.)(?=\\s+[А-Я]|\\s*$)"
-    }
+  "fees-state-zadochno": {
+   "url": "https://www.uni-ruse.bg/education/students/Documents/Zapoved_taksi_2025_2026_3811_14.10.2025_%d0%bf%d1%80%d0%b8%d0%b5%d0%bc%202025-2026n.xlsx",
+   "route": "spreadsheet",
+   "join": {
+    "kind": "fee-row",
+    "name": "uniruse-state-zadochno",
+    "match_header": "специалност",
+    "value_headers": [
+     "задочно",
+     "евро"
+    ],
+    "table_marker": "СЕМЕСТРИАЛНИ ТАКСИ съгласно Решение № 362 от 05.06.2025 г. на Министерския съвет, за специалностите, по които Русенският университет ще провежда обучение на държавна издръжка на студентите за ОКС “бакалавър” и специалност Право за ОКС \"магистър\" след средно образование за учебната 2025/2026 г.",
+    "funding": "на държавна издръжка"
+   }
+  },
+  "fees-paid-distancionna": {
+   "url": "https://www.uni-ruse.bg/education/students/Documents/Zapoved_taksi_2025_2026_3811_14.10.2025_%d0%bf%d1%80%d0%b8%d0%b5%d0%bc%202025-2026n.xlsx",
+   "route": "spreadsheet",
+   "join": {
+    "kind": "fee-row",
+    "name": "uniruse-paid-distancionna",
+    "match_header": "специалност",
+    "value_headers": [
+     "дистанционна",
+     "евро"
+    ],
+    "table_marker": "СЕМЕСТРИАЛНИ ТАКСИ съгласно Решение на Академичния съвет № 8.15 от 22.04.2025 г., за специалностите, по които Русенският университет ще провежда обучение срещу заплащане за ОКС “бакалавър” и специалност Право за ОКС \"магистър\" след средно образование за учебната 2025/2026 г. ПРИЕМ 2025/2026",
+    "funding": "срещу заплащане"
+   }
+  },
+  "fees-paid-redovno": {
+   "url": "https://www.uni-ruse.bg/education/students/Documents/Zapoved_taksi_2025_2026_3811_14.10.2025_%d0%bf%d1%80%d0%b8%d0%b5%d0%bc%202025-2026n.xlsx",
+   "route": "spreadsheet",
+   "join": {
+    "kind": "fee-row",
+    "name": "uniruse-paid-redovno",
+    "match_header": "специалност",
+    "value_headers": [
+     "редовно",
+     "евро"
+    ],
+    "table_marker": "СЕМЕСТРИАЛНИ ТАКСИ съгласно Решение на Академичния съвет № 8.15 от 22.04.2025 г., за специалностите, по които Русенският университет ще провежда обучение срещу заплащане за ОКС “бакалавър” и специалност Право за ОКС \"магистър\" след средно образование за учебната 2025/2026 г. ПРИЕМ 2025/2026",
+    "funding": "срещу заплащане"
+   }
   }
+ },
+ "programs": [
+  {
+   "id": "uniruse-bizmgmt",
+   "name": "Бизнес мениджмънт",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
+   "tuition_join": {
+    "source": "fees-state-redovno",
+    "alias": "Бизнес мениджмънт"
+   },
+   "field_anchors": {
+    "degree": "uniruse-bizmgmt-plan-degree"
+   },
+   "extra_pages": [
+    "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.7.4.1&version=5",
+    "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CBD3.7.4.11&version=1"
+   ]
+  },
+  {
+   "id": "uniruse-digmgmt",
+   "name": "Дигитален мениджмънт и иновации",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
+   "tuition_join": {
+    "source": "fees-paid-distancionna",
+    "alias": "Дигитален мениджмънт и иновации"
+   },
+   "field_anchors": {
+    "degree": "uniruse-digmgmt-plan-degree"
+   }
+  },
+  {
+   "id": "uniruse-pubadmin",
+   "name": "Публична администрация",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
+   "tuition_join": {
+    "source": "fees-state-zadochno",
+    "alias": "Публична администрация"
+   },
+   "field_anchors": {
+    "degree": "uniruse-pubadmin-plan-degree"
+   }
+  },
+  {
+   "id": "uniruse-electropower",
+   "name": "Електроенергетика и електрообзавеждане",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
+   "tuition_join": {
+    "source": "fees-state-redovno",
+    "alias": "Електроенергетика и електрообзавеждане"
+   },
+   "field_anchors": {
+    "degree": "uniruse-electropower-plan-degree"
+   }
+  },
+  {
+   "id": "uniruse-electronics",
+   "name": "Електроника",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
+   "tuition_join": {
+    "source": "fees-state-redovno",
+    "alias": "Електроника"
+   },
+   "field_anchors": {
+    "degree": "uniruse-electronics-plan-degree"
+   }
+  },
+  {
+   "id": "uniruse-compctrl",
+   "name": "Компютърно управление и автоматизация",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
+   "tuition_join": {
+    "source": "fees-state-redovno",
+    "alias": "Компютърно управление и автоматизация"
+   },
+   "field_anchors": {
+    "degree": "uniruse-compctrl-plan-degree"
+   }
+  },
+  {
+   "id": "uniruse-internetmobile",
+   "name": "Интернет и мобилни комуникации",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
+   "tuition_join": {
+    "source": "fees-state-redovno",
+    "alias": "Интернет и мобилни комуникации"
+   },
+   "field_anchors": {
+    "degree": "uniruse-internetmobile-plan-degree"
+   }
+  },
+  {
+   "id": "uniruse-compsystems",
+   "name": "Компютърни системи и технологии",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
+   "tuition_join": {
+    "source": "fees-state-redovno",
+    "alias": "Компютърни системи и технологии"
+   },
+   "field_anchors": {
+    "degree": "uniruse-compsystems-plan-degree"
+   }
+  },
+  {
+   "id": "uniruse-economics",
+   "name": "Икономика",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
+   "tuition_join": {
+    "source": "fees-state-redovno",
+    "alias": "Икономика"
+   },
+   "field_anchors": {
+    "degree": "uniruse-economics-plan-degree"
+   }
+  },
+  {
+   "id": "uniruse-indmgmt",
+   "name": "Индустриален мениджмънт",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
+   "tuition_join": {
+    "source": "fees-state-redovno",
+    "alias": "Индустриален мениджмънт"
+   },
+   "field_anchors": {
+    "degree": "uniruse-indmgmt-plan-degree",
+    "admission": "uniruse-indmgmt-page-admission"
+   }
+  },
+  {
+   "id": "uniruse-socialwork",
+   "name": "Социални дейности",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
+   "tuition_join": {
+    "source": "fees-state-redovno",
+    "alias": "Социални дейности"
+   },
+   "field_anchors": {
+    "degree": "uniruse-socialwork-plan-degree"
+   }
+  },
+  {
+   "id": "uniruse-se",
+   "name": "Софтуерно инженерство",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
+   "tuition_join": {
+    "source": "fees-state-redovno",
+    "alias": "Софтуерно инженерство"
+   },
+   "field_anchors": {
+    "admission": "uniruse-se-page-admission"
+   }
+  },
+  {
+   "id": "uniruse-cs",
+   "name": "Компютърни науки",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
+   "tuition_join": {
+    "source": "fees-state-redovno",
+    "alias": "Компютърни науки"
+   }
+  },
+  {
+   "id": "uniruse-finmath",
+   "name": "Финансова математика",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
+   "tuition_join": {
+    "source": "fees-state-redovno",
+    "alias": "Финансова математика"
+   },
+   "field_anchors": {
+    "degree": "uniruse-finmath-plan-degree"
+   }
+  },
+  {
+   "id": "uniruse-socped",
+   "name": "Социална педагогика",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
+   "tuition_join": {
+    "source": "fees-state-redovno",
+    "alias": "Социална педагогика"
+   }
+  },
+  {
+   "id": "uniruse-law",
+   "name": "Право",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-law-studies",
+   "tuition_join": {
+    "source": "fees-state-redovno",
+    "alias": "Право"
+   },
+   "field_anchors": {
+    "degree": "uniruse-law-page-degree"
+   }
+  },
+  {
+   "id": "uniruse-mecheng",
+   "name": "Машинно инженерство",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-mechanical-and-manufacturing-engineering",
+   "tuition_join": {
+    "source": "fees-state-redovno",
+    "alias": "Машинно инженерство"
+   },
+   "field_anchors": {
+    "degree": "uniruse-mecheng-plan-degree"
+   }
+  },
+  {
+   "id": "uniruse-transport",
+   "name": "Транспортна техника и технологии",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-automotive-and-transport-engineering",
+   "tuition_join": {
+    "source": "fees-state-redovno",
+    "alias": "Транспортна техника и технологии"
+   }
+  },
+  {
+   "id": "uniruse-agritech",
+   "name": "Земеделска техника и технологии",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-agricultural-mechanisation",
+   "tuition_join": {
+    "source": "fees-state-redovno",
+    "alias": "Земеделска техника и технологии"
+   },
+   "field_anchors": {
+    "degree": "uniruse-agritech-plan-degree"
+   }
+  },
+  {
+   "id": "uniruse-design",
+   "name": "Дизайн",
+   "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-agricultural-mechanisation",
+   "tuition_join": {
+    "source": "fees-state-redovno",
+    "alias": "Дизайн"
+   },
+   "field_anchors": {
+    "degree": "uniruse-design-plan-degree",
+    "admission": "uniruse-design-page-admission"
+   }
+  }
+ ],
+ "anchors": {
+  "uniruse-bizmgmt-plan-degree": {
+   "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.7.4.1&version=5",
+   "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+   "scope": "names-program"
+  },
+  "uniruse-digmgmt-plan-degree": {
+   "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.7.9.1&version=2",
+   "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+   "scope": "names-program"
+  },
+  "uniruse-pubadmin-plan-degree": {
+   "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.7.3.1&version=4",
+   "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+   "scope": "names-program"
+  },
+  "uniruse-electropower-plan-degree": {
+   "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.2.1.1&version=6",
+   "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+   "scope": "names-program"
+  },
+  "uniruse-electronics-plan-degree": {
+   "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.2.2.1&version=5",
+   "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+   "scope": "names-program"
+  },
+  "uniruse-compctrl-plan-degree": {
+   "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.2.5.1&version=4",
+   "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+   "scope": "names-program"
+  },
+  "uniruse-internetmobile-plan-degree": {
+   "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.3.9.1&version=5",
+   "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+   "scope": "names-program"
+  },
+  "uniruse-compsystems-plan-degree": {
+   "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.3.1.1&version=5",
+   "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+   "scope": "names-program"
+  },
+  "uniruse-economics-plan-degree": {
+   "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.8.4.1&version=4",
+   "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+   "scope": "names-program"
+  },
+  "uniruse-indmgmt-plan-degree": {
+   "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.13.4.1&version=5",
+   "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+   "scope": "names-program"
+  },
+  "uniruse-socialwork-plan-degree": {
+   "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB3.4.1.1&version=3",
+   "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+   "scope": "names-program"
+  },
+  "uniruse-indmgmt-page-admission": {
+   "source": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
+   "pattern": "Специалност ИНДУСТРИАЛЕН МЕНИДЖМЪНТ(?:(?!Специалност).)*?Кандидатства се с:\\s*((?:(?!Специалност).){20,600}?\\.)(?=\\s+[А-Я]|\\s*$)"
+  },
+  "uniruse-se-page-admission": {
+   "source": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
+   "pattern": "Специалност СОФТУЕРНО ИНЖЕНЕРСТВО(?:(?!Специалност).)*?Кандидатства се с:\\s*((?:(?!Специалност).){20,600}?\\.)(?=\\s+[А-Я]|\\s*$)"
+  },
+  "uniruse-finmath-plan-degree": {
+   "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB4.5.1.1&version=5",
+   "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+   "scope": "names-program"
+  },
+  "uniruse-law-page-degree": {
+   "source": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-law-studies",
+   "pattern": "Специалност ПРАВО(?:(?!Специалност).)*?получават диплома за образователно-квалификационната[^\"]{0,20}\"([^\"]+)\""
+  },
+  "uniruse-mecheng-plan-degree": {
+   "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.1.8.1&version=5",
+   "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+   "scope": "names-program"
+  },
+  "uniruse-agritech-plan-degree": {
+   "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.1.1.1&version=5",
+   "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+   "scope": "names-program"
+  },
+  "uniruse-design-plan-degree": {
+   "source": "https://e-curriculum.uni-ruse.bg/app/View/Curriculum?code=CB5.13.17.1&version=5",
+   "pattern": "ОКС\\s*[«\"„]([^»\"“]+)[»\"“]",
+   "scope": "names-program"
+  },
+  "uniruse-design-page-admission": {
+   "source": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-agricultural-mechanisation",
+   "pattern": "Специалност ДИЗАЙН(?:(?!Специалност).)*?Кандидатства се с:\\s*((?:(?!Специалност).){20,700}?\\.)(?=\\s+[А-Я]|\\s*$)"
+  }
+ }
 }

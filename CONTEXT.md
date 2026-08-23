@@ -39,7 +39,7 @@ The third review axis on any ticket that can move a shipped value: read the Prov
 _Avoid_: provenance check, spot check, audit
 
 **Derived value**:
-A value that is true but that no document states — a duration reached by counting semesters, a language assumed from the absence of any other. Distinct from an extracted value, which the Artifact says verbatim. The pipeline ships NO derived values: the Provenance gate has nothing to check them against, and the blind key grades one as a fabrication rather than a wrong value, because the labeller recorded the field as genuinely absent. Ruled 2026-08-23: honest nulls are better than fabrications. Shipping them would need ADR-0002 amended with a status that records the rule applied instead of a snippet.
+A value that is true but that no document states — a language assumed where none is declared. Distinct from an extracted value, which the Artifact says verbatim. A derived value ships under its own status, `DERIVED` (ADR-0007): it never enters the Provenance gate, because there is nothing to check, and instead of a snippet it carries the rule that produced it. It can never displace an extracted value, and the rule that produces it is per-site config, not code. The blind key scores it in its own category — the key answers "what does the page say", a derived value answers "what is true" — so it counts as neither correct nor fabricated.
 _Avoid_: inferred value, assumed value, default (those name the method, not the standing)
 
 **Attention (item)**:

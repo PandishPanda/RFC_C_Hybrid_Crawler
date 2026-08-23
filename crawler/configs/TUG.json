@@ -1,203 +1,204 @@
 {
-  "uni_id": "TUG",
-  "cookies": {},
-  "sources": {
-    "bak-fees": {
-      "url": "https://www.tugab.bg/images/ksp/2026/semestrialna%20taksa%202026-2027%20dargavna%20por%20bak.pdf",
-      "route": "table-pdf",
-      "join": {
-        "kind": "fee-row",
-        "name": "tug-bak",
-        "match_header": "специалност",
-        "value_headers": [
-          "Редовна форма"
-        ],
-        "context": {
-          "valid_for": "2026/2027",
-          "form": "редовна",
-          "funding": "държавна поръчка",
-          "fee_period": "семестриална такса",
-          "currency_note": "EUR — 'Семестриални такси за обучение за учебната 2026/2027 г.' document quotes fees in евро in its preamble"
-        }
-      }
-    },
-    "mag-fees": {
-      "url": "https://www.tugab.bg/images/ksp/2026/semestrialna%20taksa%202026-2027%20darg.%20mag.pdf",
-      "route": "table-pdf",
-      "join": {
-        "kind": "sectioned-fee-row",
-        "name": "tug-mag",
-        "sections": [
-          {
-            "track": "Администрация и управление",
-            "match": "Администрация и управление"
-          },
-          {
-            "track": "Комуникационна и компютърна техника",
-            "match": "Комуникационна и компютърна техника"
-          }
-        ],
-        "fee_pattern": "\\b(\\d{3})\\b",
-        "context": {
-          "valid_for": "2026/2027",
-          "form": "редовна",
-          "funding": "държавна поръчка",
-          "fee_period": "семестриална такса",
-          "currency_note": "EUR — master fee order quotes fees in евро in its preamble",
-          "join_note": "row-anchored: this document family's continuation tables lose header rows (measured), so the row, not a column, is the deterministic unit; the fee is the only 3-digit number in the row (задочна column is '-')"
-        }
-      }
-    },
-    "phd-fees": {
-      "url": "https://www.tugab.bg/images/ksp/2026/taksi-doktor-DP.pdf",
-      "route": "table-pdf",
-      "join": {
-        "kind": "fee-row",
-        "name": "tug-phd",
-        "match_header": "Докторска програма",
-        "value_headers": [
-          "Годишна такса",
-          "Редовно"
-        ],
-        "context": {
-          "valid_for": "2026/2027",
-          "form": "редовно",
-          "funding": "държавна поръчка",
-          "fee_period": "годишна такса, 1 г.",
-          "currency_note": "EUR — the value column header reads 'Редовно обучение за 1 г./EUR'"
-        }
-      }
-    },
-    "usloviya-priem": {
-      "url": "https://www.tugab.bg/images/ksp/2026/%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D1%8F%20%D0%B8%20%D1%80%D0%B5%D0%B4%20%D0%B7%D0%B0%20%D0%BF%D1%80%D0%B8%D0%B5%D0%BC%D0%B0%D0%BD%D0%B5%20%D0%BD%D0%B0%20%D1%81%D1%82%D1%83%D0%B4%D0%B5%D0%BD%D1%82%D0%B8.pdf",
-      "route": "prose-pdf"
-    },
-    "pravila-magistar": {
-      "url": "https://www.tugab.bg/images/ksp/2026/%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0%20%D0%B7%D0%B0%20%D0%BF%D1%80%D0%B8%D0%B5%D0%BC%20%D0%B2%20%D0%9E%D0%9A%D0%A1%20%D0%BC%D0%B0%D0%B3%D0%B8%D1%81%D1%82%D1%8A%D1%80.pdf",
-      "route": "prose-pdf"
+ "uni_id": "TUG",
+ "default_language": "български",
+ "cookies": {},
+ "sources": {
+  "bak-fees": {
+   "url": "https://www.tugab.bg/images/ksp/2026/semestrialna%20taksa%202026-2027%20dargavna%20por%20bak.pdf",
+   "route": "table-pdf",
+   "join": {
+    "kind": "fee-row",
+    "name": "tug-bak",
+    "match_header": "специалност",
+    "value_headers": [
+     "Редовна форма"
+    ],
+    "context": {
+     "valid_for": "2026/2027",
+     "form": "редовна",
+     "funding": "държавна поръчка",
+     "fee_period": "семестриална такса",
+     "currency_note": "EUR — 'Семестриални такси за обучение за учебната 2026/2027 г.' document quotes fees in евро in its preamble"
     }
+   }
   },
-  "anchors": {
-    "mech-degree": {
-      "source": "https://www.tugab.bg/priem/bakalavarski-spetzialnosti",
-      "pattern": "Специалност: МЕХАТРОНИКА - М Образователно-квалификационнa степен: ([А-Я]+)"
-    },
-    "mech-duration": {
-      "source": "https://www.tugab.bg/priem/bakalavarski-spetzialnosti",
-      "pattern": "Специалност: МЕХАТРОНИКА - М .{0,240}?Период на обучение: ([А-Я0-9 ]+?) Професионална квалификация"
-    },
-    "dttt-degree": {
-      "source": "https://www.tugab.bg/priem/bakalavarski-spetzialnosti",
-      "pattern": "Специалност: ДИЗАЙН, ТЕХНИКА И ТЕХНОЛОГИИ В ТЕКСТИЛА - ДТТТ Образователно-квалификационнa степен: ([А-Я]+)"
-    },
-    "dttt-duration": {
-      "source": "https://www.tugab.bg/priem/bakalavarski-spetzialnosti",
-      "pattern": "Специалност: ДИЗАЙН, ТЕХНИКА И ТЕХНОЛОГИИ В ТЕКСТИЛА - ДТТТ .{0,240}?Период на обучение: ([А-Я0-9 ]+?) Професионална квалификация"
-    },
-    "ski-degree": {
-      "source": "https://www.tugab.bg/priem/magistarski-spetzialnosti",
-      "pattern": "Специалност: СОФТУЕРНО И КОМПЮТЪРНО ИНЖЕНЕРСТВО - СКИ Образователно-квалификационнa степен: ([А-Я]+)"
-    },
-    "ski-duration": {
-      "source": "https://www.tugab.bg/priem/magistarski-spetzialnosti",
-      "pattern": "Специалност: СОФТУЕРНО И КОМПЮТЪРНО ИНЖЕНЕРСТВО - СКИ .{0,240}?Период на обучение: ([А-Я0-9 ]+?) Професионална квалификация"
-    },
-    "ub-degree": {
-      "source": "https://www.tugab.bg/priem/magistarski-spetzialnosti?view=article&id=942:spetzialnost-upravlenie-na-biznesa&catid=103",
-      "pattern": "(магистърска специалност) „Управление на бизнеса” \\(УБ\\)"
-    },
-    "ub-duration": {
-      "source": "https://www.tugab.bg/priem/magistarski-spetzialnosti?view=article&id=942:spetzialnost-upravlenie-na-biznesa&catid=103",
-      "pattern": "Обучението се извършва в задочна платена форма и е с продължителност (2, 3 или 4 семестъра)"
-    },
-    "koe-degree": {
-      "source": "https://www.tugab.bg/priem/doktorski-programi",
-      "pattern": "Докторска програма: КВАНТОВА И ОПТОЕЛЕКТРОНИКА Образователна и научна степен: ([А-Я]+)"
-    },
-    "bsc-admission": {
-      "source": "usloviya-priem",
-      "pattern": "Приемането на студенти в ОКС „бакалавър” и „професионален бакалавър” се провежда чрез (общ конкурсен изпит по математика или чрез конкурсен изпит \\(под формата на тест\\) по български език и литература, география и общотехническа подготовка \\(ОТП\\) \\(по избор\\))",
-      "scope": "page-wide"
-    },
-    "msc-admission-dp": {
-      "source": "pravila-magistar",
-      "pattern": "Кандидатстването в ОКС „магистър“ по държавна поръчка се извършва чрез (конкурсен изпит)\\.",
-      "scope": "page-wide"
-    },
-    "msc-admission-paid": {
-      "source": "pravila-magistar",
-      "pattern": "Кандидат-студентите за платена форма на обучение и за обучение по държавна поръчка по реда на чл\\. 20, ал\\. 2 могат да кандидатстват с (конкурсен изпит или със среден успех от дипломирането \\(дипломна работа или държавен изпит\\))",
-      "scope": "page-wide"
+  "mag-fees": {
+   "url": "https://www.tugab.bg/images/ksp/2026/semestrialna%20taksa%202026-2027%20darg.%20mag.pdf",
+   "route": "table-pdf",
+   "join": {
+    "kind": "sectioned-fee-row",
+    "name": "tug-mag",
+    "sections": [
+     {
+      "track": "Администрация и управление",
+      "match": "Администрация и управление"
+     },
+     {
+      "track": "Комуникационна и компютърна техника",
+      "match": "Комуникационна и компютърна техника"
+     }
+    ],
+    "fee_pattern": "\\b(\\d{3})\\b",
+    "context": {
+     "valid_for": "2026/2027",
+     "form": "редовна",
+     "funding": "държавна поръчка",
+     "fee_period": "семестриална такса",
+     "currency_note": "EUR — master fee order quotes fees in евро in its preamble",
+     "join_note": "row-anchored: this document family's continuation tables lose header rows (measured), so the row, not a column, is the deterministic unit; the fee is the only 3-digit number in the row (задочна column is '-')"
     }
+   }
   },
-  "programs": [
-    {
-      "id": "TUG-rsvu4221-BSC-BG",
-      "name": "Мехатроника",
-      "page": "https://www.tugab.bg/priem/bakalavarski-spetzialnosti",
-      "tuition_join": {
-        "source": "bak-fees",
-        "alias": "Мехатроника"
-      },
-      "field_anchors": {
-        "degree": "mech-degree",
-        "duration": "mech-duration",
-        "admission": "bsc-admission"
-      }
-    },
-    {
-      "id": "TUG-rsvu7848-BSC-BG",
-      "name": "Дизайн,техника и технологии в текстила",
-      "page": "https://www.tugab.bg/priem/bakalavarski-spetzialnosti",
-      "tuition_join": {
-        "source": "bak-fees",
-        "alias": "Дизайн, техника и технологии в текстила"
-      },
-      "field_anchors": {
-        "degree": "dttt-degree",
-        "duration": "dttt-duration",
-        "admission": "bsc-admission"
-      }
-    },
-    {
-      "id": "TUG-rsvu31303-MSC-BG",
-      "name": "Софтуерно и компютърно инженерство",
-      "page": "https://www.tugab.bg/priem/magistarski-spetzialnosti",
-      "tuition_join": {
-        "source": "mag-fees",
-        "alias_pattern": "Софтуерно и компютърно инженерство"
-      },
-      "field_anchors": {
-        "degree": "ski-degree",
-        "duration": "ski-duration",
-        "admission": "msc-admission-dp"
-      }
-    },
-    {
-      "id": "TUG-rsvu11362-MSC-BG",
-      "name": "Управление на бизнеса",
-      "page": "https://www.tugab.bg/priem/magistarski-spetzialnosti?view=article&id=942:spetzialnost-upravlenie-na-biznesa&catid=103",
-      "tuition_join": {
-        "source": "mag-fees",
-        "alias_pattern": "Управление на бизнеса"
-      },
-      "field_anchors": {
-        "degree": "ub-degree",
-        "duration": "ub-duration",
-        "admission": "msc-admission-paid"
-      }
-    },
-    {
-      "id": "TUG-rsvu30703-PHD-BG",
-      "name": "Квантова и оптоелектроника",
-      "page": "https://www.tugab.bg/priem/doktorski-programi",
-      "tuition_join": {
-        "source": "phd-fees",
-        "alias": "Квантова и оптоелектроника"
-      },
-      "field_anchors": {
-        "degree": "koe-degree"
-      }
+  "phd-fees": {
+   "url": "https://www.tugab.bg/images/ksp/2026/taksi-doktor-DP.pdf",
+   "route": "table-pdf",
+   "join": {
+    "kind": "fee-row",
+    "name": "tug-phd",
+    "match_header": "Докторска програма",
+    "value_headers": [
+     "Годишна такса",
+     "Редовно"
+    ],
+    "context": {
+     "valid_for": "2026/2027",
+     "form": "редовно",
+     "funding": "държавна поръчка",
+     "fee_period": "годишна такса, 1 г.",
+     "currency_note": "EUR — the value column header reads 'Редовно обучение за 1 г./EUR'"
     }
-  ]
+   }
+  },
+  "usloviya-priem": {
+   "url": "https://www.tugab.bg/images/ksp/2026/%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D1%8F%20%D0%B8%20%D1%80%D0%B5%D0%B4%20%D0%B7%D0%B0%20%D0%BF%D1%80%D0%B8%D0%B5%D0%BC%D0%B0%D0%BD%D0%B5%20%D0%BD%D0%B0%20%D1%81%D1%82%D1%83%D0%B4%D0%B5%D0%BD%D1%82%D0%B8.pdf",
+   "route": "prose-pdf"
+  },
+  "pravila-magistar": {
+   "url": "https://www.tugab.bg/images/ksp/2026/%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0%20%D0%B7%D0%B0%20%D0%BF%D1%80%D0%B8%D0%B5%D0%BC%20%D0%B2%20%D0%9E%D0%9A%D0%A1%20%D0%BC%D0%B0%D0%B3%D0%B8%D1%81%D1%82%D1%8A%D1%80.pdf",
+   "route": "prose-pdf"
+  }
+ },
+ "anchors": {
+  "mech-degree": {
+   "source": "https://www.tugab.bg/priem/bakalavarski-spetzialnosti",
+   "pattern": "Специалност: МЕХАТРОНИКА - М Образователно-квалификационнa степен: ([А-Я]+)"
+  },
+  "mech-duration": {
+   "source": "https://www.tugab.bg/priem/bakalavarski-spetzialnosti",
+   "pattern": "Специалност: МЕХАТРОНИКА - М .{0,240}?Период на обучение: ([А-Я0-9 ]+?) Професионална квалификация"
+  },
+  "dttt-degree": {
+   "source": "https://www.tugab.bg/priem/bakalavarski-spetzialnosti",
+   "pattern": "Специалност: ДИЗАЙН, ТЕХНИКА И ТЕХНОЛОГИИ В ТЕКСТИЛА - ДТТТ Образователно-квалификационнa степен: ([А-Я]+)"
+  },
+  "dttt-duration": {
+   "source": "https://www.tugab.bg/priem/bakalavarski-spetzialnosti",
+   "pattern": "Специалност: ДИЗАЙН, ТЕХНИКА И ТЕХНОЛОГИИ В ТЕКСТИЛА - ДТТТ .{0,240}?Период на обучение: ([А-Я0-9 ]+?) Професионална квалификация"
+  },
+  "ski-degree": {
+   "source": "https://www.tugab.bg/priem/magistarski-spetzialnosti",
+   "pattern": "Специалност: СОФТУЕРНО И КОМПЮТЪРНО ИНЖЕНЕРСТВО - СКИ Образователно-квалификационнa степен: ([А-Я]+)"
+  },
+  "ski-duration": {
+   "source": "https://www.tugab.bg/priem/magistarski-spetzialnosti",
+   "pattern": "Специалност: СОФТУЕРНО И КОМПЮТЪРНО ИНЖЕНЕРСТВО - СКИ .{0,240}?Период на обучение: ([А-Я0-9 ]+?) Професионална квалификация"
+  },
+  "ub-degree": {
+   "source": "https://www.tugab.bg/priem/magistarski-spetzialnosti?view=article&id=942:spetzialnost-upravlenie-na-biznesa&catid=103",
+   "pattern": "(магистърска специалност) „Управление на бизнеса” \\(УБ\\)"
+  },
+  "ub-duration": {
+   "source": "https://www.tugab.bg/priem/magistarski-spetzialnosti?view=article&id=942:spetzialnost-upravlenie-na-biznesa&catid=103",
+   "pattern": "Обучението се извършва в задочна платена форма и е с продължителност (2, 3 или 4 семестъра)"
+  },
+  "koe-degree": {
+   "source": "https://www.tugab.bg/priem/doktorski-programi",
+   "pattern": "Докторска програма: КВАНТОВА И ОПТОЕЛЕКТРОНИКА Образователна и научна степен: ([А-Я]+)"
+  },
+  "bsc-admission": {
+   "source": "usloviya-priem",
+   "pattern": "Приемането на студенти в ОКС „бакалавър” и „професионален бакалавър” се провежда чрез (общ конкурсен изпит по математика или чрез конкурсен изпит \\(под формата на тест\\) по български език и литература, география и общотехническа подготовка \\(ОТП\\) \\(по избор\\))",
+   "scope": "page-wide"
+  },
+  "msc-admission-dp": {
+   "source": "pravila-magistar",
+   "pattern": "Кандидатстването в ОКС „магистър“ по държавна поръчка се извършва чрез (конкурсен изпит)\\.",
+   "scope": "page-wide"
+  },
+  "msc-admission-paid": {
+   "source": "pravila-magistar",
+   "pattern": "Кандидат-студентите за платена форма на обучение и за обучение по държавна поръчка по реда на чл\\. 20, ал\\. 2 могат да кандидатстват с (конкурсен изпит или със среден успех от дипломирането \\(дипломна работа или държавен изпит\\))",
+   "scope": "page-wide"
+  }
+ },
+ "programs": [
+  {
+   "id": "TUG-rsvu4221-BSC-BG",
+   "name": "Мехатроника",
+   "page": "https://www.tugab.bg/priem/bakalavarski-spetzialnosti",
+   "tuition_join": {
+    "source": "bak-fees",
+    "alias": "Мехатроника"
+   },
+   "field_anchors": {
+    "degree": "mech-degree",
+    "duration": "mech-duration",
+    "admission": "bsc-admission"
+   }
+  },
+  {
+   "id": "TUG-rsvu7848-BSC-BG",
+   "name": "Дизайн,техника и технологии в текстила",
+   "page": "https://www.tugab.bg/priem/bakalavarski-spetzialnosti",
+   "tuition_join": {
+    "source": "bak-fees",
+    "alias": "Дизайн, техника и технологии в текстила"
+   },
+   "field_anchors": {
+    "degree": "dttt-degree",
+    "duration": "dttt-duration",
+    "admission": "bsc-admission"
+   }
+  },
+  {
+   "id": "TUG-rsvu31303-MSC-BG",
+   "name": "Софтуерно и компютърно инженерство",
+   "page": "https://www.tugab.bg/priem/magistarski-spetzialnosti",
+   "tuition_join": {
+    "source": "mag-fees",
+    "alias_pattern": "Софтуерно и компютърно инженерство"
+   },
+   "field_anchors": {
+    "degree": "ski-degree",
+    "duration": "ski-duration",
+    "admission": "msc-admission-dp"
+   }
+  },
+  {
+   "id": "TUG-rsvu11362-MSC-BG",
+   "name": "Управление на бизнеса",
+   "page": "https://www.tugab.bg/priem/magistarski-spetzialnosti?view=article&id=942:spetzialnost-upravlenie-na-biznesa&catid=103",
+   "tuition_join": {
+    "source": "mag-fees",
+    "alias_pattern": "Управление на бизнеса"
+   },
+   "field_anchors": {
+    "degree": "ub-degree",
+    "duration": "ub-duration",
+    "admission": "msc-admission-paid"
+   }
+  },
+  {
+   "id": "TUG-rsvu30703-PHD-BG",
+   "name": "Квантова и оптоелектроника",
+   "page": "https://www.tugab.bg/priem/doktorski-programi",
+   "tuition_join": {
+    "source": "phd-fees",
+    "alias": "Квантова и оптоелектроника"
+   },
+   "field_anchors": {
+    "degree": "koe-degree"
+   }
+  }
+ ]
 }

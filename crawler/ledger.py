@@ -100,7 +100,11 @@ def append_run(ledger_dir, uni_id, run_id, report, academic_year):
 
     def entries_of(program_id, fields, scope):
         for field_name, rec in fields.items():
-            if rec["status"] != "PASS":
+            # DERIVED ships too (ADR-0007) — keeping it out would make
+            # the derivation do nothing for the published dataset — but
+            # the status travels with it, so a consumer that wants only
+            # gate-proven values can filter on PASS.
+            if rec["status"] not in ("PASS", "DERIVED"):
                 continue
             prov = rec.get("provenance", {})
             entry = {
@@ -111,6 +115,7 @@ def append_run(ledger_dir, uni_id, run_id, report, academic_year):
                     prov.get("source_snippets", []), rec["value"],
                     academic_year, field=field_name),
                 "value": rec["value"],
+                "status": rec["status"],
                 "method": rec.get("method"),
                 "tier": rec.get("tier"),
                 "source_url": prov.get("source_url"),

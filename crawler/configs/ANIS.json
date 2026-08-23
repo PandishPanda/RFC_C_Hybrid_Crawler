@@ -1,210 +1,211 @@
 {
-  "uni_id": "ANIS",
-  "cookies": {},
-  "sources": {
-    "anis-master-catalog": {
-      "url": "https://www.vusi.bg/priem-3/priem-magister/",
-      "route": "html"
-    }
+ "uni_id": "ANIS",
+ "default_language": "български",
+ "cookies": {},
+ "sources": {
+  "anis-master-catalog": {
+   "url": "https://www.vusi.bg/priem-3/priem-magister/",
+   "route": "html"
+  }
+ },
+ "anchors": {
+  "msc-admission-2026": {
+   "source": "anis-master-catalog",
+   "pattern": "Можете да се запишете в магистърските ни програми за новата учебна 2026/2027 г\\.\\s*(само по документи)"
   },
-  "anchors": {
-    "msc-admission-2026": {
-      "source": "anis-master-catalog",
-      "pattern": "Можете да се запишете в магистърските ни програми за новата учебна 2026/2027 г\\.\\s*(само по документи)"
-    },
-    "msc-duration-header": {
-      "source": "anis-master-catalog",
-      "pattern": "Срок на обучение:\\s*(2 или 3 семестъра в зависимост от ОКС и направлението на бакалавърската програма)"
-    },
-    "msc-degree-kibersigurnost": {
-      "source": "anis-master-catalog",
-      "pattern": "придобиват образователната степен „(магистър)“ по специалността „Киберсигурност“",
-      "scope": "names-program"
-    },
-    "msc-degree-terorizm": {
-      "source": "anis-master-catalog",
-      "pattern": "придобиват образователната степен „(магистър)“ по специалността „Противодействие на тероризма“",
-      "scope": "names-program"
-    },
-    "msc-degree-uchr": {
-      "source": "anis-master-catalog",
-      "pattern": "придобиват образователната степен „(магистър)“ по специалността „УПРАВЛЕНИЕ НА ЧОВЕШКИТЕ РЕСУРСИ“",
-      "scope": "names-program"
-    },
-    "anis-zvo-adm": {
-      "source": "https://www.vusi.bg/priem-3/priem-magister/",
-      "pattern": "(Право на обучение ползват кандидати, които имат минимален успех Добър от диплома за завършена степен на висшето образование \\(чл\\. 21, ал\\. 4 от ЗВО\\)\\.[^|]{0,300}?дипломната работа\\.)"
-    },
-    "anis-dur-4sem": {
-      "source": "https://www.vusi.bg/priem-3/priem-magister/",
-      "pattern": "(Срокът на обучение е 4 семестъра \\(2 учебни години\\))"
-    }
+  "msc-duration-header": {
+   "source": "anis-master-catalog",
+   "pattern": "Срок на обучение:\\s*(2 или 3 семестъра в зависимост от ОКС и направлението на бакалавърската програма)"
   },
-  "programs": [
-    {
-      "id": "ANIS-rsvu8494-MSC-BG",
-      "name": "Киберсигурност",
-      "page": "https://www.vusi.bg/priem-3/priem-magister/",
-      "field_anchors": {
-        "degree": "msc-degree-kibersigurnost",
-        "duration": "anis-dur-4sem",
-        "admission": "anis-zvo-adm"
-      }
-    },
-    {
-      "id": "ANIS-rsvu10329-MSC-BG",
-      "name": "Противодействие на тероризма (за специалност от друга специалност)",
-      "page": "https://www.vusi.bg/priem-3/priem-magister/",
-      "field_anchors": {
-        "degree": "msc-degree-terorizm",
-        "duration": "anis-dur-4sem",
-        "admission": "anis-zvo-adm"
-      }
-    },
-    {
-      "id": "ANIS-rsvu9422-MSC-BG",
-      "name": "Управление на човешките ресурси (след неикономически специалности)",
-      "page": "https://www.vusi.bg/priem-3/priem-magister/",
-      "field_anchors": {
-        "degree": "msc-degree-uchr",
-        "duration": "anis-dur-4sem",
-        "admission": "anis-zvo-adm"
-      }
-    },
-    {
-      "id": "anis-m01",
-      "name": "Национална сигурност",
-      "page": "https://www.vusi.bg/priem-3/priem-magister/",
-      "field_anchors": {
-        "admission": "anis-zvo-adm",
-        "duration": "anis-dur-4sem"
-      }
-    },
-    {
-      "id": "anis-m02",
-      "name": "Противодействие на престъпността и опазване на обществения ред",
-      "page": "https://www.vusi.bg/priem-3/priem-magister/",
-      "field_anchors": {
-        "admission": "anis-zvo-adm",
-        "duration": "anis-dur-4sem"
-      }
-    },
-    {
-      "id": "anis-m03",
-      "name": "Криминалистика",
-      "page": "https://www.vusi.bg/priem-3/priem-magister/",
-      "field_anchors": {
-        "admission": "anis-zvo-adm",
-        "duration": "anis-dur-4sem"
-      }
-    },
-    {
-      "id": "anis-m04",
-      "name": "Митническо разузнаване и разследване",
-      "page": "https://www.vusi.bg/priem-3/priem-magister/",
-      "field_anchors": {
-        "admission": "anis-zvo-adm",
-        "duration": "anis-dur-4sem"
-      }
-    },
-    {
-      "id": "anis-m05",
-      "name": "Сигурност и софтуерни технологии",
-      "page": "https://www.vusi.bg/priem-3/priem-magister/",
-      "field_anchors": {
-        "admission": "anis-zvo-adm",
-        "duration": "anis-dur-4sem"
-      }
-    },
-    {
-      "id": "anis-m06",
-      "name": "Сигурност и изкуствен интелект",
-      "page": "https://www.vusi.bg/priem-3/priem-magister/",
-      "field_anchors": {
-        "admission": "anis-zvo-adm",
-        "duration": "anis-dur-4sem"
-      }
-    },
-    {
-      "id": "anis-m07",
-      "name": "Сигурност и криминална психология",
-      "page": "https://www.vusi.bg/priem-3/priem-magister/",
-      "field_anchors": {
-        "admission": "anis-zvo-adm",
-        "duration": "anis-dur-4sem"
-      }
-    },
-    {
-      "id": "anis-m08",
-      "name": "Икономическа сигурност",
-      "page": "https://www.vusi.bg/priem-3/priem-magister/",
-      "field_anchors": {
-        "admission": "anis-zvo-adm",
-        "duration": "anis-dur-4sem"
-      }
-    },
-    {
-      "id": "anis-m09",
-      "name": "Продоволствена сигурност",
-      "page": "https://www.vusi.bg/priem-3/priem-magister/",
-      "field_anchors": {
-        "admission": "anis-zvo-adm",
-        "duration": "anis-dur-4sem"
-      }
-    },
-    {
-      "id": "anis-m10",
-      "name": "Счетоводство и контрол",
-      "page": "https://www.vusi.bg/priem-3/priem-magister/",
-      "field_anchors": {
-        "admission": "anis-zvo-adm",
-        "duration": "anis-dur-4sem"
-      }
-    },
-    {
-      "id": "anis-m11",
-      "name": "Финанси",
-      "page": "https://www.vusi.bg/priem-3/priem-magister/",
-      "field_anchors": {
-        "admission": "anis-zvo-adm",
-        "duration": "anis-dur-4sem"
-      }
-    },
-    {
-      "id": "anis-m12",
-      "name": "Дигитален маркетинг",
-      "page": "https://www.vusi.bg/priem-3/priem-magister/",
-      "field_anchors": {
-        "admission": "anis-zvo-adm",
-        "duration": "anis-dur-4sem"
-      }
-    },
-    {
-      "id": "anis-m13",
-      "name": "Валутен, митнически и данъчен контрол",
-      "page": "https://www.vusi.bg/priem-3/priem-magister/",
-      "field_anchors": {
-        "admission": "anis-zvo-adm",
-        "duration": "anis-dur-4sem"
-      }
-    },
-    {
-      "id": "anis-m14",
-      "name": "Финансово-счетоводен мениджмънт и застраховане",
-      "page": "https://www.vusi.bg/priem-3/priem-magister/",
-      "field_anchors": {
-        "admission": "anis-zvo-adm",
-        "duration": "anis-dur-4sem"
-      }
-    },
-    {
-      "id": "anis-m15",
-      "name": "Стопанско управление",
-      "page": "https://www.vusi.bg/priem-3/priem-magister/",
-      "field_anchors": {
-        "admission": "anis-zvo-adm",
-        "duration": "anis-dur-4sem"
-      }
-    }
-  ]
+  "msc-degree-kibersigurnost": {
+   "source": "anis-master-catalog",
+   "pattern": "придобиват образователната степен „(магистър)“ по специалността „Киберсигурност“",
+   "scope": "names-program"
+  },
+  "msc-degree-terorizm": {
+   "source": "anis-master-catalog",
+   "pattern": "придобиват образователната степен „(магистър)“ по специалността „Противодействие на тероризма“",
+   "scope": "names-program"
+  },
+  "msc-degree-uchr": {
+   "source": "anis-master-catalog",
+   "pattern": "придобиват образователната степен „(магистър)“ по специалността „УПРАВЛЕНИЕ НА ЧОВЕШКИТЕ РЕСУРСИ“",
+   "scope": "names-program"
+  },
+  "anis-zvo-adm": {
+   "source": "https://www.vusi.bg/priem-3/priem-magister/",
+   "pattern": "(Право на обучение ползват кандидати, които имат минимален успех Добър от диплома за завършена степен на висшето образование \\(чл\\. 21, ал\\. 4 от ЗВО\\)\\.[^|]{0,300}?дипломната работа\\.)"
+  },
+  "anis-dur-4sem": {
+   "source": "https://www.vusi.bg/priem-3/priem-magister/",
+   "pattern": "(Срокът на обучение е 4 семестъра \\(2 учебни години\\))"
+  }
+ },
+ "programs": [
+  {
+   "id": "ANIS-rsvu8494-MSC-BG",
+   "name": "Киберсигурност",
+   "page": "https://www.vusi.bg/priem-3/priem-magister/",
+   "field_anchors": {
+    "degree": "msc-degree-kibersigurnost",
+    "duration": "anis-dur-4sem",
+    "admission": "anis-zvo-adm"
+   }
+  },
+  {
+   "id": "ANIS-rsvu10329-MSC-BG",
+   "name": "Противодействие на тероризма (за специалност от друга специалност)",
+   "page": "https://www.vusi.bg/priem-3/priem-magister/",
+   "field_anchors": {
+    "degree": "msc-degree-terorizm",
+    "duration": "anis-dur-4sem",
+    "admission": "anis-zvo-adm"
+   }
+  },
+  {
+   "id": "ANIS-rsvu9422-MSC-BG",
+   "name": "Управление на човешките ресурси (след неикономически специалности)",
+   "page": "https://www.vusi.bg/priem-3/priem-magister/",
+   "field_anchors": {
+    "degree": "msc-degree-uchr",
+    "duration": "anis-dur-4sem",
+    "admission": "anis-zvo-adm"
+   }
+  },
+  {
+   "id": "anis-m01",
+   "name": "Национална сигурност",
+   "page": "https://www.vusi.bg/priem-3/priem-magister/",
+   "field_anchors": {
+    "admission": "anis-zvo-adm",
+    "duration": "anis-dur-4sem"
+   }
+  },
+  {
+   "id": "anis-m02",
+   "name": "Противодействие на престъпността и опазване на обществения ред",
+   "page": "https://www.vusi.bg/priem-3/priem-magister/",
+   "field_anchors": {
+    "admission": "anis-zvo-adm",
+    "duration": "anis-dur-4sem"
+   }
+  },
+  {
+   "id": "anis-m03",
+   "name": "Криминалистика",
+   "page": "https://www.vusi.bg/priem-3/priem-magister/",
+   "field_anchors": {
+    "admission": "anis-zvo-adm",
+    "duration": "anis-dur-4sem"
+   }
+  },
+  {
+   "id": "anis-m04",
+   "name": "Митническо разузнаване и разследване",
+   "page": "https://www.vusi.bg/priem-3/priem-magister/",
+   "field_anchors": {
+    "admission": "anis-zvo-adm",
+    "duration": "anis-dur-4sem"
+   }
+  },
+  {
+   "id": "anis-m05",
+   "name": "Сигурност и софтуерни технологии",
+   "page": "https://www.vusi.bg/priem-3/priem-magister/",
+   "field_anchors": {
+    "admission": "anis-zvo-adm",
+    "duration": "anis-dur-4sem"
+   }
+  },
+  {
+   "id": "anis-m06",
+   "name": "Сигурност и изкуствен интелект",
+   "page": "https://www.vusi.bg/priem-3/priem-magister/",
+   "field_anchors": {
+    "admission": "anis-zvo-adm",
+    "duration": "anis-dur-4sem"
+   }
+  },
+  {
+   "id": "anis-m07",
+   "name": "Сигурност и криминална психология",
+   "page": "https://www.vusi.bg/priem-3/priem-magister/",
+   "field_anchors": {
+    "admission": "anis-zvo-adm",
+    "duration": "anis-dur-4sem"
+   }
+  },
+  {
+   "id": "anis-m08",
+   "name": "Икономическа сигурност",
+   "page": "https://www.vusi.bg/priem-3/priem-magister/",
+   "field_anchors": {
+    "admission": "anis-zvo-adm",
+    "duration": "anis-dur-4sem"
+   }
+  },
+  {
+   "id": "anis-m09",
+   "name": "Продоволствена сигурност",
+   "page": "https://www.vusi.bg/priem-3/priem-magister/",
+   "field_anchors": {
+    "admission": "anis-zvo-adm",
+    "duration": "anis-dur-4sem"
+   }
+  },
+  {
+   "id": "anis-m10",
+   "name": "Счетоводство и контрол",
+   "page": "https://www.vusi.bg/priem-3/priem-magister/",
+   "field_anchors": {
+    "admission": "anis-zvo-adm",
+    "duration": "anis-dur-4sem"
+   }
+  },
+  {
+   "id": "anis-m11",
+   "name": "Финанси",
+   "page": "https://www.vusi.bg/priem-3/priem-magister/",
+   "field_anchors": {
+    "admission": "anis-zvo-adm",
+    "duration": "anis-dur-4sem"
+   }
+  },
+  {
+   "id": "anis-m12",
+   "name": "Дигитален маркетинг",
+   "page": "https://www.vusi.bg/priem-3/priem-magister/",
+   "field_anchors": {
+    "admission": "anis-zvo-adm",
+    "duration": "anis-dur-4sem"
+   }
+  },
+  {
+   "id": "anis-m13",
+   "name": "Валутен, митнически и данъчен контрол",
+   "page": "https://www.vusi.bg/priem-3/priem-magister/",
+   "field_anchors": {
+    "admission": "anis-zvo-adm",
+    "duration": "anis-dur-4sem"
+   }
+  },
+  {
+   "id": "anis-m14",
+   "name": "Финансово-счетоводен мениджмънт и застраховане",
+   "page": "https://www.vusi.bg/priem-3/priem-magister/",
+   "field_anchors": {
+    "admission": "anis-zvo-adm",
+    "duration": "anis-dur-4sem"
+   }
+  },
+  {
+   "id": "anis-m15",
+   "name": "Стопанско управление",
+   "page": "https://www.vusi.bg/priem-3/priem-magister/",
+   "field_anchors": {
+    "admission": "anis-zvo-adm",
+    "duration": "anis-dur-4sem"
+   }
+  }
+ ]
 }

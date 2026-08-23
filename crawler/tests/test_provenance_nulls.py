@@ -66,10 +66,24 @@ class TestParseFailure(unittest.TestCase):
 
 class TestLockedInterface(unittest.TestCase):
     def test_status_vocabulary(self):
+        """DERIVED joined the vocabulary in ADR-0007 (2026-08-23): a
+        value that is true but stated in no document. It is NOT a gate
+        outcome — see the next test."""
         self.assertEqual(
             {s.name for s in Status},
             {"PASS", "REJECT_CONTAINMENT", "REJECT_SUPPORT",
-             "NULL_OK", "PARSE_FAILURE"})
+             "NULL_OK", "PARSE_FAILURE", "DERIVED"})
+
+    def test_the_gate_never_returns_derived(self):
+        """The whole point of the status: a derived value has no verbatim
+        support, so it never enters gate(). If the gate could ever emit
+        DERIVED, the guarantee that PASS means 'proven in the Artifact'
+        would be back to being unauditable."""
+        seg = "Семестриална такса: 460 EUR"
+        for value, segments in (("460 EUR", [seg]), ("999 EUR", [seg]),
+                                (None, []), ("", [seg]), ("—?!", [seg])):
+            v = gate(value, segments, synthetic_artifact(seg))
+            self.assertIsNot(v.status, Status.DERIVED)
 
     def test_verdict_is_frozen_with_default_detail(self):
         v = Verdict(Status.PASS)

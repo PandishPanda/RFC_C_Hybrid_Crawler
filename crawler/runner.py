@@ -188,6 +188,56 @@ def build_docs(site, store, replay, report):
 
 
 # --------------------------------------------------------------------- gating
+# ------------------------------------------------------- derived values
+# ADR-0007. Scoped to `language` on purpose: a university's language of
+# instruction is uniform enough for a human to assert one default, while
+# tuition and admission vary program by program, where a default would
+# be a guess dressed as a value.
+DERIVABLE_FIELDS = ("language",)
+
+
+def derived_record(field, value, rule):
+    # type: (str, str, str) -> dict
+    """A value that is true but stated in no document (ADR-0007).
+
+    Deliberately carries NO `provenance` and NO `artifact`: there is no
+    verbatim support, and shipping an empty or invented snippet is the
+    exact fabrication this status exists to avoid. What it carries
+    instead is the rule that produced it, so a reader can audit the
+    assumption rather than the evidence."""
+    return {
+        "status": Status.DERIVED.value,
+        "value": value,
+        "tier": "D",
+        "method": "derive:" + rule,
+        "derivation": {
+            "rule": rule,
+            "input": value,
+            "basis": ("asserted by site config; no document of this "
+                      "program states this field"),
+        },
+    }
+
+
+def derive_fields(fields, default_language=None):
+    # type: (dict, Optional[str]) -> dict
+    """Fill derivable fields that came out of the spine with nothing.
+
+    LAST RESORT by construction: only a NULL_OK field is derived. A PASS
+    keeps its extracted value (including a language that is not the
+    default), and a REJECT_* keeps its rejection — quietly covering a
+    gate refusal with a site default would hide the refusal."""
+    if not default_language:
+        return fields
+    for field in DERIVABLE_FIELDS:
+        record = fields.get(field)
+        if record is None or record.get("status") != Status.NULL_OK.value:
+            continue
+        fields[field] = derived_record(field, default_language,
+                                       "default_language")
+    return fields
+
+
 def _field_record(program_id, field, extraction, store):
     """Gate one cascade emission; return (record, gate_failure or None).
 
@@ -382,6 +432,13 @@ def run(uni_id, configs_dir=None, out_dir=None, replay_dir=None,
                         tail_escalations += 1
                 if failure is not None:
                     report["gate_failures"].append(failure)
+            fields = derive_fields(
+                fields, default_language=site.default_language)
+            for name, rec in fields.items():
+                if rec["status"] == Status.DERIVED.value:
+                    status_counts[Status.NULL_OK.value] -= 1
+                    status_counts[Status.DERIVED.value] += 1
+                    tier_counts["D"] = tier_counts.get("D", 0) + 1
             program_record = {"program_id": program.id,
                               "name": program.name, "fields": fields}
             report["programs"].append(program_record)

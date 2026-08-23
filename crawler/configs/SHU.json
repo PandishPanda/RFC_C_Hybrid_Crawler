@@ -1,563 +1,564 @@
 {
-  "uni_id": "SHU",
-  "cookies": {},
-  "sources": {
-    "ksk-grp": {
-      "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fpn/bakalavyr/GRP.pdf",
-      "route": "prose-pdf"
-    },
-    "ksk-tks": {
-      "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/ftn/bakalavyr/TKS.pdf",
-      "route": "prose-pdf"
-    },
-    "ksk-si": {
-      "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fmi/magistyr/SI.pdf",
-      "route": "prose-pdf"
-    },
-    "ksk-rfeotb": {
-      "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fhn/magistyr/RFEOTB-new.pdf",
-      "route": "prose-pdf"
-    },
-    "kv-tks": {
-      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/894-kvalifikaciya-07-20-2026.pdf",
-      "route": "prose-pdf"
-    },
-    "kv-si": {
-      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1103-kvalifikaciya-07-23-2026.pdf",
-      "route": "prose-pdf"
-    },
-    "kv-rfeotb": {
-      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1029-kvalifikaciya-07-22-2026.pdf",
-      "route": "prose-pdf"
-    },
-    "fees-bak-dp": {
-      "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/students/taksi-DP-profBak-i-bak_2026-2027.pdf",
-      "route": "table-pdf",
-      "join": {
-        "kind": "sectioned-fee-row",
-        "name": "shu-bak-dp",
-        "sections": [
-          {
-            "track": "семестриални такси 2026/2027, държавна поръчка",
-            "match": "Семестриални такси 2026/2027"
-          }
-        ],
-        "fee_pattern": "(\\d{2,4}\\.\\d{2}\\s*€)",
-        "context": {
-          "table": "ШУ семестриални такси за обучение по държавна поръчка 2026/2027, бакалаври и проф. бакалаври",
-          "row_reading": "първата такса в реда на специалността; колоните по ред: 1-ви курс редовно, 1-ви курс задочно, 2-ри курс редовно, 2-ри курс задочно, 3-4 курс редовно, 3-4 курс задочно"
-        }
-      }
-    },
-    "fees-mag": {
-      "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/students/taksi-magistri_2026-2027.pdf",
-      "route": "table-pdf",
-      "join": {
-        "kind": "sectioned-fee-row",
-        "name": "shu-mag",
-        "sections": [
-          {
-            "track": "семестриална такса 2026/2027",
-            "match": "Семестриална такса 2026/2027"
-          }
-        ],
-        "fee_pattern": "(\\d{2,4}\\.\\d{2}\\s*€)",
-        "context": {
-          "table": "ШУ семестриални такси магистърски програми 2026/2027",
-          "row_reading": "първата такса в реда на специалността; колоните по ред: държавна поръчка 1-ви курс редовно, платено обучение 1-ви курс задочно, платено обучение 2-ри курс задочно"
-        }
-      }
-    },
-    "fees-phd": {
-      "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/razvitie/as/2025/Syobshteniya/taksi_2025-2026_eur.pdf",
-      "route": "prose-pdf"
-    },
-    "akr-doktor": {
-      "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/razvitie/doktoranti/Akr_DOKTOR_16.03.2026.pdf",
-      "route": "prose-pdf"
-    },
-    "phd-dokumenti": {
-      "url": "https://www.shu.bg/doktoranti/documenti/",
-      "route": "html"
-    },
-    "spravochnik-2026": {
-      "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/Spravochnici/Spravochnik%202026%20g..pdf",
-      "route": "prose-pdf"
-    },
-    "kv-311": {
-      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/311-kvalifikaciya-07-20-2026.pdf",
-      "route": "prose-pdf"
-    },
-    "kv-907": {
-      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/907-kvalifikaciya-07-07-2026.pdf",
-      "route": "prose-pdf"
-    },
-    "kv-122": {
-      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/122-kvalifikaciya-07-07-2026.pdf",
-      "route": "prose-pdf"
-    },
-    "kv-216": {
-      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/216-kvalifikaciya-07-22-2026.pdf",
-      "route": "prose-pdf"
-    },
-    "kv-1159": {
-      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1159-kvalifikaciya-07-22-2026.pdf",
-      "route": "prose-pdf"
-    },
-    "kv-1003": {
-      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1003-kvalifikaciya-07-22-2026.pdf",
-      "route": "prose-pdf"
-    },
-    "kv-88": {
-      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/88-kvalifikaciya-08-07-2026.pdf",
-      "route": "prose-pdf"
-    },
-    "kv-540": {
-      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/540-kvalifikaciya-2024.pdf",
-      "route": "prose-pdf"
-    },
-    "kv-1047": {
-      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1047-kvalifikaciya-08-07-2026.pdf",
-      "route": "prose-pdf"
-    },
-    "kv-1173": {
-      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1173-kvalifikaciya-07-20-2026.pdf",
-      "route": "prose-pdf"
-    },
-    "kv-402": {
-      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/402-kvalifikaciya-07-20-2026.pdf",
-      "route": "prose-pdf"
-    },
-    "kv-1147": {
-      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1147-kvalifikaciya-07-20-2026.pdf",
-      "route": "prose-pdf"
-    },
-    "kv-1111": {
-      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1111-kvalifikaciya-08-04-2026.pdf",
-      "route": "prose-pdf"
-    },
-    "kv-1113": {
-      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1113-kvalifikaciya-08-04-2026.pdf",
-      "route": "prose-pdf"
-    },
-    "kv-276": {
-      "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/276-kvalifikaciya-02-27-2025.pdf",
-      "route": "prose-pdf"
-    }
+ "uni_id": "SHU",
+ "default_language": "български",
+ "cookies": {},
+ "sources": {
+  "ksk-grp": {
+   "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fpn/bakalavyr/GRP.pdf",
+   "route": "prose-pdf"
   },
-  "anchors": {
-    "grp-degree": {
-      "source": "ksk-grp",
-      "pattern": "Образователно-квалификационна степен:\\s*([А-Яа-я]+)",
-      "scope": "page-wide"
-    },
-    "grp-duration": {
-      "source": "ksk-grp",
-      "pattern": "Продължителност на обучението:\\s*(\\d+\\s*години\\s*\\(\\d+\\s*семестъра\\))",
-      "scope": "page-wide"
-    },
-    "grp-admission": {
-      "source": "ksk-grp",
-      "pattern": "(Балът за класиране в специалността се образува като сума от [^.]+)",
-      "scope": "page-wide"
-    },
-    "tks-duration": {
-      "source": "ksk-tks",
-      "pattern": "Продължителност на обучението:\\s*(\\d+\\s*години\\s*\\(\\d+\\s*семестъра\\))",
-      "scope": "page-wide"
-    },
-    "tks-admission": {
-      "source": "ksk-tks",
-      "pattern": "(Балът за класиране в специалността се образува като сума от [^.]+)",
-      "scope": "page-wide"
-    },
-    "si-duration": {
-      "source": "ksk-si",
-      "pattern": "Продължителност\\s+(\\d+\\s*семестъра)",
-      "scope": "page-wide"
-    },
-    "si-admission": {
-      "source": "ksk-si",
-      "pattern": "(тест\\s+Конкурсен изпит\\s+по софтуерно\\s+–\\s+–\\s+инженерство)",
-      "scope": "page-wide"
-    },
-    "rfeotb-degree": {
-      "source": "kv-rfeotb",
-      "pattern": "Образователно-квалификационна степен:\\s*([А-Яа-я]+)",
-      "scope": "page-wide"
-    },
-    "rfeotb-duration": {
-      "source": "ksk-rfeotb",
-      "pattern": "Продължителност\\s+–\\s+(\\d+ и \\d+ семестъра)",
-      "scope": "page-wide"
-    },
-    "rfeotb-admission": {
-      "source": "ksk-rfeotb",
-      "pattern": "(събеседване\\s+Конкурсен изпит\\s+–\\s+–\\s+по руски език)",
-      "scope": "page-wide"
-    },
-    "phd-degree": {
-      "source": "akr-doktor",
-      "pattern": "(ОБРАЗОВАТЕЛНАТА И НАУЧНА СТЕПЕН\\s+[“\"„]ДОКТОР[”\"“])",
-      "scope": "names-program"
-    },
-    "phd-tuition": {
-      "source": "fees-phd",
-      "pattern": "Педагогика на\\s+1\\.3\\.\\s+([\\d.,]+\\s*€)",
-      "scope": "page-wide"
-    },
-    "phd-admission": {
-      "source": "phd-dokumenti",
-      "pattern": "(Диплом за придобита образователно-квалификационна степен\\s+[“\"„]магистър[”\"“])",
-      "scope": "names-program"
-    },
-    "dur-311": {
-      "source": "kv-311",
-      "pattern": "„БИЗНЕС МАТЕМАТИКА“ Бакалавърската степен се придобива след (четиригодишен курс, 8 семестъра, 240 кредита)"
-    },
-    "dur-907": {
-      "source": "kv-907",
-      "pattern": "„ДИГИТАЛНИ ТЕХНОЛОГИИ И ИЗКУСТВЕН ИНТЕЛЕКТ“ Бакалавърската степен се придобива след (четиригодишен курс, 8 семестъра, 240 кредита)"
-    },
-    "dur-122": {
-      "source": "kv-122",
-      "pattern": "„ИКОНОМИКА“ Бакалавърската степен се придобива след (четири годишен курс \\(8 семестъра и 240 кредита\\))"
-    },
-    "dur-216": {
-      "source": "kv-216",
-      "pattern": "„АНГЛИЙСКА ФИЛОЛОГИЯ“ Срок на обучение: (4 години \\(8 семестъра\\))"
-    },
-    "dur-1159": {
-      "source": "kv-1159",
-      "pattern": "„АНГЛИЙСКА ФИЛОЛОГИЯ: ЕЗИКОВО ОБСЛУЖВАНЕ НА ТУРИЗМА И БИЗНЕСА“ Срок на обучение: (- 1 година \\(2 семестъра\\).{0,400}?- 2 години \\(4 семестъра\\) за завършилите друга специалност\\.)"
-    },
-    "dur-1003": {
-      "source": "kv-1003",
-      "pattern": "„АНГЛИЙСКА ФИЛОЛОГИЯ: ЛИНГВИСТИКА И ПРЕВОД“ Срок на обучение: (- 1 година \\(2 семестъра\\).{0,400}?- 2 години \\(4 семестъра\\) за завършилите друга специалност\\.)"
-    },
-    "dur-88": {
-      "source": "kv-88",
-      "pattern": "„АСТРОНОМИЯ“ Придобиване на степента с (4-годишен курс на обучение в 8 семестъра)"
-    },
-    "dur-540": {
-      "source": "kv-540",
-      "pattern": "„АСТРОНОМИЯ И МЕТЕОРОЛОГИЯ”\\. Придобиване на степента с (4 годишен курс на обучение в 8 семестръра)"
-    },
-    "dur-1047": {
-      "source": "kv-1047",
-      "pattern": "„АСТРОФИЗИКА“ Магистърска степен се придобива след завършване на ОКС „бакалавър“ или „магистър“\\. Обучението е с продължителност (2 семестъра), редовна форма на обучение"
-    },
-    "dur-1173": {
-      "source": "kv-1173",
-      "pattern": "специалност „Административна и организационна сигурност“ се придобива (в рамките на 1 година \\(2 семестъра и 60 кредита\\).{0,500}?в рамките на 2 години \\(4 семестъра и 120 кредита\\).{0,200}?различна от посочените\\.)"
-    },
-    "dur-402": {
-      "source": "kv-402",
-      "pattern": "ПО ЧАСТ „ГЕОДЕЗИЧЕСКА“ Срок на обучение: Степента се придобива с (5-годишен курс на обучение \\(10 семестъра\\))"
-    },
-    "dur-1147": {
-      "source": "kv-1147",
-      "pattern": "„ГЕОМАТИКА“ Магистърската степен се придобива след (едногодишен курс \\(2 семестъра и 60 кредита\\))"
-    },
-    "dur-1111": {
-      "source": "kv-1111",
-      "pattern": "Магистърската степен се придобива след курс на обучение от (4 семестъра и 105 кредита, 3 семестъра и 75 кредита, 2 семестъра и 45 кредита)"
-    },
-    "dur-1113": {
-      "source": "kv-1113",
-      "pattern": "Магистърската степен се придобива след курс на обучение от (2 семестъра и 45 кредита)"
-    },
-    "dur-276": {
-      "source": "kv-276",
-      "pattern": "„ИНФОРМАТИКА И ИНФОРМАЦИОННИ ТЕХНОЛОГИИ” ОКС „професионален бакалавър” се придобива след (три годишен курс \\(6 семестъра и 180 кредита\\))"
-    },
-    "deg-122": {
-      "source": "kv-122",
-      "pattern": "Образователно-квалификационна степен:\\s*([А-Яа-я]+)"
-    },
-    "adm-311": {
-      "source": "spravochnik-2026",
-      "pattern": "Бизнес математика\\. Завършилите тази специалност придобиват ОКС „бакалавър“ с професионална квалификация Математик – бизнес аналитик\\..{0,400}?Кандидатства се по избор с: ([^.]+\\.)",
-      "scope": "names-program"
-    },
-    "adm-907": {
-      "source": "spravochnik-2026",
-      "pattern": "Дигитални технологии и изкуствен интелект\\. Завършилите тази специалност придобиват ОКС „бакалавър“ с професионална квалификация Информатик\\..{0,400}?Кандидатства се по избор с: ([^.]+\\.)",
-      "scope": "names-program"
-    },
-    "adm-122": {
-      "source": "spravochnik-2026",
-      "pattern": "Икономика.{0,3}\\. Завършилите тази специалност придобиват ОКС „бакалавър“ с професионална квалификация Икономист\\..{0,400}?Кандидатства се по избор с: ([^.]+\\.)",
-      "scope": "names-program"
-    },
-    "adm-216": {
-      "source": "spravochnik-2026",
-      "pattern": "Английска филология\\. Завършилите тази специалност придобиват ОКС „бакалавър“ с професионална квалификация Филолог\\..{0,400}?Кандидатства се по избор с: ([^.]+\\.)",
-      "scope": "names-program"
-    },
-    "adm-88": {
-      "source": "spravochnik-2026",
-      "pattern": "Астрономия\\. Завършилите тази специалност придобиват ОКС „бакалавър“ с професионална квалификация Астроном\\..{0,400}?Кандидатства се по избор с: ([^.]+\\.)",
-      "scope": "names-program"
-    },
-    "adm-402": {
-      "source": "spravochnik-2026",
-      "pattern": "Геодезия\\. Завършилите тази специалност придобиват ОКС „магистър“ \\(след средно образование\\) с професионална квалификация Инженер в геодезията, картографията и кадастъра \\(инженер – геодезист\\)\\..{0,400}?Кандидатства се по избор с: ([^.]+\\.)",
-      "scope": "names-program"
-    }
+  "ksk-tks": {
+   "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/ftn/bakalavyr/TKS.pdf",
+   "route": "prose-pdf"
   },
-  "programs": [
-    {
-      "id": "SHU-rsvu9749-BSC-BG",
-      "name": "География и регионална политика",
-      "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fpn/bakalavyr/GRP.pdf",
-      "tuition_join": {
-        "source": "fees-bak-dp",
-        "alias_pattern": "4\\.4\\.1\\.\\s*География и регионална политика"
-      },
-      "field_anchors": {
-        "degree": "grp-degree",
-        "duration": "grp-duration",
-        "admission": "grp-admission"
-      }
-    },
-    {
-      "id": "SHU-rsvu30594-MSC-BG",
-      "name": "Софтуерно инженерство",
-      "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fmi/magistyr/SI.pdf",
-      "extra_sources": [
-        "kv-si"
-      ],
-      "tuition_join": {
-        "source": "fees-mag",
-        "alias_pattern": "4\\.6\\.1\\.\\s*Софтуерно инженерство"
-      },
-      "field_anchors": {
-        "duration": "si-duration",
-        "admission": "si-admission"
-      }
-    },
-    {
-      "id": "SHU-rsvu11312-PHD-EN",
-      "name": "Методика на обучението по чужд език (английски език, руски език)",
-      "page": "https://www.shu.bg/?p=47212",
-      "field_anchors": {
-        "degree": "phd-degree",
-        "tuition": "phd-tuition",
-        "admission": "phd-admission"
-      }
-    },
-    {
-      "id": "SHU-rsvu31017-BSC-BG",
-      "name": "Технологии за киберсигурност",
-      "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/ftn/bakalavyr/TKS.pdf",
-      "extra_sources": [
-        "kv-tks"
-      ],
-      "tuition_join": {
-        "source": "fees-bak-dp",
-        "alias_pattern": "5\\.3\\.4\\.\\s*Технологии за киберсигурност"
-      },
-      "field_anchors": {
-        "duration": "tks-duration",
-        "admission": "tks-admission"
-      }
-    },
-    {
-      "id": "SHU-rsvu8752-MSC-BG",
-      "name": "Руска филология: Езиково обслужване на туризма и бизнеса",
-      "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fhn/magistyr/RFEOTB-new.pdf",
-      "extra_sources": [
-        "kv-rfeotb"
-      ],
-      "tuition_join": {
-        "source": "fees-mag",
-        "alias_pattern": "2\\.1\\.8\\.\\s*Руска филология: Езиково обслужване на туризма и бизнеса"
-      },
-      "field_anchors": {
-        "degree": "rfeotb-degree",
-        "duration": "rfeotb-duration",
-        "admission": "rfeotb-admission"
-      }
-    },
-    {
-      "id": "shu-311",
-      "name": "Бизнес математика",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/311-kvalifikaciya-07-20-2026.pdf",
-      "tuition_join": {
-        "source": "fees-bak-dp",
-        "alias_pattern": "4\\.5\\.1\\.\\s*Бизнес математика"
-      },
-      "field_anchors": {
-        "duration": "dur-311",
-        "admission": "adm-311"
-      }
-    },
-    {
-      "id": "shu-907",
-      "name": "Дигитални технологии и изкуствен интелект",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/907-kvalifikaciya-07-07-2026.pdf",
-      "tuition_join": {
-        "source": "fees-bak-dp",
-        "alias_pattern": "4\\.6\\.3\\.\\s*Дигитални технологии и изкуствен интелект"
-      },
-      "field_anchors": {
-        "duration": "dur-907",
-        "admission": "adm-907"
-      }
-    },
-    {
-      "id": "shu-122",
-      "name": "Икономика",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/122-kvalifikaciya-07-07-2026.pdf",
-      "field_anchors": {
-        "degree": "deg-122",
-        "duration": "dur-122",
-        "admission": "adm-122"
-      }
-    },
-    {
-      "id": "shu-216",
-      "name": "Английска филология",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/216-kvalifikaciya-07-22-2026.pdf",
-      "tuition_join": {
-        "source": "fees-bak-dp",
-        "alias_pattern": "2\\.1\\.3\\.\\s*Английска филология"
-      },
-      "field_anchors": {
-        "duration": "dur-216",
-        "admission": "adm-216"
-      }
-    },
-    {
-      "id": "shu-1159",
-      "name": "Английска филология: Езиково обслужване на туризма и бизнеса",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1159-kvalifikaciya-07-22-2026.pdf",
-      "tuition_join": {
-        "source": "fees-mag",
-        "alias_pattern": "2\\.1\\.5\\.\\s*Английска филология: Езиково обслужване"
-      },
-      "field_anchors": {
-        "duration": "dur-1159"
-      }
-    },
-    {
-      "id": "shu-1003",
-      "name": "Английска филология: Лингвистика и превод",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1003-kvalifikaciya-07-22-2026.pdf",
-      "tuition_join": {
-        "source": "fees-mag",
-        "alias_pattern": "2\\.1\\.4\\.\\s*Английска филология: Лингвистика и превод"
-      },
-      "field_anchors": {
-        "duration": "dur-1003"
-      }
-    },
-    {
-      "id": "shu-88",
-      "name": "Астрономия",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/88-kvalifikaciya-08-07-2026.pdf",
-      "tuition_join": {
-        "source": "fees-bak-dp",
-        "alias_pattern": "4\\.1\\.1\\.\\s*Астрономия /Астрономия и метеорология"
-      },
-      "field_anchors": {
-        "duration": "dur-88",
-        "admission": "adm-88"
-      }
-    },
-    {
-      "id": "shu-540",
-      "name": "Астрономия и метеорология",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/540-kvalifikaciya-2024.pdf",
-      "tuition_join": {
-        "source": "fees-bak-dp",
-        "alias_pattern": "4\\.1\\.1\\.\\s*Астрономия /Астрономия и метеорология"
-      },
-      "field_anchors": {
-        "duration": "dur-540"
-      }
-    },
-    {
-      "id": "shu-1047",
-      "name": "Астрофизика",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1047-kvalifikaciya-08-07-2026.pdf",
-      "tuition_join": {
-        "source": "fees-mag",
-        "alias_pattern": "4\\.1\\.1\\.\\s*Астрофизика"
-      },
-      "field_anchors": {
-        "duration": "dur-1047"
-      }
-    },
-    {
-      "id": "shu-1173",
-      "name": "Административна и организационна сигурност",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1173-kvalifikaciya-07-20-2026.pdf",
-      "tuition_join": {
-        "source": "fees-mag",
-        "alias_pattern": "9\\.1\\.1\\.\\s*Административна и организационна сигурност"
-      },
-      "field_anchors": {
-        "duration": "dur-1173"
-      }
-    },
-    {
-      "id": "shu-402",
-      "name": "Геодезия",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/402-kvalifikaciya-07-20-2026.pdf",
-      "field_anchors": {
-        "duration": "dur-402",
-        "admission": "adm-402"
-      }
-    },
-    {
-      "id": "shu-1147",
-      "name": "Геоматика",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1147-kvalifikaciya-07-20-2026.pdf",
-      "tuition_join": {
-        "source": "fees-mag",
-        "alias_pattern": "5\\.7\\.1\\.\\s*Геоматика"
-      },
-      "field_anchors": {
-        "duration": "dur-1147"
-      }
-    },
-    {
-      "id": "shu-1111",
-      "name": "Иновации в началното образование",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1111-kvalifikaciya-08-04-2026.pdf",
-      "tuition_join": {
-        "source": "fees-mag",
-        "alias_pattern": "1\\.2\\.4\\.\\s*Иновации в началното образование"
-      },
-      "field_anchors": {
-        "duration": "dur-1111"
-      }
-    },
-    {
-      "id": "shu-1113",
-      "name": "Иновации в предучилищното и началното образование",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1113-kvalifikaciya-08-04-2026.pdf",
-      "tuition_join": {
-        "source": "fees-mag",
-        "alias_pattern": "1\\.2\\.3\\.\\s*Иновации в предучилищното и началното образование"
-      },
-      "field_anchors": {
-        "duration": "dur-1113"
-      }
-    },
-    {
-      "id": "shu-276",
-      "name": "Информатика и информационни технологии, гр. Добрич",
-      "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/276-kvalifikaciya-02-27-2025.pdf",
-      "tuition_join": {
-        "source": "fees-bak-dp",
-        "alias_pattern": "4\\.6\\.1\\.\\s*Информатика и информационни технологии"
-      },
-      "field_anchors": {
-        "duration": "dur-276"
-      }
+  "ksk-si": {
+   "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fmi/magistyr/SI.pdf",
+   "route": "prose-pdf"
+  },
+  "ksk-rfeotb": {
+   "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fhn/magistyr/RFEOTB-new.pdf",
+   "route": "prose-pdf"
+  },
+  "kv-tks": {
+   "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/894-kvalifikaciya-07-20-2026.pdf",
+   "route": "prose-pdf"
+  },
+  "kv-si": {
+   "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1103-kvalifikaciya-07-23-2026.pdf",
+   "route": "prose-pdf"
+  },
+  "kv-rfeotb": {
+   "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1029-kvalifikaciya-07-22-2026.pdf",
+   "route": "prose-pdf"
+  },
+  "fees-bak-dp": {
+   "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/students/taksi-DP-profBak-i-bak_2026-2027.pdf",
+   "route": "table-pdf",
+   "join": {
+    "kind": "sectioned-fee-row",
+    "name": "shu-bak-dp",
+    "sections": [
+     {
+      "track": "семестриални такси 2026/2027, държавна поръчка",
+      "match": "Семестриални такси 2026/2027"
+     }
+    ],
+    "fee_pattern": "(\\d{2,4}\\.\\d{2}\\s*€)",
+    "context": {
+     "table": "ШУ семестриални такси за обучение по държавна поръчка 2026/2027, бакалаври и проф. бакалаври",
+     "row_reading": "първата такса в реда на специалността; колоните по ред: 1-ви курс редовно, 1-ви курс задочно, 2-ри курс редовно, 2-ри курс задочно, 3-4 курс редовно, 3-4 курс задочно"
     }
-  ]
+   }
+  },
+  "fees-mag": {
+   "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/students/taksi-magistri_2026-2027.pdf",
+   "route": "table-pdf",
+   "join": {
+    "kind": "sectioned-fee-row",
+    "name": "shu-mag",
+    "sections": [
+     {
+      "track": "семестриална такса 2026/2027",
+      "match": "Семестриална такса 2026/2027"
+     }
+    ],
+    "fee_pattern": "(\\d{2,4}\\.\\d{2}\\s*€)",
+    "context": {
+     "table": "ШУ семестриални такси магистърски програми 2026/2027",
+     "row_reading": "първата такса в реда на специалността; колоните по ред: държавна поръчка 1-ви курс редовно, платено обучение 1-ви курс задочно, платено обучение 2-ри курс задочно"
+    }
+   }
+  },
+  "fees-phd": {
+   "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/razvitie/as/2025/Syobshteniya/taksi_2025-2026_eur.pdf",
+   "route": "prose-pdf"
+  },
+  "akr-doktor": {
+   "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/razvitie/doktoranti/Akr_DOKTOR_16.03.2026.pdf",
+   "route": "prose-pdf"
+  },
+  "phd-dokumenti": {
+   "url": "https://www.shu.bg/doktoranti/documenti/",
+   "route": "html"
+  },
+  "spravochnik-2026": {
+   "url": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/Spravochnici/Spravochnik%202026%20g..pdf",
+   "route": "prose-pdf"
+  },
+  "kv-311": {
+   "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/311-kvalifikaciya-07-20-2026.pdf",
+   "route": "prose-pdf"
+  },
+  "kv-907": {
+   "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/907-kvalifikaciya-07-07-2026.pdf",
+   "route": "prose-pdf"
+  },
+  "kv-122": {
+   "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/122-kvalifikaciya-07-07-2026.pdf",
+   "route": "prose-pdf"
+  },
+  "kv-216": {
+   "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/216-kvalifikaciya-07-22-2026.pdf",
+   "route": "prose-pdf"
+  },
+  "kv-1159": {
+   "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1159-kvalifikaciya-07-22-2026.pdf",
+   "route": "prose-pdf"
+  },
+  "kv-1003": {
+   "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1003-kvalifikaciya-07-22-2026.pdf",
+   "route": "prose-pdf"
+  },
+  "kv-88": {
+   "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/88-kvalifikaciya-08-07-2026.pdf",
+   "route": "prose-pdf"
+  },
+  "kv-540": {
+   "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/540-kvalifikaciya-2024.pdf",
+   "route": "prose-pdf"
+  },
+  "kv-1047": {
+   "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1047-kvalifikaciya-08-07-2026.pdf",
+   "route": "prose-pdf"
+  },
+  "kv-1173": {
+   "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1173-kvalifikaciya-07-20-2026.pdf",
+   "route": "prose-pdf"
+  },
+  "kv-402": {
+   "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/402-kvalifikaciya-07-20-2026.pdf",
+   "route": "prose-pdf"
+  },
+  "kv-1147": {
+   "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1147-kvalifikaciya-07-20-2026.pdf",
+   "route": "prose-pdf"
+  },
+  "kv-1111": {
+   "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1111-kvalifikaciya-08-04-2026.pdf",
+   "route": "prose-pdf"
+  },
+  "kv-1113": {
+   "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1113-kvalifikaciya-08-04-2026.pdf",
+   "route": "prose-pdf"
+  },
+  "kv-276": {
+   "url": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/276-kvalifikaciya-02-27-2025.pdf",
+   "route": "prose-pdf"
+  }
+ },
+ "anchors": {
+  "grp-degree": {
+   "source": "ksk-grp",
+   "pattern": "Образователно-квалификационна степен:\\s*([А-Яа-я]+)",
+   "scope": "page-wide"
+  },
+  "grp-duration": {
+   "source": "ksk-grp",
+   "pattern": "Продължителност на обучението:\\s*(\\d+\\s*години\\s*\\(\\d+\\s*семестъра\\))",
+   "scope": "page-wide"
+  },
+  "grp-admission": {
+   "source": "ksk-grp",
+   "pattern": "(Балът за класиране в специалността се образува като сума от [^.]+)",
+   "scope": "page-wide"
+  },
+  "tks-duration": {
+   "source": "ksk-tks",
+   "pattern": "Продължителност на обучението:\\s*(\\d+\\s*години\\s*\\(\\d+\\s*семестъра\\))",
+   "scope": "page-wide"
+  },
+  "tks-admission": {
+   "source": "ksk-tks",
+   "pattern": "(Балът за класиране в специалността се образува като сума от [^.]+)",
+   "scope": "page-wide"
+  },
+  "si-duration": {
+   "source": "ksk-si",
+   "pattern": "Продължителност\\s+(\\d+\\s*семестъра)",
+   "scope": "page-wide"
+  },
+  "si-admission": {
+   "source": "ksk-si",
+   "pattern": "(тест\\s+Конкурсен изпит\\s+по софтуерно\\s+–\\s+–\\s+инженерство)",
+   "scope": "page-wide"
+  },
+  "rfeotb-degree": {
+   "source": "kv-rfeotb",
+   "pattern": "Образователно-квалификационна степен:\\s*([А-Яа-я]+)",
+   "scope": "page-wide"
+  },
+  "rfeotb-duration": {
+   "source": "ksk-rfeotb",
+   "pattern": "Продължителност\\s+–\\s+(\\d+ и \\d+ семестъра)",
+   "scope": "page-wide"
+  },
+  "rfeotb-admission": {
+   "source": "ksk-rfeotb",
+   "pattern": "(събеседване\\s+Конкурсен изпит\\s+–\\s+–\\s+по руски език)",
+   "scope": "page-wide"
+  },
+  "phd-degree": {
+   "source": "akr-doktor",
+   "pattern": "(ОБРАЗОВАТЕЛНАТА И НАУЧНА СТЕПЕН\\s+[“\"„]ДОКТОР[”\"“])",
+   "scope": "names-program"
+  },
+  "phd-tuition": {
+   "source": "fees-phd",
+   "pattern": "Педагогика на\\s+1\\.3\\.\\s+([\\d.,]+\\s*€)",
+   "scope": "page-wide"
+  },
+  "phd-admission": {
+   "source": "phd-dokumenti",
+   "pattern": "(Диплом за придобита образователно-квалификационна степен\\s+[“\"„]магистър[”\"“])",
+   "scope": "names-program"
+  },
+  "dur-311": {
+   "source": "kv-311",
+   "pattern": "„БИЗНЕС МАТЕМАТИКА“ Бакалавърската степен се придобива след (четиригодишен курс, 8 семестъра, 240 кредита)"
+  },
+  "dur-907": {
+   "source": "kv-907",
+   "pattern": "„ДИГИТАЛНИ ТЕХНОЛОГИИ И ИЗКУСТВЕН ИНТЕЛЕКТ“ Бакалавърската степен се придобива след (четиригодишен курс, 8 семестъра, 240 кредита)"
+  },
+  "dur-122": {
+   "source": "kv-122",
+   "pattern": "„ИКОНОМИКА“ Бакалавърската степен се придобива след (четири годишен курс \\(8 семестъра и 240 кредита\\))"
+  },
+  "dur-216": {
+   "source": "kv-216",
+   "pattern": "„АНГЛИЙСКА ФИЛОЛОГИЯ“ Срок на обучение: (4 години \\(8 семестъра\\))"
+  },
+  "dur-1159": {
+   "source": "kv-1159",
+   "pattern": "„АНГЛИЙСКА ФИЛОЛОГИЯ: ЕЗИКОВО ОБСЛУЖВАНЕ НА ТУРИЗМА И БИЗНЕСА“ Срок на обучение: (- 1 година \\(2 семестъра\\).{0,400}?- 2 години \\(4 семестъра\\) за завършилите друга специалност\\.)"
+  },
+  "dur-1003": {
+   "source": "kv-1003",
+   "pattern": "„АНГЛИЙСКА ФИЛОЛОГИЯ: ЛИНГВИСТИКА И ПРЕВОД“ Срок на обучение: (- 1 година \\(2 семестъра\\).{0,400}?- 2 години \\(4 семестъра\\) за завършилите друга специалност\\.)"
+  },
+  "dur-88": {
+   "source": "kv-88",
+   "pattern": "„АСТРОНОМИЯ“ Придобиване на степента с (4-годишен курс на обучение в 8 семестъра)"
+  },
+  "dur-540": {
+   "source": "kv-540",
+   "pattern": "„АСТРОНОМИЯ И МЕТЕОРОЛОГИЯ”\\. Придобиване на степента с (4 годишен курс на обучение в 8 семестръра)"
+  },
+  "dur-1047": {
+   "source": "kv-1047",
+   "pattern": "„АСТРОФИЗИКА“ Магистърска степен се придобива след завършване на ОКС „бакалавър“ или „магистър“\\. Обучението е с продължителност (2 семестъра), редовна форма на обучение"
+  },
+  "dur-1173": {
+   "source": "kv-1173",
+   "pattern": "специалност „Административна и организационна сигурност“ се придобива (в рамките на 1 година \\(2 семестъра и 60 кредита\\).{0,500}?в рамките на 2 години \\(4 семестъра и 120 кредита\\).{0,200}?различна от посочените\\.)"
+  },
+  "dur-402": {
+   "source": "kv-402",
+   "pattern": "ПО ЧАСТ „ГЕОДЕЗИЧЕСКА“ Срок на обучение: Степента се придобива с (5-годишен курс на обучение \\(10 семестъра\\))"
+  },
+  "dur-1147": {
+   "source": "kv-1147",
+   "pattern": "„ГЕОМАТИКА“ Магистърската степен се придобива след (едногодишен курс \\(2 семестъра и 60 кредита\\))"
+  },
+  "dur-1111": {
+   "source": "kv-1111",
+   "pattern": "Магистърската степен се придобива след курс на обучение от (4 семестъра и 105 кредита, 3 семестъра и 75 кредита, 2 семестъра и 45 кредита)"
+  },
+  "dur-1113": {
+   "source": "kv-1113",
+   "pattern": "Магистърската степен се придобива след курс на обучение от (2 семестъра и 45 кредита)"
+  },
+  "dur-276": {
+   "source": "kv-276",
+   "pattern": "„ИНФОРМАТИКА И ИНФОРМАЦИОННИ ТЕХНОЛОГИИ” ОКС „професионален бакалавър” се придобива след (три годишен курс \\(6 семестъра и 180 кредита\\))"
+  },
+  "deg-122": {
+   "source": "kv-122",
+   "pattern": "Образователно-квалификационна степен:\\s*([А-Яа-я]+)"
+  },
+  "adm-311": {
+   "source": "spravochnik-2026",
+   "pattern": "Бизнес математика\\. Завършилите тази специалност придобиват ОКС „бакалавър“ с професионална квалификация Математик – бизнес аналитик\\..{0,400}?Кандидатства се по избор с: ([^.]+\\.)",
+   "scope": "names-program"
+  },
+  "adm-907": {
+   "source": "spravochnik-2026",
+   "pattern": "Дигитални технологии и изкуствен интелект\\. Завършилите тази специалност придобиват ОКС „бакалавър“ с професионална квалификация Информатик\\..{0,400}?Кандидатства се по избор с: ([^.]+\\.)",
+   "scope": "names-program"
+  },
+  "adm-122": {
+   "source": "spravochnik-2026",
+   "pattern": "Икономика.{0,3}\\. Завършилите тази специалност придобиват ОКС „бакалавър“ с професионална квалификация Икономист\\..{0,400}?Кандидатства се по избор с: ([^.]+\\.)",
+   "scope": "names-program"
+  },
+  "adm-216": {
+   "source": "spravochnik-2026",
+   "pattern": "Английска филология\\. Завършилите тази специалност придобиват ОКС „бакалавър“ с професионална квалификация Филолог\\..{0,400}?Кандидатства се по избор с: ([^.]+\\.)",
+   "scope": "names-program"
+  },
+  "adm-88": {
+   "source": "spravochnik-2026",
+   "pattern": "Астрономия\\. Завършилите тази специалност придобиват ОКС „бакалавър“ с професионална квалификация Астроном\\..{0,400}?Кандидатства се по избор с: ([^.]+\\.)",
+   "scope": "names-program"
+  },
+  "adm-402": {
+   "source": "spravochnik-2026",
+   "pattern": "Геодезия\\. Завършилите тази специалност придобиват ОКС „магистър“ \\(след средно образование\\) с професионална квалификация Инженер в геодезията, картографията и кадастъра \\(инженер – геодезист\\)\\..{0,400}?Кандидатства се по избор с: ([^.]+\\.)",
+   "scope": "names-program"
+  }
+ },
+ "programs": [
+  {
+   "id": "SHU-rsvu9749-BSC-BG",
+   "name": "География и регионална политика",
+   "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fpn/bakalavyr/GRP.pdf",
+   "tuition_join": {
+    "source": "fees-bak-dp",
+    "alias_pattern": "4\\.4\\.1\\.\\s*География и регионална политика"
+   },
+   "field_anchors": {
+    "degree": "grp-degree",
+    "duration": "grp-duration",
+    "admission": "grp-admission"
+   }
+  },
+  {
+   "id": "SHU-rsvu30594-MSC-BG",
+   "name": "Софтуерно инженерство",
+   "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fmi/magistyr/SI.pdf",
+   "extra_sources": [
+    "kv-si"
+   ],
+   "tuition_join": {
+    "source": "fees-mag",
+    "alias_pattern": "4\\.6\\.1\\.\\s*Софтуерно инженерство"
+   },
+   "field_anchors": {
+    "duration": "si-duration",
+    "admission": "si-admission"
+   }
+  },
+  {
+   "id": "SHU-rsvu11312-PHD-EN",
+   "name": "Методика на обучението по чужд език (английски език, руски език)",
+   "page": "https://www.shu.bg/?p=47212",
+   "field_anchors": {
+    "degree": "phd-degree",
+    "tuition": "phd-tuition",
+    "admission": "phd-admission"
+   }
+  },
+  {
+   "id": "SHU-rsvu31017-BSC-BG",
+   "name": "Технологии за киберсигурност",
+   "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/ftn/bakalavyr/TKS.pdf",
+   "extra_sources": [
+    "kv-tks"
+   ],
+   "tuition_join": {
+    "source": "fees-bak-dp",
+    "alias_pattern": "5\\.3\\.4\\.\\s*Технологии за киберсигурност"
+   },
+   "field_anchors": {
+    "duration": "tks-duration",
+    "admission": "tks-admission"
+   }
+  },
+  {
+   "id": "SHU-rsvu8752-MSC-BG",
+   "name": "Руска филология: Езиково обслужване на туризма и бизнеса",
+   "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fhn/magistyr/RFEOTB-new.pdf",
+   "extra_sources": [
+    "kv-rfeotb"
+   ],
+   "tuition_join": {
+    "source": "fees-mag",
+    "alias_pattern": "2\\.1\\.8\\.\\s*Руска филология: Езиково обслужване на туризма и бизнеса"
+   },
+   "field_anchors": {
+    "degree": "rfeotb-degree",
+    "duration": "rfeotb-duration",
+    "admission": "rfeotb-admission"
+   }
+  },
+  {
+   "id": "shu-311",
+   "name": "Бизнес математика",
+   "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/311-kvalifikaciya-07-20-2026.pdf",
+   "tuition_join": {
+    "source": "fees-bak-dp",
+    "alias_pattern": "4\\.5\\.1\\.\\s*Бизнес математика"
+   },
+   "field_anchors": {
+    "duration": "dur-311",
+    "admission": "adm-311"
+   }
+  },
+  {
+   "id": "shu-907",
+   "name": "Дигитални технологии и изкуствен интелект",
+   "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/907-kvalifikaciya-07-07-2026.pdf",
+   "tuition_join": {
+    "source": "fees-bak-dp",
+    "alias_pattern": "4\\.6\\.3\\.\\s*Дигитални технологии и изкуствен интелект"
+   },
+   "field_anchors": {
+    "duration": "dur-907",
+    "admission": "adm-907"
+   }
+  },
+  {
+   "id": "shu-122",
+   "name": "Икономика",
+   "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/122-kvalifikaciya-07-07-2026.pdf",
+   "field_anchors": {
+    "degree": "deg-122",
+    "duration": "dur-122",
+    "admission": "adm-122"
+   }
+  },
+  {
+   "id": "shu-216",
+   "name": "Английска филология",
+   "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/216-kvalifikaciya-07-22-2026.pdf",
+   "tuition_join": {
+    "source": "fees-bak-dp",
+    "alias_pattern": "2\\.1\\.3\\.\\s*Английска филология"
+   },
+   "field_anchors": {
+    "duration": "dur-216",
+    "admission": "adm-216"
+   }
+  },
+  {
+   "id": "shu-1159",
+   "name": "Английска филология: Езиково обслужване на туризма и бизнеса",
+   "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1159-kvalifikaciya-07-22-2026.pdf",
+   "tuition_join": {
+    "source": "fees-mag",
+    "alias_pattern": "2\\.1\\.5\\.\\s*Английска филология: Езиково обслужване"
+   },
+   "field_anchors": {
+    "duration": "dur-1159"
+   }
+  },
+  {
+   "id": "shu-1003",
+   "name": "Английска филология: Лингвистика и превод",
+   "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1003-kvalifikaciya-07-22-2026.pdf",
+   "tuition_join": {
+    "source": "fees-mag",
+    "alias_pattern": "2\\.1\\.4\\.\\s*Английска филология: Лингвистика и превод"
+   },
+   "field_anchors": {
+    "duration": "dur-1003"
+   }
+  },
+  {
+   "id": "shu-88",
+   "name": "Астрономия",
+   "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/88-kvalifikaciya-08-07-2026.pdf",
+   "tuition_join": {
+    "source": "fees-bak-dp",
+    "alias_pattern": "4\\.1\\.1\\.\\s*Астрономия /Астрономия и метеорология"
+   },
+   "field_anchors": {
+    "duration": "dur-88",
+    "admission": "adm-88"
+   }
+  },
+  {
+   "id": "shu-540",
+   "name": "Астрономия и метеорология",
+   "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/540-kvalifikaciya-2024.pdf",
+   "tuition_join": {
+    "source": "fees-bak-dp",
+    "alias_pattern": "4\\.1\\.1\\.\\s*Астрономия /Астрономия и метеорология"
+   },
+   "field_anchors": {
+    "duration": "dur-540"
+   }
+  },
+  {
+   "id": "shu-1047",
+   "name": "Астрофизика",
+   "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1047-kvalifikaciya-08-07-2026.pdf",
+   "tuition_join": {
+    "source": "fees-mag",
+    "alias_pattern": "4\\.1\\.1\\.\\s*Астрофизика"
+   },
+   "field_anchors": {
+    "duration": "dur-1047"
+   }
+  },
+  {
+   "id": "shu-1173",
+   "name": "Административна и организационна сигурност",
+   "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1173-kvalifikaciya-07-20-2026.pdf",
+   "tuition_join": {
+    "source": "fees-mag",
+    "alias_pattern": "9\\.1\\.1\\.\\s*Административна и организационна сигурност"
+   },
+   "field_anchors": {
+    "duration": "dur-1173"
+   }
+  },
+  {
+   "id": "shu-402",
+   "name": "Геодезия",
+   "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/402-kvalifikaciya-07-20-2026.pdf",
+   "field_anchors": {
+    "duration": "dur-402",
+    "admission": "adm-402"
+   }
+  },
+  {
+   "id": "shu-1147",
+   "name": "Геоматика",
+   "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1147-kvalifikaciya-07-20-2026.pdf",
+   "tuition_join": {
+    "source": "fees-mag",
+    "alias_pattern": "5\\.7\\.1\\.\\s*Геоматика"
+   },
+   "field_anchors": {
+    "duration": "dur-1147"
+   }
+  },
+  {
+   "id": "shu-1111",
+   "name": "Иновации в началното образование",
+   "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1111-kvalifikaciya-08-04-2026.pdf",
+   "tuition_join": {
+    "source": "fees-mag",
+    "alias_pattern": "1\\.2\\.4\\.\\s*Иновации в началното образование"
+   },
+   "field_anchors": {
+    "duration": "dur-1111"
+   }
+  },
+  {
+   "id": "shu-1113",
+   "name": "Иновации в предучилищното и началното образование",
+   "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1113-kvalifikaciya-08-04-2026.pdf",
+   "tuition_join": {
+    "source": "fees-mag",
+    "alias_pattern": "1\\.2\\.3\\.\\s*Иновации в предучилищното и началното образование"
+   },
+   "field_anchors": {
+    "duration": "dur-1113"
+   }
+  },
+  {
+   "id": "shu-276",
+   "name": "Информатика и информационни технологии, гр. Добрич",
+   "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/276-kvalifikaciya-02-27-2025.pdf",
+   "tuition_join": {
+    "source": "fees-bak-dp",
+    "alias_pattern": "4\\.6\\.1\\.\\s*Информатика и информационни технологии"
+   },
+   "field_anchors": {
+    "duration": "dur-276"
+   }
+  }
+ ]
 }

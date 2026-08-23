@@ -62,6 +62,11 @@ class Status(Enum):
     REJECT_SUPPORT = "REJECT_SUPPORT"
     NULL_OK = "NULL_OK"
     PARSE_FAILURE = "PARSE_FAILURE"
+    # ADR-0007: true, but stated in no document — so there is nothing for
+    # gate() to check and it never enters the gate. Its own status keeps
+    # it impossible to mistake for a proven value: PASS still means, and
+    # only means, "the gate proved this string is in the Artifact".
+    DERIVED = "DERIVED"
 
 
 @dataclass(frozen=True)

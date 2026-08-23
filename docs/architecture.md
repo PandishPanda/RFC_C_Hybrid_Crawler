@@ -52,7 +52,8 @@ flowchart LR
 | # | Invariant | Where |
 | -- | -- | -- |
 | 1 | No per-site code; site knowledge is strictly-validated config data | ADR-0001, `config.py` |
-| 2 | Every shipped value carries verbatim, gate-checked Provenance — no human exemption | ADR-0002, `provenance.py` |
+| 2 | Every EXTRACTED value carries verbatim, gate-checked Provenance — no human exemption | ADR-0002, `provenance.py` |
+| 2b | A value true but stated nowhere ships as DERIVED, never as PASS — the gate cannot emit DERIVED | ADR-0007, `runner.derive_fields` |
 | 3 | Onboarding proposes; only humans promote configs | ADR-0003, `onboarding.py` |
 | 4 | No external registry: config program entries are the unit of identity | ADR-0006 |
 | 5 | "Can't determine" ships as null — never a plausible value | gate + `suppress_labels` |

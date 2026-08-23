@@ -313,6 +313,15 @@ class SiteConfig:
     programs: Tuple[ProgramConfig, ...]
     cookies: Mapping[str, str] = field(default_factory=dict)
     anchors: Mapping[str, AnchorConfig] = field(default_factory=dict)
+    default_language: Optional[str] = None
+    # ADR-0007: the language of instruction this site's programs use when
+    # no document of theirs states one. Site knowledge, so it is config
+    # data (ADR-0001) rather than a fleet-wide constant: AUBG teaches in
+    # English and VUM in both, and a hardcoded default would ship a wrong
+    # value at the first university that does not fit. Absent = derive
+    # nothing. The config diff records who asserted this, the same
+    # discipline as a page-wide anchor attestation.
+
     program_markers: Tuple[str, ...] = ()  # words THIS site uses to
     # announce "a program we offer" ("Специалност", "Programme", ...),
     # read by adjudication.propose_enrolling to tell a real declaration
@@ -815,11 +824,16 @@ def parse_site_config(data, origin="<config>"):
     mis-wiring. origin (usually the file path) prefixes every error.
     """
     _reject_unknown(data, ("uni_id", "cookies", "sources", "programs",
-                           "anchors", "program_markers"), origin)
+                           "anchors", "program_markers",
+                           "default_language"), origin)
     uni_id = _str(_require(data, "uni_id", origin), origin + ".uni_id")
     cookies = _str_dict(data.get("cookies", {}), origin + ".cookies")
     program_markers = tuple(_str_list(data.get("program_markers", []),
                                       origin + ".program_markers"))
+    default_language = data.get("default_language")
+    if default_language is not None:
+        default_language = _str(default_language,
+                                origin + ".default_language")
 
     raw_sources = data.get("sources", {})
     if not isinstance(raw_sources, dict):
@@ -857,7 +871,8 @@ def parse_site_config(data, origin="<config>"):
 
     return SiteConfig(uni_id=uni_id, cookies=cookies, sources=sources,
                       programs=programs, anchors=anchors,
-                      program_markers=program_markers)
+                      program_markers=program_markers,
+                      default_language=default_language)
 
 
 def load_site_config(path):
