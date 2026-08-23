@@ -46,13 +46,22 @@ reason; an unexplained failure is a bug.
 
 Issue tracker: local markdown under `.scratch/<feature>/` — see
 docs/agents/issue-tracker.md. Every ticket gets a two-axis review
-(standards + spec) before it is called done.
+(standards + spec) before it is called done. A ticket that can change a
+shipped value gets a THIRD axis — attribution: read the provenance of
+every changed cell and run an independent refuter over it. See
+docs/agents/attribution-review.md; it is not optional and not a
+sampled check.
 
 ## Agent skills
 
 ### Issue tracker
 
 Local markdown under `.scratch/<feature>/`. See `docs/agents/issue-tracker.md`.
+
+### Attribution review
+
+Third review axis for any ticket that can change a shipped value. See
+`docs/agents/attribution-review.md`; helper: `scripts/changed-cells.py`.
 
 ### Domain docs
 

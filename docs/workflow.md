@@ -84,6 +84,23 @@ flowchart TB
 | manual-verdict overlay exercised | process | CHECK rows (incl. process-page admission cells keyed by sentinel) settled by human ok/wrong; verdicts carried over only when shipped values are byte-identical |
 | `labelkit` CLI un-dead-coded | bug fix | handler body sat unreachable inside the `check-pins` block |
 
+## Attribution review — the gate outside the benchmark loop
+
+The blind-benchmark loop above measures a 5-program sample per university.
+It does not see cells no key covers, and the rev.5 round closed seven
+fabrications that lived there — verbatim-present, gate-clean, invisible to
+grading. So every change that can move a shipped value carries a review
+that is scoped to *changed cells* rather than *graded cells*: read the
+provenance of each one, then run an independent agent whose only job is to
+refute the first.
+
+This is a process gate, enforced by the ticket's done-check rather than by
+code — the full procedure, the refuter's independence contract and the
+decision rule are in `docs/agents/attribution-review.md`; the changed-cell
+diff (value **and** attribution, which `ledger.diff_runs` does not cover) is
+`scripts/changed-cells.py`. A provenance-aware `crawler diff` verb is the
+natural mechanisation and is not built.
+
 ## Known open edges
 
 - **JS-injected content is invisible to the fetch route** — vum-tour-phd's
