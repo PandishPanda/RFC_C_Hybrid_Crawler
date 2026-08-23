@@ -100,80 +100,38 @@ def candidate_docs(site, program, field, docs):
     # type: (...) -> List[Tuple[str, object]]
     """Every doc the tail may read for one field, as (ref, source) pairs.
 
-    Mirrors ``cascade.resolve_field``'s per-field document selection, but
-    collects everything relevant instead of trying tiers in order and
-    returning on first hit — the tail only runs when every tier already
-    missed, so it should see the full candidate set, not one path through
-    it. Duplicates are dropped, order is deterministic (dict insertion).
+    The page-family documents come from the Readable set
+    (field_sources.readable_sources) — the SAME return value the
+    deterministic cascade harvests, so the two extractors cannot drift
+    (they did, twice, while each kept its own copy of the selection: see
+    field_sources' module docstring for the measured incidents). Each
+    entry's model_view() is what the model may read: the original source
+    when unscoped, the Program's own regions joined when the page is
+    shared — same ref either way, because scoping only narrows what the
+    model sees, never what counts as proof (the gate still checks quoted
+    snippets against the FULL artifact).
+
+    Join sources are appended after the Readable set: they are
+    human-attributed config the cascade executes as mechanisms, outside
+    the Readable-set seam by decision (nothing has ever drifted there).
 
     The returned ref is source.ref -- the artifact ref the STORE actually
-    indexes by (runner.build_docs's own ArtifactStore.resolve() call) --
-    never the DOCS dict's lookup key. runner.build_docs() keys `docs` by
-    URL (and, for named sources, additionally by source id) purely for
-    its own lookup convenience; neither key equals the store's real ref
-    format (e.g. "html:" + url) for any HTML-routed document. A model
-    that quotes back the lookup key as its source_ref would make
-    store.artifact(ref) raise KeyError the moment it PASSes on a plain
-    page/extra_page/named-source field -- this was live-verified against
-    a real ArtifactStore (2026-08-15, University of Ruse --tail run);
-    every existing unit test fixture happened to set TextSource.ref equal
-    to its own docs-dict key, which masked this from every prior test.
+    indexes by -- never the DOCS dict's lookup key (live-verified
+    distinction: 2026-08-15 UniRuse --tail run; ref-vs-key is now a
+    ScopedDoc invariant rather than a docstring warning).
     """
     seen = {}
+    for sd in cascade.readable_sources(site, program, field, docs):
+        if sd.ref not in seen:
+            seen[sd.ref] = sd.model_view()
 
     def add(key):
         if key and key in docs:
             source = docs[key]
-            seen[source.ref] = source
-
-    def add_own_page():
-        """The program's own page, region-scoped when it is shared.
-
-        The deterministic cascade slices a shared page to the program's
-        own program_region() spans; the tail used to receive the page
-        WHOLE, so on a page serving several programs the model had to
-        choose which section answered the question — and chose
-        differently per call (measured 2026-08-23 at VUM: durations came
-        back swapped between two programs, and one got a complete
-        admission answer while the other got a fragment). The gate
-        cannot catch that: every fragment is verbatim on the page.
-
-        The scoped view keeps the page's artifact ref, because it is the
-        same artifact — the model still quotes a ref the store resolves,
-        and the gate still checks the quoted snippet against the FULL
-        artifact, so scoping can only narrow what the model may read.
-
-        NOTE this cannot separate same-named siblings (VUM's
-        professional-bachelor / bachelor twins): program_region()
-        deliberately refuses to let same-named siblings bound each
-        other, so both get the same span. Those need a tier-B anchor on
-        whatever the page uses to tell them apart.
-        """
-        page = docs.get(program.page)
-        if page is None:
-            return
-        siblings = [p.name for p in site.programs
-                    if p.page == program.page and p.id != program.id]
-        if not siblings or not isinstance(page, cascade.TextSource):
-            seen[page.ref] = page
-            return
-        raw = page.text or ""
-        spans = cascade.program_region(raw, program.name, siblings)
-        if not spans:
-            # the shared page never names this program: tier G would
-            # read nothing from it, and neither may the tail
-            return
-        scoped = "\n".join(raw[s0:e0] for s0, e0 in spans)
-        seen[page.ref] = cascade.TextSource(ref=page.ref, text=scoped)
-
-    add_own_page()
-    for url in program.extra_pages:
-        add(url)
-    for sid in program.extra_sources:
-        add(sid)
+            if source.ref not in seen:
+                seen[source.ref] = source
 
     if field == "language":
-        add(program.lang_page)
         if program.language_tracks is not None:
             add(program.language_tracks.source)
 
@@ -182,7 +140,6 @@ def candidate_docs(site, program, field, docs):
             add(program.spravochnik.source)
         if program.admission_join is not None:
             add(program.admission_join.source)
-        add(program.adm_page)
 
     if field in ("degree", "duration") and program.spravochnik is not None:
         add(program.spravochnik.source)
@@ -192,7 +149,6 @@ def candidate_docs(site, program, field, docs):
             add(program.tuition_join.source)
         if program.fees_section is not None:
             add(program.fees_section.source)
-        add(program.tuition_page)
 
     return list(seen.items())
 

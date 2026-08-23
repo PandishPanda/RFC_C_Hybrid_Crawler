@@ -38,6 +38,10 @@ _Avoid_: diff row, changed value
 The third review axis on any ticket that can move a shipped value: read the Provenance of every changed cell, then have an independent agent try to refute that reading. Answers "did this value come from the right place?", which the Provenance gate (presence) and the blind benchmark (a sample) both leave open. A process gate, enforced by the ticket's done-check rather than by code.
 _Avoid_: provenance check, spot check, audit
 
+**Readable set**:
+The documents one Program-field may draw values from — the Program's own page narrowed to its own regions, its routed pages (lang/adm/tuition), and its extra sources, each participating once under its Artifact ref. Computed by one module (`crawler/field_sources.py`) and consumed identically by the deterministic cascade and the LLM tail; a value from outside the Readable set is a misattribution even when verbatim-present, which the Provenance gate cannot see. Join sources are attributed by config and executed as mechanisms, not read as text.
+_Avoid_: candidate docs, document selection (those name the mechanics, not the guarantee)
+
 **Derived value**:
 A value that is true but that no document states — a language assumed where none is declared. Distinct from an extracted value, which the Artifact says verbatim. A derived value ships under its own status, `DERIVED` (ADR-0007): it never enters the Provenance gate, because there is nothing to check, and instead of a snippet it carries the rule that produced it. It can never displace an extracted value, and the rule that produces it is per-site config, not code. The blind key scores it in its own category — the key answers "what does the page say", a derived value answers "what is true" — so it counts as neither correct nor fabricated.
 _Avoid_: inferred value, assumed value, default (those name the method, not the standing)
