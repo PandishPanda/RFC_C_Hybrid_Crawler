@@ -1,0 +1,158 @@
+{
+ "uni_id": "MUSofia",
+ "display_name": "Медицински университет – София",
+ "slug": "mu-sofia",
+ "city": "София",
+ "cookies": {},
+ "sources": {},
+ "programs": [
+  {
+   "id": "mc-medlab",
+   "name": "Медицински лаборант",
+   "page": "https://mc.mu-sofia.bg/?page_id=582",
+   "slug": "meditsinski-laborant",
+   "subject": "zdravni-grizhi",
+   "field_anchors": {
+    "degree": "mc-medlab-degree",
+    "duration": "mc-medlab-duration",
+    "admission": "mc-ksk-admission"
+   }
+  },
+  {
+   "id": "mc-rentgen",
+   "name": "Рентгенов лаборант",
+   "page": "https://mc.mu-sofia.bg/?page_id=2185",
+   "slug": "rentgenov-laborant",
+   "subject": "zdravni-grizhi",
+   "field_anchors": {
+    "degree": "mc-ksk-degree",
+    "admission": "mc-ksk-admission"
+   }
+  },
+  {
+   "id": "mc-zabotehnik",
+   "name": "Зъботехник",
+   "page": "https://mc.mu-sofia.bg/?page_id=2210",
+   "slug": "zabotehnik",
+   "subject": "zdravni-grizhi",
+   "field_anchors": {
+    "degree": "mc-ksk-degree",
+    "admission": "mc-ksk-adm-zabotehnik"
+   }
+  },
+  {
+   "id": "mc-rehab",
+   "name": "Рехабилитатор",
+   "page": "https://mc.mu-sofia.bg/?page_id=2258",
+   "slug": "rehabilitator",
+   "subject": "kineziterapia",
+   "field_anchors": {
+    "degree": "mc-ksk-degree",
+    "admission": "mc-rehab-admission"
+   }
+  },
+  {
+   "id": "mc-pomfarm",
+   "name": "Помощник-фармацевт",
+   "page": "https://mc.mu-sofia.bg/?page_id=2244",
+   "slug": "pomoshtnik-farmatsevt",
+   "subject": "farmatsia",
+   "field_anchors": {
+    "duration": "mc-pomfarm-duration",
+    "admission": "mc-ksk-admission"
+   }
+  },
+  {
+   "id": "mc-inspektor",
+   "name": "Инспектор по обществено здраве",
+   "page": "https://mc.mu-sofia.bg/?page_id=2276",
+   "slug": "inspektor-po-obshtestveno-zdrave",
+   "subject": "obshtestveno-zdrave",
+   "field_anchors": {
+    "degree": "mc-inspektor-degree",
+    "duration": "mc-inspektor-duration",
+    "admission": "mc-ksk-admission"
+   }
+  },
+  {
+   "id": "mc-masazhist",
+   "name": "Масажист /с увредено зрение/",
+   "page": "https://mc.mu-sofia.bg/?page_id=2288",
+   "slug": "masazhist-s-uvredeno-zrenie",
+   "subject": "kineziterapia",
+   "field_anchors": {
+    "degree": "mc-ksk-degree",
+    "admission": "mc-ksk-adm-masazhist"
+   }
+  },
+  {
+   "id": "mc-kozmetika",
+   "name": "Медицинска Козметика",
+   "page": "https://mc.mu-sofia.bg/?page_id=2275",
+   "slug": "meditsinska-kozmetika",
+   "subject": "zdravni-grizhi",
+   "field_anchors": {
+    "degree": "mc-ksk-degree",
+    "admission": "mc-ksk-admission"
+   }
+  },
+  {
+   "id": "mc-paramedik",
+   "name": "Парамедик",
+   "page": "https://mc.mu-sofia.bg/?page_id=2583",
+   "slug": "paramedik",
+   "subject": "zdravni-grizhi",
+   "field_anchors": {
+    "degree": "mc-ksk-degree",
+    "admission": "mc-ksk-admission"
+   }
+  }
+ ],
+ "default_language": "български",
+ "anchors": {
+  "mc-medlab-degree": {
+   "source": "https://mc.mu-sofia.bg/?page_id=582",
+   "pattern": "с (образователно-квалификационна степен [“„‟\"]Професионален бакалавър[”“\"])"
+  },
+  "mc-medlab-duration": {
+   "source": "https://mc.mu-sofia.bg/?page_id=582",
+   "pattern": "(със срок на обучение три години)"
+  },
+  "mc-pomfarm-duration": {
+   "source": "https://mc.mu-sofia.bg/?page_id=2244",
+   "pattern": "редовна със (срок на обучение три години)"
+  },
+  "mc-inspektor-degree": {
+   "source": "https://mc.mu-sofia.bg/?page_id=2276",
+   "pattern": "ЗА ПРИДОБИВАНЕ НА (ОБРАЗОВАТЕЛНО-КВАЛИФИКАЦИОННА СТЕПЕН [„“\"]ПРОФЕСИОНАЛЕН БАКАЛАВЪР[”“\"])"
+  },
+  "mc-inspektor-duration": {
+   "source": "https://mc.mu-sofia.bg/?page_id=2276",
+   "pattern": "(Срок на обучение – 3 години \\(6 семестъра\\))"
+  },
+  "mc-ksk-degree": {
+   "source": "https://mc.mu-sofia.bg/?page_id=530",
+   "scope": "page-wide",
+   "pattern": "за придобиване на (образователно-квалификационна степен [„“\"]професионален бакалавър[“”\"])"
+  },
+  "mc-ksk-admission": {
+   "source": "https://mc.mu-sofia.bg/?page_id=530",
+   "scope": "page-wide",
+   "pattern": "(Балът за класиране по специалностите в Медицински колеж [„“\"]Й\\. Филаретова[“”\"] – София за придобиване на образователно-квалификационна степен [„“\"]професионален бакалавър[“”\"] се образува от сбора на:.*?Максимален бал за участие в класирането – 18\\.)"
+  },
+  "mc-ksk-adm-zabotehnik": {
+   "source": "https://mc.mu-sofia.bg/?page_id=530",
+   "scope": "names-program",
+   "pattern": "(За специалност [„“\"]Зъботехник[“”\"] балът се образува от сбора на:.*?Максимален бал за участие в класирането – 30\\.)"
+  },
+  "mc-ksk-adm-masazhist": {
+   "source": "https://mc.mu-sofia.bg/?page_id=530",
+   "scope": "page-wide",
+   "pattern": "(Кандидатстващите за придобиване на образователно-квалификационна степен професионален бакалавър по специалностите в Медицински колеж [„“\"]Й\\. Филаретова[”“\"]- София полагат писмен изпит върху темата [„“\"]Мотивация за осъществяване на здравни грижи на нуждаещите се[”“\"], състоящ се от три компонента:.*?За специалност [„“\"]Масажист[”“\"] \\(лица с увредено зрение\\) – полагат устен изпит – събеседване на същата тема\\.)"
+  },
+  "mc-rehab-admission": {
+   "source": "https://mc.mu-sofia.bg/?page_id=2258",
+   "pattern": "(Рехабилитаторът е специалист с медицинско образование, завършил медицински колеж след завършено средно образование и успешно положен конкурсен изпит\\. Задължително условие е кандидат-студентът да има оценка или [„“\"]издържал[”“\"] по физическо възпитание в дипломата за средно образование\\.)"
+  }
+ }
+}

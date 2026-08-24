@@ -1,0 +1,43 @@
+{
+ "uni_id": "CoTurVarna",
+ "display_name": "Колеж по туризъм – Варна (при Икономически университет – Варна)",
+ "slug": "kolezh-po-turizam-varna",
+ "city": "Варна",
+ "default_language": "български",
+ "cookies": {},
+ "sources": {},
+ "anchors": {
+  "co-mtrb-duration": {
+   "source": "https://ct-varna.com/priem/specialnosti/menidzhmynt-na-turizma-i-svobodnoto-vreme/",
+   "pattern": "(Срок на обучение: 3 години за редовно обучение)"
+  },
+  "co-adm-bal": {
+   "source": "https://ct-varna.com/прием/",
+   "scope": "page-wide",
+   "pattern": "(Балът за класиране на кандидат-студентите за всички специалности се образува като сума от: Оценката по български език и литература от дипломата за средно образование.*?положен през 2026 г\\. в друг университет в България от дипломата за средно образование – По избор на кандидата)"
+  }
+ },
+ "programs": [
+  {
+   "id": "co-mtrb",
+   "name": "Мениджмънт на туризма и развлекателния бизнес",
+   "page": "https://ct-varna.com/priem/specialnosti/menidzhmynt-na-turizma-i-svobodnoto-vreme/",
+   "slug": "menidzhmant-na-turizma-i-razvlekatelnia-biznes",
+   "subject": "turizam-i-hotelierstvo",
+   "field_anchors": {
+    "duration": "co-mtrb-duration",
+    "admission": "co-adm-bal"
+   }
+  },
+  {
+   "id": "co-mhr",
+   "name": "Мениджмънт на хотели и ресторанти",
+   "page": "https://ct-varna.com/priem/specialnosti/menidzhmynt-na-hoteli-i-restoranti/",
+   "slug": "menidzhmant-na-hoteli-i-restoranti",
+   "subject": "turizam-i-hotelierstvo",
+   "field_anchors": {
+    "admission": "co-adm-bal"
+   }
+  }
+ ]
+}

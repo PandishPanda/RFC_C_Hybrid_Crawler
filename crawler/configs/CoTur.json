@@ -1,0 +1,74 @@
+{
+ "uni_id": "CoTur",
+ "display_name": "Колеж по туризъм – Благоевград",
+ "slug": "kolezh-po-turizam-blagoevgrad",
+ "city": "Благоевград",
+ "default_language": "български",
+ "cookies": {},
+ "sources": {
+  "co-spravochnik": {
+   "url": "https://cotur.bg/wp-content/uploads/2026/06/Справочник-2026-2027.pdf",
+   "route": "prose-pdf"
+  }
+ },
+ "anchors": {
+  "co-adm-ba": {
+   "source": "https://cotur.bg/учебна-дейност/прием-2022-2023-г/",
+   "scope": "names-program",
+   "pattern": "(За специалност [„“\"]Бизнес администрация[”“\"] – оценки от държавните зрелостни изпити по Български език и литература, математика, география и икономика и чужд език)"
+  },
+  "co-adm-tur": {
+   "source": "https://cotur.bg/учебна-дейност/прием-2022-2023-г/",
+   "scope": "names-program",
+   "pattern": "(За специалности [„“\"] ?Организация и управление на туристическото обслужване ?[”“\"] и [„“\"] ?Организация и управление на хотели и ресторанти ?[”“\"] – оценки от държавните зрелостни изпити по Български език и литература, география и икономика, история и цивилизация и чужд език)"
+  },
+  "co-sprav-degree": {
+   "source": "co-spravochnik",
+   "scope": "page-wide",
+   "pattern": "(образователно-квалификационна степен [„“\"]професионален бакалавър[“”\"])"
+  },
+  "co-sprav-duration": {
+   "source": "co-spravochnik",
+   "scope": "page-wide",
+   "pattern": "срок на обучение\\s*[–-]\\s*(три години\\s*/\\s*шест семестъра)"
+  }
+ },
+ "programs": [
+  {
+   "id": "co-ba",
+   "name": "Бизнес администрация",
+   "page": "https://cotur.bg/%d0%b7%d0%b0-%d1%81%d1%82%d1%83%d0%b4%d0%b5%d0%bd%d1%82%d0%b8%d1%82%d0%b5/%d1%83%d1%87%d0%b5%d0%b1%d0%bd%d0%b8-%d0%bf%d0%bb%d0%b0%d0%bd%d0%be%d0%b2%d0%b5-%d0%b8-%d0%bf%d1%80%d0%be%d0%b3%d1%80%d0%b0%d0%bc%d0%b8/%d0%b1%d0%b8%d0%b7%d0%bd%d0%b5%d1%81-%d0%b0%d0%b4%d0%bc%d0%b8%d0%bd%d0%b8%d1%81%d1%82%d1%80%d0%b0%d1%86%d0%b8%d1%8f/",
+   "slug": "biznes-administratsia",
+   "subject": "biznes-i-menidzhmant",
+   "field_anchors": {
+    "admission": "co-adm-ba",
+    "degree": "co-sprav-degree",
+    "duration": "co-sprav-duration"
+   }
+  },
+  {
+   "id": "co-outo",
+   "name": "Организация и управление на туристическото обслужване",
+   "page": "https://cotur.bg/%d0%b7%d0%b0-%d1%81%d1%82%d1%83%d0%b4%d0%b5%d0%bd%d1%82%d0%b8%d1%82%d0%b5/%d1%83%d1%87%d0%b5%d0%b1%d0%bd%d0%b8-%d0%bf%d0%bb%d0%b0%d0%bd%d0%be%d0%b2%d0%b5-%d0%b8-%d0%bf%d1%80%d0%be%d0%b3%d1%80%d0%b0%d0%bc%d0%b8/%d0%be%d1%80%d0%b3%d0%b0%d0%bd%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d1%8f-%d0%b8-%d1%83%d0%bf%d1%80%d0%b0%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d0%b5-%d0%bd%d0%b0-%d1%82%d1%83%d1%80%d0%b8%d1%81%d1%82%d0%b8%d1%87/",
+   "slug": "organizatsia-i-upravlenie-na-turisticheskoto-obsluzhvane",
+   "subject": "turizam-i-hotelierstvo",
+   "field_anchors": {
+    "admission": "co-adm-tur",
+    "degree": "co-sprav-degree",
+    "duration": "co-sprav-duration"
+   }
+  },
+  {
+   "id": "co-ouhr",
+   "name": "Организация и управление на хотели и ресторанти",
+   "page": "https://cotur.bg/%d0%b7%d0%b0-%d1%81%d1%82%d1%83%d0%b4%d0%b5%d0%bd%d1%82%d0%b8%d1%82%d0%b5/%d1%83%d1%87%d0%b5%d0%b1%d0%bd%d0%b8-%d0%bf%d0%bb%d0%b0%d0%bd%d0%be%d0%b2%d0%b5-%d0%b8-%d0%bf%d1%80%d0%be%d0%b3%d1%80%d0%b0%d0%bc%d0%b8/%d0%be%d1%80%d0%b3%d0%b0%d0%bd%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d1%8f-%d0%b8-%d1%83%d0%bf%d1%80%d0%b0%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d0%b5-%d0%bd%d0%b0-%d1%85%d0%be%d1%82%d0%b5%d0%bb%d0%b8-%d0%b8-%d1%80/",
+   "slug": "organizatsia-i-upravlenie-na-hoteli-i-restoranti",
+   "subject": "turizam-i-hotelierstvo",
+   "field_anchors": {
+    "admission": "co-adm-tur",
+    "degree": "co-sprav-degree",
+    "duration": "co-sprav-duration"
+   }
+  }
+ ]
+}
