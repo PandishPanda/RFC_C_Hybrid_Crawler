@@ -189,6 +189,16 @@ LABEL_PATTERNS = {
         # exact pre-emption changed a golden-pinned value on MUPleven
         # when the label was made case-insensitive (2026-08-24).
         ("bg-okstepen-caps", r'(ОБРАЗОВАТЕЛНО\s*-?\s*КВАЛИФИКАЦИОННА СТЕПЕН\s*[–-]?\s*[„"“]\s*[А-Яа-я ]+["”“])'),
+        # APPENDED (fill-only): the UNQUOTED colon-labelled fact
+        # block («Образователно-квалификационна степен: Бакалавър»,
+        # BFU's template — located by the attended LLM tail
+        # 2026-08-24, then generalized here instead of pinned as
+        # per-site anchors). Closed value list on purpose: a colon
+        # followed by open prose must never ship.
+        ("bg-okstepen-colon",
+         r'([Оо]бразователно-квалификационна степен:\s*'
+         r'(?:[Пп]рофесионален\s+)?(?:[Бб]акалавър|[Мм]агистър'
+         r'|[Дд]октор)\b)'),
     ],
     "duration": [
         ("bg-semestri-label", r'(Продължителност на обучението \(брой семестри\):\s*[0-9а-я]+)'),
@@ -235,7 +245,7 @@ LABEL_PATTERNS = {
          r'([Сс]рок на обучение\s*[:–-]\s*\d+\s*години'
          r'(?:\s*\(\d+\s*семестъра\))?)'),
         ("bg-srok-dumi",
-         r'([Сс]рок на обучение\s*[–-]?\s*(?:две|три|четири|пет|шест)'
+         r'([Сс]рок на обучение\s*[:–-]?\s*(?:две|три|четири|пет|шест)'
          r'\s+години'
          r'(?:\s*/\s*(?:две|три|четири|пет|шест|седем|осем)'
          r'\s+семестъра)?)'),
@@ -297,6 +307,16 @@ LABEL_PATTERNS = {
         # before the next prose sentence (2026-08-22, 20 graded-MISS
         # cells the frozen key proved exist).
         ("bg-kandidatstva-se", r'Кандидатства се с:\s*(1\).{20,500}?\.)(?=\s+[А-Я]|\s*$)'),
+        # APPENDED (fill-only): the program-NAMED admission sentence
+        # («Приемът в бакалавърската програма по специалност „X" е с
+        # ... или чрез ...», BFU's template — located by the attended
+        # LLM tail 2026-08-24). Captured whole to the sentence end so
+        # both admission routes ship together (partial values are
+        # wrong values); the value NAMES its own program, making the
+        # claim self-attributing.
+        ("bg-priemat-e",
+         r'(Приемът (?:в [а-я]+ската(?: програма)? )?по специалност\s*'
+         r'[„"“][^"”“]+["”“] (?:е|става) (?:с|чрез)\s[^.]+\.)'),
     ],
 }
 

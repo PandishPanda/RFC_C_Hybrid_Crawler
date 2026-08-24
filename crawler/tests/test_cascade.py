@@ -338,8 +338,13 @@ class TestGoldenRegression(unittest.TestCase):
         #         + bg-okstepen-caps (same ticket: the all-caps label
         #           form, APPENDED so it can never pre-empt lowercase
         #           prose — the golden pin on mu-med proved why)
+        #         + bg-okstepen-colon, bg-priemat-e (2026-08-24: the
+        #           unquoted colon-labelled degree block and the
+        #           program-named admission sentence — BFU's templates,
+        #           LOCATED by the attended LLM tail then generalized
+        #           into the library instead of pinned as anchors)
         n = sum(len(v) for v in cascade.LABEL_PATTERNS.values())
-        self.assertEqual(n, 37)
+        self.assertEqual(n, 39)
 
     def test_reproduces_every_golden_record(self):
         extractions = benchmark_extractions()

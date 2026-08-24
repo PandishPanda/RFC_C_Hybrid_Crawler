@@ -70,6 +70,84 @@ class DegreeCapitalsTest(unittest.TestCase):
             "образователно-квалификационна степен „професионален бакалавър“")
 
 
+class ColonLabelledDegreeTest(unittest.TestCase):
+    """The unquoted colon-labelled degree block (BFU's template, located
+    by the attended LLM tail): „Образователно-квалификационна степен:
+    Бакалавър" — bg-okstepen requires quotes, so this shipped via the
+    tail until the shape joined the library."""
+
+    def test_bachelor(self):
+        r = cascade.harvest_labels("degree", _src(
+            "Основно звено: Център по информатика "
+            "Образователно-квалификационна степен: Бакалавър "
+            "Професионална квалификация: Информатик"))
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value,
+                         "Образователно-квалификационна степен: Бакалавър")
+
+    def test_master(self):
+        r = cascade.harvest_labels("degree", _src(
+            "Образователно-квалификационна степен: Магистър "
+            "Професионална квалификация: Юрист"))
+        self.assertEqual(r.value,
+                         "Образователно-квалификационна степен: Магистър")
+
+    def test_professional_bachelor(self):
+        r = cascade.harvest_labels("degree", _src(
+            "Образователно-квалификационна степен: професионален "
+            "бакалавър и още текст"))
+        self.assertEqual(
+            r.value,
+            "Образователно-квалификационна степен: професионален бакалавър")
+
+    def test_open_ended_word_after_colon_does_not_match(self):
+        # closed value list — a colon followed by prose must not ship
+        self.assertIsNone(cascade.harvest_labels("degree", _src(
+            "Образователно-квалификационна степен: виж таблицата")))
+
+
+class ProgramNamedAdmissionTest(unittest.TestCase):
+    def test_priemat_e_sentence_ships_whole(self):
+        r = cascade.harvest_labels("admission", _src(
+            "Друга възможна реализация е работа. Приемът в "
+            "бакалавърската програма по специалност „Софтуерно "
+            "инженерство” е с оценки от държавни зрелостни изпити "
+            "(матури) или чрез приемни изпити. Учебен план и учебни "
+            "програми"))
+        self.assertIsNotNone(r)
+        self.assertEqual(
+            r.value,
+            "Приемът в бакалавърската програма по специалност „Софтуерно "
+            "инженерство” е с оценки от държавни зрелостни изпити "
+            "(матури) или чрез приемни изпити.")
+
+    def test_stava_verb_variant(self):
+        r = cascade.harvest_labels("admission", _src(
+            "Приемът в бакалавърската програма по специалност "
+            "„Компютърни системи и технологии” става с оценки от "
+            "държавни зрелостни изпити (матури) или чрез приемни "
+            "изпити. Учебен план"))
+        self.assertIsNotNone(r)
+        self.assertTrue(r.value.endswith("приемни изпити."))
+
+    def test_bare_po_spetsialnost_variant(self):
+        # pravo's shape drops „...ската програма" entirely
+        r = cascade.harvest_labels("admission", _src(
+            "Прием Приемът по специалност „Право” става с ДЗИ (матура) "
+            "по Български език и литература или с кандидатстудентски "
+            "изпит по български език. Учебен план"))
+        self.assertIsNotNone(r)
+        self.assertTrue(r.value.startswith("Приемът по специалност"))
+        self.assertTrue(r.value.endswith("български език."))
+
+    def test_master_programme_variant(self):
+        r = cascade.harvest_labels("admission", _src(
+            "Приемът в магистърската програма по специалност „Право” е "
+            "чрез конкурсен изпит. Още текст"))
+        self.assertIsNotNone(r)
+        self.assertTrue(r.value.startswith("Приемът в магистърската"))
+
+
 class DurationShapesTest(unittest.TestCase):
     def test_colon_years_no_semesters(self):
         r = cascade.harvest_labels("duration", _src(
@@ -102,6 +180,15 @@ class DurationShapesTest(unittest.TestCase):
     def test_bare_year_count_without_the_label_does_not_match(self):
         self.assertIsNone(cascade.harvest_labels("duration", _src(
             "програмата съществува от 4 години и се радва на интерес")))
+
+    def test_colon_word_number_duration(self):
+        # BFU's labelled fact block (located by the attended LLM tail,
+        # 2026-08-24): „Срок на обучение: четири години"
+        r = cascade.harvest_labels("duration", _src(
+            "Форма на обучение: редовно, задочно Срок на обучение: "
+            "четири години Профил на специалността"))
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "Срок на обучение: четири години")
 
     def test_existing_semester_label_keeps_its_pattern(self):
         r = cascade.harvest_labels("duration", _src(
