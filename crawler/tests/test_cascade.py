@@ -350,8 +350,10 @@ class TestGoldenRegression(unittest.TestCase):
         #         + bg-prodalzhava-semestri,
         #           bg-prodalzhitelnost-godini-sem (2026-08-24: LTU's
         #           duration shapes, surfaced as refuter misses)
+        #         + bg-srok-semestri-formi (ltu-gorsko's bracketed
+        #           both-form statement, 2026-08-24)
         n = sum(len(v) for v in cascade.LABEL_PATTERNS.values())
-        self.assertEqual(n, 43)
+        self.assertEqual(n, 44)
 
     def test_reproduces_every_golden_record(self):
         extractions = benchmark_extractions()

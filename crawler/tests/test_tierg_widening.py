@@ -141,6 +141,30 @@ class LtuDurationShapesTest(unittest.TestCase):
             "с продължителност 4 години (8 семестъра) за редовно "
             "обучение и 5 години (10 семестъра) за задочно обучение")
 
+    def test_bracketed_form_semesters_ship_whole(self):
+        # ltu-gorsko: „Срок на обучение – 8 семестъра (редовна форма) и
+        # 10 семестъра (задочна форма)" — both forms, one claim
+        r = cascade.harvest_labels("duration", _src(
+            "Форма на обучение – редовна и задочна. Срок на обучение – "
+            "8 семестъра (редовна форма) и 10 семестъра (задочна "
+            "форма). Професионална квалификация – инженер"))
+        self.assertIsNotNone(r)
+        self.assertEqual(
+            r.value,
+            "Срок на обучение – 8 семестъра (редовна форма) и 10 "
+            "семестъра (задочна форма)")
+
+    def test_za_form_master_phrasing_does_not_match_the_bracketed_pattern(self):
+        # the same page's MASTER section phrases per-form durations as
+        # „3 семестъра за редовно обучение, 4 семестъра за задочно
+        # обучение" — deliberately NOT captured here: a pattern for that
+        # shape could ship a master duration on a dual-section bachelor
+        # page (the ltu-inzheneren defect class)
+        self.assertIsNone(cascade.harvest_labels("duration", _src(
+            "Срок на обучение – 3 семестъра за редовно обучение, 4 "
+            "семестъра за задочно обучение. Професионална квалификация "
+            "– магистър-инженер")))
+
     def test_digit_years_with_semesters_parenthetical(self):
         # ltu-alternativen/ekologia: „е с продължителност 4 години
         # (8 семестъра), в редовна форма"

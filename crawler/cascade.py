@@ -280,6 +280,16 @@ LABEL_PATTERNS = {
         # in bg-prodalzhitelnost.
         ("bg-prodalzhava-semestri",
          r'[Оо]бучението продължава\s+(\d+\s*семестъра)'),
+        # APPENDED (fill-only): ltu-gorsko's bracketed both-form
+        # statement. ONLY the parenthesized form labels — the same
+        # page's master section phrases per-form durations as «N
+        # семестъра за редовно обучение», and a pattern for that
+        # shape could ship a master duration on a dual-section
+        # bachelor page (the ltu-inzheneren defect class).
+        ("bg-srok-semestri-formi",
+         r'(Срок на обучение\s*[–-]\s*\d+\s*семестъра\s*'
+         r'\(редовна форма\)\s*и\s*\d+\s*семестъра\s*'
+         r'\(задочна форма\))'),
         ("bg-prodalzhitelnost-godini-sem",
          # the group extends over the per-form continuation («... за
          # редовно обучение и 5 години (10 семестъра) за задочно
