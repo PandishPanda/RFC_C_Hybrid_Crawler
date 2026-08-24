@@ -52,10 +52,16 @@ from crawler.render import DOCLING_URL, ROUTE_HTML
 from crawler.store import LiveFetcher, SnapshotStore
 
 __all__ = ["run", "document_plan", "build_docs", "build_fetcher_and_store",
-          "DEFAULT_OUT_ROOT", "CASCADE_NULL_REASON"]
+          "DEFAULT_OUT_ROOT", "CASCADE_NULL_REASON", "config_path_for"]
 
 DEFAULT_OUT_ROOT = "crawler-out"
 DEFAULT_CONFIGS_DIR = Path(__file__).resolve().parent / "configs"
+
+
+def config_path_for(uni_id, configs_dir=None):
+    # type: (str, ...) -> Path
+    """The one <UniID>.json path rule, shared by every CLI verb."""
+    return Path(configs_dir or DEFAULT_CONFIGS_DIR) / (uni_id + ".json")
 
 
 def build_fetcher_and_store(uni_id, *, out_dir=None, replay_dir=None,

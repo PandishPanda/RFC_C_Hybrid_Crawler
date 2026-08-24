@@ -16,6 +16,7 @@
                                  [--all] [--json] [--out DIR]
     python3 -m crawler resolve <item-id> [--reason ..] [--verdict ok|wrong]
                                          [--note ..] [--shipped-value V]
+    python3 -m crawler slugs <UniID> [--configs DIR]
     python3 -m crawler labelkit <UniID> [--configs DIR] [--out-file PATH]
     python3 -m crawler check-pins <UniID> [--configs DIR] [--list-html PATH]
 
@@ -95,7 +96,7 @@ import json
 import sys
 from pathlib import Path
 
-from crawler import attention, celldiff, grader, labelkit, llm_tail, onboarding, publish as publish_mod, refresh as refresh_mod, runner, staleness, validate as validate_mod
+from crawler import attention, celldiff, grader, labelkit, llm_tail, minting, onboarding, publish as publish_mod, refresh as refresh_mod, runner, staleness, validate as validate_mod
 from crawler.config import load_site_config
 
 
@@ -423,10 +424,18 @@ def main(argv=None):
         "--out-file", metavar="PATH", default=None,
         help="write the worksheet here instead of stdout")
 
+    slugs_parser = subparsers.add_parser(
+        "slugs", help="propose URL slugs for a university's unminted "
+                      "programs and flag collisions — proposes only, a "
+                      "human promotes (url-scheme ticket 03)")
+    slugs_parser.add_argument(
+        "uni_id", help="university id — a crawler/configs/<UniID>.json")
+    slugs_parser.add_argument("--configs", metavar="DIR", default=None)
+
     args = parser.parse_args(argv)
 
     if args.command not in ("run", "publish", "onboard", "grade", "diff",
-                            "attention", "resolve", "refresh",
+                            "attention", "resolve", "refresh", "slugs",
                             "labelkit", "check-pins", "validate"):
         parser.print_help()
         return 2
@@ -475,10 +484,14 @@ def main(argv=None):
         # it fatal would block a publish over data that is still accurate.
         return 0
 
+    if args.command == "slugs":
+        config_path = runner.config_path_for(args.uni_id, args.configs)
+        report = minting.propose_slugs(load_site_config(config_path))
+        print(minting.render_report(report))
+        return 0 if report["complete"] else 1
+
     if args.command == "labelkit":
-        config_path = Path(
-            args.configs or runner.DEFAULT_CONFIGS_DIR
-        ) / "{0}.json".format(args.uni_id)
+        config_path = runner.config_path_for(args.uni_id, args.configs)
         site = load_site_config(config_path)
         worksheet = labelkit.build_worksheet(site)
         if args.out_file:

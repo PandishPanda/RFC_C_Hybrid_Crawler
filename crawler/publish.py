@@ -12,7 +12,8 @@ import time
 from pathlib import Path
 from typing import Optional
 
-from crawler import attention, expectations, ledger, runner
+from crawler import attention, expectations, ledger, runner, urls
+from crawler.config import load_site_config
 
 __all__ = ["publish", "PUBLISH_REPORT_NAME"]
 
@@ -21,7 +22,7 @@ PUBLISH_REPORT_NAME = "publish-report.json"
 
 def publish(uni_id, *, configs_dir=None, out_dir=None, replay_dir=None,
            docling_url=None, tail=None, ledger_dir=None,
-           academic_year=None, today=None, report=None):
+           academic_year=None, today=None, report=None, site=None):
     # type: (...) -> dict
     """Run the extraction spine (unless ``report`` is already supplied —
     tests can skip re-running), append its values to the ledger, check
@@ -99,6 +100,24 @@ def publish(uni_id, *, configs_dir=None, out_dir=None, replay_dir=None,
     run_dir.mkdir(parents=True, exist_ok=True)
     (run_dir / PUBLISH_REPORT_NAME).write_text(
         json.dumps(publish_report, ensure_ascii=False, indent=1), encoding="utf-8")
+
+    # urls.json (url-scheme ticket 04) — AFTER the gates, and only on
+    # promotion: a blocked publish leaves no fresh export, so the
+    # frontend's URL contract only ever reflects a promoted run — and a
+    # malformed config can only fail a publish that was exporting
+    # anyway. site= mirrors report= (tests inject one); without a
+    # config file there is nothing to export — the pre-URL-scheme
+    # surface, not an error.
+    if promoted and site is None:
+        config_path = runner.config_path_for(uni_id, configs_dir)
+        if config_path.exists():
+            site = load_site_config(config_path)
+    if promoted and site is not None:
+        urls_report = urls.build_urls_report(
+            site, generated_at=publish_report["generated_at"])
+        (run_dir / urls.URLS_REPORT_NAME).write_text(
+            json.dumps(urls_report, ensure_ascii=False, indent=1),
+            encoding="utf-8")
 
     # Attention Ledger (ADR-0005): a blocked publish and every gate
     # failure become aged items a human works later. Both kinds snapshot

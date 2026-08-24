@@ -16,7 +16,20 @@ visibly starts at load.
 
 Schema (JSON key = dataclass field, snake_case):
 
-  SiteConfig            uni_id, cookies, sources{id: SourceConfig}, programs[]
+  SiteConfig            uni_id, cookies, sources{id: SourceConfig}, programs[],
+                        display_name?, slug?, city?, retired_slugs?
+                        (URL scheme, .scratch/url-scheme/spec.md: the
+                        hand-authored university record and the redirect
+                        ledger {old slug: program id | uni_id}; slugs are
+                        VALIDATED here — charset, uniqueness, reserved
+                        root words — and minted by `crawler slugs` + a
+                        human, never generated at load)
+  subjects.json         {subjects: [{slug, name}]} — the subject-landing
+                        taxonomy, loaded by load_subjects; program
+                        `subject` keys must reference it (checked in
+                        load_configs_dir, the one place that sees every
+                        file, where cross-university slug uniqueness is
+                        checked too)
   SourceConfig          url, route (html | prose-pdf | table-pdf |
                         spreadsheet), join?
   join (by "kind"):
@@ -51,7 +64,9 @@ Schema (JSON key = dataclass field, snake_case):
                         language_tracks? (JoinRef: source + alias|alias_pattern),
                         fees_section? (SectionRef: source + section_pattern),
                         field_anchors? ({field: anchor_id} into site anchors),
-                        suppress_labels? ({field: [label ids]})
+                        suppress_labels? ({field: [label ids]}),
+                        slug? (public path segment, unique per university),
+                        subject? (a subjects.json slug)
 
 All regexes (alias_pattern, join patterns) are compile-checked at load time;
 join pattern templates carry a literal "{alias}" placeholder that the cascade
@@ -68,6 +83,8 @@ import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, Mapping, Optional, Tuple
+
+from crawler.slugs import RESERVED_ROOT_SLUGS, SLUG_RE
 
 __all__ = [
     "ConfigError",
@@ -88,6 +105,7 @@ __all__ = [
     "parse_site_config",
     "load_site_config",
     "load_configs_dir",
+    "load_subjects",
 ]
 
 # Must stay equal to crawler.render.ROUTE_* (not imported: config is
@@ -304,6 +322,13 @@ class ProgramConfig:
     # through to the next mechanism or an honest null.
     suppress_labels: Mapping[str, Tuple[str, ...]] = field(
         default_factory=dict)
+    # URL-scheme identity (.scratch/url-scheme/spec.md): the public path
+    # segment and the subject-landing membership. Minted by a human from
+    # the ``crawler slugs`` proposal — the loader validates, never
+    # generates. Optional during rollout; completeness is the backfill's
+    # concern, not the schema's.
+    slug: Optional[str] = None
+    subject: Optional[str] = None
 
 
 @dataclass(frozen=True)
@@ -321,6 +346,19 @@ class SiteConfig:
     # value at the first university that does not fit. Absent = derive
     # nothing. The config diff records who asserted this, the same
     # discipline as a page-wide anchor attestation.
+
+    # URL-scheme university record (.scratch/url-scheme/spec.md): the
+    # hand-authored public identity this repo otherwise lacks. slug is a
+    # short COMMON name (sofiyski-universitet), a human judgment call per
+    # ADR-0003; city is metadata only (no city URLs yet — /gradove/ is
+    # reserved). retired_slugs is the redirect ledger: every slug ever
+    # minted and since replaced, mapped to the PROGRAM ID (or this
+    # university's own uni_id) it belonged to — ids, not paths, so a
+    # second rename never strands the first redirect.
+    display_name: Optional[str] = None
+    slug: Optional[str] = None
+    city: Optional[str] = None
+    retired_slugs: Mapping[str, str] = field(default_factory=dict)
 
     program_markers: Tuple[str, ...] = ()  # words THIS site uses to
     # announce "a program we offer" ("Специалност", "Programme", ...),
@@ -394,6 +432,16 @@ def _str_dict(value, path):
             "{0}: expected an object of string values, got {1!r}".format(
                 path, value))
     return dict(value)
+
+
+def _slug(value, path):
+    value = _str(value, path)
+    if not SLUG_RE.match(value):
+        raise ConfigError(
+            "{0}: {1!r} is not a valid slug — lowercase latin words and "
+            "digits joined by single hyphens (mint one with `python3 -m "
+            "crawler slugs`)".format(path, value))
+    return value
 
 
 def _regex(value, path, template=False):
@@ -697,7 +745,8 @@ _PROGRAM_KEYS = ("id", "name", "page",
                  "extra_pages", "extra_sources",
                  "lang_page", "adm_page", "tuition_page", "tuition_join",
                  "admission_join", "spravochnik", "language_tracks",
-                 "fees_section", "field_anchors", "suppress_labels")
+                 "fees_section", "field_anchors", "suppress_labels",
+                 "slug", "subject")
 
 
 def _build_field_anchors(data, path, anchors):
@@ -809,7 +858,16 @@ def _build_program(data, path, sources, anchors):
                                            path + ".field_anchors", anchors),
         suppress_labels=_build_suppress_labels(
             data.get("suppress_labels", {}), path + ".suppress_labels"),
+        slug=(_slug(data["slug"], path + ".slug")
+              if data.get("slug") is not None else None),
+        subject=opt_str("subject"),
     )
+    # /<uni>/ucheben-plan must stay free: it is the reserved child
+    # segment of every specialty page, so no program may claim it.
+    if program.slug in RESERVED_ROOT_SLUGS:
+        raise ConfigError(
+            "{0}.slug: {1!r} is a reserved URL segment".format(
+                path, program.slug))
     _check_anchor_scopes(program, anchors, path, sources)
     return program
 
@@ -825,8 +883,20 @@ def parse_site_config(data, origin="<config>"):
     """
     _reject_unknown(data, ("uni_id", "cookies", "sources", "programs",
                            "anchors", "program_markers",
-                           "default_language"), origin)
+                           "default_language", "display_name", "slug",
+                           "city", "retired_slugs"), origin)
     uni_id = _str(_require(data, "uni_id", origin), origin + ".uni_id")
+    display_name = (_str(data["display_name"], origin + ".display_name")
+                    if data.get("display_name") is not None else None)
+    city = (_str(data["city"], origin + ".city")
+            if data.get("city") is not None else None)
+    uni_slug = None
+    if data.get("slug") is not None:
+        uni_slug = _slug(data["slug"], origin + ".slug")
+        if uni_slug in RESERVED_ROOT_SLUGS:
+            raise ConfigError(
+                "{0}.slug: {1!r} is a reserved root URL segment".format(
+                    origin, uni_slug))
     cookies = _str_dict(data.get("cookies", {}), origin + ".cookies")
     program_markers = tuple(_str_list(data.get("program_markers", []),
                                       origin + ".program_markers"))
@@ -868,11 +938,38 @@ def parse_site_config(data, origin="<config>"):
             raise ConfigError("{0}: duplicate program id {1!r}".format(
                 origin, p.id))
         seen.add(p.id)
+    live_slugs = {}
+    for p in programs:
+        if p.slug is None:
+            continue
+        if p.slug in live_slugs:
+            raise ConfigError(
+                "{0}: programs {1!r} and {2!r} share the slug {3!r} — a "
+                "human names the twins apart (no auto-suffix)".format(
+                    origin, live_slugs[p.slug], p.id, p.slug))
+        live_slugs[p.slug] = p.id
+
+    retired_raw = data.get("retired_slugs", {})
+    retired = _str_dict(retired_raw, origin + ".retired_slugs")
+    for old, target in retired.items():
+        rpath = "{0}.retired_slugs[{1!r}]".format(origin, old)
+        _slug(old, rpath)
+        if old in live_slugs or old == uni_slug:
+            raise ConfigError(
+                "{0}: {1!r} is still a live slug — retire it only after "
+                "the rename".format(rpath, old))
+        if target != uni_id and target not in seen:
+            raise ConfigError(
+                "{0}: target {1!r} is neither a program id nor this "
+                "uni_id — the ledger maps to ids, and a dangling id "
+                "cannot redirect".format(rpath, target))
 
     return SiteConfig(uni_id=uni_id, cookies=cookies, sources=sources,
                       programs=programs, anchors=anchors,
                       program_markers=program_markers,
-                      default_language=default_language)
+                      default_language=default_language,
+                      display_name=display_name, slug=uni_slug, city=city,
+                      retired_slugs=retired)
 
 
 def load_site_config(path):
@@ -886,14 +983,60 @@ def load_site_config(path):
     return parse_site_config(data, origin=str(path))
 
 
+def load_subjects(path):
+    # type: (str) -> Dict[str, str]
+    """Load configs/subjects.json: the subject-landing taxonomy.
+
+    Free-form and search-led (.scratch/url-scheme/spec.md) — subjects
+    are named the way students search, not the way the класификатор
+    talks. Returns {subject slug: display name}. Program `subject` keys
+    must reference a slug in here; load_configs_dir enforces that."""
+    path = Path(path)
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except ValueError as exc:
+        raise ConfigError("{0}: not valid JSON: {1}".format(path, exc))
+    origin = str(path)
+    _reject_unknown(data, ("subjects",), origin)
+    raw = _require(data, "subjects", origin)
+    if not isinstance(raw, list):
+        raise ConfigError(origin + ".subjects: expected a list")
+    subjects = {}
+    for i, entry in enumerate(raw):
+        epath = "{0}.subjects[{1}]".format(origin, i)
+        _reject_unknown(entry, ("slug", "name"), epath)
+        slug = _slug(_require(entry, "slug", epath), epath + ".slug")
+        name = _str(_require(entry, "name", epath), epath + ".name")
+        if slug in subjects:
+            raise ConfigError("{0}: duplicate subject slug {1!r}".format(
+                epath, slug))
+        subjects[slug] = name
+    return subjects
+
+
+SUBJECTS_FILENAME = "subjects.json"
+
+
 def load_configs_dir(directory):
     # type: (str) -> Dict[str, SiteConfig]
     """Load every *.json site config in a directory, keyed by uni_id.
 
     The filename stem must equal the uni_id inside — a mismatch is a
-    config bug (the file IS the per-site maintenance surface)."""
+    config bug (the file IS the per-site maintenance surface).
+
+    subjects.json is the URL-scheme taxonomy, not a site config; this
+    is also the one place that sees every file, so the cross-file URL
+    checks live here: program `subject` references must exist in the
+    taxonomy, and no two universities may share a slug (they share the
+    root URL namespace)."""
+    directory = Path(directory)
+    subjects_path = directory / SUBJECTS_FILENAME
+    subjects = load_subjects(subjects_path) if subjects_path.exists() \
+        else None
     configs = {}
-    for path in sorted(Path(directory).glob("*.json")):
+    for path in sorted(directory.glob("*.json")):
+        if path.name == SUBJECTS_FILENAME:
+            continue
         cfg = load_site_config(path)
         if cfg.uni_id != path.stem:
             raise ConfigError(
@@ -902,4 +1045,28 @@ def load_configs_dir(directory):
         if cfg.uni_id in configs:
             raise ConfigError("duplicate uni_id {0!r}".format(cfg.uni_id))
         configs[cfg.uni_id] = cfg
+
+    slug_owners = {}
+    for cfg in configs.values():
+        if cfg.slug is not None:
+            if cfg.slug in slug_owners:
+                raise ConfigError(
+                    "universities {0!r} and {1!r} share the slug {2!r} — "
+                    "uni slugs share one root namespace".format(
+                        slug_owners[cfg.slug], cfg.uni_id, cfg.slug))
+            slug_owners[cfg.slug] = cfg.uni_id
+        for p in cfg.programs:
+            if p.subject is None:
+                continue
+            if subjects is None:
+                raise ConfigError(
+                    "{0} program {1!r}: subject {2!r} but no {3} exists "
+                    "in {4}".format(cfg.uni_id, p.id, p.subject,
+                                    SUBJECTS_FILENAME, directory))
+            if p.subject not in subjects:
+                raise ConfigError(
+                    "{0} program {1!r}: subject {2!r} is not in {3} — a "
+                    "dangling reference cannot land on a subject "
+                    "page".format(cfg.uni_id, p.id, p.subject,
+                                  SUBJECTS_FILENAME))
     return configs
