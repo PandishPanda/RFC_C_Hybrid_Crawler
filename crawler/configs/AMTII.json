@@ -12,95 +12,174 @@
    "name": "Аниматор изкуство в туризма",
    "page": "https://artacademyplovdiv.com/specialnosti/AIT.html",
    "slug": "animator-izkustvo-v-turizma",
-   "subject": "turizam-i-hotelierstvo"
+   "subject": "turizam-i-hotelierstvo",
+   "field_anchors": {
+    "degree": "amtii-ait-degree",
+    "duration": "amtii-ait-duration"
+   }
   },
   {
    "id": "amtii-artm",
    "name": "Артмениджмънт",
    "page": "https://artacademyplovdiv.com/specialnosti/ArtM.html",
    "slug": "artmenidzhmant",
-   "subject": "izkustva-i-dizayn"
+   "subject": "izkustva-i-dizayn",
+   "field_anchors": {
+    "degree": "amtii-artm-degree",
+    "duration": "amtii-artm-duration"
+   }
   },
   {
    "id": "amtii-artt",
    "name": "Арттерапия",
    "page": "https://artacademyplovdiv.com/specialnosti/ArtT.html",
    "slug": "artterapia",
-   "subject": "izkustva-i-dizayn"
+   "subject": "izkustva-i-dizayn",
+   "field_anchors": {
+    "degree": "amtii-artt-degree",
+    "duration": "amtii-artt-duration"
+   }
   },
   {
-   "id": "amtii-bi",
-   "name": "Балетно изкуство",
+   "id": "amtii-bi-bak",
+   "name": "Балетно изкуство (бакалавър)",
    "page": "https://artacademyplovdiv.com/specialnosti/BI.html",
    "slug": "baletno-izkustvo",
-   "subject": "horeografia"
+   "subject": "horeografia",
+   "field_anchors": {
+    "degree": "amtii-bi-bak-degree",
+    "duration": "amtii-bi-bak-duration"
+   }
   },
   {
-   "id": "amtii-bnh",
-   "name": "Българска народна хореография",
+   "id": "amtii-bi-mag",
+   "name": "Балетно изкуство (магистър)",
+   "page": "https://artacademyplovdiv.com/specialnosti/BI.html",
+   "slug": "baletno-izkustvo-magistratura",
+   "subject": "horeografia",
+   "field_anchors": {
+    "degree": "amtii-bi-mag-degree",
+    "duration": "amtii-bi-mag-duration"
+   }
+  },
+  {
+   "id": "amtii-bnh-bak",
+   "name": "Българска народна хореография (бакалавър)",
    "page": "https://artacademyplovdiv.com/specialnosti/BNH.html",
    "slug": "balgarska-narodna-horeografia",
-   "subject": "horeografia"
+   "subject": "horeografia",
+   "field_anchors": {
+    "degree": "amtii-bnh-bak-degree",
+    "duration": "amtii-bnh-bak-duration"
+   }
+  },
+  {
+   "id": "amtii-bnh-mag",
+   "name": "Българска народна хореография (магистър)",
+   "page": "https://artacademyplovdiv.com/specialnosti/BNH.html",
+   "slug": "balgarska-narodna-horeografia-magistratura",
+   "subject": "horeografia",
+   "field_anchors": {
+    "degree": "amtii-bnh-mag-degree",
+    "duration": "amtii-bnh-mag-duration"
+   }
   },
   {
    "id": "amtii-gra",
    "name": "Графика",
    "page": "https://artacademyplovdiv.com/specialnosti/GRA.html",
    "slug": "grafika",
-   "subject": "izkustva-i-dizayn"
+   "subject": "izkustva-i-dizayn",
+   "field_anchors": {
+    "degree": "amtii-gra-degree",
+    "duration": "amtii-gra-duration"
+   }
   },
   {
    "id": "amtii-gd",
    "name": "Графичен дизайн",
    "page": "https://artacademyplovdiv.com/specialnosti/GD.html",
    "slug": "grafichen-dizayn",
-   "subject": "izkustva-i-dizayn"
+   "subject": "izkustva-i-dizayn",
+   "field_anchors": {
+    "degree": "amtii-gd-degree"
+   }
   },
   {
    "id": "amtii-gdf",
    "name": "Графичен дизайн и фотография",
    "page": "https://artacademyplovdiv.com/specialnosti/GDF.html",
    "slug": "grafichen-dizayn-i-fotografia",
-   "subject": "izkustva-i-dizayn"
+   "subject": "izkustva-i-dizayn",
+   "field_anchors": {
+    "degree": "amtii-gdf-degree",
+    "duration": "amtii-gdf-duration"
+   }
   },
   {
    "id": "amtii-do",
    "name": "Дизайн на облеклото",
    "page": "https://artacademyplovdiv.com/specialnosti/DO.html",
    "slug": "dizayn-na-oblekloto",
-   "subject": "izkustva-i-dizayn"
+   "subject": "izkustva-i-dizayn",
+   "field_anchors": {
+    "degree": "amtii-do-degree",
+    "duration": "amtii-do-duration"
+   }
   },
   {
    "id": "amtii-dir",
    "name": "Дирижиране (хорово и оркестрово)",
    "page": "https://artacademyplovdiv.com/specialnosti/DIR.html",
    "slug": "dirizhirane",
-   "subject": "muzika"
+   "subject": "muzika",
+   "field_anchors": {
+    "degree": "amtii-dir-degree",
+    "duration": "amtii-dir-duration"
+   }
   },
   {
    "id": "amtii-dno",
    "name": "Дирижиране на народен оркестър",
    "page": "https://artacademyplovdiv.com/specialnosti/DNO.html",
    "slug": "dirizhirane-na-naroden-orkestar",
-   "subject": "muzika"
+   "subject": "muzika",
+   "field_anchors": {
+    "degree": "amtii-dno-degree",
+    "duration": "amtii-dno-duration"
+   }
   },
   {
    "id": "amtii-dnh",
    "name": "Дирижиране на народен хор",
    "page": "https://artacademyplovdiv.com/specialnosti/DNH.html",
    "slug": "dirizhirane-na-naroden-hor",
-   "subject": "muzika"
+   "subject": "muzika",
+   "field_anchors": {
+    "degree": "amtii-dnh-degree",
+    "duration": "amtii-dnh-duration"
+   }
   },
   {
-   "id": "amtii-dns",
-   "name": "Дирижиране на народни състави",
+   "id": "amtii-dns-bak",
+   "name": "Дирижиране на народни състави (бакалавър)",
    "page": "https://artacademyplovdiv.com/specialnosti/DNS.html",
    "slug": "dirizhirane-na-narodni-sastavi",
    "subject": "muzika",
-   "suppress_labels": {
-    "degree": [
-     "bg-oks-inline"
-    ]
+   "field_anchors": {
+    "degree": "amtii-dns-bak-degree",
+    "duration": "amtii-dns-bak-duration"
+   }
+  },
+  {
+   "id": "amtii-dns-mag",
+   "name": "Дирижиране на народни състави (магистър)",
+   "page": "https://artacademyplovdiv.com/specialnosti/DNS.html",
+   "slug": "dirizhirane-na-narodni-sastavi-magistratura",
+   "subject": "muzika",
+   "field_anchors": {
+    "degree": "amtii-dns-mag-degree",
+    "duration": "amtii-dns-mag-duration"
    }
   },
   {
@@ -108,14 +187,164 @@
    "name": "Живопис",
    "page": "https://artacademyplovdiv.com/specialnosti/ZHI.html",
    "slug": "zhivopis",
-   "subject": "izkustva-i-dizayn"
+   "subject": "izkustva-i-dizayn",
+   "field_anchors": {
+    "degree": "amtii-zhi-degree",
+    "duration": "amtii-zhi-duration"
+   }
   },
   {
    "id": "amtii-iibm",
    "name": "Изпълнителско изкуство (българска народна музика с класически или друг нетрадиционен за България фолклорен инструмент)",
    "page": "https://artacademyplovdiv.com/specialnosti/IIBM.html",
    "slug": "izpalnitelsko-izkustvo",
-   "subject": "muzika"
+   "subject": "muzika",
+   "field_anchors": {
+    "degree": "amtii-iibm-degree",
+    "duration": "amtii-iibm-duration"
+   }
   }
- ]
+ ],
+ "anchors": {
+  "amtii-ait-degree": {
+   "source": "https://artacademyplovdiv.com/specialnosti/AIT.html",
+   "pattern": "(степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно\\s*\\(1 година\\))"
+  },
+  "amtii-ait-duration": {
+   "source": "https://artacademyplovdiv.com/specialnosti/AIT.html",
+   "pattern": "Магистратурата [„“\"][^\"”“]+[”“\"] в АМТИИ е със срок на обучение (2 семестъра)"
+  },
+  "amtii-artm-degree": {
+   "source": "https://artacademyplovdiv.com/specialnosti/ArtM.html",
+   "pattern": "(степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно и задочно\\s*\\(1 година\\))"
+  },
+  "amtii-artm-duration": {
+   "source": "https://artacademyplovdiv.com/specialnosti/ArtM.html",
+   "pattern": "степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно и задочно\\s*\\((1 година)\\)"
+  },
+  "amtii-artt-degree": {
+   "source": "https://artacademyplovdiv.com/specialnosti/ArtT.html",
+   "pattern": "(степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно и задочно\\s*\\(1 година\\))"
+  },
+  "amtii-artt-duration": {
+   "source": "https://artacademyplovdiv.com/specialnosti/ArtT.html",
+   "pattern": "степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно и задочно\\s*\\((1 година)\\)"
+  },
+  "amtii-bi-bak-degree": {
+   "source": "https://artacademyplovdiv.com/specialnosti/BI.html",
+   "pattern": "(степен [“„\"]бакалавър[”“\"]\\s*\\(балетна педагогика\\)\\s*[–-]\\s*задочно\\s*\\(4 години\\))"
+  },
+  "amtii-bi-bak-duration": {
+   "source": "https://artacademyplovdiv.com/specialnosti/BI.html",
+   "pattern": "степен [“„\"]бакалавър[”“\"]\\s*\\(балетна педагогика\\)\\s*[–-]\\s*задочно\\s*\\((4 години)\\)"
+  },
+  "amtii-bi-mag-degree": {
+   "source": "https://artacademyplovdiv.com/specialnosti/BI.html",
+   "pattern": "(степен [“„\"]магистър[”“\"]\\s*\\(балетна педагогика или балетна режисура\\)\\s*[–-]\\s*задочно\\s*\\(1 година\\))"
+  },
+  "amtii-bi-mag-duration": {
+   "source": "https://artacademyplovdiv.com/specialnosti/BI.html",
+   "pattern": "степен [“„\"]магистър[”“\"]\\s*\\(балетна педагогика или балетна режисура\\)\\s*[–-]\\s*задочно\\s*\\((1 година)\\)"
+  },
+  "amtii-bnh-bak-degree": {
+   "source": "https://artacademyplovdiv.com/specialnosti/BNH.html",
+   "pattern": "(степен [“„\"]бакалавър[”“\"]\\s*[–-]\\s*редовно и задочно\\s*\\(4 години\\))"
+  },
+  "amtii-bnh-bak-duration": {
+   "source": "https://artacademyplovdiv.com/specialnosti/BNH.html",
+   "pattern": "степен [“„\"]бакалавър[”“\"]\\s*[–-]\\s*редовно и задочно\\s*\\((4 години)\\)"
+  },
+  "amtii-bnh-mag-degree": {
+   "source": "https://artacademyplovdiv.com/specialnosti/BNH.html",
+   "pattern": "(степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно и задочно\\s*\\(1 година\\))"
+  },
+  "amtii-bnh-mag-duration": {
+   "source": "https://artacademyplovdiv.com/specialnosti/BNH.html",
+   "pattern": "степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно и задочно\\s*\\((1 година)\\)"
+  },
+  "amtii-gra-degree": {
+   "source": "https://artacademyplovdiv.com/specialnosti/GRA.html",
+   "pattern": "(степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно\\s*\\(1,5 години\\))"
+  },
+  "amtii-gra-duration": {
+   "source": "https://artacademyplovdiv.com/specialnosti/GRA.html",
+   "pattern": "степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно\\s*\\((1,5 години)\\)"
+  },
+  "amtii-gd-degree": {
+   "source": "https://artacademyplovdiv.com/specialnosti/GD.html",
+   "pattern": "(степен [“„\"]магистър[”“\"])"
+  },
+  "amtii-gdf-degree": {
+   "source": "https://artacademyplovdiv.com/specialnosti/GDF.html",
+   "pattern": "(степен [“„\"]бакалавър[”“\"]\\s*[–-]\\s*редовна\\s*\\(4 години\\))"
+  },
+  "amtii-gdf-duration": {
+   "source": "https://artacademyplovdiv.com/specialnosti/GDF.html",
+   "pattern": "степен [“„\"]бакалавър[”“\"]\\s*[–-]\\s*редовна\\s*\\((4 години)\\)"
+  },
+  "amtii-do-degree": {
+   "source": "https://artacademyplovdiv.com/specialnosti/DO.html",
+   "pattern": "(степен [“„\"]бакалавър[”“\"]\\s*[–-]\\s*редовна\\s*\\(4 години\\))"
+  },
+  "amtii-do-duration": {
+   "source": "https://artacademyplovdiv.com/specialnosti/DO.html",
+   "pattern": "степен [“„\"]бакалавър[”“\"]\\s*[–-]\\s*редовна\\s*\\((4 години)\\)"
+  },
+  "amtii-dir-degree": {
+   "source": "https://artacademyplovdiv.com/specialnosti/DIR.html",
+   "pattern": "(степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно\\s*\\(1,5 години\\))"
+  },
+  "amtii-dir-duration": {
+   "source": "https://artacademyplovdiv.com/specialnosti/DIR.html",
+   "pattern": "степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно\\s*\\((1,5 години)\\)"
+  },
+  "amtii-dno-degree": {
+   "source": "https://artacademyplovdiv.com/specialnosti/DNO.html",
+   "pattern": "(степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно 1 година)"
+  },
+  "amtii-dno-duration": {
+   "source": "https://artacademyplovdiv.com/specialnosti/DNO.html",
+   "pattern": "степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно (1 година)"
+  },
+  "amtii-dnh-degree": {
+   "source": "https://artacademyplovdiv.com/specialnosti/DNH.html",
+   "pattern": "(степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно 1 година)"
+  },
+  "amtii-dnh-duration": {
+   "source": "https://artacademyplovdiv.com/specialnosti/DNH.html",
+   "pattern": "степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно (1 година)"
+  },
+  "amtii-dns-bak-degree": {
+   "source": "https://artacademyplovdiv.com/specialnosti/DNS.html",
+   "pattern": "(степен [“„\"]бакалавър[”“\"]\\s*[–-]\\s*редовно\\s*\\(4 години\\))"
+  },
+  "amtii-dns-bak-duration": {
+   "source": "https://artacademyplovdiv.com/specialnosti/DNS.html",
+   "pattern": "степен [“„\"]бакалавър[”“\"]\\s*[–-]\\s*редовно\\s*\\((4 години)\\)"
+  },
+  "amtii-dns-mag-degree": {
+   "source": "https://artacademyplovdiv.com/specialnosti/DNS.html",
+   "pattern": "(степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно\\s*\\(1,5 години\\))"
+  },
+  "amtii-dns-mag-duration": {
+   "source": "https://artacademyplovdiv.com/specialnosti/DNS.html",
+   "pattern": "степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно\\s*\\((1,5 години)\\)"
+  },
+  "amtii-zhi-degree": {
+   "source": "https://artacademyplovdiv.com/specialnosti/ZHI.html",
+   "pattern": "(степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно\\s*\\(1,5 години\\))"
+  },
+  "amtii-zhi-duration": {
+   "source": "https://artacademyplovdiv.com/specialnosti/ZHI.html",
+   "pattern": "степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно\\s*\\((1,5 години)\\)"
+  },
+  "amtii-iibm-degree": {
+   "source": "https://artacademyplovdiv.com/specialnosti/IIBM.html",
+   "pattern": "(степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно\\s*\\(1 година\\))"
+  },
+  "amtii-iibm-duration": {
+   "source": "https://artacademyplovdiv.com/specialnosti/IIBM.html",
+   "pattern": "степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно\\s*\\((1 година)\\)"
+  }
+ }
 }
