@@ -188,17 +188,27 @@ class ArtifactStore:
         return self._docs[ref]
 
     # ------------------------------------------------------------- resolve
-    def resolve(self, url, route, cookies=None, source_id=None, label=""):
-        # type: (str, str, Optional[dict], Optional[str], str) -> ResolvedDoc
+    def resolve(self, url, route, cookies=None, source_id=None, label="",
+                want_grid=False):
+        # type: (str, str, Optional[dict], Optional[str], str, bool) -> ResolvedDoc
         """Fetch (or replay) one document and resolve its Artifact.
 
         source_id names the config source (and, in replay, the vendored
         rendering: out/pdftext/<source_id>.txt, out/docling/<source_id>/).
         Idempotent per ref within a store instance.
+
+        want_grid (html route only): also parse <table> elements into
+        cell grids from the SAME stripped soup as the canonical text —
+        text + optional grid under one ref. Opt-in, so a plain html
+        page never surprises a caller with tables (the runner sets it
+        from the config join's kind; fill-rate ticket 01).
         """
         ref = self._ref(url, route, source_id)
         if ref in self._docs:
-            return self._docs[ref]
+            cached = self._docs[ref]
+            if not (want_grid and route == _render.ROUTE_HTML
+                    and cached.tables is None):
+                return cached
 
         snap = self.fetcher.fetch(url, {"cookies": cookies or {},
                                         "label": label})
@@ -209,7 +219,16 @@ class ArtifactStore:
 
         layout = None
         tables = None
-        if route == _render.ROUTE_HTML:
+        if route == _render.ROUTE_HTML and want_grid:
+            text, mode, grids = _render.html_text_and_grids(
+                snap.read_bytes())
+            artifact = Artifact(
+                text=text,
+                renderer_id=_render.RENDERER_HTML + ":" + mode,
+                renderer_version=_render.HTML_RENDERER_VERSION,
+                ref=ref)
+            tables = grids or None
+        elif route == _render.ROUTE_HTML:
             artifact = _render.render(snap.read_bytes(), snap.content_type,
                                       _render.ROUTE_HTML, ref=ref)
         elif route == _render.ROUTE_PROSE_PDF:

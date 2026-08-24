@@ -214,6 +214,83 @@ def _strip(soup, aggressive):
     return text.strip()
 
 
+def _table_grid(table):
+    """One <table> as a tuple of rows of normalized cell strings.
+
+    colspan/rowspan expand by PADDING with "" — deliberately NOT
+    docling's repeat-the-text convention: the html canonical text
+    renders a merged cell ONCE, so a repeated grid row could never be
+    gate-contained in the artifact text. Padding keeps every column
+    aligned while " ".join(row), normalized, stays a substring of the
+    canonical text by construction (VVVU's fee table, whose funding
+    band is a 6-column merged heading, is the measured case). The cost:
+    a header spanning N columns contributes its text only to its FIRST
+    column's header stack — name that column's own tokens in
+    value_headers when wiring such a table.
+
+    Only this table's own <tr> elements (a nested table's rows land
+    inside the parent cell's text, never as sibling grid rows)."""
+    occupied = {}
+    rows = []
+    trs = [tr for tr in table.find_all("tr")
+           if tr.find_parent("table") is table]
+    for r, tr in enumerate(trs):
+        row = []
+        c = 0
+        for cell in tr.find_all(["td", "th"], recursive=False):
+            while (r, c) in occupied:
+                row.append(occupied.pop((r, c)))
+                c += 1
+            text = " ".join(cell.get_text(" ").split())
+            try:
+                colspan = max(1, int(cell.get("colspan") or 1))
+            except (TypeError, ValueError):
+                colspan = 1
+            try:
+                rowspan = max(1, int(cell.get("rowspan") or 1))
+            except (TypeError, ValueError):
+                rowspan = 1
+            for span_i in range(colspan):
+                row.append(text if span_i == 0 else "")
+                for dr in range(1, rowspan):
+                    occupied[(r + dr, c)] = ""
+                c += 1
+        while (r, c) in occupied:
+            row.append(occupied.pop((r, c)))
+            c += 1
+        if row:
+            rows.append(tuple(row))
+    return tuple(rows)
+
+
+def html_text_and_grids(snapshot_bytes):
+    # type: (bytes) -> tuple
+    """(canonical_text, mode, grids) — one rendering, two views.
+
+    The grids are parsed from the SAME stripped soup that produced the
+    canonical text (the volumetric two-tier rule decides which), so a
+    grid row's cells appear in the text in document order and every
+    " ".join(row) segment a fee-row join emits is gate-containable by
+    construction — the html twin of grid_artifact_text's invariant for
+    TSV grids. A table the strip removed (chrome-classed, mega-menu)
+    is absent from BOTH views, never just one.
+    """
+    strict_soup = BeautifulSoup(snapshot_bytes, _BS4_PARSER)
+    strict = _strip(strict_soup, aggressive=True)
+    light_soup = BeautifulSoup(snapshot_bytes, _BS4_PARSER)
+    light = _strip(light_soup, aggressive=False)
+    if len(strict) < 400 or len(strict) < 0.15 * len(light):
+        text, mode, soup = light, MODE_LIGHT_FALLBACK, light_soup
+    else:
+        text, mode, soup = strict, MODE_AGGRESSIVE, strict_soup
+    grids = tuple(
+        grid for grid in
+        (_table_grid(t) for t in soup.find_all("table")
+         if t.find_parent("table") is None)
+        if grid)
+    return text, mode, grids
+
+
 def _render_html(snapshot_bytes):
     # type: (bytes) -> tuple
     """Two-tier strip with the light-strip volumetric fallback.
@@ -222,13 +299,8 @@ def _render_html(snapshot_bytes):
     MODE_LIGHT_FALLBACK — the caller records it in renderer_id, because
     which tier ran is part of artifact identity.
     """
-    strict = _strip(BeautifulSoup(snapshot_bytes, _BS4_PARSER),
-                    aggressive=True)
-    light = _strip(BeautifulSoup(snapshot_bytes, _BS4_PARSER),
-                   aggressive=False)
-    if len(strict) < 400 or len(strict) < 0.15 * len(light):
-        return light, MODE_LIGHT_FALLBACK
-    return strict, MODE_AGGRESSIVE
+    text, mode, _grids = html_text_and_grids(snapshot_bytes)
+    return text, mode
 
 
 # ------------------------------------------------------- prose-pdf renderer

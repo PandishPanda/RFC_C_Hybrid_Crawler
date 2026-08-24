@@ -153,8 +153,16 @@ def build_docs(site, store, replay, report):
     docs = {}
     for _key, (url, route, sid) in sorted(document_plan(site).items()):
         try:
+            # An html source whose join reads a grid gets the dual view
+            # (fill-rate ticket 01): text + tables under one ref.
+            want_grid = (
+                route == ROUTE_HTML and sid is not None
+                and site.sources[sid].join is not None
+                and site.sources[sid].join.kind in ("fee-row",
+                                                    "sectioned-fee-row"))
             resolved = store.resolve(url, route, cookies=dict(site.cookies),
-                                     source_id=sid, label=site.uni_id)
+                                     source_id=sid, label=site.uni_id,
+                                     want_grid=want_grid)
         except Exception as exc:  # noqa: BLE001 — recorded or re-raised
             if replay:
                 raise
@@ -165,7 +173,19 @@ def build_docs(site, store, replay, report):
                 "error": "{0}: {1}".format(type(exc).__name__, exc),
             })
             continue
-        if resolved.tables is not None:
+        if resolved.tables is not None and resolved.route == ROUTE_HTML:
+            # html dual view (fill-rate ticket 01): the url key keeps
+            # the TextSource (tier G, the Readable set), the source-id
+            # key carries the TableSource (joins address by id) — one
+            # ref, two views. Grid ROUTES below stay exactly as they
+            # were: their artifact text IS the grid text.
+            docs[url] = cascade.TextSource(ref=resolved.ref,
+                                           text=resolved.artifact.text,
+                                           layout=resolved.layout)
+            if sid is not None:
+                docs[sid] = cascade.TableSource(ref=resolved.ref,
+                                                tables=resolved.tables)
+        elif resolved.tables is not None:
             # Every grid-producing route (table-pdf, spreadsheet) feeds
             # the column-aware resolvers a TableSource. Keyed off the
             # resolved doc actually carrying grids rather than a literal
@@ -174,13 +194,16 @@ def build_docs(site, store, replay, report):
             # spreadsheet route landed and this still read "table-pdf".
             source = cascade.TableSource(ref=resolved.ref,
                                          tables=resolved.tables)
+            docs[url] = source
+            if sid is not None:
+                docs[sid] = source
         else:
             source = cascade.TextSource(ref=resolved.ref,
                                         text=resolved.artifact.text,
                                         layout=resolved.layout)
-        docs[url] = source
-        if sid is not None:
-            docs[sid] = source
+            docs[url] = source
+            if sid is not None:
+                docs[sid] = source
         report["documents"].append({
             "ref": resolved.ref,
             "source_url": resolved.source_url,

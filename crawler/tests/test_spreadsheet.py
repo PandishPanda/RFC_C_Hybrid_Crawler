@@ -348,7 +348,7 @@ class RunnerBuildDocsTest(unittest.TestCase):
             self._resolved = resolved
 
         def resolve(self, url, route, cookies=None, source_id=None,
-                    label=None):
+                    label=None, want_grid=False):
             return self._resolved
 
     def test_a_spreadsheet_doc_becomes_a_TableSource_not_a_TextSource(self):
@@ -417,8 +417,11 @@ class SpreadsheetConfigWiringTest(unittest.TestCase):
     def test_a_grid_join_on_a_flow_text_route_is_rejected_at_load_time(self):
         # Without this the mismatch surfaces as a TypeError deep in the
         # resolver at refresh time; config.py's stated philosophy is that
-        # tier-F wiring must break visibly, at load.
-        for route in ("html", "prose-pdf"):
+        # tier-F wiring must break visibly, at load. html left this list
+        # deliberately (fill-rate ticket 01): it is text-first but
+        # grid-capable — its <table> elements resolve as cell grids when
+        # a grid join asks (test_html_grids.py owns that contract).
+        for route in ("prose-pdf",):
             with self.assertRaises(ConfigError):
                 parse_site_config(self._config(route), origin="<test>")
 

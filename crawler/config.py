@@ -652,11 +652,18 @@ def _build_source(source_id, data, path):
     if built is not None:
         wants_grid = built.kind in _GRID_JOIN_KINDS
         has_grid = route in _GRID_ROUTES
-        if wants_grid and not has_grid:
+        # html is text-FIRST but grid-CAPABLE (fill-rate ticket 01): a
+        # grid join on an html source makes the runner resolve its
+        # <table> elements as cell grids too — text + optional grid
+        # under one ref. The reverse rule below stays: a pure grid
+        # route still refuses a flow-text join.
+        grid_capable = has_grid or route == "html"
+        if wants_grid and not grid_capable:
             raise ConfigError(
                 "{0}: join kind {1!r} reads a parsed cell grid, but route "
                 "{2!r} renders flow text — use one of: {3}".format(
-                    path, built.kind, route, ", ".join(_GRID_ROUTES)))
+                    path, built.kind, route,
+                    ", ".join(_GRID_ROUTES + ("html",))))
         if has_grid and not wants_grid:
             raise ConfigError(
                 "{0}: route {1!r} renders a parsed cell grid, but join "
