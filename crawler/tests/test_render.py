@@ -290,7 +290,9 @@ class TestDoclingClientMocked(unittest.TestCase):
         self.assertIsInstance(art, Artifact)
         self.assertEqual(art.text, "Специалност такса\nМедицина 620")
         self.assertEqual(art.renderer_id, R.RENDERER_TABLE_PDF)
-        self.assertEqual(art.renderer_version, R.DOCLING_IMAGE_TAG)
+        self.assertEqual(art.renderer_version, "{0}/ocr={1}:{2}".format(
+            R.DOCLING_IMAGE_TAG, R.DOCLING_OCR_PRESET,
+            ",".join(R.DOCLING_OCR_LANG)))
         self.assertEqual(post.call_count, 1)
 
     def test_payload_is_unified_sources_array(self):
@@ -308,6 +310,32 @@ class TestDoclingClientMocked(unittest.TestCase):
         self.assertEqual(src["kind"], "file")
         import base64 as b64
         self.assertEqual(b64.b64decode(src["base64_string"]), self.PDF)
+
+    def test_payload_requests_bulgarian_ocr(self):
+        # A scanned-PDF fee table OCR'd under the default preset/lang
+        # misreads Cyrillic as Latin lookalikes ("OBIIIECTBEHO 3IPABE"
+        # for "ОБЩЕСТВЕНО ЗДРАВЕ", measured live on MU-Sofia's fee PDF,
+        # 2026-08-24) — the default preset silently picks an engine
+        # with no Cyrillic model at all. Every table-pdf source in this
+        # fleet is a Bulgarian document, so Bulgarian OCR is the
+        # renderer's own default, not site config.
+        with mock.patch.object(R.requests, "post",
+                               return_value=_ok_response()) as post:
+            R.render(self.PDF, "application/pdf", "table-pdf", backoff_s=0)
+        payload = post.call_args.kwargs["json"]
+        self.assertEqual(payload["options"]["ocr_preset"], "easyocr")
+        self.assertEqual(payload["options"]["ocr_lang"], ["bg", "en"])
+
+    def test_renderer_version_names_the_ocr_config(self):
+        # ADR-0002: renderer identity is part of every Artifact. The OCR
+        # language is a behaviour-affecting part of that identity, not
+        # just the image tag.
+        with mock.patch.object(R.requests, "post",
+                               return_value=_ok_response()):
+            art = R.render(self.PDF, "application/pdf", "table-pdf",
+                           backoff_s=0)
+        self.assertIn(R.DOCLING_IMAGE_TAG, art.renderer_version)
+        self.assertIn("bg", art.renderer_version)
 
     def test_504_retries_once_with_backoff_then_succeeds(self):
         with mock.patch.object(R.requests, "post",
@@ -399,7 +427,9 @@ class TestTablePdfLive(unittest.TestCase):
 
     def test_renderer_identity(self):
         self.assertEqual(self.artifact.renderer_id, R.RENDERER_TABLE_PDF)
-        self.assertEqual(self.artifact.renderer_version, R.DOCLING_IMAGE_TAG)
+        self.assertEqual(self.artifact.renderer_version, "{0}/ocr={1}:{2}"
+                         .format(R.DOCLING_IMAGE_TAG, R.DOCLING_OCR_PRESET,
+                                 ",".join(R.DOCLING_OCR_LANG)))
 
     def test_reproduces_spike_a_tsv_artifact_text(self):
         expected = (FIXTURES / "expected-docling-tsv-mu-fees.txt").read_text()

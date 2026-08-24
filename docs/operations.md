@@ -101,3 +101,28 @@ reads pending `check-verdict` items into its verdicts but never lapses
 them — only a grade can say a CHECK stopped existing. Promotion of
 onboarding proposals stays a human config edit (ADR-0003); the LLM tail
 stays out of the loop unless a human passes `--tail` (ADR-0001).
+
+## docling-serve: Cyrillic OCR
+
+`docker compose up -d` alone is not enough for the table-pdf route
+against a scanned (image-only) PDF. The EasyOCR Cyrillic recognizer
+weight (`cyrillic_g2.pth`) is not baked into the
+`docling-serve-cpu` image, `DOCLING_SERVE_ARTIFACTS_PATH` disables
+runtime downloads, and the weight lives in `docker-compose.yml`'s
+`docling-models` named volume — not the image — so it must be reseeded
+after any fresh volume (new machine, `docker compose down -v`, a volume
+prune):
+
+```bash
+docker compose up -d
+./scripts/seed-docling-cyrillic-ocr.sh
+```
+
+Without it, OCR silently misreads Cyrillic as Latin lookalikes (no
+error — `OBIIIECTBEHO 3IPABE` for `ОБЩЕСТВЕНО ЗДРАВЕ`) instead of
+failing loudly, because `ocr_preset: "auto"` picks an engine (RapidOCR)
+with no Cyrillic model at all; `crawler/render.py` requests
+`ocr_preset: "easyocr"` with `ocr_lang: ["bg", "en"]` explicitly
+(measured live on MU-Sofia's fee PDF, 2026-08-24). Confirmed
+empirically to change nothing for text-layer PDFs (OCR only touches
+bitmap content) — only genuinely scanned documents are affected.

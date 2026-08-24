@@ -43,6 +43,12 @@ _YEAR_RANGE_RX = re.compile(r"\b(20\d{2})\s*/\s*(20\d{2})\b")
 # reference ("until academic year X it was called Y"), never the
 # validity year of the value that happens to sit near it
 _HISTORICAL_YEAR_RX = re.compile(r"до\s+уч(?:\.|ебната)\s*$")
+# «2025 / 2026 и предишни години» self-declares as superseded — the
+# marker sits AFTER the year range, not before it, so it needs its own
+# forward-looking check (VVVU's fee table, measured 2026-08-24: the
+# backward-only check let a correct current price get blocked as
+# lagging because 2025/2026 — "and earlier years" — matched first).
+_HISTORICAL_YEAR_FOLLOWS_RX = re.compile(r"\s*и\s+предишни\s+години")
 
 
 def run_id_for(uni_id, now=None):
@@ -84,6 +90,8 @@ def infer_academic_year(segments, value, fallback_academic_year, field=None):
                 # цикъл“)», and reading that as the value's cycle
                 # blocked a publish on an up-to-date document
                 # (measured 2026-08-23).
+                continue
+            if _HISTORICAL_YEAR_FOLLOWS_RX.match(text, m.end()):
                 continue
             return "{0}/{1}".format(m.group(1), m.group(2))
     return fallback_academic_year

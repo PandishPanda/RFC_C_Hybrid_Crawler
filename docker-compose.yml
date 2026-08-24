@@ -7,3 +7,15 @@ services:
     ports:
       - "5001:5001"
     restart: unless-stopped
+    volumes:
+      # Named volume over the image's own model cache: Docker seeds it
+      # from the image's baked-in models on first mount (nothing lost),
+      # and it persists across recreation -- without this, any weight
+      # added at runtime (docling-models.md) silently vanishes on the
+      # next `docker compose up`. DOCLING_SERVE_ARTIFACTS_PATH (image
+      # default) points here and disables runtime downloads, so this
+      # volume is the ONLY place new language weights can land.
+      - docling-models:/opt/app-root/src/.cache/docling/models
+
+volumes:
+  docling-models:

@@ -106,6 +106,25 @@ DOCLING_IMAGE_TAG = "ghcr.io/docling-project/docling-serve-cpu:v1.28.0"
 DOCLING_TIMEOUT_S = (10, 600)          # connect, read — big PDFs take minutes
 DOCLING_RETRY_BACKOFF_S = 30.0
 
+# The default preset ("auto") silently selects an OCR engine with no
+# Cyrillic model at all, misreading Cyrillic as Latin lookalikes
+# ("OBIIIECTBEHO 3IPABE" for "ОБЩЕСТВЕНО ЗДРАВЕ" — measured live on
+# MU-Sofia's scanned fee PDF, 2026-08-24). Every table-pdf source this
+# fleet points at is a Bulgarian document, so Bulgarian OCR is the
+# renderer's own default, not per-site config (ADR-0001: this is a
+# pipeline operating parameter, not site knowledge). Requires the
+# EasyOCR Cyrillic recognizer weight in the docling-serve model cache
+# (docker-compose.yml's docling-models volume; see docs for how it was
+# seeded) — falls back to a text-only result for any PDF whose scanned
+# regions are language content the weight doesn't cover, same as
+# before. Empirically verified (2026-08-24) to change nothing for the
+# 8 real table-pdf sources already configured across 5 universities —
+# every one has a genuine text layer, so OCR (bitmap-only) never
+# engages for them; only scanned documents like MU-Sofia's are
+# affected. No attribution-review trigger: no existing cell can move.
+DOCLING_OCR_PRESET = "easyocr"
+DOCLING_OCR_LANG = ("bg", "en")
+
 _WS_RX = re.compile(r"\s+")
 
 
@@ -593,7 +612,9 @@ def _docling_convert(snapshot_bytes, docling_url, backoff_s):
             "base64_string": base64.b64encode(snapshot_bytes).decode("ascii"),
             "filename": "snapshot.pdf",
         }],
-        "options": {"to_formats": ["json"]},
+        "options": {"to_formats": ["json"],
+                   "ocr_preset": DOCLING_OCR_PRESET,
+                   "ocr_lang": list(DOCLING_OCR_LANG)},
     }
     url = docling_url.rstrip("/") + "/v1/convert/source"
     resp = requests.post(url, json=payload, timeout=DOCLING_TIMEOUT_S)
@@ -682,7 +703,9 @@ def render(snapshot_bytes, content_type, route_hint=None, *, ref=None,
     else:
         text = _render_table_pdf(snapshot_bytes, docling_url, backoff_s)
         renderer_id = RENDERER_TABLE_PDF
-        renderer_version = DOCLING_IMAGE_TAG
+        renderer_version = "{0}/ocr={1}:{2}".format(
+            DOCLING_IMAGE_TAG, DOCLING_OCR_PRESET,
+            ",".join(DOCLING_OCR_LANG))
 
     return Artifact(text=text, renderer_id=renderer_id,
                     renderer_version=renderer_version, ref=ref)

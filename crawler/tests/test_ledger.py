@@ -312,6 +312,33 @@ class HistoricalYearIsNotTheValuesYearTest(unittest.TestCase):
                                        field="tuition"),
             "2025/2026")
 
+    def test_a_forward_i_predishni_godini_range_is_skipped(self):
+        # «2025 / 2026 и предишни години» self-declares as superseded —
+        # the marker sits AFTER the year range, not before it (VVVU's
+        # fee table: "Държавна поръчка ... 2025 / 2026 и предишни
+        # години 2026 / 2027 година ... 450 €", measured 2026-08-24 —
+        # the year-lag gate blocked a correct, current 450 € value
+        # because 2025/2026 matched first and the only historical check
+        # was backward-looking).
+        seg = ("Държавна поръчка Образователна степен 2025 / 2026 и "
+               "предишни години 2026 / 2027 година ОКС „Бакалавър“, "
+               "редовна форма на обучение 357 € 450 €")
+        self.assertEqual(
+            ledger.infer_academic_year([seg], "450 €", "2026/2027",
+                                       field="tuition"),
+            "2026/2027")
+
+    def test_i_predishni_godini_does_not_swallow_an_unrelated_later_lag(self):
+        # The forward marker must stay scoped to the year it directly
+        # follows — a genuinely lagging year stated elsewhere in the
+        # same segment must still be caught.
+        seg = ("2025 / 2026 и предишни години; отделно, таксите за "
+               "2024/2025 останаха непроменени")
+        self.assertEqual(
+            ledger.infer_academic_year([seg], "500 лв.", "2026/2027",
+                                       field="tuition"),
+            "2024/2025")
+
 
 class CurrencyEquivalenceTest(unittest.TestCase):
     def test_bgn_eur_peg_restatement_is_equivalent(self):
