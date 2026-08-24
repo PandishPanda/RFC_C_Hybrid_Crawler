@@ -231,30 +231,57 @@ def verify_page(store, url, program_name, *, cookies=None):
 
 
 def propose_onboarding(uni_id, candidate_links, adapter, store, *,
-                       cookies=None, tag_prefix="", max_pages=None):
-    # type: (str, List[Tuple[str, str]], object, object, Optional[Mapping], str, Optional[int]) -> Tuple[List[ProposedProgram], float]
+                       cookies=None, tag_prefix="", max_pages=None,
+                       survey_rounds=3):
+    # type: (str, List[Tuple[str, str]], object, object, Optional[Mapping], str, Optional[int], int) -> Tuple[List[ProposedProgram], float]
     """Returns (proposals, total_cost_usd) -- cost is summed from the
     adapter.call()'s usage dict, 0.0 for adapters that don't report cost
-    (FakeAdapter). One survey call per university; max_pages caps how
-    many selected pages are verified (each verify is a real fetch)."""
+    (FakeAdapter). max_pages caps how many selected pages are verified
+    (each verify is a real fetch).
+
+    survey_rounds: the survey is the only non-deterministic module in
+    onboarding, and one call proved wasteful live -- the same MUSofia
+    seed gave 9 proposals then 0, and SWU lost two paid runs to the
+    variance (2026-08-24). k rounds union their URL selections (dedup by
+    URL, first round's naming wins); the deterministic verify step stays
+    the ranker via its gate-verified-field counts. A single failed round
+    is tolerated; only ALL rounds failing reports an adapter error.
+    Cost of the extra rounds is ~$0.02 -- the survey is the cheap half,
+    verification the expensive one, and only the flaky half is
+    ensembled. ADR-0003 untouched: still propose-only."""
     urls = [url for url, _ in candidate_links]
     if not urls:
         return [], 0.0
     url_set = set(urls)
     schema = build_schema(urls)
     prompt = build_prompt(uni_id, candidate_links)
-    tag = "{0}survey".format(tag_prefix)
-    try:
-        structured, usage = adapter.call(prompt, schema, HAIKU, tag)
-        total_cost = usage.get("cost_usd") or 0.0
-    except Exception as exc:  # noqa: BLE001 -- adapter/transport failure
+
+    total_cost = 0.0
+    selected = []
+    seen_keys = set()
+    errors = []
+    for round_no in range(1, max(1, survey_rounds) + 1):
+        tag = "{0}survey:{1}".format(tag_prefix, round_no) \
+            if survey_rounds > 1 else "{0}survey".format(tag_prefix)
+        try:
+            structured, usage = adapter.call(prompt, schema, HAIKU, tag)
+            total_cost += usage.get("cost_usd") or 0.0
+        except Exception as exc:  # noqa: BLE001 -- adapter/transport failure
+            errors.append(str(exc))
+            continue
+        for item in structured.get("programs") or []:
+            key = item.get("url") or ("name:" + (item.get("name") or ""))
+            if key in seen_keys:
+                continue
+            seen_keys.add(key)
+            selected.append(item)
+    if errors and not selected and len(errors) == max(1, survey_rounds):
         return [ProposedProgram(
             "(survey failed)", None,
-            "adapter error: {0}".format(exc), {}, 0,
-            adapter_error=str(exc))], 0.0
+            "adapter error: {0}".format(errors[-1]), {}, 0,
+            adapter_error=errors[-1])], total_cost
 
     proposals = []
-    selected = structured.get("programs") or []
     if max_pages is not None:
         selected = selected[:max_pages]
     for item in selected:

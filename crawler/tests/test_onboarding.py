@@ -291,7 +291,7 @@ class ProposeOnboardingTest(unittest.TestCase):
             adapter, store, tag_prefix="X:", max_pages=2)
         self.assertEqual(len(proposals), 2)
 
-    def test_cost_comes_from_the_single_survey_call(self):
+    def test_cost_sums_across_the_survey_rounds(self):
         adapter = FakeAdapter({"X:survey": {"programs": []}})
         real_call = adapter.call
         def call_with_cost(prompt, schema, model, tag):
@@ -301,7 +301,9 @@ class ProposeOnboardingTest(unittest.TestCase):
         _proposals, cost = propose_onboarding(
             "X", [("https://x/a", "A")], adapter,
             FakeVerifyStore({}), tag_prefix="X:")
-        self.assertAlmostEqual(cost, 0.05)
+        # the survey is an ensemble now (default 3 rounds; see
+        # test_survey_ensemble.py) — cost sums across rounds
+        self.assertAlmostEqual(cost, 0.15)
 
 
 class ValidateAsDraftConfigTest(unittest.TestCase):
