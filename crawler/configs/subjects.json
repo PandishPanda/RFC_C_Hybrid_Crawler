@@ -1,0 +1,188 @@
+{
+ "subjects": [
+  {
+   "slug": "analiz-na-danni",
+   "name": "Анализ на данни и статистика"
+  },
+  {
+   "slug": "antropologia",
+   "name": "Антропология"
+  },
+  {
+   "slug": "bibliotechno-informatsionni-nauki",
+   "name": "Библиотечно-информационни науки"
+  },
+  {
+   "slug": "biologia-i-ekologia",
+   "name": "Биология и екология"
+  },
+  {
+   "slug": "biznes-i-menidzhmant",
+   "name": "Бизнес и мениджмънт"
+  },
+  {
+   "slug": "evropeistika",
+   "name": "Европеистика"
+  },
+  {
+   "slug": "farmatsia",
+   "name": "Фармация"
+  },
+  {
+   "slug": "filologia",
+   "name": "Езици и филологии"
+  },
+  {
+   "slug": "filosofia",
+   "name": "Философия"
+  },
+  {
+   "slug": "finansi-i-schetovodstvo",
+   "name": "Финанси и счетоводство"
+  },
+  {
+   "slug": "fizika-i-astronomia",
+   "name": "Физика и астрономия"
+  },
+  {
+   "slug": "geodezia",
+   "name": "Геодезия и геоматика"
+  },
+  {
+   "slug": "geografia",
+   "name": "География"
+  },
+  {
+   "slug": "himia",
+   "name": "Химия"
+  },
+  {
+   "slug": "ikonomika",
+   "name": "Икономика"
+  },
+  {
+   "slug": "informatika",
+   "name": "Информатика"
+  },
+  {
+   "slug": "informatsionni-sistemi",
+   "name": "Информационни системи"
+  },
+  {
+   "slug": "informatsionni-tehnologii",
+   "name": "Информационни технологии"
+  },
+  {
+   "slug": "interdistsiplinarni-programi",
+   "name": "Интердисциплинарни програми"
+  },
+  {
+   "slug": "inzhenerstvo",
+   "name": "Инженерство и технологии"
+  },
+  {
+   "slug": "istoria",
+   "name": "История"
+  },
+  {
+   "slug": "izkustva-i-dizayn",
+   "name": "Изкуства и дизайн"
+  },
+  {
+   "slug": "kibersigurnost",
+   "name": "Киберсигурност"
+  },
+  {
+   "slug": "kineziterapia",
+   "name": "Кинезитерапия и рехабилитация"
+  },
+  {
+   "slug": "kompyutarni-nauki",
+   "name": "Компютърни науки"
+  },
+  {
+   "slug": "kompyutarni-sistemi-i-tehnologii",
+   "name": "Компютърни системи и технологии"
+  },
+  {
+   "slug": "kriminalistika",
+   "name": "Криминалистика"
+  },
+  {
+   "slug": "kulturologia",
+   "name": "Културология"
+  },
+  {
+   "slug": "logopedia",
+   "name": "Логопедия"
+  },
+  {
+   "slug": "marketing",
+   "name": "Маркетинг"
+  },
+  {
+   "slug": "matematika",
+   "name": "Математика"
+  },
+  {
+   "slug": "meditsina",
+   "name": "Медицина"
+  },
+  {
+   "slug": "natsionalna-sigurnost",
+   "name": "Национална сигурност"
+  },
+  {
+   "slug": "obshtestveno-zdrave",
+   "name": "Обществено здраве"
+  },
+  {
+   "slug": "pedagogika",
+   "name": "Педагогика"
+  },
+  {
+   "slug": "politologia",
+   "name": "Политология"
+  },
+  {
+   "slug": "pravo",
+   "name": "Право"
+  },
+  {
+   "slug": "psihologia",
+   "name": "Психология"
+  },
+  {
+   "slug": "publichna-administratsia",
+   "name": "Публична администрация"
+  },
+  {
+   "slug": "softuerno-inzhenerstvo",
+   "name": "Софтуерно инженерство"
+  },
+  {
+   "slug": "sotsialni-deynosti",
+   "name": "Социални дейности"
+  },
+  {
+   "slug": "sotsiologia",
+   "name": "Социология"
+  },
+  {
+   "slug": "turizam-i-hotelierstvo",
+   "name": "Туризъм и хотелиерство"
+  },
+  {
+   "slug": "veterinarna-meditsina",
+   "name": "Ветеринарна медицина"
+  },
+  {
+   "slug": "zdravni-grizhi",
+   "name": "Здравни грижи"
+  },
+  {
+   "slug": "zhurnalistika-i-komunikatsii",
+   "name": "Журналистика и комуникации"
+  }
+ ]
+}

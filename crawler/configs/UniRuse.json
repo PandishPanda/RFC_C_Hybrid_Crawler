@@ -1,5 +1,8 @@
 {
  "uni_id": "UniRuse",
+ "display_name": "Русенски университет „Ангел Кънчев“",
+ "slug": "rusenski-universitet",
+ "city": "Русе",
  "default_language": "български",
  "cookies": {},
  "sources": {
@@ -68,6 +71,8 @@
   {
    "id": "uniruse-bizmgmt",
    "name": "Бизнес мениджмънт",
+   "slug": "biznes-menidzhmant",
+   "subject": "biznes-i-menidzhmant",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
    "tuition_join": {
     "source": "fees-state-redovno",
@@ -84,6 +89,8 @@
   {
    "id": "uniruse-digmgmt",
    "name": "Дигитален мениджмънт и иновации",
+   "slug": "digitalen-menidzhmant-i-inovatsii",
+   "subject": "biznes-i-menidzhmant",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
    "tuition_join": {
     "source": "fees-paid-distancionna",
@@ -96,6 +103,8 @@
   {
    "id": "uniruse-pubadmin",
    "name": "Публична администрация",
+   "slug": "publichna-administratsia",
+   "subject": "publichna-administratsia",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
    "tuition_join": {
     "source": "fees-state-zadochno",
@@ -108,6 +117,8 @@
   {
    "id": "uniruse-electropower",
    "name": "Електроенергетика и електрообзавеждане",
+   "slug": "elektroenergetika-i-elektroobzavezhdane",
+   "subject": "inzhenerstvo",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
    "tuition_join": {
     "source": "fees-state-redovno",
@@ -120,6 +131,8 @@
   {
    "id": "uniruse-electronics",
    "name": "Електроника",
+   "slug": "elektronika",
+   "subject": "inzhenerstvo",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
    "tuition_join": {
     "source": "fees-state-redovno",
@@ -132,6 +145,8 @@
   {
    "id": "uniruse-compctrl",
    "name": "Компютърно управление и автоматизация",
+   "slug": "kompyutarno-upravlenie-i-avtomatizatsia",
+   "subject": "inzhenerstvo",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
    "tuition_join": {
     "source": "fees-state-redovno",
@@ -144,6 +159,8 @@
   {
    "id": "uniruse-internetmobile",
    "name": "Интернет и мобилни комуникации",
+   "slug": "internet-i-mobilni-komunikatsii",
+   "subject": "inzhenerstvo",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
    "tuition_join": {
     "source": "fees-state-redovno",
@@ -156,6 +173,8 @@
   {
    "id": "uniruse-compsystems",
    "name": "Компютърни системи и технологии",
+   "slug": "kompyutarni-sistemi-i-tehnologii",
+   "subject": "kompyutarni-sistemi-i-tehnologii",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-electrical-and-electronic-engineering-and-automation",
    "tuition_join": {
     "source": "fees-state-redovno",
@@ -168,6 +187,8 @@
   {
    "id": "uniruse-economics",
    "name": "Икономика",
+   "slug": "ikonomika",
+   "subject": "ikonomika",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
    "tuition_join": {
     "source": "fees-state-redovno",
@@ -180,6 +201,8 @@
   {
    "id": "uniruse-indmgmt",
    "name": "Индустриален мениджмънт",
+   "slug": "industrialen-menidzhmant",
+   "subject": "biznes-i-menidzhmant",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
    "tuition_join": {
     "source": "fees-state-redovno",
@@ -193,6 +216,8 @@
   {
    "id": "uniruse-socialwork",
    "name": "Социални дейности",
+   "slug": "sotsialni-deynosti",
+   "subject": "sotsialni-deynosti",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-business-and-management",
    "tuition_join": {
     "source": "fees-state-redovno",
@@ -205,6 +230,8 @@
   {
    "id": "uniruse-se",
    "name": "Софтуерно инженерство",
+   "slug": "softuerno-inzhenerstvo",
+   "subject": "softuerno-inzhenerstvo",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
    "tuition_join": {
     "source": "fees-state-redovno",
@@ -217,6 +244,8 @@
   {
    "id": "uniruse-cs",
    "name": "Компютърни науки",
+   "slug": "kompyutarni-nauki",
+   "subject": "kompyutarni-nauki",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
    "tuition_join": {
     "source": "fees-state-redovno",
@@ -226,6 +255,8 @@
   {
    "id": "uniruse-finmath",
    "name": "Финансова математика",
+   "slug": "finansova-matematika",
+   "subject": "matematika",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
    "tuition_join": {
     "source": "fees-state-redovno",
@@ -238,6 +269,8 @@
   {
    "id": "uniruse-socped",
    "name": "Социална педагогика",
+   "slug": "sotsialna-pedagogika",
+   "subject": "pedagogika",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-natural-science-and-education",
    "tuition_join": {
     "source": "fees-state-redovno",
@@ -247,6 +280,8 @@
   {
    "id": "uniruse-law",
    "name": "Право",
+   "slug": "pravo",
+   "subject": "pravo",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-law-studies",
    "tuition_join": {
     "source": "fees-state-redovno",
@@ -259,6 +294,8 @@
   {
    "id": "uniruse-mecheng",
    "name": "Машинно инженерство",
+   "slug": "mashinno-inzhenerstvo",
+   "subject": "inzhenerstvo",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-mechanical-and-manufacturing-engineering",
    "tuition_join": {
     "source": "fees-state-redovno",
@@ -271,6 +308,8 @@
   {
    "id": "uniruse-transport",
    "name": "Транспортна техника и технологии",
+   "slug": "transportna-tehnika-i-tehnologii",
+   "subject": "inzhenerstvo",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-automotive-and-transport-engineering",
    "tuition_join": {
     "source": "fees-state-redovno",
@@ -280,6 +319,8 @@
   {
    "id": "uniruse-agritech",
    "name": "Земеделска техника и технологии",
+   "slug": "zemedelska-tehnika-i-tehnologii",
+   "subject": "inzhenerstvo",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-agricultural-mechanisation",
    "tuition_join": {
     "source": "fees-state-redovno",
@@ -292,6 +333,8 @@
   {
    "id": "uniruse-design",
    "name": "Дизайн",
+   "slug": "dizayn",
+   "subject": "izkustva-i-dizayn",
    "page": "https://www.uni-ruse.bg/admission/bachelors/guide/specialities/faculty-of-agricultural-mechanisation",
    "tuition_join": {
     "source": "fees-state-redovno",

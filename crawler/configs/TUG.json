@@ -1,5 +1,8 @@
 {
  "uni_id": "TUG",
+ "display_name": "Технически университет – Габрово",
+ "slug": "tu-gabrovo",
+ "city": "Габрово",
  "default_language": "български",
  "cookies": {},
  "sources": {
@@ -135,6 +138,8 @@
   {
    "id": "TUG-rsvu4221-BSC-BG",
    "name": "Мехатроника",
+   "slug": "mehatronika",
+   "subject": "inzhenerstvo",
    "page": "https://www.tugab.bg/priem/bakalavarski-spetzialnosti",
    "tuition_join": {
     "source": "bak-fees",
@@ -149,6 +154,8 @@
   {
    "id": "TUG-rsvu7848-BSC-BG",
    "name": "Дизайн,техника и технологии в текстила",
+   "slug": "dizayn-tehnika-i-tehnologii-v-tekstila",
+   "subject": "izkustva-i-dizayn",
    "page": "https://www.tugab.bg/priem/bakalavarski-spetzialnosti",
    "tuition_join": {
     "source": "bak-fees",
@@ -163,6 +170,8 @@
   {
    "id": "TUG-rsvu31303-MSC-BG",
    "name": "Софтуерно и компютърно инженерство",
+   "slug": "softuerno-i-kompyutarno-inzhenerstvo",
+   "subject": "softuerno-inzhenerstvo",
    "page": "https://www.tugab.bg/priem/magistarski-spetzialnosti",
    "tuition_join": {
     "source": "mag-fees",
@@ -177,6 +186,8 @@
   {
    "id": "TUG-rsvu11362-MSC-BG",
    "name": "Управление на бизнеса",
+   "slug": "upravlenie-na-biznesa",
+   "subject": "biznes-i-menidzhmant",
    "page": "https://www.tugab.bg/priem/magistarski-spetzialnosti?view=article&id=942:spetzialnost-upravlenie-na-biznesa&catid=103",
    "tuition_join": {
     "source": "mag-fees",
@@ -191,6 +202,8 @@
   {
    "id": "TUG-rsvu30703-PHD-BG",
    "name": "Квантова и оптоелектроника",
+   "slug": "kvantova-i-optoelektronika",
+   "subject": "fizika-i-astronomia",
    "page": "https://www.tugab.bg/priem/doktorski-programi",
    "tuition_join": {
     "source": "phd-fees",

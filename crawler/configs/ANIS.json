@@ -1,5 +1,8 @@
 {
  "uni_id": "ANIS",
+ "display_name": "Академия по национална и информационна сигурност – Пловдив",
+ "slug": "anis",
+ "city": "Пловдив",
  "default_language": "български",
  "cookies": {},
  "sources": {
@@ -45,6 +48,8 @@
   {
    "id": "ANIS-rsvu8494-MSC-BG",
    "name": "Киберсигурност",
+   "slug": "kibersigurnost",
+   "subject": "kibersigurnost",
    "page": "https://www.vusi.bg/priem-3/priem-magister/",
    "field_anchors": {
     "degree": "msc-degree-kibersigurnost",
@@ -55,6 +60,8 @@
   {
    "id": "ANIS-rsvu10329-MSC-BG",
    "name": "Противодействие на тероризма (за специалност от друга специалност)",
+   "slug": "protivodeystvie-na-terorizma",
+   "subject": "natsionalna-sigurnost",
    "page": "https://www.vusi.bg/priem-3/priem-magister/",
    "field_anchors": {
     "degree": "msc-degree-terorizm",
@@ -65,6 +72,8 @@
   {
    "id": "ANIS-rsvu9422-MSC-BG",
    "name": "Управление на човешките ресурси (след неикономически специалности)",
+   "slug": "upravlenie-na-choveshkite-resursi",
+   "subject": "biznes-i-menidzhmant",
    "page": "https://www.vusi.bg/priem-3/priem-magister/",
    "field_anchors": {
     "degree": "msc-degree-uchr",
@@ -75,6 +84,8 @@
   {
    "id": "anis-m01",
    "name": "Национална сигурност",
+   "slug": "natsionalna-sigurnost",
+   "subject": "natsionalna-sigurnost",
    "page": "https://www.vusi.bg/priem-3/priem-magister/",
    "field_anchors": {
     "admission": "anis-zvo-adm",
@@ -84,6 +95,8 @@
   {
    "id": "anis-m02",
    "name": "Противодействие на престъпността и опазване на обществения ред",
+   "slug": "protivodeystvie-na-prestapnostta-i-opazvane-na-obshtestvenia-red",
+   "subject": "natsionalna-sigurnost",
    "page": "https://www.vusi.bg/priem-3/priem-magister/",
    "field_anchors": {
     "admission": "anis-zvo-adm",
@@ -93,6 +106,8 @@
   {
    "id": "anis-m03",
    "name": "Криминалистика",
+   "slug": "kriminalistika",
+   "subject": "kriminalistika",
    "page": "https://www.vusi.bg/priem-3/priem-magister/",
    "field_anchors": {
     "admission": "anis-zvo-adm",
@@ -102,6 +117,8 @@
   {
    "id": "anis-m04",
    "name": "Митническо разузнаване и разследване",
+   "slug": "mitnichesko-razuznavane-i-razsledvane",
+   "subject": "natsionalna-sigurnost",
    "page": "https://www.vusi.bg/priem-3/priem-magister/",
    "field_anchors": {
     "admission": "anis-zvo-adm",
@@ -111,6 +128,8 @@
   {
    "id": "anis-m05",
    "name": "Сигурност и софтуерни технологии",
+   "slug": "sigurnost-i-softuerni-tehnologii",
+   "subject": "kibersigurnost",
    "page": "https://www.vusi.bg/priem-3/priem-magister/",
    "field_anchors": {
     "admission": "anis-zvo-adm",
@@ -120,6 +139,8 @@
   {
    "id": "anis-m06",
    "name": "Сигурност и изкуствен интелект",
+   "slug": "sigurnost-i-izkustven-intelekt",
+   "subject": "kibersigurnost",
    "page": "https://www.vusi.bg/priem-3/priem-magister/",
    "field_anchors": {
     "admission": "anis-zvo-adm",
@@ -129,6 +150,8 @@
   {
    "id": "anis-m07",
    "name": "Сигурност и криминална психология",
+   "slug": "sigurnost-i-kriminalna-psihologia",
+   "subject": "kriminalistika",
    "page": "https://www.vusi.bg/priem-3/priem-magister/",
    "field_anchors": {
     "admission": "anis-zvo-adm",
@@ -138,6 +161,8 @@
   {
    "id": "anis-m08",
    "name": "Икономическа сигурност",
+   "slug": "ikonomicheska-sigurnost",
+   "subject": "natsionalna-sigurnost",
    "page": "https://www.vusi.bg/priem-3/priem-magister/",
    "field_anchors": {
     "admission": "anis-zvo-adm",
@@ -147,6 +172,8 @@
   {
    "id": "anis-m09",
    "name": "Продоволствена сигурност",
+   "slug": "prodovolstvena-sigurnost",
+   "subject": "natsionalna-sigurnost",
    "page": "https://www.vusi.bg/priem-3/priem-magister/",
    "field_anchors": {
     "admission": "anis-zvo-adm",
@@ -156,6 +183,8 @@
   {
    "id": "anis-m10",
    "name": "Счетоводство и контрол",
+   "slug": "schetovodstvo-i-kontrol",
+   "subject": "finansi-i-schetovodstvo",
    "page": "https://www.vusi.bg/priem-3/priem-magister/",
    "field_anchors": {
     "admission": "anis-zvo-adm",
@@ -165,6 +194,8 @@
   {
    "id": "anis-m11",
    "name": "Финанси",
+   "slug": "finansi",
+   "subject": "finansi-i-schetovodstvo",
    "page": "https://www.vusi.bg/priem-3/priem-magister/",
    "field_anchors": {
     "admission": "anis-zvo-adm",
@@ -174,6 +205,8 @@
   {
    "id": "anis-m12",
    "name": "Дигитален маркетинг",
+   "slug": "digitalen-marketing",
+   "subject": "marketing",
    "page": "https://www.vusi.bg/priem-3/priem-magister/",
    "field_anchors": {
     "admission": "anis-zvo-adm",
@@ -183,6 +216,8 @@
   {
    "id": "anis-m13",
    "name": "Валутен, митнически и данъчен контрол",
+   "slug": "valuten-mitnicheski-i-danachen-kontrol",
+   "subject": "finansi-i-schetovodstvo",
    "page": "https://www.vusi.bg/priem-3/priem-magister/",
    "field_anchors": {
     "admission": "anis-zvo-adm",
@@ -192,6 +227,8 @@
   {
    "id": "anis-m14",
    "name": "Финансово-счетоводен мениджмънт и застраховане",
+   "slug": "finansovo-schetovoden-menidzhmant-i-zastrahovane",
+   "subject": "finansi-i-schetovodstvo",
    "page": "https://www.vusi.bg/priem-3/priem-magister/",
    "field_anchors": {
     "admission": "anis-zvo-adm",
@@ -201,6 +238,8 @@
   {
    "id": "anis-m15",
    "name": "Стопанско управление",
+   "slug": "stopansko-upravlenie",
+   "subject": "biznes-i-menidzhmant",
    "page": "https://www.vusi.bg/priem-3/priem-magister/",
    "field_anchors": {
     "admission": "anis-zvo-adm",

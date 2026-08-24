@@ -1,5 +1,8 @@
 {
  "uni_id": "SHU",
+ "display_name": "Шуменски университет „Епископ Константин Преславски“",
+ "slug": "shumenski-universitet",
+ "city": "Шумен",
  "default_language": "български",
  "cookies": {},
  "sources": {
@@ -311,6 +314,8 @@
   {
    "id": "SHU-rsvu9749-BSC-BG",
    "name": "География и регионална политика",
+   "slug": "geografia-i-regionalna-politika",
+   "subject": "geografia",
    "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fpn/bakalavyr/GRP.pdf",
    "tuition_join": {
     "source": "fees-bak-dp",
@@ -325,6 +330,8 @@
   {
    "id": "SHU-rsvu30594-MSC-BG",
    "name": "Софтуерно инженерство",
+   "slug": "softuerno-inzhenerstvo",
+   "subject": "softuerno-inzhenerstvo",
    "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fmi/magistyr/SI.pdf",
    "extra_sources": [
     "kv-si"
@@ -341,6 +348,8 @@
   {
    "id": "SHU-rsvu11312-PHD-EN",
    "name": "Методика на обучението по чужд език (английски език, руски език)",
+   "slug": "metodika-na-obuchenieto-po-chuzhd-ezik",
+   "subject": "pedagogika",
    "page": "https://www.shu.bg/?p=47212",
    "field_anchors": {
     "degree": "phd-degree",
@@ -351,6 +360,8 @@
   {
    "id": "SHU-rsvu31017-BSC-BG",
    "name": "Технологии за киберсигурност",
+   "slug": "tehnologii-za-kibersigurnost",
+   "subject": "kibersigurnost",
    "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/ftn/bakalavyr/TKS.pdf",
    "extra_sources": [
     "kv-tks"
@@ -367,6 +378,8 @@
   {
    "id": "SHU-rsvu8752-MSC-BG",
    "name": "Руска филология: Езиково обслужване на туризма и бизнеса",
+   "slug": "ruska-filologia-ezikovo-obsluzhvane-na-turizma-i-biznesa",
+   "subject": "filologia",
    "page": "https://www.shu.bg/wp-content/uploads/file-manager-advanced/users/ksk/fhn/magistyr/RFEOTB-new.pdf",
    "extra_sources": [
     "kv-rfeotb"
@@ -384,6 +397,8 @@
   {
    "id": "shu-311",
    "name": "Бизнес математика",
+   "slug": "biznes-matematika",
+   "subject": "matematika",
    "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/311-kvalifikaciya-07-20-2026.pdf",
    "tuition_join": {
     "source": "fees-bak-dp",
@@ -397,6 +412,8 @@
   {
    "id": "shu-907",
    "name": "Дигитални технологии и изкуствен интелект",
+   "slug": "digitalni-tehnologii-i-izkustven-intelekt",
+   "subject": "informatsionni-tehnologii",
    "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/907-kvalifikaciya-07-07-2026.pdf",
    "tuition_join": {
     "source": "fees-bak-dp",
@@ -410,6 +427,8 @@
   {
    "id": "shu-122",
    "name": "Икономика",
+   "slug": "ikonomika",
+   "subject": "ikonomika",
    "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/122-kvalifikaciya-07-07-2026.pdf",
    "field_anchors": {
     "degree": "deg-122",
@@ -420,6 +439,8 @@
   {
    "id": "shu-216",
    "name": "Английска филология",
+   "slug": "angliyska-filologia",
+   "subject": "filologia",
    "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/216-kvalifikaciya-07-22-2026.pdf",
    "tuition_join": {
     "source": "fees-bak-dp",
@@ -433,6 +454,8 @@
   {
    "id": "shu-1159",
    "name": "Английска филология: Езиково обслужване на туризма и бизнеса",
+   "slug": "angliyska-filologia-ezikovo-obsluzhvane-na-turizma-i-biznesa",
+   "subject": "filologia",
    "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1159-kvalifikaciya-07-22-2026.pdf",
    "tuition_join": {
     "source": "fees-mag",
@@ -445,6 +468,8 @@
   {
    "id": "shu-1003",
    "name": "Английска филология: Лингвистика и превод",
+   "slug": "angliyska-filologia-lingvistika-i-prevod",
+   "subject": "filologia",
    "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1003-kvalifikaciya-07-22-2026.pdf",
    "tuition_join": {
     "source": "fees-mag",
@@ -457,6 +482,8 @@
   {
    "id": "shu-88",
    "name": "Астрономия",
+   "slug": "astronomia",
+   "subject": "fizika-i-astronomia",
    "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/88-kvalifikaciya-08-07-2026.pdf",
    "tuition_join": {
     "source": "fees-bak-dp",
@@ -470,6 +497,8 @@
   {
    "id": "shu-540",
    "name": "Астрономия и метеорология",
+   "slug": "astronomia-i-meteorologia",
+   "subject": "fizika-i-astronomia",
    "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/540-kvalifikaciya-2024.pdf",
    "tuition_join": {
     "source": "fees-bak-dp",
@@ -482,6 +511,8 @@
   {
    "id": "shu-1047",
    "name": "Астрофизика",
+   "slug": "astrofizika",
+   "subject": "fizika-i-astronomia",
    "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1047-kvalifikaciya-08-07-2026.pdf",
    "tuition_join": {
     "source": "fees-mag",
@@ -494,6 +525,8 @@
   {
    "id": "shu-1173",
    "name": "Административна и организационна сигурност",
+   "slug": "administrativna-i-organizatsionna-sigurnost",
+   "subject": "natsionalna-sigurnost",
    "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1173-kvalifikaciya-07-20-2026.pdf",
    "tuition_join": {
     "source": "fees-mag",
@@ -506,6 +539,8 @@
   {
    "id": "shu-402",
    "name": "Геодезия",
+   "slug": "geodezia",
+   "subject": "geodezia",
    "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/402-kvalifikaciya-07-20-2026.pdf",
    "field_anchors": {
     "duration": "dur-402",
@@ -515,6 +550,8 @@
   {
    "id": "shu-1147",
    "name": "Геоматика",
+   "slug": "geomatika",
+   "subject": "geodezia",
    "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1147-kvalifikaciya-07-20-2026.pdf",
    "tuition_join": {
     "source": "fees-mag",
@@ -527,6 +564,8 @@
   {
    "id": "shu-1111",
    "name": "Иновации в началното образование",
+   "slug": "inovatsii-v-nachalnoto-obrazovanie",
+   "subject": "pedagogika",
    "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1111-kvalifikaciya-08-04-2026.pdf",
    "tuition_join": {
     "source": "fees-mag",
@@ -539,6 +578,8 @@
   {
    "id": "shu-1113",
    "name": "Иновации в предучилищното и началното образование",
+   "slug": "inovatsii-v-preduchilishtnoto-i-nachalnoto-obrazovanie",
+   "subject": "pedagogika",
    "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/1113-kvalifikaciya-08-04-2026.pdf",
    "tuition_join": {
     "source": "fees-mag",
@@ -551,6 +592,8 @@
   {
    "id": "shu-276",
    "name": "Информатика и информационни технологии, гр. Добрич",
+   "slug": "informatika-i-informatsionni-tehnologii-dobrich",
+   "subject": "informatika",
    "page": "https://www.shu.bg/wp-content/uploads/studentski-ekomplekt/kvalifikaciya/276-kvalifikaciya-02-27-2025.pdf",
    "tuition_join": {
     "source": "fees-bak-dp",

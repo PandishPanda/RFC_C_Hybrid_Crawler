@@ -1,5 +1,8 @@
 {
  "uni_id": "MUPleven",
+ "display_name": "Медицински университет – Плевен",
+ "slug": "mu-pleven",
+ "city": "Плевен",
  "default_language": "български",
  "cookies": {},
  "sources": {
@@ -67,6 +70,8 @@
   {
    "id": "mu-med",
    "name": "Медицина",
+   "slug": "meditsina",
+   "subject": "meditsina",
    "page": "https://mu-pleven.bg/index.php/bg/specialities/medicine/479-annotation-of-specialty",
    "tuition_join": {
     "source": "mu-fees",
@@ -80,6 +85,8 @@
   {
    "id": "mu-pharm",
    "name": "Фармация",
+   "slug": "farmatsia",
+   "subject": "farmatsia",
    "page": "https://mu-pleven.bg/index.php/bg/specialities/farmacy/3602-2016-05-19-07-23-24",
    "tuition_join": {
     "source": "mu-fees",
@@ -93,6 +100,8 @@
   {
    "id": "mu-nurse",
    "name": "Медицинска сестра",
+   "slug": "meditsinska-sestra",
+   "subject": "zdravni-grizhi",
    "page": "https://mu-pleven.bg/index.php/bg/specialities/medical-nurse/492-annotation-of-specialty",
    "language_tracks": {
     "source": "mu-fees",
@@ -107,6 +116,8 @@
   {
    "id": "mu-ap",
    "name": "Помощник-фармацевт",
+   "slug": "pomoshtnik-farmatsevt",
+   "subject": "farmatsia",
    "page": "https://mu-pleven.bg/index.php/bg/specialities/assistant-pharmacist",
    "tuition_join": {
     "source": "mu-fees",
@@ -123,6 +134,8 @@
   {
    "id": "mu-midwife",
    "name": "Акушерка",
+   "slug": "akusherka",
+   "subject": "zdravni-grizhi",
    "page": "https://mu-pleven.bg/index.php/bg/specialities/midwife",
    "spravochnik": {
     "source": "mu-sprav",
@@ -140,6 +153,8 @@
   {
    "id": "mu-veterinary-medicine",
    "name": "Ветеринарна медицина",
+   "slug": "veterinarna-meditsina",
+   "subject": "veterinarna-meditsina",
    "page": "https://mu-pleven.bg/index.php/bg/specialities/veterinary-medicine",
    "spravochnik": {
     "source": "mu-sprav",
@@ -157,6 +172,8 @@
   {
    "id": "mu-medical-rehabilitation-and-o",
    "name": "Кинезитерапия - Бакалавър",
+   "slug": "kineziterapia",
+   "subject": "kineziterapia",
    "page": "https://mu-pleven.bg/index.php/bg/specialities/medical-rehabilitation-and-occupational-therapy-bachelor-2",
    "spravochnik": {
     "source": "mu-sprav",
@@ -174,6 +191,8 @@
   {
    "id": "mu-social-activities",
    "name": "Медико - социални дейности",
+   "slug": "mediko-sotsialni-deynosti",
+   "subject": "sotsialni-deynosti",
    "page": "https://mu-pleven.bg/index.php/bg/specialities/social-activities",
    "spravochnik": {
     "source": "mu-sprav",
@@ -187,6 +206,8 @@
   {
    "id": "mu-medical-cosmetics",
    "name": "Медицинска козметика",
+   "slug": "meditsinska-kozmetika",
+   "subject": "zdravni-grizhi",
    "page": "https://mu-pleven.bg/index.php/bg/specialities/medical-cosmetics",
    "spravochnik": {
     "source": "mu-sprav",
@@ -204,6 +225,8 @@
   {
    "id": "mu-medical-rehabilitation-and-o-2",
    "name": "Медицинска рехабилитация и ерготерапия - Бакалавър",
+   "slug": "meditsinska-rehabilitatsia-i-ergoterapia",
+   "subject": "kineziterapia",
    "page": "https://mu-pleven.bg/index.php/bg/specialities/medical-rehabilitation-and-occupational-therapy-bachelor",
    "spravochnik": {
     "source": "mu-sprav",
@@ -213,6 +236,8 @@
   {
    "id": "mu-medical-laboratory-assistant",
    "name": "Медицински лаборант",
+   "slug": "meditsinski-laborant",
+   "subject": "zdravni-grizhi",
    "page": "https://mu-pleven.bg/index.php/bg/specialities/medical-laboratory-assistant",
    "spravochnik": {
     "source": "mu-sprav",
@@ -230,6 +255,8 @@
   {
    "id": "mu-public-health-and-health-man",
    "name": "Обществено здраве и здравен мениджмънт",
+   "slug": "obshtestveno-zdrave-i-zdraven-menidzhmant",
+   "subject": "obshtestveno-zdrave",
    "page": "https://mu-pleven.bg/index.php/bg/specialities/public-health-and-health-management",
    "spravochnik": {
     "source": "mu-sprav",
@@ -239,6 +266,8 @@
   {
    "id": "mu-protection-and-control-of-pu",
    "name": "Опазване и контрол на общественото здраве",
+   "slug": "opazvane-i-kontrol-na-obshtestvenoto-zdrave",
+   "subject": "obshtestveno-zdrave",
    "page": "https://mu-pleven.bg/index.php/bg/specialities/protection-and-control-of-public-health",
    "spravochnik": {
     "source": "mu-sprav",
@@ -256,6 +285,8 @@
   {
    "id": "mu-x-ray-laboratory-assistant",
    "name": "Рентгенов лаборант",
+   "slug": "rentgenov-laborant",
+   "subject": "zdravni-grizhi",
    "page": "https://mu-pleven.bg/index.php/bg/specialities/x-ray-laboratory-assistant",
    "spravochnik": {
     "source": "mu-sprav",
@@ -273,6 +304,8 @@
   {
    "id": "mu-social-activities-in-healthc",
    "name": "Социални дейности в здравеопазването – Бакалавър",
+   "slug": "sotsialni-deynosti-v-zdraveopazvaneto",
+   "subject": "sotsialni-deynosti",
    "page": "https://mu-pleven.bg/index.php/bg/specialities/social-activities-in-healthcare-bachelor",
    "spravochnik": {
     "source": "mu-sprav",
@@ -286,6 +319,8 @@
   {
    "id": "mu-health-care-management-bache",
    "name": "Управление на здравните грижи - Бакалавър",
+   "slug": "upravlenie-na-zdravnite-grizhi-bakalavar",
+   "subject": "zdravni-grizhi",
    "page": "https://mu-pleven.bg/index.php/bg/specialities/health-care-management-bachelor",
    "spravochnik": {
     "source": "mu-sprav-ukg-bachelor",
@@ -303,6 +338,8 @@
   {
    "id": "mu-health-care-management-maste",
    "name": "Управление на здравните грижи - Магистър",
+   "slug": "upravlenie-na-zdravnite-grizhi-magistar",
+   "subject": "zdravni-grizhi",
    "page": "https://mu-pleven.bg/index.php/bg/specialities/health-care-management-master",
    "spravochnik": {
     "source": "mu-sprav-ukg-master",

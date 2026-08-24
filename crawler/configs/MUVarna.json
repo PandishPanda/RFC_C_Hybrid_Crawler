@@ -1,5 +1,8 @@
 {
  "uni_id": "MUVarna",
+ "display_name": "Медицински университет „Проф. д-р Параскев Стоянов“ – Варна",
+ "slug": "mu-varna",
+ "city": "Варна",
  "default_language": "български",
  "cookies": {},
  "sources": {
@@ -84,6 +87,8 @@
   {
    "id": "MUVarna-rsvu4414-IMSC-BG",
    "name": "Фармация",
+   "slug": "farmatsia",
+   "subject": "farmatsia",
    "page": "https://www.mu-varna.bg/BG/AboutUs/Pharmacy/Pages/Specialities.aspx",
    "tuition_join": {
     "source": "muv-fees",
@@ -101,6 +106,8 @@
   {
    "id": "MUVarna-rsvu31893-BSC-BG",
    "name": "Кинезитерапия",
+   "slug": "kineziterapia",
+   "subject": "kineziterapia",
    "page": "https://www.mu-varna.bg/BG/specialnosti",
    "tuition_join": {
     "source": "muv-fees",
@@ -119,6 +126,8 @@
   {
    "id": "MUVarna-rsvu11227-PHD-BG",
    "name": "Патофизиология",
+   "slug": "patofiziologia",
+   "subject": "meditsina",
    "page": "https://www.mu-varna.bg/BG/Research/obyava-priem-doktoranti",
    "fees_section": {
     "source": "muv-phd-fees",
@@ -131,6 +140,8 @@
   {
    "id": "MUVarna-rsvu30580-PHD-BG",
    "name": "Анатомия, хистология и цитология",
+   "slug": "anatomia-histologia-i-tsitologia",
+   "subject": "meditsina",
    "page": "https://www.mu-varna.bg/BG/Research/obyava-priem-doktoranti",
    "fees_section": {
     "source": "muv-phd-fees",
@@ -143,6 +154,8 @@
   {
    "id": "MUVarna-rsvu29924-PHD-BG",
    "name": "Технология на лекарствените форми и биофармация",
+   "slug": "tehnologia-na-lekarstvenite-formi-i-biofarmatsia",
+   "subject": "farmatsia",
    "page": "https://www.mu-varna.bg/BG/Research/priem-doktoranti-63-01-08-2025",
    "fees_section": {
     "source": "muv-phd-fees",
@@ -156,11 +169,15 @@
   {
    "id": "muv-medicina",
    "name": "Медицина",
+   "slug": "meditsina",
+   "subject": "meditsina",
    "page": "https://www.mu-varna.bg/BG/specialnosti"
   },
   {
    "id": "muv-medicinska-sestra",
    "name": "Медицинска сестра",
+   "slug": "meditsinska-sestra",
+   "subject": "zdravni-grizhi",
    "page": "https://www.mu-varna.bg/BG/specialnosti",
    "language_tracks": {
     "source": "muv-fees",
@@ -170,11 +187,15 @@
   {
    "id": "muv-medicinsko-osiguryavane-na",
    "name": "Медицинско осигуряване на въоръжените сили",
+   "slug": "meditsinsko-osiguryavane-na-vaorazhenite-sili",
+   "subject": "meditsina",
    "page": "https://www.mu-varna.bg/BG/specialnosti"
   },
   {
    "id": "muv-akusherka",
    "name": "Акушерка",
+   "slug": "akusherka",
+   "subject": "zdravni-grizhi",
    "page": "https://www.mu-varna.bg/BG/specialnosti",
    "language_tracks": {
     "source": "muv-fees",
@@ -184,6 +205,8 @@
   {
    "id": "muv-logopediya",
    "name": "Логопедия",
+   "slug": "logopedia",
+   "subject": "logopedia",
    "page": "https://www.mu-varna.bg/BG/specialnosti",
    "tuition_join": {
     "source": "muv-fees",
@@ -197,11 +220,15 @@
   {
    "id": "muv-upravlenie-na-zdravnite-gr",
    "name": "Управление на здравните грижи",
+   "slug": "upravlenie-na-zdravnite-grizhi",
+   "subject": "zdravni-grizhi",
    "page": "https://www.mu-varna.bg/BG/specialnosti"
   },
   {
    "id": "muv-pomoshtnikfarmacevt",
    "name": "Помощник-фармацевт",
+   "slug": "pomoshtnik-farmatsevt",
+   "subject": "farmatsia",
    "page": "https://www.mu-varna.bg/BG/specialnosti",
    "tuition_join": {
     "source": "muv-fees",
@@ -215,6 +242,8 @@
   {
    "id": "muv-rehabilitator",
    "name": "Рехабилитатор",
+   "slug": "rehabilitator",
+   "subject": "kineziterapia",
    "page": "https://www.mu-varna.bg/BG/specialnosti",
    "tuition_join": {
     "source": "muv-fees",
@@ -228,6 +257,8 @@
   {
    "id": "muv-inspektor-po-obshtestveno",
    "name": "Инспектор по обществено здраве",
+   "slug": "inspektor-po-obshtestveno-zdrave",
+   "subject": "obshtestveno-zdrave",
    "page": "https://www.mu-varna.bg/BG/specialnosti",
    "tuition_join": {
     "source": "muv-fees",
@@ -241,6 +272,8 @@
   {
    "id": "muv-rentgenov-laborant",
    "name": "Рентгенов лаборант",
+   "slug": "rentgenov-laborant",
+   "subject": "zdravni-grizhi",
    "page": "https://www.mu-varna.bg/BG/specialnosti",
    "tuition_join": {
     "source": "muv-fees",

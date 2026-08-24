@@ -1,5 +1,8 @@
 {
  "uni_id": "VUM",
+ "display_name": "Висше училище по мениджмънт",
+ "slug": "vum",
+ "city": "Варна",
  "cookies": {},
  "sources": {
   "vum-fees": {
@@ -27,6 +30,8 @@
   {
    "id": "vum-sst",
    "name": "Software Systems and Technologies",
+   "slug": "software-systems-and-technologies",
+   "subject": "softuerno-inzhenerstvo",
    "page": "https://vum.bg/software-systems-and-technologies/",
    "fees_section": {
     "source": "vum-fees",
@@ -37,6 +42,8 @@
   {
    "id": "vum-gca",
    "name": "Gastronomy and Culinary Arts",
+   "slug": "gastronomy-and-culinary-arts",
+   "subject": "turizam-i-hotelierstvo",
    "page": "https://vum.bg/gastronomy-and-culinary-arts/",
    "fees_section": {
     "source": "vum-fees",
@@ -47,6 +54,8 @@
   {
    "id": "vum-mba",
    "name": "Master of Business Administration",
+   "slug": "mba",
+   "subject": "biznes-i-menidzhmant",
    "page": "https://vum.bg/master-of-business-administration/",
    "fees_section": {
     "source": "vum-fees",
@@ -56,6 +65,8 @@
   {
    "id": "vum-corr",
    "name": "Fighting Corruption and Conflict of Interest",
+   "slug": "fighting-corruption-and-conflict-of-interest",
+   "subject": "publichna-administratsia",
    "page": "https://vum.bg/coruption/",
    "suppress_labels": {
     "tuition": [
@@ -66,6 +77,8 @@
   {
    "id": "vum-ibm-pb",
    "name": "Международен бизнес и мениджмънт",
+   "slug": "mezhdunaroden-biznes-i-menidzhmant-prof-bakalavar",
+   "subject": "biznes-i-menidzhmant",
    "page": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/",
    "fees_section": {
     "source": "vum-fees-bg",
@@ -80,6 +93,8 @@
   {
    "id": "vum-ibm-b",
    "name": "Международен бизнес и мениджмънт",
+   "slug": "mezhdunaroden-biznes-i-menidzhmant",
+   "subject": "biznes-i-menidzhmant",
    "page": "https://vum.bg/bg/mejdunaroden-biznes-menidvjmant/",
    "fees_section": {
     "source": "vum-fees-bg",
@@ -94,6 +109,8 @@
   {
    "id": "vum-hm-pb",
    "name": "Хотелски мениджмънт",
+   "slug": "hotelski-menidzhmant-prof-bakalavar",
+   "subject": "turizam-i-hotelierstvo",
    "page": "https://vum.bg/bg/hotelski-menidjmant",
    "fees_section": {
     "source": "vum-fees-bg",
@@ -108,6 +125,8 @@
   {
    "id": "vum-hm-b",
    "name": "Хотелски мениджмънт",
+   "slug": "hotelski-menidzhmant",
+   "subject": "turizam-i-hotelierstvo",
    "page": "https://vum.bg/bg/hotelski-menidjmant",
    "fees_section": {
     "source": "vum-fees-bg",
@@ -122,6 +141,8 @@
   {
    "id": "vum-ped-econ",
    "name": "Педагогика на обучението по Икономика и мениджмънт",
+   "slug": "pedagogika-na-obuchenieto-po-ikonomika-i-menidzhmant",
+   "subject": "pedagogika",
    "page": "https://vum.bg/bg/pedagogika-obuchenieto-ikonomika-menidjmant/",
    "field_anchors": {
     "admission": "vum-ped-econ-adm"
@@ -130,6 +151,8 @@
   {
    "id": "vum-ped-hosp",
    "name": "Педагогика на обучението по хотелиерство и ресторантьорство",
+   "slug": "pedagogika-na-obuchenieto-po-hotelierstvo-i-restorantyorstvo",
+   "subject": "pedagogika",
    "page": "https://vum.bg/bg/pedagogika-obuchenieto-hotelierstvo-restorantiorstvo/",
    "field_anchors": {
     "admission": "vum-ped-hosp-adm"
@@ -138,6 +161,8 @@
   {
    "id": "vum-hce",
    "name": "Хотелиерство и кулинарни изкуства",
+   "slug": "hotelierstvo-i-kulinarni-izkustva",
+   "subject": "turizam-i-hotelierstvo",
    "page": "https://vum.bg/bg/hotelierstvo-kulinarni-izkustva/",
    "fees_section": {
     "source": "vum-fees-bg",
@@ -150,6 +175,8 @@
   {
    "id": "vum-int-tour",
    "name": "Международен туризъм",
+   "slug": "mezhdunaroden-turizam",
+   "subject": "turizam-i-hotelierstvo",
    "page": "https://vum.bg/bg/magistratura-mejdunaroden-turizam/",
    "fees_section": {
     "source": "vum-fees-bg",
@@ -162,6 +189,8 @@
   {
    "id": "vum-tour-phd",
    "name": "Туризъм",
+   "slug": "turizam",
+   "subject": "turizam-i-hotelierstvo",
    "page": "https://vum.bg/bg/doktorska-programa-turizam/",
    "field_anchors": {
     "admission": "vum-tour-phd-adm"
@@ -170,6 +199,8 @@
   {
    "id": "vum-food",
    "name": "Хранителни технологии в кулинарните изкуства",
+   "slug": "hranitelni-tehnologii-v-kulinarnite-izkustva",
+   "subject": "turizam-i-hotelierstvo",
    "page": "https://vum.bg/bg/hranitelni-tehnologii-kulinarni-izkustva/",
    "fees_section": {
     "source": "vum-fees-bg",
@@ -182,6 +213,8 @@
   {
    "id": "vum-mkt",
    "name": "Маркетинг и мениджмънт",
+   "slug": "marketing-i-menidzhmant",
+   "subject": "marketing",
    "page": "https://vum.bg/bg/marketing-menidjmant/",
    "fees_section": {
     "source": "vum-fees-bg",

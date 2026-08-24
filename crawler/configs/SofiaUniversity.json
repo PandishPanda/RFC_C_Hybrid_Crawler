@@ -1,5 +1,8 @@
 {
  "uni_id": "SofiaUniversity",
+ "display_name": "Софийски университет „Св. Климент Охридски“",
+ "slug": "sofiyski-universitet",
+ "city": "София",
  "default_language": "български",
  "cookies": {},
  "anchors": {
@@ -53,6 +56,8 @@
   {
    "id": "su-kn",
    "name": "Компютърни науки",
+   "slug": "kompyutarni-nauki",
+   "subject": "kompyutarni-nauki",
    "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/kompyut_rni_nauki",
    "tuition_join": {
     "source": "su-fees",
@@ -66,6 +71,8 @@
   {
    "id": "su-si",
    "name": "Софтуерно инженерство",
+   "slug": "softuerno-inzhenerstvo",
+   "subject": "softuerno-inzhenerstvo",
    "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/softuerno_inzhenerstvo",
    "tuition_join": {
     "source": "su-fees",
@@ -79,6 +86,8 @@
   {
    "id": "su-is",
    "name": "Информационни системи",
+   "slug": "informatsionni-sistemi",
+   "subject": "informatsionni-sistemi",
    "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/informacionni_sistemi",
    "tuition_join": {
     "source": "su-fees",
@@ -92,6 +101,8 @@
   {
    "id": "su-stat",
    "name": "Статистика",
+   "slug": "statistika",
+   "subject": "analiz-na-danni",
    "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_5_matematika/statistika",
    "tuition_join": {
     "source": "su-fees",
@@ -105,6 +116,8 @@
   {
    "id": "su-ch",
    "name": "Компютърна химия",
+   "slug": "kompyutarna-himia",
+   "subject": "himia",
    "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/kompyut_rna_himiya",
    "extra_sources": [
     "su-compchem"
@@ -117,6 +130,8 @@
   {
    "id": "su-ih",
    "name": "Инженерна химия и съвременни материали (с частично обучение на английски език)",
+   "slug": "inzhenerna-himia-i-savremenni-materiali",
+   "subject": "himia",
    "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/inzhenerna_himiya_i_s_vremenni_materiali_s_chastichno_obuchenie_na_anglijski_ezik",
    "extra_pages": [
     "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_himiya_i_farmaciya/obuchenie/bakalav_rski_programi/fakultet_po_himiya_i_farmaciya/inzhenerna_himiya_i_s_vremenni_materiali_s_chastichno_obuchenie_na_anglijski_ezik/kvalifikacionna_harakteristika"
@@ -129,6 +144,8 @@
   {
    "id": "su-psy",
    "name": "Психология",
+   "slug": "psihologia",
+   "subject": "psihologia",
    "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/psihologiya/",
    "tuition_join": {
     "source": "su-fees",
@@ -142,6 +159,8 @@
   {
    "id": "su-phil",
    "name": "Философия на английски език",
+   "slug": "filosofia-na-angliyski-ezik",
+   "subject": "filosofia",
    "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/filosofiya-na-angliiski-ezik/",
    "tuition_join": {
     "source": "su-fees",
@@ -155,6 +174,8 @@
   {
    "id": "su-data",
    "name": "Анализ на данни",
+   "slug": "analiz-na-danni",
+   "subject": "analiz-na-danni",
    "field_anchors": {
     "duration": "su-data-duration"
    },
@@ -171,6 +192,8 @@
   {
    "id": "su-math",
    "name": "Математика",
+   "slug": "matematika",
+   "subject": "matematika",
    "field_anchors": {
     "duration": "su-math-duration"
    },
@@ -187,6 +210,8 @@
   {
    "id": "su-appmath",
    "name": "Приложна математика",
+   "slug": "prilozhna-matematika",
+   "subject": "matematika",
    "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_5_matematika/prilozhna_matematika",
    "tuition_join": {
     "source": "su-fees",
@@ -200,6 +225,8 @@
   {
    "id": "su-inf",
    "name": "Информатика",
+   "slug": "informatika",
+   "subject": "informatika",
    "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/4_6_informatika_i_kompyut_rni_nauki/informatika",
    "tuition_join": {
     "source": "su-fees",
@@ -213,6 +240,8 @@
   {
    "id": "su-mathinf",
    "name": "Математика и информатика",
+   "slug": "matematika-i-informatika",
+   "subject": "informatika",
    "page": "https://www.uni-sofia.bg/index.php/bul/universitet_t/fakulteti/fakultet_po_matematika_i_informatika2/specialnosti/bakalav_rski_programi/fakultet_po_matematika_i_informatika/1_3_pedagogika_na_obuchenieto_po/matematika_i_informatika",
    "tuition_join": {
     "source": "su-fees",
@@ -226,6 +255,8 @@
   {
    "id": "su-philo",
    "name": "Философия",
+   "slug": "filosofia",
+   "subject": "filosofia",
    "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/filosofiya/",
    "tuition_join": {
     "source": "su-fees",
@@ -235,6 +266,8 @@
   {
    "id": "su-socio",
    "name": "Социология",
+   "slug": "sotsiologia",
+   "subject": "sotsiologia",
    "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/sociologiya/",
    "tuition_join": {
     "source": "su-fees",
@@ -248,6 +281,8 @@
   {
    "id": "su-polit",
    "name": "Политология",
+   "slug": "politologia",
+   "subject": "politologia",
    "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/politologiya/",
    "tuition_join": {
     "source": "su-fees",
@@ -261,6 +296,8 @@
   {
    "id": "su-pubadm",
    "name": "Публична администрация",
+   "slug": "publichna-administratsia",
+   "subject": "publichna-administratsia",
    "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/publichna-administraciya/",
    "tuition_join": {
     "source": "su-fees",
@@ -274,6 +311,8 @@
   {
    "id": "su-cult",
    "name": "Културология",
+   "slug": "kulturologia",
+   "subject": "kulturologia",
    "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/kulturologiya/",
    "tuition_join": {
     "source": "su-fees",
@@ -283,6 +322,8 @@
   {
    "id": "su-euro",
    "name": "Европеистика",
+   "slug": "evropeistika",
+   "subject": "evropeistika",
    "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/evropeistika/",
    "tuition_join": {
     "source": "su-fees",
@@ -296,6 +337,8 @@
   {
    "id": "su-pis",
    "name": "Публични информационни системи",
+   "slug": "publichni-informatsionni-sistemi",
+   "subject": "informatsionni-sistemi",
    "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/publichni-informacionni-sistemi/",
    "tuition_join": {
     "source": "su-fees",
@@ -309,6 +352,8 @@
   {
    "id": "su-bin",
    "name": "Библиотечно-информационни науки",
+   "slug": "bibliotechno-informatsionni-nauki",
+   "subject": "bibliotechno-informatsionni-nauki",
    "page": "https://phls.uni-sofia.bg/obuchenie/bakalavarski-programi/bibliotechno-informacionni-nauki/",
    "tuition_join": {
     "source": "su-fees",
