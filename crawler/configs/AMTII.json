@@ -9,6 +9,10 @@
   "amtii-fees": {
    "url": "https://artacademyplovdiv.com/students/Taksi%20BG%20studenti%20i%20doktoranti.pdf",
    "route": "prose-pdf"
+  },
+  "amtii-kss": {
+   "url": "https://artacademyplovdiv.com/priem/KSS-AMTII.pdf",
+   "route": "prose-pdf"
   }
  },
  "programs": [
@@ -31,7 +35,8 @@
    "subject": "izkustva-i-dizayn",
    "field_anchors": {
     "degree": "amtii-artm-degree",
-    "duration": "amtii-artm-duration"
+    "duration": "amtii-artm-duration",
+    "tuition": "amtii-fee-mag-teoria"
    }
   },
   {
@@ -42,7 +47,8 @@
    "subject": "izkustva-i-dizayn",
    "field_anchors": {
     "degree": "amtii-artt-degree",
-    "duration": "amtii-artt-duration"
+    "duration": "amtii-artt-duration",
+    "tuition": "amtii-fee-mag-teoria-red"
    }
   },
   {
@@ -246,8 +252,9 @@
    "pattern": "(степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно и задочно\\s*\\(1 година\\))"
   },
   "amtii-artt-duration": {
-   "source": "https://artacademyplovdiv.com/specialnosti/ArtT.html",
-   "pattern": "степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно и задочно\\s*\\((1 година)\\)"
+   "source": "amtii-kss",
+   "scope": "page-wide",
+   "pattern": "АРТТЕРАПИЯ\\s+Форма на обучение:\\s*степен [„\"“]Магистър[”“\"]\\s*[–-]\\s*редовна \\((1,5 години)\\)"
   },
   "amtii-bi-bak-degree": {
    "source": "https://artacademyplovdiv.com/specialnosti/BI.html",
@@ -404,6 +411,16 @@
    "source": "amtii-fees",
    "scope": "page-wide",
    "pattern": "(„Изобразително изкуство “?редовно обучение – 920 евро)"
+  },
+  "amtii-fee-mag-teoria": {
+   "source": "amtii-fees",
+   "scope": "page-wide",
+   "pattern": "(Теория на изкуствата:\\s*-?\\s*за редовно обучение:?\\s*– 780 евро;\\s*-?\\s*за задочно обучение – 720 евро)"
+  },
+  "amtii-fee-mag-teoria-red": {
+   "source": "amtii-fees",
+   "scope": "page-wide",
+   "pattern": "(Теория на изкуствата:\\s*-?\\s*за редовно обучение:?\\s*– 780 евро)"
   }
  }
 }
