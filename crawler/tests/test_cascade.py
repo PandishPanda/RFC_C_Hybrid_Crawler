@@ -347,8 +347,11 @@ class TestGoldenRegression(unittest.TestCase):
         #           UCTM's fact blocks — generalized from page reading,
         #           no tail run needed; the per-form duration ships BOTH
         #           forms or nothing)
+        #         + bg-prodalzhava-semestri,
+        #           bg-prodalzhitelnost-godini-sem (2026-08-24: LTU's
+        #           duration shapes, surfaced as refuter misses)
         n = sum(len(v) for v in cascade.LABEL_PATTERNS.values())
-        self.assertEqual(n, 41)
+        self.assertEqual(n, 43)
 
     def test_reproduces_every_golden_record(self):
         extractions = benchmark_extractions()

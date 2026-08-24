@@ -273,6 +273,22 @@ LABEL_PATTERNS = {
         ("bg-po-formi-semestri",
          r'(Редовно обучение\s*[–-]\s*\d+\s*семестъра\s+'
          r'Задочно обучение\s*[–-]\s*\d+\s*семестъра)'),
+        # APPENDED (fill-only): LTU's shapes, surfaced by the SWU/LTU
+        # refuter as misses (2026-08-24): «Обучението продължава 11
+        # семестъра» and the digit-years form «е с продължителност 4
+        # години (8 семестъра)» — the word-number twin already lived
+        # in bg-prodalzhitelnost.
+        ("bg-prodalzhava-semestri",
+         r'[Оо]бучението продължава\s+(\d+\s*семестъра)'),
+        ("bg-prodalzhitelnost-godini-sem",
+         # the group extends over the per-form continuation («... за
+         # редовно обучение и 5 години (10 семестъра) за задочно
+         # обучение») when present — truncating at the first
+         # parenthetical dropped a competing задочна duration on
+         # ltu-ekologia (refuter catch, 2026-08-24)
+         r'(с продължителност \d+\s*години\s*\(\d+\s*семестъра\)'
+         r'(?:\s*за редовно обучение и \d+\s*години\s*'
+         r'\(\d+\s*семестъра\) за задочно обучение)?)'),
     ],
     "language": [
         # BG structured label first: a page's own «Език на преподаване»
@@ -358,6 +374,13 @@ SECTION_SPANS = {
 }
 
 
+# Continuation verbs only — «продължат»/«да продължи» (graduates may
+# continue) never «продължава» (a duration statement: «Обучението
+# продължава 11 семестъра»), which the \b boundary keeps out.
+_CONTINUATION_GUARD_RX = re.compile(
+    r"(?:да|могат да)\s+продължат\b|да\s+продължи\b")
+
+
 def harvest_labels(field, source, max_span=400, skip=()):
     # type: (str, TextSource, int, Sequence[str]) -> Optional[Extraction]
     """Run the shared label library over one document (tier G).
@@ -372,12 +395,22 @@ def harvest_labels(field, source, max_span=400, skip=()):
     for pid, rx in LABEL_PATTERNS[field]:
         if pid in skip:
             continue
-        m = re.search(rx, text)
         span = max(max_span, SECTION_SPANS.get(pid, 0))
-        if m and len(m.group(1)) <= span:
-            return _emit(field, norm(m.group(1)),
-                         [snippet_around(text, m.start(), m.end())],
-                         source.ref, "label:" + pid, TIER_G)
+        for m in re.finditer(rx, text):
+            if field == "degree" and _CONTINUATION_GUARD_RX.search(
+                    text[max(0, m.start() - 70):m.start()]):
+                # «завършилите могат да продължат … степен „магистър"»
+                # states where GRADUATES go next, not this program's
+                # award. The guard was a lookbehind on ONE pattern
+                # until the SWU refuter caught two bachelor programs
+                # shipping „магистър" through bg-okstepen (2026-08-24);
+                # it now covers every degree pattern and skips to the
+                # page's next occurrence instead of shipping nothing.
+                continue
+            if len(m.group(1)) <= span:
+                return _emit(field, norm(m.group(1)),
+                             [snippet_around(text, m.start(), m.end())],
+                             source.ref, "label:" + pid, TIER_G)
     return None
 
 

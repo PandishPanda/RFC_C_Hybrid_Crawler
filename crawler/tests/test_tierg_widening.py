@@ -70,6 +70,87 @@ class DegreeCapitalsTest(unittest.TestCase):
             "образователно-квалификационна степен „професионален бакалавър“")
 
 
+class ContinuationGuardTest(unittest.TestCase):
+    """The next-degree trap, generalized (refuter catches on SWU,
+    2026-08-24): „завършилите могат да продължат образованието си за
+    придобиване на ОКС/степен „магистър"" states where GRADUATES may go
+    next, not this program's award. The guard was a lookbehind on
+    bg-oks-inline only; once the widening made bg-okstepen reachable in
+    such clauses, two bachelor programs shipped „магистър". The guard
+    now lives in harvest_labels for the degree field: a match whose
+    preceding window contains a продължат/да продължи continuation verb
+    is skipped, and scanning continues to the next occurrence."""
+
+    def test_continuation_clause_alone_ships_nothing(self):
+        self.assertIsNone(cascade.harvest_labels("degree", _src(
+            "Завършилите могат да продължат образованието си за "
+            "придобиване на образователно-квалификационна степен "
+            "„магистър“ в същото направление.")))
+
+    def test_v_oks_variant_is_also_guarded_for_okstepen(self):
+        # swu-130's shape: „да продължат образованието си в ОКС ..." —
+        # bg-oks-inline's lookbehind already refuses it; bg-okstepen
+        # (matching the longer label in the same clause) must too
+        self.assertIsNone(cascade.harvest_labels("degree", _src(
+            "Придобилите бакалавърска степен могат да продължат "
+            "образованието си в образователно-квалификационната степен "
+            "„магистър“ по същата специалност.")))
+
+    def test_guard_skips_to_the_later_own_statement(self):
+        r = cascade.harvest_labels("degree", _src(
+            "могат да продължат образованието си за придобиване на "
+            "образователно-квалификационна степен „магистър“. "
+            "Специалността се изучава в образователно-квалификационна "
+            "степен „бакалавър“ с четиригодишен курс."))
+        self.assertIsNotNone(r)
+        self.assertEqual(
+            r.value, "образователно-квалификационна степен „бакалавър“")
+
+    def test_pridobivane_heading_without_continuation_still_matches(self):
+        # „ИЗИСКВАНИЯ ЗА ПРИДОБИВАНЕ НА ..." is a legit own-page heading
+        # (MUSofia inspektor) — придобиване alone must not trigger
+        r = cascade.harvest_labels("degree", _src(
+            "ИЗИСКВАНИЯ ЗА ПРИДОБИВАНЕ НА ОБРАЗОВАТЕЛНО-КВАЛИФИКАЦИОННА "
+            "СТЕПЕН „ПРОФЕСИОНАЛЕН БАКАЛАВЪР” ПО СПЕЦИАЛНОСТ"))
+        self.assertIsNotNone(r)
+
+
+class LtuDurationShapesTest(unittest.TestCase):
+    def test_obuchenieto_prodalzhava_semestri(self):
+        # ltu-veterinarna: „Обучението продължава 11 семестъра" — and
+        # „продължава" (a duration verb) must NOT trip the degree
+        # field's continuation guard vocabulary
+        r = cascade.harvest_labels("duration", _src(
+            "СПЕЦИАЛНОСТ „ВЕТЕРИНАРНА МЕДИЦИНА“ Обучението продължава "
+            "11 семестъра и завършва с държавни изпити."))
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "11 семестъра")
+
+    def test_per_form_years_continuation_ships_whole(self):
+        # ltu-ekologia (refuter catch): „... за редовно обучение и 5
+        # години (10 семестъра) за задочно обучение" — truncating at
+        # the first parenthetical drops the qualifier AND the competing
+        # задочна duration
+        r = cascade.harvest_labels("duration", _src(
+            "Обучението по специалност ЕООС-ОКС «Бакалавър» е с "
+            "продължителност 4 години (8 семестъра) за редовно обучение "
+            "и 5 години (10 семестъра) за задочно обучение."))
+        self.assertIsNotNone(r)
+        self.assertEqual(
+            r.value,
+            "с продължителност 4 години (8 семестъра) за редовно "
+            "обучение и 5 години (10 семестъра) за задочно обучение")
+
+    def test_digit_years_with_semesters_parenthetical(self):
+        # ltu-alternativen/ekologia: „е с продължителност 4 години
+        # (8 семестъра), в редовна форма"
+        r = cascade.harvest_labels("duration", _src(
+            "Обучението по специалност „Алтернативен туризъм“ (АТ) е с "
+            "продължителност 4 години (8 семестъра), в редовна форма."))
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "с продължителност 4 години (8 семестъра)")
+
+
 class ColonLabelledDegreeTest(unittest.TestCase):
     """The unquoted colon-labelled degree block (BFU's template, located
     by the attended LLM tail): „Образователно-квалификационна степен:
