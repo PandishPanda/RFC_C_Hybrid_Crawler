@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
-<title>RFC-C rev.5 — Hybrid crawler</title><script src="https://cdn.tailwindcss.com"></script>
+<title>RFC-C rev.7 — Hybrid crawler</title><script src="https://cdn.tailwindcss.com"></script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
 mermaid.initialize({startOnLoad:true,theme:'neutral',flowchart:{htmlLabels:true}});</script>
 <style>.mermaid svg{max-width:100%!important}</style></head>
@@ -8,7 +8,11 @@ mermaid.initialize({startOnLoad:true,theme:'neutral',flowchart:{htmlLabels:true}
 <header class="mb-6 border-b border-slate-700 pb-5">
 <p class="text-indigo-400 font-mono text-sm">STA-78 · RFC Round: University Crawler v2</p>
 <h1 class="text-4xl font-bold">RFC-C — Hybrid: deterministic core + gated LLM tail</h1>
-<p class="text-slate-400 mt-2 text-lg">Revision 6 · 2026-08-23 · 9 universities · 164 programs · 265 cells blind-graded · 104 derived</p></header>
+<p class="text-slate-400 mt-2 text-lg">Revision 7 · 2026-08-24 · 18 universities · 280 programs · 265 cells blind-graded (the 9-university benchmark cohort) · 218 derived</p></header>
+
+<div class="bg-indigo-950/40 border border-indigo-800 rounded-xl p-5 mb-8">
+<p class="font-bold text-indigo-300 mb-2 text-lg">Revision 7: the fleet doubles (9 → 18 universities) and the pipeline generalizes — the shared library grows 27 → 44 patterns, the tail becomes an attended locator, and the review discipline scales with it</p>
+<p class="text-indigo-100">One day of expansion (2026-08-24) onboarded nine further universities (MUSofia's Medical College, ВВВУ „Георги Бенковски", Колеж по туризъм – Благоевград, BFU, АМТИИ, ХТМУ, ЮЗУ, ЛТУ — plus a preserved config for the misidentified Varna college) for a total LLM spend of ~$10 against VUM's historical $23.49 for one university. The working loop, proven end-to-end on BFU (28% → 80%, zero anchors): an <strong>attended --tail pass locates</strong> statements on a new site; the templated <strong>shapes join the shared library</strong> instead of becoming per-site anchors; a <strong>deterministic re-run reproduces</strong> every located cell as a plain tier-G catch; an <strong>independent refuter seals</strong> the batch; refreshes stay LLM-free (ADR-0001). Mechanism growth along the way: every route now hands the cascade text + optional grid under one ref, so the column-aware fee-row join runs on HTML fee tables with the funding band quoted from the table itself; a continuation-verb guard covers every degree pattern after two SWU cells shipped a graduates-may-continue „магистър"; and AMTII's both-level pages were fixed by MODELING (per-level program entries), not looser capture. Ten refuter rounds refuted twelve cells across the expansion — every one fixed at the mechanism or withdrawn to an honest null. The new cohort is attribution-reviewed but NOT blind-graded; the 93.3% / 0-fabrications figures below remain statements about the 9-university benchmark cohort until a labeller grades the newcomers.</p></div>
 
 <div class="bg-emerald-950/40 border border-emerald-800 rounded-xl p-5 mb-8">
 <p class="font-bold text-emerald-300 mb-2 text-lg">Revision 6: the fabrication class is closed and now policed; coverage 68% extracted + 104 derived</p>
@@ -83,5 +87,5 @@ mermaid.initialize({startOnLoad:true,theme:'neutral',flowchart:{htmlLabels:true}
 <p><strong>Still open:</strong> if the recoverable-miss backlog (§4.4) keeps regrowing faster than config work closes it as universities are added, the per-program recipe model needs revisiting — that is a scaling question, not a correctness one.</p>
 <p><strong>The honest bottom line:</strong> a mechanical presence check is a real and rare guarantee — the previous attempt shipped 36% unsupported values, this ships none. Presence was never the same thing as correctness; it took the blind benchmark to measure the difference, three structural fixes to close it, and the same frozen keys to prove it closed. Every defect was found by human labels; every fix is verified by them.</p></div></section>
 
-<footer class="text-slate-500 text-sm border-t border-slate-800 pt-4">RFC-C rev.5 · evidence in tracked <code>benchmark/</code> · 265 graded cells across 9 universities · docs/adr/0001–0006 · companions: scorecard.html, missing-matrix.html</footer>
+<footer class="text-slate-500 text-sm border-t border-slate-800 pt-4">RFC-C rev.7 · evidence in tracked <code>benchmark/</code> · 265 graded cells across the 9-university benchmark cohort · fleet 18 universities / 280 programs / 989 of 1400 cells shipped (70.6%) · docs/adr/0001–0007 · companions: scorecard.html, missing-matrix.html</footer>
 </div></body></html>
