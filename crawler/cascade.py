@@ -199,6 +199,15 @@ LABEL_PATTERNS = {
          r'([Оо]бразователно-квалификационна степен:\s*'
          r'(?:[Пп]рофесионален\s+)?(?:[Бб]акалавър|[Мм]агистър'
          r'|[Дд]октор)\b)'),
+        # APPENDED (fill-only): UCTM's «Степен и форма Бакалавър,
+        # редовно, задочно» fact block — degree + offered forms in
+        # one labelled span, shipped whole. Closed value list; the
+        # forms tail is a comma list of the two known form words.
+        ("bg-stepen-i-forma",
+         r'(Степен и форма\s+(?:[Пп]рофесионален\s+)?'
+         r'(?:[Бб]акалавър|[Мм]агистър|[Дд]октор)'
+         r'(?:(?:,|\s+и)?\s+(?:редовно|задочно|дистанционно))*'
+         r'(?:\s+обучение)?)'),
     ],
     "duration": [
         ("bg-semestri-label", r'(Продължителност на обучението \(брой семестри\):\s*[0-9а-я]+)'),
@@ -249,6 +258,14 @@ LABEL_PATTERNS = {
          r'\s+години'
          r'(?:\s*/\s*(?:две|три|четири|пет|шест|седем|осем)'
          r'\s+семестъра)?)'),
+        # APPENDED (fill-only): UCTM's per-form statement («Редовно
+        # обучение – 8 семестъра Задочно обучение – 9 семестъра»).
+        # BOTH forms or nothing — one form alone is the partial
+        # value the labeller rules WRONG (the same refusal
+        # bg-prodalzhitelnost encodes for multi-route durations).
+        ("bg-po-formi-semestri",
+         r'(Редовно обучение\s*[–-]\s*\d+\s*семестъра\s+'
+         r'Задочно обучение\s*[–-]\s*\d+\s*семестъра)'),
     ],
     "language": [
         # BG structured label first: a page's own «Език на преподаване»

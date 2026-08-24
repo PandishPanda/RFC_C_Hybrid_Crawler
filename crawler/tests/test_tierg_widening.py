@@ -148,6 +148,58 @@ class ProgramNamedAdmissionTest(unittest.TestCase):
         self.assertTrue(r.value.startswith("Приемът в магистърската"))
 
 
+class StepenIFormaTest(unittest.TestCase):
+    """UCTM's labelled fact block: „Степен и форма Бакалавър, редовно,
+    задочно" — degree and forms in one unquoted labelled span. Closed
+    value list; the forms tail rides along so the claim ships whole."""
+
+    def test_bachelor_with_forms(self):
+        r = cascade.harvest_labels("degree", _src(
+            "фармацията и медицината . Степен и форма Бакалавър, "
+            "редовно, задочно Професионална квалификация Инженер"))
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "Степен и форма Бакалавър, редовно, задочно")
+
+    def test_master_single_form(self):
+        r = cascade.harvest_labels("degree", _src(
+            "Степен и форма Магистър, редовно Професионална"))
+        self.assertEqual(r.value, "Степен и форма Магистър, редовно")
+
+    def test_i_conjunction_form_list_ships_whole(self):
+        # uctm-industrial-safety (refuter catch): „редовно и задочно
+        # обучение" — a comma-only form tail truncated mid-list and
+        # asserted half the claim
+        r = cascade.harvest_labels("degree", _src(
+            "Степен и форма Бакалавър, редовно и задочно обучение "
+            "Професионална квалификация"))
+        self.assertEqual(
+            r.value, "Степен и форма Бакалавър, редовно и задочно обучение")
+
+    def test_open_prose_after_label_does_not_match(self):
+        self.assertIsNone(cascade.harvest_labels("degree", _src(
+            "Степен и форма на обучение се определят от факултета")))
+
+
+class PerFormSemestersTest(unittest.TestCase):
+    """UCTM states duration PER FORM („Редовно обучение – 8 семестъра
+    Задочно обучение – 9 семестъра"). One form alone is the partial
+    value the labeller rules WRONG — the pattern captures BOTH
+    consecutive statements or nothing."""
+
+    def test_both_forms_ship_whole(self):
+        r = cascade.harvest_labels("duration", _src(
+            "Дипломиране Редовно обучение – 8 семестъра Задочно "
+            "обучение – 9 семестъра Реализация Завършилите"))
+        self.assertIsNotNone(r)
+        self.assertEqual(
+            r.value,
+            "Редовно обучение – 8 семестъра Задочно обучение – 9 семестъра")
+
+    def test_a_lone_form_does_not_match(self):
+        self.assertIsNone(cascade.harvest_labels("duration", _src(
+            "Дипломиране Редовно обучение – 8 семестъра Реализация")))
+
+
 class DurationShapesTest(unittest.TestCase):
     def test_colon_years_no_semesters(self):
         r = cascade.harvest_labels("duration", _src(

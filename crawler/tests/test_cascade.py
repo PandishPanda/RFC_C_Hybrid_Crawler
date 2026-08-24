@@ -343,8 +343,12 @@ class TestGoldenRegression(unittest.TestCase):
         #           program-named admission sentence — BFU's templates,
         #           LOCATED by the attended LLM tail then generalized
         #           into the library instead of pinned as anchors)
+        #         + bg-stepen-i-forma, bg-po-formi-semestri (same day:
+        #           UCTM's fact blocks — generalized from page reading,
+        #           no tail run needed; the per-form duration ships BOTH
+        #           forms or nothing)
         n = sum(len(v) for v in cascade.LABEL_PATTERNS.values())
-        self.assertEqual(n, 39)
+        self.assertEqual(n, 41)
 
     def test_reproduces_every_golden_record(self):
         extractions = benchmark_extractions()
