@@ -1,0 +1,111 @@
+{
+ "uni_id": "LTU",
+ "display_name": "Лесотехнически университет",
+ "slug": "ltu",
+ "city": "София",
+ "default_language": "български",
+ "cookies": {},
+ "sources": {},
+ "programs": [
+  {
+   "id": "ltu-agronomstvo",
+   "name": "АГРОНОМСТВО",
+   "page": "https://ltu.bg/прием/специалности/агрономство/",
+   "slug": "agronomstvo",
+   "subject": "agronomstvo"
+  },
+  {
+   "id": "ltu-alternativen",
+   "name": "АЛТЕРНАТИВЕН ТУРИЗЪМ",
+   "page": "https://ltu.bg/прием/специалности/алтернативен-туризъм/",
+   "slug": "alternativen-turizam",
+   "subject": "turizam-i-hotelierstvo"
+  },
+  {
+   "id": "ltu-veterinarna",
+   "name": "ВЕТЕРИНАРНА МЕДИЦИНА",
+   "page": "https://ltu.bg/прием/специалности/ветеринарна-медицина/",
+   "slug": "veterinarna-meditsina",
+   "subject": "veterinarna-meditsina"
+  },
+  {
+   "id": "ltu-gorsko",
+   "name": "ГОРСКО СТОПАНСТВО",
+   "page": "https://ltu.bg/прием/специалности/горско-стопанство/",
+   "slug": "gorsko-stopanstvo",
+   "subject": "gorsko-stopanstvo"
+  },
+  {
+   "id": "ltu-ekologia",
+   "name": "ЕКОЛОГИЯ И ОПАЗВАНЕ НА ОКОЛНАТА СРЕДА",
+   "page": "https://ltu.bg/прием/специалности/екология-и-опазване-на-околнатта-сред/",
+   "slug": "ekologia-i-opazvane-na-okolnata-sreda",
+   "subject": "biologia-i-ekologia"
+  },
+  {
+   "id": "ltu-inzheneren",
+   "name": "ИНЖЕНЕРЕН ДИЗАЙН (ИНТЕРИОР И ДИЗАЙН НА МЕБЕЛИ)",
+   "page": "https://ltu.bg/прием/специалности/инженерен-дизайн/",
+   "slug": "inzheneren-dizayn",
+   "subject": "izkustva-i-dizayn",
+   "field_anchors": {
+    "duration": "ltu-inzheneren-duration"
+   }
+  },
+  {
+   "id": "ltu-kompyutarni",
+   "name": "КОМПЮТЪРНИ ТЕХНОЛОГИИ В МЕБЕЛНАТА ИНДУСТРИЯ",
+   "page": "https://ltu.bg/прием/специалности/компютърни-технологии-в-мебелната-ин/",
+   "slug": "kompyutarni-tehnologii-v-mebelnata-industria",
+   "subject": "inzhenerstvo",
+   "field_anchors": {
+    "degree": "ltu-kompyutarni-degree"
+   }
+  },
+  {
+   "id": "ltu-landshaftna",
+   "name": "ЛАНДШАФТНА АРХИТЕКТУРА",
+   "page": "https://ltu.bg/прием/специалности/ландшафтна-архитектура/",
+   "slug": "landshaftna-arhitektura",
+   "subject": "arhitektura"
+  },
+  {
+   "id": "ltu-rastitelna",
+   "name": "РАСТИТЕЛНА ЗАЩИТА",
+   "page": "https://ltu.bg/прием/специалности/растителна-защита/",
+   "slug": "rastitelna-zashtita",
+   "subject": "agronomstvo"
+  },
+  {
+   "id": "ltu-stopansko",
+   "name": "СТОПАНСКО УПРАВЛЕНИЕ",
+   "page": "https://ltu.bg/прием/специалности/стопанско-управление/",
+   "slug": "stopansko-upravlenie",
+   "subject": "biznes-i-menidzhmant"
+  },
+  {
+   "id": "ltu-tehnologia",
+   "name": "ТЕХНОЛОГИЯ НА ДЪРВЕСИНАТА И МЕБЕЛИТЕ",
+   "page": "https://ltu.bg/прием/специалности/технология-на-дървесината-и-мебелите/",
+   "slug": "tehnologia-na-darvesinata-i-mebelite",
+   "subject": "gorsko-stopanstvo",
+   "field_anchors": {
+    "duration": "ltu-tehnologia-duration"
+   }
+  }
+ ],
+ "anchors": {
+  "ltu-inzheneren-duration": {
+   "source": "https://ltu.bg/прием/специалности/инженерен-дизайн/",
+   "pattern": "(Срокът на обучение в редовната форма е 8 семестъра)"
+  },
+  "ltu-tehnologia-duration": {
+   "source": "https://ltu.bg/прием/специалности/технология-на-дървесината-и-мебелите/",
+   "pattern": "(Срокът на обучение в редовната форма е 8 семестъра, а в задочната е 10 семестъра)"
+  },
+  "ltu-kompyutarni-degree": {
+   "source": "https://ltu.bg/прием/специалности/компютърни-технологии-в-мебелната-ин/",
+   "pattern": "(Образователно-квалификационна степен „бакалавър“)(?=\\s*Обучението е в редовната форма)"
+  }
+ }
+}

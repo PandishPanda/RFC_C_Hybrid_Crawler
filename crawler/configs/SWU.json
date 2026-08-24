@@ -1,0 +1,221 @@
+{
+ "uni_id": "SWU",
+ "display_name": "Югозападен университет „Неофит Рилски“",
+ "slug": "yugozapaden-universitet",
+ "city": "Благоевград",
+ "default_language": "български",
+ "cookies": {},
+ "sources": {},
+ "programs": [
+  {
+   "id": "swu-100",
+   "name": "Предучилищна и начална училищна педагогика",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/83-bprogrammescat/2021-10-13-08-06-53/100-pnupbgart",
+   "slug": "preduchilishtna-i-nachalna-uchilishtna-pedagogika",
+   "subject": "pedagogika"
+  },
+  {
+   "id": "swu-102",
+   "name": "Начална училищна педагогика и чужд език",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/83-bprogrammescat/2021-10-13-08-06-53/102-nupchebgart",
+   "slug": "nachalna-uchilishtna-pedagogika-i-chuzhd-ezik",
+   "subject": "pedagogika"
+  },
+  {
+   "id": "swu-103",
+   "name": "Предучилищна педагогика и чужд език",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/83-bprogrammescat/2021-10-13-08-06-53/103-ppchebgart",
+   "slug": "preduchilishtna-pedagogika-i-chuzhd-ezik",
+   "subject": "pedagogika"
+  },
+  {
+   "id": "swu-104",
+   "name": "Социална педагогика",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/83-bprogrammescat/2021-10-13-08-06-53/104-socpbgart",
+   "slug": "sotsialna-pedagogika",
+   "subject": "pedagogika"
+  },
+  {
+   "id": "swu-105",
+   "name": "Специална педагогика",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/83-bprogrammescat/2021-10-13-08-06-53/105-sppedbgart",
+   "slug": "spetsialna-pedagogika",
+   "subject": "pedagogika"
+  },
+  {
+   "id": "swu-108",
+   "name": "Педагогика на обучението по математика, информатика и информационни технологии",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/84-bprogrammescat/edpedagogycat/108-pomiitbgart",
+   "slug": "pedagogika-na-obuchenieto-po-matematika-informatika-i-informatsionni-tehnologii",
+   "subject": "pedagogika"
+  },
+  {
+   "id": "swu-109",
+   "name": "Педагогика на обучението по Български език и чужд език (английски, руски, гръцки, китайски)",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/84-bprogrammescat/edpedagogycat/109-pobechebgart",
+   "slug": "pedagogika-na-obuchenieto-po-balgarski-ezik-i-chuzhd-ezik",
+   "subject": "pedagogika"
+  },
+  {
+   "id": "swu-111",
+   "name": "Педагогика на обучението по изобразително изкуство",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/84-bprogrammescat/edpedagogycat/111-poii2bgart",
+   "slug": "pedagogika-na-obuchenieto-po-izobrazitelno-izkustvo",
+   "subject": "pedagogika"
+  },
+  {
+   "id": "swu-112",
+   "name": "Педагогика на музикалното изкуствo",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/84-bprogrammescat/edpedagogycat/112-pmibgart",
+   "slug": "pedagogika-na-muzikalnoto-izkustvo",
+   "subject": "pedagogika"
+  },
+  {
+   "id": "swu-113",
+   "name": "Педагогика на обучението по технологии и предприемачество",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/84-bprogrammescat/edpedagogycat/113-potpbgart",
+   "slug": "pedagogika-na-obuchenieto-po-tehnologii-i-predpriemachestvo",
+   "subject": "pedagogika"
+  },
+  {
+   "id": "swu-114",
+   "name": "Педагогика на обучението по физика и математика",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/84-bprogrammescat/edpedagogycat/114-pofmbgart",
+   "slug": "pedagogika-na-obuchenieto-po-fizika-i-matematika",
+   "subject": "pedagogika"
+  },
+  {
+   "id": "swu-115",
+   "name": "Педагогика на обучението по химия и физика",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/84-bprogrammescat/edpedagogycat/115-pohfbgart",
+   "slug": "pedagogika-na-obuchenieto-po-himia-i-fizika",
+   "subject": "pedagogika"
+  },
+  {
+   "id": "swu-116",
+   "name": "Педагогика на обучението по география и история",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/84-bprogrammescat/edpedagogycat/116-pogibgart",
+   "slug": "pedagogika-na-obuchenieto-po-geografia-i-istoria",
+   "subject": "pedagogika"
+  },
+  {
+   "id": "swu-2051",
+   "name": "Педагогика на обучението по химия и човекът и природата",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/84-bprogrammescat/edpedagogycat/2051-pohhnbgart",
+   "slug": "pedagogika-na-obuchenieto-po-himia-i-chovekat-i-prirodata",
+   "subject": "pedagogika"
+  },
+  {
+   "id": "swu-117",
+   "name": "Физическо възпитание и спорт",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/84-bprogrammescat/edpedagogycat/117-fvisbgart",
+   "slug": "fizichesko-vazpitanie-i-sport",
+   "subject": "pedagogika"
+  },
+  {
+   "id": "swu-118",
+   "name": "Техника, технологии и предприемачество",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/84-bprogrammescat/edpedagogycat/118-pottpbgart",
+   "slug": "tehnika-tehnologii-i-predpriemachestvo",
+   "subject": "pedagogika"
+  },
+  {
+   "id": "swu-119",
+   "name": "Българска филология",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/85-bprogrammescat/philologycat/119-bfbgart",
+   "slug": "balgarska-filologia",
+   "subject": "filologia"
+  },
+  {
+   "id": "swu-120",
+   "name": "Английска филология",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/85-bprogrammescat/philologycat/120-anfbgart",
+   "slug": "angliyska-filologia",
+   "subject": "filologia"
+  },
+  {
+   "id": "swu-121",
+   "name": "Приложна лингвистика (английски с немски, или френски, или руски, или гръцки)",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/85-bprogrammescat/philologycat/121-prlingbgart",
+   "slug": "prilozhna-lingvistika",
+   "subject": "filologia"
+  },
+  {
+   "id": "swu-122",
+   "name": "Английски език и етнология",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/85-bprogrammescat/philologycat/122-aeebgart",
+   "slug": "angliyski-ezik-i-etnologia",
+   "subject": "filologia"
+  },
+  {
+   "id": "swu-123",
+   "name": "Английски език: превод и комуникации",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/85-bprogrammescat/philologycat/123-aepkbgart",
+   "slug": "angliyski-ezik-prevod-i-komunikatsii",
+   "subject": "filologia"
+  },
+  {
+   "id": "swu-124",
+   "name": "Чужд език (руски, немски или френски и втори чужд език английски) и бизнес администрация",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/85-bprogrammescat/philologycat/124-forlangbgart",
+   "slug": "chuzhd-ezik-i-biznes-administratsia",
+   "subject": "filologia"
+  },
+  {
+   "id": "swu-126",
+   "name": "История",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/86-bprogrammescat/hisarchcat/126-historyarchbgcat",
+   "slug": "istoria",
+   "subject": "istoria"
+  },
+  {
+   "id": "swu-127",
+   "name": "Архивистика и информационна сигурност",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/86-bprogrammescat/hisarchcat/127-archisbgart",
+   "slug": "arhivistika-i-informatsionna-sigurnost",
+   "subject": "istoria"
+  },
+  {
+   "id": "swu-128",
+   "name": "История и археология",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/86-bprogrammescat/hisarchcat/128-iabgart",
+   "slug": "istoria-i-arheologia",
+   "subject": "istoria"
+  },
+  {
+   "id": "swu-129",
+   "name": "Философия",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/87-bprogrammescat/philocat/129-philobgart",
+   "slug": "filosofia",
+   "subject": "filosofia"
+  },
+  {
+   "id": "swu-130",
+   "name": "Социология",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/88-bprogrammescat/sankcat/130-socbgart",
+   "slug": "sotsiologia",
+   "subject": "sotsiologia"
+  },
+  {
+   "id": "swu-131",
+   "name": "Културология и културен мениджмънт",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/88-bprogrammescat/sankcat/131-kkmbgart",
+   "slug": "kulturologia-i-kulturen-menidzhmant",
+   "subject": "kulturologia"
+  },
+  {
+   "id": "swu-132",
+   "name": "Култура и медии",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/88-bprogrammescat/sankcat/132-kmbgart",
+   "slug": "kultura-i-medii",
+   "subject": "kulturologia"
+  },
+  {
+   "id": "swu-133",
+   "name": "Култура и културен туризъм",
+   "page": "https://www.swu.bg/bg/prospectivestbg/admse/88-bprogrammescat/sankcat/133-kkturbgart",
+   "slug": "kultura-i-kulturen-turizam",
+   "subject": "kulturologia"
+  }
+ ]
+}

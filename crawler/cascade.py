@@ -240,7 +240,14 @@ LABEL_PATTERNS = {
         # honest null (2026-08-23).
         ("bg-prodalzhitelnost-semestri",
          r'(?:с продължителност|[Пп]родължителността на обучението е)'
-         r'\s+(\d+\s*семестъра)'),
+         # The group extends over LTU's per-form continuation («8
+         # семестъра в редовна форма и 10 семестъра за задочна
+         # форма») when present — the first number alone shipped a
+         # partial value (2026-08-24); single-number sentences keep
+         # their exact old capture, golden-pinned.
+         r'\s+(\d+\s*семестъра'
+         r'(?:\s+в редовна форма и \d+\s*семестъра'
+         r' за задочна форма)?)'),
         # APPENDED (first hit wins — can only fill nulls). The two
         # shapes tier B kept re-implementing per site (fill-rate ticket
         # 02): the labelled years form without a semester requirement

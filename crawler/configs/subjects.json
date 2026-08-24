@@ -1,12 +1,20 @@
 {
  "subjects": [
   {
+   "slug": "agronomstvo",
+   "name": "Агрономство и земеделие"
+  },
+  {
    "slug": "analiz-na-danni",
    "name": "Анализ на данни и статистика"
   },
   {
    "slug": "antropologia",
    "name": "Антропология"
+  },
+  {
+   "slug": "arhitektura",
+   "name": "Архитектура"
   },
   {
    "slug": "aviatsia",
@@ -55,6 +63,10 @@
   {
    "slug": "geografia",
    "name": "География"
+  },
+  {
+   "slug": "gorsko-stopanstvo",
+   "name": "Горско стопанство"
   },
   {
    "slug": "himia",

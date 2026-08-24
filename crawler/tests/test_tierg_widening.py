@@ -148,6 +148,30 @@ class ProgramNamedAdmissionTest(unittest.TestCase):
         self.assertTrue(r.value.startswith("Приемът в магистърската"))
 
 
+class PerFormProdalzhitelnostTest(unittest.TestCase):
+    """LTU's agronomy pages state BOTH forms in one sentence
+    („с продължителност 8 семестъра в редовна форма и 10 семестъра за
+    задочна форма") — capturing just the first number shipped a partial
+    value (reviewer catch, 2026-08-24). The group extends over the
+    continuation when present; single-number sentences (NBU's shape)
+    keep their exact old capture."""
+
+    def test_both_forms_extend_the_capture(self):
+        r = cascade.harvest_labels("duration", _src(
+            "Обучението е с продължителност 8 семестъра в редовна форма "
+            "и 10 семестъра за задочна форма на обучение."))
+        self.assertIsNotNone(r)
+        self.assertEqual(
+            r.value,
+            "8 семестъра в редовна форма и 10 семестъра за задочна форма")
+
+    def test_single_number_sentence_keeps_the_old_capture(self):
+        r = cascade.harvest_labels("duration", _src(
+            "Обучението е с продължителност 8 семестъра по учебен план."))
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "8 семестъра")
+
+
 class StepenIFormaTest(unittest.TestCase):
     """UCTM's labelled fact block: „Степен и форма Бакалавър, редовно,
     задочно" — degree and forms in one unquoted labelled span. Closed
