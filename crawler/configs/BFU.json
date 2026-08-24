@@ -12,70 +12,112 @@
    "name": "Право",
    "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-yuridicheski-nauki/pravo",
    "slug": "pravo",
-   "subject": "pravo"
+   "subject": "pravo",
+   "field_anchors": {
+    "tuition": "bfu-pravo-tuition"
+   }
   },
   {
    "id": "bfu-schet-fin",
    "name": "Счетоводство и финанси",
    "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-ikonomicheski-i-upravlenski-nauki/spetsialnost-schetovodstvo-i-finansi",
    "slug": "schetovodstvo-i-finansi",
-   "subject": "finansi-i-schetovodstvo"
+   "subject": "finansi-i-schetovodstvo",
+   "field_anchors": {
+    "tuition": "bfu-bak-tuition"
+   }
   },
   {
    "id": "bfu-marketing",
    "name": "Маркетинг и дигитални комуникации",
    "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-ikonomicheski-i-upravlenski-nauki/spetsialnost-marketing-i-digitalni-komunikatsii",
    "slug": "marketing-i-digitalni-komunikatsii",
-   "subject": "marketing"
+   "subject": "marketing",
+   "field_anchors": {
+    "tuition": "bfu-bak-tuition"
+   }
   },
   {
    "id": "bfu-ubmi",
    "name": "Управление на бизнеса и международна икономика",
    "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-ikonomicheski-i-upravlenski-nauki/spetsialnost-upravlenie-na-biznesa-i-mezhdunarodna-ikonomika",
    "slug": "upravlenie-na-biznesa-i-mezhdunarodna-ikonomika",
-   "subject": "biznes-i-menidzhmant"
+   "subject": "biznes-i-menidzhmant",
+   "field_anchors": {
+    "tuition": "bfu-bak-tuition"
+   }
   },
   {
    "id": "bfu-se",
    "name": "Софтуерно инженерство",
    "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-informatika-i-tehnicheski-nauki/softuerno-inzhenerstvo",
    "slug": "softuerno-inzhenerstvo",
-   "subject": "softuerno-inzhenerstvo"
+   "subject": "softuerno-inzhenerstvo",
+   "field_anchors": {
+    "tuition": "bfu-bak-tuition"
+   }
   },
   {
    "id": "bfu-kst",
    "name": "Компютърни системи и технологии",
    "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-informatika-i-tehnicheski-nauki/kompyutarni-sistemi-i-tehnologii",
    "slug": "kompyutarni-sistemi-i-tehnologii",
-   "subject": "kompyutarni-sistemi-i-tehnologii"
+   "subject": "kompyutarni-sistemi-i-tehnologii",
+   "field_anchors": {
+    "tuition": "bfu-bak-tuition"
+   }
   },
   {
    "id": "bfu-siit",
    "name": "Системно инженерство в индустрията и туризма",
    "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-informatika-i-tehnicheski-nauki/spetsialnost-sistemno-inzhenerstvo-v-industriyata-i-turizma",
    "slug": "sistemno-inzhenerstvo-v-industriyata-i-turizma",
-   "subject": "inzhenerstvo"
+   "subject": "inzhenerstvo",
+   "field_anchors": {
+    "tuition": "bfu-bak-tuition"
+   }
   },
   {
    "id": "bfu-ee",
    "name": "Електроснабдяване и електрообзавеждане",
    "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-informatika-i-tehnicheski-nauki/elektrosnabdyavane-i-elektroobzavezhdane",
    "slug": "elektrosnabdyavane-i-elektroobzavezhdane",
-   "subject": "inzhenerstvo"
+   "subject": "inzhenerstvo",
+   "field_anchors": {
+    "tuition": "bfu-bak-tuition"
+   }
   },
   {
    "id": "bfu-psihologia",
    "name": "Психология",
    "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-humanitarni-nauki/psihologiya",
    "slug": "psihologia",
-   "subject": "psihologia"
+   "subject": "psihologia",
+   "field_anchors": {
+    "tuition": "bfu-bak-tuition"
+   }
   },
   {
    "id": "bfu-pnup",
    "name": "Предучилищна и начална училищна педагогика",
    "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-humanitarni-nauki/pedagog-detski-uchitel-nachalen-uchitel",
    "slug": "preduchilishtna-i-nachalna-uchilishtna-pedagogika",
-   "subject": "pedagogika"
+   "subject": "pedagogika",
+   "field_anchors": {
+    "tuition": "bfu-bak-tuition"
+   }
   }
- ]
+ ],
+ "anchors": {
+  "bfu-pravo-tuition": {
+   "source": "https://www.bfu.bg/bg/studenti/studentski-taksi/semestrialni-taksi-i-namaleniya",
+   "scope": "names-program",
+   "pattern": "семестриалните такси за новоприети студенти за учебната 2026-2027 година:.*?(Специалност „Право” Редовно обучение 1040,00 € 2 вноски по 550,00 € Задочно обучение: 1040,00 € 2 вноски по 550,00 €)"
+  },
+  "bfu-bak-tuition": {
+   "source": "https://www.bfu.bg/bg/studenti/studentski-taksi/semestrialni-taksi-i-namaleniya",
+   "scope": "page-wide",
+   "pattern": "семестриалните такси за новоприети студенти за учебната 2026-2027 година:.*?(1\\. Бакалавърски програми Редовно обучение 900,00 € 2 вноски по 475,00 € Задочно обучение 820,00 € 2 вноски по 435,00 €)"
+  }
+ }
 }
