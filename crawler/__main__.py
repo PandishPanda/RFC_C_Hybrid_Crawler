@@ -517,9 +517,16 @@ def main(argv=None):
         print(_summarize_onboarding(report))
         print("proposal: {0}/{1}/{2}".format(
             out_root, args.uni_id, onboarding.PROPOSAL_NAME))
-        # a pending proposal awaits a human promotion decision (ADR-0003)
+        # a pending proposal awaits a human promotion decision (ADR-0003).
+        # detect_proposals wants the WRITTEN proposal dict, same as
+        # refresh.py's tick -- read it back rather than handing it the
+        # OnboardingReport dataclass run_onboarding returns.
+        proposal_path = (Path(out_root) / args.uni_id
+                         / onboarding.PROPOSAL_NAME)
+        proposal_doc = json.loads(
+            proposal_path.read_text(encoding="utf-8"))
         attention.sync(
-            out_root, attention.detect_proposals(report, out_root),
+            out_root, attention.detect_proposals(proposal_doc, out_root),
             kinds=["proposal"], unis=[args.uni_id])
         return 0
 
