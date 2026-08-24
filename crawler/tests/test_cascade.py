@@ -331,8 +331,15 @@ class TestGoldenRegression(unittest.TestCase):
         #           (2026-08-23 NBU: the admission tab was never fetched;
         #            bg-priem-section replaced a first-bullet-only
         #            pattern an adversarial review refuted as partial)
+        #         + bg-srok-plain, bg-srok-dumi (2026-08-24 fill-rate
+        #           ticket 02: the labelled-years and word-number
+        #           duration shapes tier B kept re-implementing per
+        #           site — VVVU carried 12 identical anchors for one)
+        #         + bg-okstepen-caps (same ticket: the all-caps label
+        #           form, APPENDED so it can never pre-empt lowercase
+        #           prose — the golden pin on mu-med proved why)
         n = sum(len(v) for v in cascade.LABEL_PATTERNS.values())
-        self.assertEqual(n, 34)
+        self.assertEqual(n, 37)
 
     def test_reproduces_every_golden_record(self):
         extractions = benchmark_extractions()

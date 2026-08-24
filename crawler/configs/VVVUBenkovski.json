@@ -5,97 +5,85 @@
  "city": "Долна Митрополия",
  "default_language": "български",
  "cookies": {},
- "sources": {},
+ "sources": {
+  "vvvu-fees": {
+   "url": "https://www.af-acad.bg/education/tuition_fees",
+   "route": "html",
+   "join": {
+    "kind": "fee-row",
+    "name": "vvvu",
+    "match_header": "Образователна степен",
+    "value_headers": [
+     "2026 / 2027 година"
+    ],
+    "table_marker": "Държавна поръчка",
+    "funding": "Държавна поръчка"
+   }
+  }
+ },
  "programs": [
   {
    "id": "vvvu-pilot",
    "name": "Летец – пилот",
    "page": "https://www.af-acad.bg/military/letec_pilot",
    "slug": "letets-pilot",
-   "subject": "aviatsia",
-   "field_anchors": {
-    "duration": "vvvu-pilot-duration"
-   }
+   "subject": "aviatsia"
   },
   {
    "id": "vvvu-rvd",
    "name": "Ръководител на полети (Щурман – управление на въздушното движение)",
    "page": "https://www.af-acad.bg/military/rvd",
    "slug": "rakovoditel-na-poleti",
-   "subject": "aviatsia",
-   "field_anchors": {
-    "duration": "vvvu-rvd-duration"
-   }
+   "subject": "aviatsia"
   },
   {
    "id": "vvvu-laad",
    "name": "Летателни апарати и авиационни двигатели",
    "page": "https://www.af-acad.bg/military/laad",
    "slug": "letatelni-aparati-i-aviatsionni-dvigateli",
-   "subject": "aviatsia",
-   "field_anchors": {
-    "duration": "vvvu-laad-duration"
-   }
+   "subject": "aviatsia"
   },
   {
    "id": "vvvu-aepas",
    "name": "Авиационни електроприборни и автоматични системи",
    "page": "https://www.af-acad.bg/military/aepas",
    "slug": "aviatsionni-elektropriborni-i-avtomatichni-sistemi",
-   "subject": "aviatsia",
-   "field_anchors": {
-    "duration": "vvvu-aepas-duration"
-   }
+   "subject": "aviatsia"
   },
   {
    "id": "vvvu-reola",
    "name": "Радиоелектронно оборудване на летателни апарати",
    "page": "https://www.af-acad.bg/military/reola",
    "slug": "radioelektronno-oborudvane-na-letatelni-aparati",
-   "subject": "aviatsia",
-   "field_anchors": {
-    "duration": "vvvu-reola-duration"
-   }
+   "subject": "aviatsia"
   },
   {
    "id": "vvvu-av",
    "name": "Авиационно въоръжение",
    "page": "https://www.af-acad.bg/military/av",
    "slug": "aviatsionno-vaorazhenie",
-   "subject": "aviatsia",
-   "field_anchors": {
-    "duration": "vvvu-av-duration"
-   }
+   "subject": "aviatsia"
   },
   {
    "id": "vvvu-kins",
    "name": "Комуникационни, информационни и навигационни системи",
    "page": "https://www.af-acad.bg/military/kins",
    "slug": "komunikatsionni-informatsionni-i-navigatsionni-sistemi",
-   "subject": "aviatsia",
-   "field_anchors": {
-    "duration": "vvvu-kins-duration"
-   }
+   "subject": "aviatsia"
   },
   {
    "id": "vvvu-logistika",
    "name": "Логистика на формированията от ВВС",
    "page": "https://www.af-acad.bg/military/letishtno_osig",
    "slug": "logistika-na-formirovaniyata-ot-vvs",
-   "subject": "aviatsia",
-   "field_anchors": {
-    "duration": "vvvu-logistika-duration"
-   }
+   "subject": "aviatsia"
   },
   {
    "id": "vvvu-asics",
    "name": "Системи за въздушно наблюдение, разузнаване и контрол",
    "page": "https://www.af-acad.bg/military/asics",
    "slug": "sistemi-za-vazdushno-nablyudenie-razuznavane-i-kontrol",
-   "subject": "aviatsia",
-   "field_anchors": {
-    "duration": "vvvu-asics-duration"
-   }
+   "subject": "aviatsia"
   },
   {
    "id": "vvvu-av-management",
@@ -104,9 +92,11 @@
    "slug": "aviatsionen-menidzhmant",
    "subject": "aviatsia",
    "field_anchors": {
-    "duration": "vvvu-av-management-duration",
-    "admission": "vvvu-adm-bal",
-    "tuition": "vvvu-fees-bak-zadochna"
+    "admission": "vvvu-adm-bal"
+   },
+   "tuition_join": {
+    "source": "vvvu-fees",
+    "alias": "ОКС „Бакалавър“, задочна форма на обучение"
    }
   },
   {
@@ -116,9 +106,11 @@
    "slug": "vazduhoplavatelni-sredstva-i-aviatsionni-dvigateli",
    "subject": "aviatsia",
    "field_anchors": {
-    "duration": "vvvu-vs-ad-duration",
-    "admission": "vvvu-adm-bal",
-    "tuition": "vvvu-fees-bak-redovna"
+    "admission": "vvvu-adm-bal"
+   },
+   "tuition_join": {
+    "source": "vvvu-fees",
+    "alias": "ОКС „Бакалавър“, редовна форма на обучение"
    }
   },
   {
@@ -128,10 +120,11 @@
    "slug": "avtomatika-informatsionna-i-upravlyavashta-tehnika",
    "subject": "inzhenerstvo",
    "field_anchors": {
-    "duration": "vvvu-aiut-duration",
-    "degree": "vvvu-aiut-degree",
-    "admission": "vvvu-adm-bal",
-    "tuition": "vvvu-fees-bak-redovna"
+    "admission": "vvvu-adm-bal"
+   },
+   "tuition_join": {
+    "source": "vvvu-fees",
+    "alias": "ОКС „Бакалавър“, редовна форма на обучение"
    }
   },
   {
@@ -139,11 +132,7 @@
    "name": "Авиационни електронни системи за управление на въздушното движение",
    "page": "https://www.af-acad.bg/bach/aesuvd_bak",
    "slug": "aviatsionni-elektronni-sistemi-za-upravlenie-na-vazdushnoto-dvizhenie",
-   "subject": "aviatsia",
-   "field_anchors": {
-    "duration": "vvvu-aesuvd-duration",
-    "degree": "vvvu-aesuvd-degree"
-   }
+   "subject": "aviatsia"
   },
   {
    "id": "vvvu-elektronika",
@@ -152,9 +141,11 @@
    "slug": "elektronika",
    "subject": "inzhenerstvo",
    "field_anchors": {
-    "duration": "vvvu-elektronika-duration",
-    "admission": "vvvu-adm-bal",
-    "tuition": "vvvu-fees-bak-redovna"
+    "admission": "vvvu-adm-bal"
+   },
+   "tuition_join": {
+    "source": "vvvu-fees",
+    "alias": "ОКС „Бакалавър“, редовна форма на обучение"
    }
   },
   {
@@ -164,100 +155,19 @@
    "slug": "robotehnicheski-aviatsionni-sistemi",
    "subject": "aviatsia",
    "field_anchors": {
-    "duration": "vvvu-rt-as-duration",
-    "degree": "vvvu-rt-as-degree",
-    "admission": "vvvu-adm-bal",
-    "tuition": "vvvu-fees-bak-redovna"
+    "admission": "vvvu-adm-bal"
+   },
+   "tuition_join": {
+    "source": "vvvu-fees",
+    "alias": "ОКС „Бакалавър“, редовна форма на обучение"
    }
   }
  ],
  "anchors": {
-  "vvvu-pilot-duration": {
-   "source": "https://www.af-acad.bg/military/letec_pilot",
-   "pattern": "(Срок на обучение: 4 години)"
-  },
-  "vvvu-rvd-duration": {
-   "source": "https://www.af-acad.bg/military/rvd",
-   "pattern": "(Срок на обучение: 5 години)"
-  },
-  "vvvu-laad-duration": {
-   "source": "https://www.af-acad.bg/military/laad",
-   "pattern": "(Срок на обучение: 5 години)"
-  },
-  "vvvu-aepas-duration": {
-   "source": "https://www.af-acad.bg/military/aepas",
-   "pattern": "(Срок на обучение: 5 години)"
-  },
-  "vvvu-reola-duration": {
-   "source": "https://www.af-acad.bg/military/reola",
-   "pattern": "(Срок на обучение: 5 години)"
-  },
-  "vvvu-av-duration": {
-   "source": "https://www.af-acad.bg/military/av",
-   "pattern": "(Срок на обучение: 5 години)"
-  },
-  "vvvu-kins-duration": {
-   "source": "https://www.af-acad.bg/military/kins",
-   "pattern": "(Срок на обучение: 5 години)"
-  },
-  "vvvu-logistika-duration": {
-   "source": "https://www.af-acad.bg/military/letishtno_osig",
-   "pattern": "(Срок на обучение: 5 години)"
-  },
-  "vvvu-asics-duration": {
-   "source": "https://www.af-acad.bg/military/asics",
-   "pattern": "(Срок на обучение: 5 години)"
-  },
-  "vvvu-av-management-duration": {
-   "source": "https://www.af-acad.bg/bach/av_management",
-   "pattern": "(Срок на обучение – 4 години \\(8 семестъра\\))"
-  },
-  "vvvu-vs-ad-duration": {
-   "source": "https://www.af-acad.bg/bach/vs_ad",
-   "pattern": "(Срок на обучение – 4 години \\(8 семестъра\\))"
-  },
-  "vvvu-aiut-duration": {
-   "source": "https://www.af-acad.bg/bach/aiut_bak",
-   "pattern": "(Срок на обучение – 4 години \\(8 семестъра\\))"
-  },
-  "vvvu-aiut-degree": {
-   "source": "https://www.af-acad.bg/bach/aiut_bak",
-   "pattern": "(Образователно-квалификационна степен [„“\"] ?[Бб]акалавър[”“\"])"
-  },
-  "vvvu-aesuvd-duration": {
-   "source": "https://www.af-acad.bg/bach/aesuvd_bak",
-   "pattern": "(Срок на обучение – 4 години \\(8 семестъра\\))"
-  },
-  "vvvu-aesuvd-degree": {
-   "source": "https://www.af-acad.bg/bach/aesuvd_bak",
-   "pattern": "(Образователно-квалификационна степен [„“\"] ?[Бб]акалавър[”“\"])"
-  },
-  "vvvu-elektronika-duration": {
-   "source": "https://www.af-acad.bg/bach/av_el_bak",
-   "pattern": "(Срок на обучение – 4 години \\(8 семестъра\\))"
-  },
-  "vvvu-rt-as-duration": {
-   "source": "https://www.af-acad.bg/bach/rt_as",
-   "pattern": "(Срок на обучение – 4 години \\(8 семестъра\\))"
-  },
-  "vvvu-rt-as-degree": {
-   "source": "https://www.af-acad.bg/bach/rt_as",
-   "pattern": "(Образователно-квалификационна степен [„“\"] ?[Бб]акалавър[”“\"])"
-  },
   "vvvu-adm-bal": {
    "source": "https://www.af-acad.bg/students_admission",
    "scope": "page-wide",
    "pattern": "(Образуването на състезателният бал на кандидат-студентите за всички специалности да се образува, като сума от следните оценки:.*?в балообразуването участва най-високата оценка\\.)"
-  },
-  "vvvu-fees-bak-redovna": {
-   "source": "https://www.af-acad.bg/education/tuition_fees",
-   "scope": "page-wide",
-   "pattern": "Държавна поръчка Образователна степен \\d+\\s*/\\s*\\d+\\s*и\\s*предишни години \\d+\\s*/\\s*\\d+\\s*година ОКС „Бакалавър“, редовна форма на обучение \\d+\\s*€\\s*(\\d+\\s*€)"
-  },
-  "vvvu-fees-bak-zadochna": {
-   "source": "https://www.af-acad.bg/education/tuition_fees",
-   "scope": "page-wide",
-   "pattern": "Държавна поръчка Образователна степен \\d+\\s*/\\s*\\d+\\s*и\\s*предишни години \\d+\\s*/\\s*\\d+\\s*година ОКС „Бакалавър“, редовна форма на обучение \\d+\\s*€\\s*\\d+\\s*€ ОКС „Бакалавър“, задочна форма на обучение \\d+\\s*€\\s*(\\d+\\s*€)"
   }
  }
 }

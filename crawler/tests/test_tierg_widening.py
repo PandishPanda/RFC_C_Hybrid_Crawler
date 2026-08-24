@@ -1,0 +1,114 @@
+"""Tier G learns capitals and word-numbers (fill-rate ticket 02).
+
+Measured blind spots that forced per-site anchors for statements the
+shared library should own (VVVU carried 12 identical duration anchors
+for one templated sentence; MUSofia three more):
+
+- bg-okstepen required a lowercase-only quoted value, so
+  „Бакалавър"/„Професионален бакалавър"/„ПРОФЕСИОНАЛЕН БАКАЛАВЪР" all
+  missed, and an all-caps label heading missed too;
+- durations required digits AND semesters, so „Срок на обучение: 4
+  години", „– 3 години (6 семестъра)" and „срок на обучение три
+  години" all missed.
+
+The widening touches VALUE alternations and adds appended patterns
+only (first hit wins, so existing catches keep their pattern and their
+value); region rules and _is_caps_heading are deliberately untouched —
+the 4-fabrication caps incident was about regions, not value patterns.
+"""
+import sys
+import unittest
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+from crawler import cascade  # noqa: E402
+
+
+def _src(text):
+    return cascade.TextSource(ref="html:test", text=text)
+
+
+class DegreeCapitalsTest(unittest.TestCase):
+    def test_capitalized_value_matches(self):
+        # VVVU's templated header (was: 3 per-site anchors)
+        r = cascade.harvest_labels("degree", _src(
+            "Образователно-квалификационна степен „Бакалавър” "
+            "Професионална квалификация „Бакалавър-инженер”"))
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value,
+                         "Образователно-квалификационна степен „Бакалавър”")
+
+    def test_capitalized_multiword_value_with_typographic_quotes(self):
+        # MUSofia medlab: “ ” quotes and a capitalized first word
+        r = cascade.harvest_labels("degree", _src(
+            "с образователно-квалификационна степен “Професионален "
+            "бакалавър”, със срок на обучение три години."))
+        self.assertIsNotNone(r)
+        self.assertEqual(
+            r.value,
+            "образователно-квалификационна степен “Професионален бакалавър”")
+
+    def test_all_caps_label_and_value_match(self):
+        # MUSofia inspektor's heading form
+        r = cascade.harvest_labels("degree", _src(
+            "ИЗИСКВАНИЯ ЗА ПРИДОБИВАНЕ НА ОБРАЗОВАТЕЛНО-КВАЛИФИКАЦИОННА "
+            "СТЕПЕН „ПРОФЕСИОНАЛЕН БАКАЛАВЪР” ПО СПЕЦИАЛНОСТ"))
+        self.assertIsNotNone(r)
+        self.assertEqual(
+            r.value,
+            "ОБРАЗОВАТЕЛНО-КВАЛИФИКАЦИОННА СТЕПЕН „ПРОФЕСИОНАЛЕН "
+            "БАКАЛАВЪР”")
+
+    def test_lowercase_catch_is_unchanged(self):
+        r = cascade.harvest_labels("degree", _src(
+            "образователно-квалификационна степен „професионален "
+            "бакалавър“ и професионална квалификация"))
+        self.assertIsNotNone(r)
+        self.assertEqual(
+            r.value,
+            "образователно-квалификационна степен „професионален бакалавър“")
+
+
+class DurationShapesTest(unittest.TestCase):
+    def test_colon_years_no_semesters(self):
+        r = cascade.harvest_labels("duration", _src(
+            "Форма на обучение – редовна и задочна "
+            "Срок на обучение: 4 години Насоченост на изграждането"))
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "Срок на обучение: 4 години")
+
+    def test_dash_years_with_semester_parenthetical(self):
+        r = cascade.harvest_labels("duration", _src(
+            "Срок на обучение – 4 години (8 семестъра) 1. Насоченост"))
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "Срок на обучение – 4 години (8 семестъра)")
+
+    def test_word_number_years(self):
+        r = cascade.harvest_labels("duration", _src(
+            "редовна със срок на обучение три години. Обучението"))
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value, "срок на обучение три години")
+
+    def test_word_number_years_with_word_semesters(self):
+        # CoTur's handbook shape
+        r = cascade.harvest_labels("duration", _src(
+            "съгласно чл. 42, срок на обучение – три години/ шест "
+            "семестъра по следните специалности"))
+        self.assertIsNotNone(r)
+        self.assertEqual(r.value,
+                         "срок на обучение – три години/ шест семестъра")
+
+    def test_bare_year_count_without_the_label_does_not_match(self):
+        self.assertIsNone(cascade.harvest_labels("duration", _src(
+            "програмата съществува от 4 години и се радва на интерес")))
+
+    def test_existing_semester_label_keeps_its_pattern(self):
+        r = cascade.harvest_labels("duration", _src(
+            "Срок на обучение: 8 семестъра (4 учебни години)"))
+        self.assertIsNotNone(r)
+        self.assertEqual(r.method, "label:bg-srok-label")
+
+
+if __name__ == "__main__":
+    unittest.main()

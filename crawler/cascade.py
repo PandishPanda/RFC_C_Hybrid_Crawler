@@ -159,7 +159,17 @@ LABEL_PATTERNS = {
         # this program's award; it shipped a master's degree for a
         # bachelor program on the real UniRuse faculty page (2026-08-22).
         ("bg-oks-inline", r'(?<!образованието си в )(ОКС\s*[„"«][А-Яа-я][а-я ]*["”»])'),
-        ("bg-okstepen", r'([Оо]бразователно\s*-?\s*квалификационна(?:та)? степен\s*[–-]?\s*[„"“]\s*[а-я ]+["”“])'),
+        # Value widened to [А-Яа-я ] IN PLACE (fill-rate ticket 02):
+        # „Бакалавър"/„Професионален бакалавър" are real quoted degree
+        # values (VVVU's templated header, MUSofia's medlab page — each
+        # carried a per-site anchor for a statement this library should
+        # own). The quotes still delimit the value, so this cannot run
+        # away. The LABEL stays lowercase-anchored on purpose: making
+        # it case-insensitive let an ALL-CAPS heading match ahead of
+        # the lowercase prose statement on MUPleven's mu-med page and
+        # changed a golden-pinned value — the caps form lives in
+        # bg-okstepen-caps, APPENDED so it can only fill a null.
+        ("bg-okstepen", r'([Оо]бразователно\s*-?\s*квалификационна(?:та)? степен\s*[–-]?\s*[„"“]\s*[А-Яа-я ]+["”“])'),
         ("bg-pridobilite", r'Придобилите степен\s+([А-Я][А-Я ]+[А-Я])(?=\s+са)'),
         ("en-equal-degree", r'Educational qualification degree\s+([A-Z]+)'),
         ("vum-dual-bachelor", r'((?:accredited )?(?:Bulgarian )?Professional Bachelor degree from VUM and the British [^.]+? awarded by Cardiff Metropolitan University)'),
@@ -171,6 +181,14 @@ LABEL_PATTERNS = {
         # claim, and without it such pages ship a null for a field the
         # page does state.
         ("bg-programme-level", r'[-–—]\s*(бакалавърска програма|магистърска програма|докторска програма)'),
+        # APPENDED (first hit wins — fills nulls only): the all-caps
+        # label form („ИЗИСКВАНИЯ ЗА ПРИДОБИВАНЕ НА ОБРАЗОВАТЕЛНО-
+        # КВАЛИФИКАЦИОННА СТЕПЕН „ПРОФЕСИОНАЛЕН БАКАЛАВЪР”", MUSofia's
+        # inspektor page). Kept SEPARATE from bg-okstepen so a caps
+        # heading can never pre-empt a lowercase prose statement — that
+        # exact pre-emption changed a golden-pinned value on MUPleven
+        # when the label was made case-insensitive (2026-08-24).
+        ("bg-okstepen-caps", r'(ОБРАЗОВАТЕЛНО\s*-?\s*КВАЛИФИКАЦИОННА СТЕПЕН\s*[–-]?\s*[„"“]\s*[А-Яа-я ]+["”“])'),
     ],
     "duration": [
         ("bg-semestri-label", r'(Продължителност на обучението \(брой семестри\):\s*[0-9а-я]+)'),
@@ -204,6 +222,23 @@ LABEL_PATTERNS = {
         ("bg-prodalzhitelnost-semestri",
          r'(?:с продължителност|[Пп]родължителността на обучението е)'
          r'\s+(\d+\s*семестъра)'),
+        # APPENDED (first hit wins — can only fill nulls). The two
+        # shapes tier B kept re-implementing per site (fill-rate ticket
+        # 02): the labelled years form without a semester requirement
+        # („Срок на обучение: 4 години", „– 3 години (6 семестъра)" —
+        # VVVU carried 12 identical anchors for it), and the closed
+        # word-number form („срок на обучение три години", CoTur's „–
+        # три години/ шест семестъра"). Both stay anchored to the
+        # „срок на обучение" label so a bare "N години" in prose can
+        # never match.
+        ("bg-srok-plain",
+         r'([Сс]рок на обучение\s*[:–-]\s*\d+\s*години'
+         r'(?:\s*\(\d+\s*семестъра\))?)'),
+        ("bg-srok-dumi",
+         r'([Сс]рок на обучение\s*[–-]?\s*(?:две|три|четири|пет|шест)'
+         r'\s+години'
+         r'(?:\s*/\s*(?:две|три|четири|пет|шест|седем|осем)'
+         r'\s+семестъра)?)'),
     ],
     "language": [
         # BG structured label first: a page's own «Език на преподаване»

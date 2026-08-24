@@ -13,7 +13,6 @@
    "slug": "meditsinski-laborant",
    "subject": "zdravni-grizhi",
    "field_anchors": {
-    "degree": "mc-medlab-degree",
     "duration": "mc-medlab-duration",
     "admission": "mc-ksk-admission"
    }
@@ -58,7 +57,6 @@
    "slug": "pomoshtnik-farmatsevt",
    "subject": "farmatsia",
    "field_anchors": {
-    "duration": "mc-pomfarm-duration",
     "admission": "mc-ksk-admission"
    }
   },
@@ -69,8 +67,6 @@
    "slug": "inspektor-po-obshtestveno-zdrave",
    "subject": "obshtestveno-zdrave",
    "field_anchors": {
-    "degree": "mc-inspektor-degree",
-    "duration": "mc-inspektor-duration",
     "admission": "mc-ksk-admission"
    }
   },
@@ -110,25 +106,9 @@
  ],
  "default_language": "български",
  "anchors": {
-  "mc-medlab-degree": {
-   "source": "https://mc.mu-sofia.bg/?page_id=582",
-   "pattern": "с (образователно-квалификационна степен [“„‟\"]Професионален бакалавър[”“\"])"
-  },
   "mc-medlab-duration": {
    "source": "https://mc.mu-sofia.bg/?page_id=582",
    "pattern": "(със срок на обучение три години)"
-  },
-  "mc-pomfarm-duration": {
-   "source": "https://mc.mu-sofia.bg/?page_id=2244",
-   "pattern": "редовна със (срок на обучение три години)"
-  },
-  "mc-inspektor-degree": {
-   "source": "https://mc.mu-sofia.bg/?page_id=2276",
-   "pattern": "ЗА ПРИДОБИВАНЕ НА (ОБРАЗОВАТЕЛНО-КВАЛИФИКАЦИОННА СТЕПЕН [„“\"]ПРОФЕСИОНАЛЕН БАКАЛАВЪР[”“\"])"
-  },
-  "mc-inspektor-duration": {
-   "source": "https://mc.mu-sofia.bg/?page_id=2276",
-   "pattern": "(Срок на обучение – 3 години \\(6 семестъра\\))"
   },
   "mc-ksk-degree": {
    "source": "https://mc.mu-sofia.bg/?page_id=530",
