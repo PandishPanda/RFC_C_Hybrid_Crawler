@@ -61,6 +61,10 @@
    "name": "Химия"
   },
   {
+   "slug": "horeografia",
+   "name": "Хореография и танц"
+  },
+  {
    "slug": "ikonomika",
    "name": "Икономика"
   },
@@ -131,6 +135,10 @@
   {
    "slug": "meditsina",
    "name": "Медицина"
+  },
+  {
+   "slug": "muzika",
+   "name": "Музика"
   },
   {
    "slug": "natsionalna-sigurnost",

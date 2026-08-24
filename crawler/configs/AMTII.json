@@ -1,0 +1,121 @@
+{
+ "uni_id": "AMTII",
+ "display_name": "АМТИИ „Проф. Асен Диамандиев“ – Пловдив",
+ "slug": "amtii",
+ "city": "Пловдив",
+ "default_language": "български",
+ "cookies": {},
+ "sources": {},
+ "programs": [
+  {
+   "id": "amtii-ait",
+   "name": "Аниматор изкуство в туризма",
+   "page": "https://artacademyplovdiv.com/specialnosti/AIT.html",
+   "slug": "animator-izkustvo-v-turizma",
+   "subject": "turizam-i-hotelierstvo"
+  },
+  {
+   "id": "amtii-artm",
+   "name": "Артмениджмънт",
+   "page": "https://artacademyplovdiv.com/specialnosti/ArtM.html",
+   "slug": "artmenidzhmant",
+   "subject": "izkustva-i-dizayn"
+  },
+  {
+   "id": "amtii-artt",
+   "name": "Арттерапия",
+   "page": "https://artacademyplovdiv.com/specialnosti/ArtT.html",
+   "slug": "artterapia",
+   "subject": "izkustva-i-dizayn"
+  },
+  {
+   "id": "amtii-bi",
+   "name": "Балетно изкуство",
+   "page": "https://artacademyplovdiv.com/specialnosti/BI.html",
+   "slug": "baletno-izkustvo",
+   "subject": "horeografia"
+  },
+  {
+   "id": "amtii-bnh",
+   "name": "Българска народна хореография",
+   "page": "https://artacademyplovdiv.com/specialnosti/BNH.html",
+   "slug": "balgarska-narodna-horeografia",
+   "subject": "horeografia"
+  },
+  {
+   "id": "amtii-gra",
+   "name": "Графика",
+   "page": "https://artacademyplovdiv.com/specialnosti/GRA.html",
+   "slug": "grafika",
+   "subject": "izkustva-i-dizayn"
+  },
+  {
+   "id": "amtii-gd",
+   "name": "Графичен дизайн",
+   "page": "https://artacademyplovdiv.com/specialnosti/GD.html",
+   "slug": "grafichen-dizayn",
+   "subject": "izkustva-i-dizayn"
+  },
+  {
+   "id": "amtii-gdf",
+   "name": "Графичен дизайн и фотография",
+   "page": "https://artacademyplovdiv.com/specialnosti/GDF.html",
+   "slug": "grafichen-dizayn-i-fotografia",
+   "subject": "izkustva-i-dizayn"
+  },
+  {
+   "id": "amtii-do",
+   "name": "Дизайн на облеклото",
+   "page": "https://artacademyplovdiv.com/specialnosti/DO.html",
+   "slug": "dizayn-na-oblekloto",
+   "subject": "izkustva-i-dizayn"
+  },
+  {
+   "id": "amtii-dir",
+   "name": "Дирижиране (хорово и оркестрово)",
+   "page": "https://artacademyplovdiv.com/specialnosti/DIR.html",
+   "slug": "dirizhirane",
+   "subject": "muzika"
+  },
+  {
+   "id": "amtii-dno",
+   "name": "Дирижиране на народен оркестър",
+   "page": "https://artacademyplovdiv.com/specialnosti/DNO.html",
+   "slug": "dirizhirane-na-naroden-orkestar",
+   "subject": "muzika"
+  },
+  {
+   "id": "amtii-dnh",
+   "name": "Дирижиране на народен хор",
+   "page": "https://artacademyplovdiv.com/specialnosti/DNH.html",
+   "slug": "dirizhirane-na-naroden-hor",
+   "subject": "muzika"
+  },
+  {
+   "id": "amtii-dns",
+   "name": "Дирижиране на народни състави",
+   "page": "https://artacademyplovdiv.com/specialnosti/DNS.html",
+   "slug": "dirizhirane-na-narodni-sastavi",
+   "subject": "muzika",
+   "suppress_labels": {
+    "degree": [
+     "bg-oks-inline"
+    ]
+   }
+  },
+  {
+   "id": "amtii-zhi",
+   "name": "Живопис",
+   "page": "https://artacademyplovdiv.com/specialnosti/ZHI.html",
+   "slug": "zhivopis",
+   "subject": "izkustva-i-dizayn"
+  },
+  {
+   "id": "amtii-iibm",
+   "name": "Изпълнителско изкуство (българска народна музика с класически или друг нетрадиционен за България фолклорен инструмент)",
+   "page": "https://artacademyplovdiv.com/specialnosti/IIBM.html",
+   "slug": "izpalnitelsko-izkustvo",
+   "subject": "muzika"
+  }
+ ]
+}

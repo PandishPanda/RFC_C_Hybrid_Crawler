@@ -1,0 +1,81 @@
+{
+ "uni_id": "BFU",
+ "display_name": "Бургаски свободен университет",
+ "slug": "bsu",
+ "city": "Бургас",
+ "default_language": "български",
+ "cookies": {},
+ "sources": {},
+ "programs": [
+  {
+   "id": "bfu-pravo",
+   "name": "Право",
+   "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-yuridicheski-nauki/pravo",
+   "slug": "pravo",
+   "subject": "pravo"
+  },
+  {
+   "id": "bfu-schet-fin",
+   "name": "Счетоводство и финанси",
+   "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-ikonomicheski-i-upravlenski-nauki/spetsialnost-schetovodstvo-i-finansi",
+   "slug": "schetovodstvo-i-finansi",
+   "subject": "finansi-i-schetovodstvo"
+  },
+  {
+   "id": "bfu-marketing",
+   "name": "Маркетинг и дигитални комуникации",
+   "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-ikonomicheski-i-upravlenski-nauki/spetsialnost-marketing-i-digitalni-komunikatsii",
+   "slug": "marketing-i-digitalni-komunikatsii",
+   "subject": "marketing"
+  },
+  {
+   "id": "bfu-ubmi",
+   "name": "Управление на бизнеса и международна икономика",
+   "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-ikonomicheski-i-upravlenski-nauki/spetsialnost-upravlenie-na-biznesa-i-mezhdunarodna-ikonomika",
+   "slug": "upravlenie-na-biznesa-i-mezhdunarodna-ikonomika",
+   "subject": "biznes-i-menidzhmant"
+  },
+  {
+   "id": "bfu-se",
+   "name": "Софтуерно инженерство",
+   "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-informatika-i-tehnicheski-nauki/softuerno-inzhenerstvo",
+   "slug": "softuerno-inzhenerstvo",
+   "subject": "softuerno-inzhenerstvo"
+  },
+  {
+   "id": "bfu-kst",
+   "name": "Компютърни системи и технологии",
+   "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-informatika-i-tehnicheski-nauki/kompyutarni-sistemi-i-tehnologii",
+   "slug": "kompyutarni-sistemi-i-tehnologii",
+   "subject": "kompyutarni-sistemi-i-tehnologii"
+  },
+  {
+   "id": "bfu-siit",
+   "name": "Системно инженерство в индустрията и туризма",
+   "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-informatika-i-tehnicheski-nauki/spetsialnost-sistemno-inzhenerstvo-v-industriyata-i-turizma",
+   "slug": "sistemno-inzhenerstvo-v-industriyata-i-turizma",
+   "subject": "inzhenerstvo"
+  },
+  {
+   "id": "bfu-ee",
+   "name": "Електроснабдяване и електрообзавеждане",
+   "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-informatika-i-tehnicheski-nauki/elektrosnabdyavane-i-elektroobzavezhdane",
+   "slug": "elektrosnabdyavane-i-elektroobzavezhdane",
+   "subject": "inzhenerstvo"
+  },
+  {
+   "id": "bfu-psihologia",
+   "name": "Психология",
+   "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-humanitarni-nauki/psihologiya",
+   "slug": "psihologia",
+   "subject": "psihologia"
+  },
+  {
+   "id": "bfu-pnup",
+   "name": "Предучилищна и начална училищна педагогика",
+   "page": "https://www.bfu.bg/bg/bakalavarski-programi/tsentar-po-humanitarni-nauki/pedagog-detski-uchitel-nachalen-uchitel",
+   "slug": "preduchilishtna-i-nachalna-uchilishtna-pedagogika",
+   "subject": "pedagogika"
+  }
+ ]
+}

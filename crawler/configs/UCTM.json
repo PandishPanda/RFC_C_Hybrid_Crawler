@@ -1,0 +1,134 @@
+{
+ "uni_id": "UCTM",
+ "display_name": "Химикотехнологичен и металургичен университет",
+ "slug": "htmu",
+ "city": "София",
+ "default_language": "български",
+ "cookies": {},
+ "sources": {},
+ "programs": [
+  {
+   "id": "uctm-automation-and-informati",
+   "name": "Автоматика и информационни технологии",
+   "page": "https://uctm.edu/bg/case-study/bakalavur/automation-and-information-technology",
+   "slug": "avtomatika-i-informatsionni-tehnologii",
+   "subject": "inzhenerstvo"
+  },
+  {
+   "id": "uctm-biomaterials-for-medical",
+   "name": "Биоматериали за приложения в медицината",
+   "page": "https://uctm.edu/bg/case-study/bakalavur/biomaterials-for-medical-applications",
+   "slug": "biomateriali-za-prilozhenia-v-meditsinata",
+   "subject": "himia"
+  },
+  {
+   "id": "uctm-bio-product-engineering",
+   "name": "Биопродуктово инженерство, хартия и опаковки",
+   "page": "https://uctm.edu/bg/case-study/bakalavur/bio-product-engineering-paper-and-packaging",
+   "slug": "bioproduktovo-inzhenerstvo-hartia-i-opakovki",
+   "subject": "inzhenerstvo"
+  },
+  {
+   "id": "uctm-biotechnology",
+   "name": "Биотехнологии",
+   "page": "https://uctm.edu/bg/case-study/bakalavur/biotechnology",
+   "slug": "biotehnologii",
+   "subject": "biologia-i-ekologia",
+   "field_anchors": {
+    "language": "uctm-lang-biotech"
+   }
+  },
+  {
+   "id": "uctm-biomedical-engineering",
+   "name": "Биомедицинско инженерство",
+   "page": "https://uctm.edu/bg/case-study/bakalavur/biomedical-engineering",
+   "slug": "biomeditsinsko-inzhenerstvo",
+   "subject": "inzhenerstvo",
+   "field_anchors": {
+    "language": "uctm-lang-bme"
+   }
+  },
+  {
+   "id": "uctm-fuels-and-bioenergy",
+   "name": "Горива и биоенергийни технологии",
+   "page": "https://uctm.edu/bg/case-study/bakalavur/fuels-and-bioenergy-technologies",
+   "slug": "goriva-i-bioenergiyni-tehnologii",
+   "subject": "himia"
+  },
+  {
+   "id": "uctm-digital-and-conventional",
+   "name": "Дигитални и конвенционални печатни технологии и дизайн",
+   "page": "https://uctm.edu/bg/case-study/bakalavur/digital-and-conventional-printing-technologies-and-design",
+   "slug": "digitalni-i-konventsionalni-pechatni-tehnologii-i-dizayn",
+   "subject": "inzhenerstvo"
+  },
+  {
+   "id": "uctm-energy-and-environmental",
+   "name": "Енергийна и екологична ефективност",
+   "page": "https://uctm.edu/bg/case-study/bakalavur/energy-and-environmental-performance-in-metallurgy",
+   "slug": "energiyna-i-ekologichna-efektivnost",
+   "subject": "inzhenerstvo"
+  },
+  {
+   "id": "uctm-p500",
+   "name": "Зелени технологии",
+   "page": "https://uctm.edu/bg/component/sppagebuilder/?view=page&id=500",
+   "slug": "zeleni-tehnologii",
+   "subject": "biologia-i-ekologia"
+  },
+  {
+   "id": "uctm-industrial-safety",
+   "name": "Индустриална безопасност",
+   "page": "https://uctm.edu/bg/case-study/bakalavur/industrial-safety",
+   "slug": "industrialna-bezopasnost",
+   "subject": "inzhenerstvo"
+  },
+  {
+   "id": "uctm-p783",
+   "name": "Индустриална фармация",
+   "page": "https://uctm.edu/bg/component/sppagebuilder/?view=page&id=783",
+   "slug": "industrialna-farmatsia",
+   "subject": "farmatsia"
+  },
+  {
+   "id": "uctm-industrial-management",
+   "name": "Индустриален мениджмънт",
+   "page": "https://uctm.edu/bg/case-study/bakalavur/industrial-management",
+   "slug": "industrialen-menidzhmant",
+   "subject": "biznes-i-menidzhmant"
+  },
+  {
+   "id": "uctm-engineering-ecology-and",
+   "name": "Инженерна екология и опазване на околната среда",
+   "page": "https://uctm.edu/bg/case-study/bakalavur/engineering-ecology-and-environmental-protection",
+   "slug": "inzhenerna-ekologia-i-opazvane-na-okolnata-sreda",
+   "subject": "biologia-i-ekologia"
+  },
+  {
+   "id": "uctm-p477",
+   "name": "Инженерна електрохимия и корозия",
+   "page": "https://uctm.edu/bg/component/sppagebuilder/?view=page&id=477",
+   "slug": "inzhenerna-elektrohimia-i-korozia",
+   "subject": "himia"
+  },
+  {
+   "id": "uctm-engineering-informatics",
+   "name": "Инженерна информатика",
+   "page": "https://uctm.edu/bg/case-study/bakalavur/engineering-informatics",
+   "slug": "inzhenerna-informatika",
+   "subject": "informatika"
+  }
+ ],
+ "anchors": {
+  "uctm-lang-biotech": {
+   "source": "https://uctm.edu/bg/case-study/bakalavur",
+   "scope": "names-program",
+   "pattern": "Биотехнологии \\((на български и на английски език)\\)"
+  },
+  "uctm-lang-bme": {
+   "source": "https://uctm.edu/bg/case-study/bakalavur",
+   "scope": "names-program",
+   "pattern": "Биомедицинско инженерство \\((на български и на английски език)\\)"
+  }
+ }
+}
