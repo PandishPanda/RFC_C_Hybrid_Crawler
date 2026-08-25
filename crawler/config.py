@@ -97,6 +97,7 @@ __all__ = [
     "OrdinanceJoin",
     "SpravochnikJoin",
     "FeesPageJoin",
+    "DirectionFeesJoin",
     "SourceConfig",
     "JoinRef",
     "SectionRef",
@@ -235,8 +236,28 @@ class FeesPageJoin:
     kind = "fees-page"
 
 
+@dataclass(frozen=True)
+class DirectionFeesJoin:
+    """Per-направление fee clauses over a fee order's flow text
+    (kind=direction-fees).
+
+    A fee order that prices by професионално направление, not by
+    program: clauses maps each direction label to the clause regex whose
+    group 1 is the value span. The program picks its clause via
+    tuition_join.alias — the direction label is ATTESTED config data
+    (ADR-0003; the specialty→направление tie's documentary evidence
+    lives in the attribution-review record, the config diff is the
+    attestation). The WHOLE clause match ships as the segment, so scope
+    qualifiers — funding band, form, exceptions — travel in the span.
+    """
+    name: str
+    clauses: Mapping[str, str]
+
+    kind = "direction-fees"
+
+
 _JOIN_KINDS = ("fee-row", "sectioned-fee-row", "ordinance", "spravochnik",
-               "fees-page")
+               "fees-page", "direction-fees")
 
 
 @dataclass(frozen=True)
@@ -611,12 +632,33 @@ def _build_fees_page(data, path):
     )
 
 
+def _build_direction_fees(data, path):
+    _reject_unknown(data, ("kind", "name", "clauses"), path)
+    clauses = _require(data, "clauses", path)
+    if not isinstance(clauses, dict) or not clauses:
+        raise ConfigError(path + ".clauses: expected a non-empty object "
+                          "of {direction label: clause pattern}")
+    built = {}
+    for label, pattern in clauses.items():
+        node = "{0}.clauses[{1!r}]".format(path, label)
+        _str(label, node + " (key)")
+        if _regex(_str(pattern, node), node).groups < 1:
+            raise ConfigError(
+                node + ": clause pattern needs group 1 = the value span")
+        built[label] = pattern
+    return DirectionFeesJoin(
+        name=_str(_require(data, "name", path), path + ".name"),
+        clauses=built,
+    )
+
+
 _JOIN_BUILDERS = {
     "fee-row": _build_fee_row,
     "sectioned-fee-row": _build_sectioned,
     "ordinance": _build_ordinance,
     "spravochnik": _build_spravochnik,
     "fees-page": _build_fees_page,
+    "direction-fees": _build_direction_fees,
 }
 
 
@@ -833,7 +875,7 @@ def _build_program(data, path, sources, anchors):
         ref_path = path + ".tuition_join"
         source_id = _require(data["tuition_join"], "source", ref_path) \
             if isinstance(data["tuition_join"], dict) else None
-        want = ("fee-row", "sectioned-fee-row")
+        want = ("fee-row", "sectioned-fee-row", "direction-fees")
         mode = "alias"
         if (isinstance(source_id, str) and source_id in sources
                 and sources[source_id].join is not None
@@ -841,6 +883,14 @@ def _build_program(data, path, sources, anchors):
             mode = "alias_pattern"
         tuition_join = _build_join_ref(data["tuition_join"], ref_path,
                                        sources, want, mode)
+        join = sources[tuition_join.source].join
+        if (join.kind == "direction-fees"
+                and tuition_join.alias not in join.clauses):
+            raise ConfigError(
+                "{0}.alias: {1!r} is not a clause of direction-fees "
+                "source {2!r} — one of: {3}".format(
+                    ref_path, tuition_join.alias, tuition_join.source,
+                    ", ".join(sorted(join.clauses))))
 
     program = ProgramConfig(
         id=_str(_require(data, "id", path), path + ".id"),

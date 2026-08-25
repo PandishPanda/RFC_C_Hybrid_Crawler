@@ -78,6 +78,7 @@ from crawler.config import (
     OrdinanceJoin,
     SpravochnikJoin,
     FeesPageJoin,
+    DirectionFeesJoin,
     ProgramConfig,
     SiteConfig,
     ALIAS_PLACEHOLDER,
@@ -106,6 +107,7 @@ __all__ = [
     "spravochnik_join",
     "spravochnik_admission_join",
     "fees_page_section",
+    "direction_fee_join",
     "resolve_field",
     "extract_program",
     "extract_site",
@@ -497,7 +499,14 @@ _PLACEHOLDER_CELLS = frozenset(["-", "–", "—", "n/a", "na"])
 # Longest a cell can be and still read as a column LABEL rather than
 # prose. Fee-table headers are short ("СПЕЦИАЛНОСТ", "Редовно обучение");
 # a spreadsheet's title block runs to whole sentences.
-_HEADER_CELL_MAX = 60
+# A header token counts only inside a short LABEL cell (guards against
+# prose preamble rows — UniRuse's order-citation titles; the binding
+# rejected fixture is the 98-char _TITLE_2, so 80 keeps 18 chars of
+# headroom). 80, not 60: SWU's real alias-column label is the 70-char
+# «Области на висше образование, професионални направления и
+# специалности» — a label, not a sentence (test_direction_fees pins the
+# accept side; test_spreadsheet the reject side).
+_HEADER_CELL_MAX = 80
 
 
 def _is_placeholder(cell):
@@ -915,6 +924,26 @@ def fees_page_section(source, join, section_pattern):
                  "fees-page-section:" + join.name, TIER_F)
 
 
+def direction_fee_join(source, join, direction):
+    # type: (TextSource, DirectionFeesJoin, str) -> Optional[Extraction]
+    """Per-направление fee clause on a shared fee order (tier F).
+
+    The direction label — attested config data — picks the clause
+    pattern; the value is the pattern's group 1 and the WHOLE clause
+    match is the shipped segment, so scope qualifiers (funding band,
+    form, exceptions) travel in the span by construction."""
+    if not isinstance(source, TextSource):
+        raise TypeError("direction-fees join needs a TextSource, got "
+                        + type(source).__name__)
+    text = norm(source.text)
+    m = re.search(join.clauses[direction], text)
+    if not m:
+        return None
+    return _emit("tuition", norm(m.group(1)),
+                 [snippet_around(text, m.start(), m.end())], source.ref,
+                 "direction-fee:" + direction, TIER_F)
+
+
 # ------------------------------------------------------------- the cascade
 def _join_of(site, ref):
     return site.sources[ref.source].join
@@ -1038,7 +1067,10 @@ def resolve_field(site, program, field, docs):
             source = _table(docs, program.tuition_join)
             if source is not None:
                 join = _join_of(site, program.tuition_join)
-                if isinstance(join, SectionedFeeRowJoin):
+                if isinstance(join, DirectionFeesJoin):
+                    r = direction_fee_join(source, join,
+                                           program.tuition_join.alias)
+                elif isinstance(join, SectionedFeeRowJoin):
                     r = sectioned_fee_join(
                         field, source, join,
                         program.tuition_join.alias_pattern)

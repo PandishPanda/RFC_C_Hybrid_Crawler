@@ -23,6 +23,10 @@ The proof attached to every non-null extracted value: `value · source_url · ve
 A Program's tuition read from the cell/section that prices it, with Provenance and its exact currency. A Program with no stated fee may be genuinely unpriced or merely unconfigured — the two are not distinguishable, so fee completeness is a floor, never a rate.
 _Avoid_: price, cost
 
+**Direction (Професионално направление)**:
+The national classifier field a Program belongs to (e.g. 1.3 «Педагогика на обучението по...», 8.1 «Теория на изкуствата»). Fee orders commonly price per Direction, not per Program, so the Direction is the join key of the направление→такса chain: the Program→Direction tie is ATTESTED config data (ADR-0003 — the config diff is the attestation; the documentary evidence, typically curriculum-plan headers or fee-table rows, lives in the attribution-review record), while the fee value itself ships with verbatim Provenance from the fee document. Executed by the `direction-fees` join (flow-text clauses keyed by Direction) or a `fee-row` grid join whose alias is a Direction row label.
+_Avoid_: field of study, category, faculty (a faculty is an org unit — AMTII's справочник groups by faculty and states no Direction)
+
 **Shared source**:
 A source (central fee order, admission ordinance, catalog, university fees page) that backs a field's value for two or more Programs. The value is still per-Program data; Provenance records the shared source.
 _Avoid_: general info

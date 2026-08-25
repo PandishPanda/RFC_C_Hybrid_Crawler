@@ -8,7 +8,22 @@
  "sources": {
   "amtii-fees": {
    "url": "https://artacademyplovdiv.com/students/Taksi%20BG%20studenti%20i%20doktoranti.pdf",
-   "route": "prose-pdf"
+   "route": "prose-pdf",
+   "join": {
+    "kind": "direction-fees",
+    "name": "amtii-fee-order",
+    "clauses": {
+     "бакалавър: БНХ": "(БНХ редовно обучение:\\s*-?\\s*за 1-ви курс – 780 евро;\\s*-?\\s*за 2-ри, 3-ти и 4-ти курс - 720 евро;\\s*2\\.2\\. БНХ и БП задочно обучение:\\s*-?\\s*за 1-ви курс – 660 евро;\\s*-?\\s*за 2-ри, 3-ти и 4-ти курс - 610 евро)",
+     "бакалавър: БНХ и БП (задочно)": "(БНХ и БП задочно обучение:\\s*-?\\s*за 1-ви курс – 660 евро;\\s*-?\\s*за 2-ри, 3-ти и 4-ти курс - 610 евро)",
+     "бакалавър: Изобразително изкуство": "(„Изобразително изкуство“ редовно обучение:\\s*-?\\s*за 1-ви;? курс – 850 евро;\\s*за 2-ри, 3-ти и 4-ти курс - 780\\s*евро)",
+     "магистър: Музикално и танцово изкуство": "(„Музикално и танцово изкуство“ \\(с изключение на БНХ, Балетна педагогика и Балетна режисура\\)\\s*редовно обучение - 920 евро)",
+     "магистър: БНХ": "(БНХ редовно обучение – 860 евро\\.\\s*2\\.2\\. БНХ, Балетна педагогика и Балетна режисура задочно обучение – 720 евро)",
+     "магистър: БНХ, БП и БР (задочно)": "(БНХ, Балетна педагогика и Балетна режисура задочно обучение – 720 евро)",
+     "магистър: Изобразително изкуство": "(„Изобразително изкуство “?редовно обучение – 920 евро)",
+     "магистър: Теория на изкуствата": "(Теория на изкуствата:\\s*-?\\s*за редовно обучение:?\\s*– 780 евро;\\s*-?\\s*за задочно обучение – 720 евро)",
+     "магистър: Теория на изкуствата (редовно)": "(Теория на изкуствата:\\s*-?\\s*за редовно обучение:?\\s*– 780 евро)"
+    }
+   }
   },
   "amtii-kss": {
    "url": "https://artacademyplovdiv.com/priem/KSS-AMTII.pdf",
@@ -35,8 +50,11 @@
    "subject": "izkustva-i-dizayn",
    "field_anchors": {
     "degree": "amtii-artm-degree",
-    "duration": "amtii-artm-duration",
-    "tuition": "amtii-fee-mag-teoria"
+    "duration": "amtii-artm-duration"
+   },
+   "tuition_join": {
+    "source": "amtii-fees",
+    "alias": "магистър: Теория на изкуствата"
    }
   },
   {
@@ -47,8 +65,11 @@
    "subject": "izkustva-i-dizayn",
    "field_anchors": {
     "degree": "amtii-artt-degree",
-    "duration": "amtii-artt-duration",
-    "tuition": "amtii-fee-mag-teoria-red"
+    "duration": "amtii-artt-duration"
+   },
+   "tuition_join": {
+    "source": "amtii-fees",
+    "alias": "магистър: Теория на изкуствата (редовно)"
    }
   },
   {
@@ -59,8 +80,11 @@
    "subject": "horeografia",
    "field_anchors": {
     "degree": "amtii-bi-bak-degree",
-    "duration": "amtii-bi-bak-duration",
-    "tuition": "amtii-fee-bak-bp-zad"
+    "duration": "amtii-bi-bak-duration"
+   },
+   "tuition_join": {
+    "source": "amtii-fees",
+    "alias": "бакалавър: БНХ и БП (задочно)"
    }
   },
   {
@@ -71,8 +95,11 @@
    "subject": "horeografia",
    "field_anchors": {
     "degree": "amtii-bi-mag-degree",
-    "duration": "amtii-bi-mag-duration",
-    "tuition": "amtii-fee-mag-bp-zad"
+    "duration": "amtii-bi-mag-duration"
+   },
+   "tuition_join": {
+    "source": "amtii-fees",
+    "alias": "магистър: БНХ, БП и БР (задочно)"
    }
   },
   {
@@ -83,8 +110,11 @@
    "subject": "horeografia",
    "field_anchors": {
     "degree": "amtii-bnh-bak-degree",
-    "duration": "amtii-bnh-bak-duration",
-    "tuition": "amtii-fee-bak-bnh"
+    "duration": "amtii-bnh-bak-duration"
+   },
+   "tuition_join": {
+    "source": "amtii-fees",
+    "alias": "бакалавър: БНХ"
    }
   },
   {
@@ -95,8 +125,11 @@
    "subject": "horeografia",
    "field_anchors": {
     "degree": "amtii-bnh-mag-degree",
-    "duration": "amtii-bnh-mag-duration",
-    "tuition": "amtii-fee-mag-bnh"
+    "duration": "amtii-bnh-mag-duration"
+   },
+   "tuition_join": {
+    "source": "amtii-fees",
+    "alias": "магистър: БНХ"
    }
   },
   {
@@ -107,8 +140,11 @@
    "subject": "izkustva-i-dizayn",
    "field_anchors": {
     "degree": "amtii-gra-degree",
-    "duration": "amtii-gra-duration",
-    "tuition": "amtii-fee-mag-izo"
+    "duration": "amtii-gra-duration"
+   },
+   "tuition_join": {
+    "source": "amtii-fees",
+    "alias": "магистър: Изобразително изкуство"
    }
   },
   {
@@ -118,8 +154,11 @@
    "slug": "grafichen-dizayn",
    "subject": "izkustva-i-dizayn",
    "field_anchors": {
-    "degree": "amtii-gd-degree",
-    "tuition": "amtii-fee-mag-izo"
+    "degree": "amtii-gd-degree"
+   },
+   "tuition_join": {
+    "source": "amtii-fees",
+    "alias": "магистър: Изобразително изкуство"
    }
   },
   {
@@ -130,8 +169,11 @@
    "subject": "izkustva-i-dizayn",
    "field_anchors": {
     "degree": "amtii-gdf-degree",
-    "duration": "amtii-gdf-duration",
-    "tuition": "amtii-fee-bak-izo"
+    "duration": "amtii-gdf-duration"
+   },
+   "tuition_join": {
+    "source": "amtii-fees",
+    "alias": "бакалавър: Изобразително изкуство"
    }
   },
   {
@@ -142,8 +184,11 @@
    "subject": "izkustva-i-dizayn",
    "field_anchors": {
     "degree": "amtii-do-degree",
-    "duration": "amtii-do-duration",
-    "tuition": "amtii-fee-bak-izo"
+    "duration": "amtii-do-duration"
+   },
+   "tuition_join": {
+    "source": "amtii-fees",
+    "alias": "бакалавър: Изобразително изкуство"
    }
   },
   {
@@ -154,8 +199,11 @@
    "subject": "muzika",
    "field_anchors": {
     "degree": "amtii-dir-degree",
-    "duration": "amtii-dir-duration",
-    "tuition": "amtii-fee-mag-music"
+    "duration": "amtii-dir-duration"
+   },
+   "tuition_join": {
+    "source": "amtii-fees",
+    "alias": "магистър: Музикално и танцово изкуство"
    }
   },
   {
@@ -166,8 +214,11 @@
    "subject": "muzika",
    "field_anchors": {
     "degree": "amtii-dno-degree",
-    "duration": "amtii-dno-duration",
-    "tuition": "amtii-fee-mag-music"
+    "duration": "amtii-dno-duration"
+   },
+   "tuition_join": {
+    "source": "amtii-fees",
+    "alias": "магистър: Музикално и танцово изкуство"
    }
   },
   {
@@ -178,8 +229,11 @@
    "subject": "muzika",
    "field_anchors": {
     "degree": "amtii-dnh-degree",
-    "duration": "amtii-dnh-duration",
-    "tuition": "amtii-fee-mag-music"
+    "duration": "amtii-dnh-duration"
+   },
+   "tuition_join": {
+    "source": "amtii-fees",
+    "alias": "магистър: Музикално и танцово изкуство"
    }
   },
   {
@@ -201,8 +255,11 @@
    "subject": "muzika",
    "field_anchors": {
     "degree": "amtii-dns-mag-degree",
-    "duration": "amtii-dns-mag-duration",
-    "tuition": "amtii-fee-mag-music"
+    "duration": "amtii-dns-mag-duration"
+   },
+   "tuition_join": {
+    "source": "amtii-fees",
+    "alias": "магистър: Музикално и танцово изкуство"
    }
   },
   {
@@ -213,8 +270,11 @@
    "subject": "izkustva-i-dizayn",
    "field_anchors": {
     "degree": "amtii-zhi-degree",
-    "duration": "amtii-zhi-duration",
-    "tuition": "amtii-fee-mag-izo"
+    "duration": "amtii-zhi-duration"
+   },
+   "tuition_join": {
+    "source": "amtii-fees",
+    "alias": "магистър: Изобразително изкуство"
    }
   },
   {
@@ -225,8 +285,11 @@
    "subject": "muzika",
    "field_anchors": {
     "degree": "amtii-iibm-degree",
-    "duration": "amtii-iibm-duration",
-    "tuition": "amtii-fee-mag-music"
+    "duration": "amtii-iibm-duration"
+   },
+   "tuition_join": {
+    "source": "amtii-fees",
+    "alias": "магистър: Музикално и танцово изкуство"
    }
   }
  ],
@@ -371,56 +434,6 @@
   "amtii-iibm-duration": {
    "source": "https://artacademyplovdiv.com/specialnosti/IIBM.html",
    "pattern": "степен [“„\"]магистър[”“\"]\\s*[–-]\\s*редовно\\s*\\((1 година)\\)"
-  },
-  "amtii-fee-bak-music": {
-   "source": "amtii-fees",
-   "scope": "page-wide",
-   "pattern": "(„Музикално и танцово изкуство“ редовно обучение \\(с изключение на БНХ и Балетна педагогика\\):\\s*-?\\s*за 1-ви;? курс – 850 евро;\\s*за 2-ри, 3-ти, 4-ти и 5-ти курс - 780 евро)"
-  },
-  "amtii-fee-bak-bnh": {
-   "source": "amtii-fees",
-   "scope": "page-wide",
-   "pattern": "(БНХ редовно обучение:\\s*-?\\s*за 1-ви курс – 780 евро;\\s*-?\\s*за 2-ри, 3-ти и 4-ти курс - 720 евро;\\s*2\\.2\\. БНХ и БП задочно обучение:\\s*-?\\s*за 1-ви курс – 660 евро;\\s*-?\\s*за 2-ри, 3-ти и 4-ти курс - 610 евро)"
-  },
-  "amtii-fee-bak-bp-zad": {
-   "source": "amtii-fees",
-   "scope": "page-wide",
-   "pattern": "(БНХ и БП задочно обучение:\\s*-?\\s*за 1-ви курс – 660 евро;\\s*-?\\s*за 2-ри, 3-ти и 4-ти курс - 610 евро)"
-  },
-  "amtii-fee-bak-izo": {
-   "source": "amtii-fees",
-   "scope": "page-wide",
-   "pattern": "(„Изобразително изкуство“ редовно обучение:\\s*-?\\s*за 1-ви;? курс – 850 евро;\\s*за 2-ри, 3-ти и 4-ти курс - 780\\s*евро)"
-  },
-  "amtii-fee-mag-music": {
-   "source": "amtii-fees",
-   "scope": "page-wide",
-   "pattern": "(„Музикално и танцово изкуство“ \\(с изключение на БНХ, Балетна педагогика и Балетна режисура\\)\\s*редовно обучение - 920 евро)"
-  },
-  "amtii-fee-mag-bnh": {
-   "source": "amtii-fees",
-   "scope": "page-wide",
-   "pattern": "(БНХ редовно обучение – 860 евро\\.\\s*2\\.2\\. БНХ, Балетна педагогика и Балетна режисура задочно обучение – 720 евро)"
-  },
-  "amtii-fee-mag-bp-zad": {
-   "source": "amtii-fees",
-   "scope": "page-wide",
-   "pattern": "(БНХ, Балетна педагогика и Балетна режисура задочно обучение – 720 евро)"
-  },
-  "amtii-fee-mag-izo": {
-   "source": "amtii-fees",
-   "scope": "page-wide",
-   "pattern": "(„Изобразително изкуство “?редовно обучение – 920 евро)"
-  },
-  "amtii-fee-mag-teoria": {
-   "source": "amtii-fees",
-   "scope": "page-wide",
-   "pattern": "(Теория на изкуствата:\\s*-?\\s*за редовно обучение:?\\s*– 780 евро;\\s*-?\\s*за задочно обучение – 720 евро)"
-  },
-  "amtii-fee-mag-teoria-red": {
-   "source": "amtii-fees",
-   "scope": "page-wide",
-   "pattern": "(Теория на изкуствата:\\s*-?\\s*за редовно обучение:?\\s*– 780 евро)"
   }
  }
 }
