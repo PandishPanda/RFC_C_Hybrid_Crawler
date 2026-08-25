@@ -5,42 +5,108 @@
  "city": "Благоевград",
  "default_language": "български",
  "cookies": {},
- "sources": {},
+ "sources": {
+  "swu-fees": {
+   "url": "https://www.swu.bg/bg/78-studentscat/2373-feespaycityzenbul2627",
+   "route": "html",
+   "join": {
+    "kind": "fee-row",
+    "name": "swu-state",
+    "match_header": "области на висше образование",
+    "value_headers": [
+     "бакалавър",
+     "редовно"
+    ],
+    "value_pattern": "(\\d+)",
+    "table_marker": "Български граждани и граждани на ЕС и ЕИП",
+    "context": {
+     "track": "субсидирано от държавата",
+     "level": "бакалавър",
+     "form": "редовно",
+     "year": "2026/2027",
+     "unit": "годишна такса, евро"
+    }
+   }
+  },
+  "swu-fees-pn13": {
+   "url": "https://www.swu.bg/bg/78-studentscat/2373-feespaycityzenbul2627",
+   "route": "html",
+   "join": {
+    "kind": "fee-row",
+    "name": "swu-state-pn13",
+    "match_header": "области на висше образование",
+    "value_headers": [
+     "бакалавър",
+     "редовно"
+    ],
+    "value_pattern": "(\\d+)",
+    "table_marker": "Български граждани и граждани на ЕС и ЕИП",
+    "context": {
+     "track": "субсидирано от държавата",
+     "level": "бакалавър",
+     "form": "редовно",
+     "year": "2026/2027",
+     "unit": "годишна такса, евро",
+     "cohort": "приети в първи курс от учебната 2025/2026 нататък — по-ранните кохорти в ПН 1.3 не заплащат такси (ПМС № 283 от 19.08.2021, Забележка под таблицата)"
+    }
+   }
+  }
+ },
  "programs": [
   {
    "id": "swu-100",
    "name": "Предучилищна и начална училищна педагогика",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/83-bprogrammescat/2021-10-13-08-06-53/100-pnupbgart",
    "slug": "preduchilishtna-i-nachalna-uchilishtna-pedagogika",
-   "subject": "pedagogika"
+   "subject": "pedagogika",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "Педагогика"
+   }
   },
   {
    "id": "swu-102",
    "name": "Начална училищна педагогика и чужд език",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/83-bprogrammescat/2021-10-13-08-06-53/102-nupchebgart",
    "slug": "nachalna-uchilishtna-pedagogika-i-chuzhd-ezik",
-   "subject": "pedagogika"
+   "subject": "pedagogika",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "Педагогика"
+   }
   },
   {
    "id": "swu-103",
    "name": "Предучилищна педагогика и чужд език",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/83-bprogrammescat/2021-10-13-08-06-53/103-ppchebgart",
    "slug": "preduchilishtna-pedagogika-i-chuzhd-ezik",
-   "subject": "pedagogika"
+   "subject": "pedagogika",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "Педагогика"
+   }
   },
   {
    "id": "swu-104",
    "name": "Социална педагогика",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/83-bprogrammescat/2021-10-13-08-06-53/104-socpbgart",
    "slug": "sotsialna-pedagogika",
-   "subject": "pedagogika"
+   "subject": "pedagogika",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "Педагогика"
+   }
   },
   {
    "id": "swu-105",
    "name": "Специална педагогика",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/83-bprogrammescat/2021-10-13-08-06-53/105-sppedbgart",
    "slug": "spetsialna-pedagogika",
-   "subject": "pedagogika"
+   "subject": "pedagogika",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "Педагогика"
+   }
   },
   {
    "id": "swu-108",
@@ -54,28 +120,44 @@
    "name": "Педагогика на обучението по Български език и чужд език (английски, руски, гръцки, китайски)",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/84-bprogrammescat/edpedagogycat/109-pobechebgart",
    "slug": "pedagogika-na-obuchenieto-po-balgarski-ezik-i-chuzhd-ezik",
-   "subject": "pedagogika"
+   "subject": "pedagogika",
+   "tuition_join": {
+    "source": "swu-fees-pn13",
+    "alias": "Педагогика на обучението по"
+   }
   },
   {
    "id": "swu-111",
    "name": "Педагогика на обучението по изобразително изкуство",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/84-bprogrammescat/edpedagogycat/111-poii2bgart",
    "slug": "pedagogika-na-obuchenieto-po-izobrazitelno-izkustvo",
-   "subject": "pedagogika"
+   "subject": "pedagogika",
+   "tuition_join": {
+    "source": "swu-fees-pn13",
+    "alias": "Педагогика на обучението по"
+   }
   },
   {
    "id": "swu-112",
    "name": "Педагогика на музикалното изкуствo",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/84-bprogrammescat/edpedagogycat/112-pmibgart",
    "slug": "pedagogika-na-muzikalnoto-izkustvo",
-   "subject": "pedagogika"
+   "subject": "pedagogika",
+   "tuition_join": {
+    "source": "swu-fees-pn13",
+    "alias": "Педагогика на обучението по"
+   }
   },
   {
    "id": "swu-113",
    "name": "Педагогика на обучението по технологии и предприемачество",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/84-bprogrammescat/edpedagogycat/113-potpbgart",
    "slug": "pedagogika-na-obuchenieto-po-tehnologii-i-predpriemachestvo",
-   "subject": "pedagogika"
+   "subject": "pedagogika",
+   "tuition_join": {
+    "source": "swu-fees-pn13",
+    "alias": "Педагогика на обучението по"
+   }
   },
   {
    "id": "swu-114",
@@ -96,7 +178,11 @@
    "name": "Педагогика на обучението по география и история",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/84-bprogrammescat/edpedagogycat/116-pogibgart",
    "slug": "pedagogika-na-obuchenieto-po-geografia-i-istoria",
-   "subject": "pedagogika"
+   "subject": "pedagogika",
+   "tuition_join": {
+    "source": "swu-fees-pn13",
+    "alias": "Педагогика на обучението по"
+   }
   },
   {
    "id": "swu-2051",
@@ -110,7 +196,11 @@
    "name": "Физическо възпитание и спорт",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/84-bprogrammescat/edpedagogycat/117-fvisbgart",
    "slug": "fizichesko-vazpitanie-i-sport",
-   "subject": "pedagogika"
+   "subject": "pedagogika",
+   "tuition_join": {
+    "source": "swu-fees-pn13",
+    "alias": "Педагогика на обучението по"
+   }
   },
   {
    "id": "swu-118",
@@ -124,98 +214,154 @@
    "name": "Българска филология",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/85-bprogrammescat/philologycat/119-bfbgart",
    "slug": "balgarska-filologia",
-   "subject": "filologia"
+   "subject": "filologia",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "Филология"
+   }
   },
   {
    "id": "swu-120",
    "name": "Английска филология",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/85-bprogrammescat/philologycat/120-anfbgart",
    "slug": "angliyska-filologia",
-   "subject": "filologia"
+   "subject": "filologia",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "Филология"
+   }
   },
   {
    "id": "swu-121",
    "name": "Приложна лингвистика (английски с немски, или френски, или руски, или гръцки)",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/85-bprogrammescat/philologycat/121-prlingbgart",
    "slug": "prilozhna-lingvistika",
-   "subject": "filologia"
+   "subject": "filologia",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "Филология"
+   }
   },
   {
    "id": "swu-122",
    "name": "Английски език и етнология",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/85-bprogrammescat/philologycat/122-aeebgart",
    "slug": "angliyski-ezik-i-etnologia",
-   "subject": "filologia"
+   "subject": "filologia",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "Филология"
+   }
   },
   {
    "id": "swu-123",
    "name": "Английски език: превод и комуникации",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/85-bprogrammescat/philologycat/123-aepkbgart",
    "slug": "angliyski-ezik-prevod-i-komunikatsii",
-   "subject": "filologia"
+   "subject": "filologia",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "Филология"
+   }
   },
   {
    "id": "swu-124",
    "name": "Чужд език (руски, немски или френски и втори чужд език английски) и бизнес администрация",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/85-bprogrammescat/philologycat/124-forlangbgart",
    "slug": "chuzhd-ezik-i-biznes-administratsia",
-   "subject": "filologia"
+   "subject": "filologia",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "Филология"
+   }
   },
   {
    "id": "swu-126",
    "name": "История",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/86-bprogrammescat/hisarchcat/126-historyarchbgcat",
    "slug": "istoria",
-   "subject": "istoria"
+   "subject": "istoria",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "История и археология"
+   }
   },
   {
    "id": "swu-127",
    "name": "Архивистика и информационна сигурност",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/86-bprogrammescat/hisarchcat/127-archisbgart",
    "slug": "arhivistika-i-informatsionna-sigurnost",
-   "subject": "istoria"
+   "subject": "istoria",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "История и археология"
+   }
   },
   {
    "id": "swu-128",
    "name": "История и археология",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/86-bprogrammescat/hisarchcat/128-iabgart",
    "slug": "istoria-i-arheologia",
-   "subject": "istoria"
+   "subject": "istoria",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "История и археология"
+   }
   },
   {
    "id": "swu-129",
    "name": "Философия",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/87-bprogrammescat/philocat/129-philobgart",
    "slug": "filosofia",
-   "subject": "filosofia"
+   "subject": "filosofia",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "Философия"
+   }
   },
   {
    "id": "swu-130",
    "name": "Социология",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/88-bprogrammescat/sankcat/130-socbgart",
    "slug": "sotsiologia",
-   "subject": "sotsiologia"
+   "subject": "sotsiologia",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "Социология, антропология и науки за културата"
+   }
   },
   {
    "id": "swu-131",
    "name": "Културология и културен мениджмънт",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/88-bprogrammescat/sankcat/131-kkmbgart",
    "slug": "kulturologia-i-kulturen-menidzhmant",
-   "subject": "kulturologia"
+   "subject": "kulturologia",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "Социология, антропология и науки за културата"
+   }
   },
   {
    "id": "swu-132",
    "name": "Култура и медии",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/88-bprogrammescat/sankcat/132-kmbgart",
    "slug": "kultura-i-medii",
-   "subject": "kulturologia"
+   "subject": "kulturologia",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "Социология, антропология и науки за културата"
+   }
   },
   {
    "id": "swu-133",
    "name": "Култура и културен туризъм",
    "page": "https://www.swu.bg/bg/prospectivestbg/admse/88-bprogrammescat/sankcat/133-kkturbgart",
    "slug": "kultura-i-kulturen-turizam",
-   "subject": "kulturologia"
+   "subject": "kulturologia",
+   "tuition_join": {
+    "source": "swu-fees",
+    "alias": "Социология, антропология и науки за културата"
+   }
   }
  ]
 }
