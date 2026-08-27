@@ -364,6 +364,99 @@ def _ok_response():
     })
 
 
+def _confident_response(grid, ocr_score):
+    return _Resp(200, {
+        "status": "success",
+        "document": {"json_content": {"tables": [{"data": {"grid": grid}}]}},
+        "confidence": {"ocr_score": ocr_score} if ocr_score is not None
+                      else {},
+    })
+
+
+class TestOcrAgreement(unittest.TestCase):
+    """Cross-engine OCR agreement (crawler/render.py, table-pdf route
+    only -- the only OCR-touching route in this fleet). Measured
+    2026-08-27: EasyOCR and Tesseract fail in UNCORRELATED ways on real
+    scanned Bulgarian PDFs (EasyOCR: Cyrillic/Latin lookalikes; Tesseract:
+    genuine misread real words, e.g. "Фармация" -> "Mapmauua"). Requiring
+    both to agree on a cell (after the homoglyph fold) turns two
+    independently-unreliable readings into one trustworthy one without
+    ever guessing: disagreement ships neither reading (the same "can't
+    determine both, so ship neither" rule fee_row_join already applies
+    to a fee cell stating two conflicting values).
+
+    Docling's own confidence.ocr_score is null when OCR never engaged
+    (a real text layer needs no OCR at all) and a real number when it
+    did (verified live 2026-08-27: None on a real fleet fixture, ~0.95
+    on a genuinely scanned document) -- an exact, free signal for
+    whether the second (Tesseract) call is worth its cost at all, so
+    the ~zero-scanned-document fleet today pays nothing extra."""
+
+    PDF = b"%PDF-1.4 fake-snapshot-bytes"
+
+    def test_second_call_skipped_when_ocr_never_engaged(self):
+        primary = _confident_response(
+            [[{"text": "Медицина"}, {"text": "620"}]], ocr_score=None)
+        with mock.patch.object(R.requests, "post",
+                               return_value=primary) as post:
+            R.docling_grids(self.PDF)
+        self.assertEqual(post.call_count, 1)
+
+    def test_second_call_made_when_ocr_engaged(self):
+        primary = _confident_response(
+            [[{"text": "Медицина"}, {"text": "620"}]], ocr_score=0.95)
+        with mock.patch.object(R.requests, "post",
+                               return_value=primary) as post:
+            R.docling_grids(self.PDF)
+        self.assertEqual(post.call_count, 2)
+        second_payload = post.call_args_list[1].kwargs["json"]
+        self.assertEqual(second_payload["options"]["ocr_preset"],
+                         "tesseract")
+
+    def test_agreeing_cell_ships(self):
+        primary = _confident_response(
+            [[{"text": "Медицина"}, {"text": "620"}]], ocr_score=0.95)
+        secondary = _confident_response(
+            [[{"text": "Медицина"}, {"text": "620"}]], ocr_score=None)
+        with mock.patch.object(R.requests, "post",
+                               side_effect=[primary, secondary]):
+            grids = R.docling_grids(self.PDF)
+        self.assertEqual(grids, ((("Медицина", "620"),),))
+
+    def test_disagreeing_cell_blanks_to_empty(self):
+        # The real measured case: EasyOCR "Фармация" vs Tesseract's
+        # misread "Mapmauua" -- ship neither, blank the cell.
+        primary = _confident_response(
+            [[{"text": "Фармация"}, {"text": "614"}]], ocr_score=0.95)
+        secondary = _confident_response(
+            [[{"text": "Mapmauua"}, {"text": "614"}]], ocr_score=None)
+        with mock.patch.object(R.requests, "post",
+                               side_effect=[primary, secondary]):
+            grids = R.docling_grids(self.PDF)
+        self.assertEqual(grids, ((("", "614"),),))
+
+    def test_mismatched_table_shape_falls_back_to_primary(self):
+        primary = _confident_response(
+            [[{"text": "Медицина"}, {"text": "620"}]], ocr_score=0.95)
+        secondary = _confident_response(
+            [[{"text": "Медицина"}]], ocr_score=None)  # different column count
+        with mock.patch.object(R.requests, "post",
+                               side_effect=[primary, secondary]):
+            grids = R.docling_grids(self.PDF)
+        self.assertEqual(grids, ((("Медицина", "620"),),))
+
+    def test_second_call_failure_falls_back_to_primary(self):
+        # A Tesseract-preset call failing outright must not take down an
+        # otherwise-good EasyOCR reading -- degrade to today's behavior.
+        primary = _confident_response(
+            [[{"text": "Медицина"}, {"text": "620"}]], ocr_score=0.95)
+        with mock.patch.object(
+                R.requests, "post",
+                side_effect=[primary, requests.RequestException("boom")]):
+            grids = R.docling_grids(self.PDF)
+        self.assertEqual(grids, ((("Медицина", "620"),),))
+
+
 class TestDoclingClientMocked(unittest.TestCase):
     PDF = b"%PDF-1.4 fake-snapshot-bytes"
 
@@ -377,9 +470,10 @@ class TestDoclingClientMocked(unittest.TestCase):
         self.assertEqual(art.renderer_id, R.RENDERER_TABLE_PDF)
         self.assertEqual(
             art.renderer_version,
-            "{0}/ocr={1}:{2}+homoglyph-fold={3}".format(
+            "{0}/ocr={1}:{2}+homoglyph-fold={3}+agreement={4}".format(
                 R.DOCLING_IMAGE_TAG, R.DOCLING_OCR_PRESET,
-                ",".join(R.DOCLING_OCR_LANG), R.HOMOGLYPH_FOLD_VERSION))
+                ",".join(R.DOCLING_OCR_LANG), R.HOMOGLYPH_FOLD_VERSION,
+                R.AGREEMENT_CHECK_VERSION))
         self.assertEqual(post.call_count, 1)
 
     def test_payload_is_unified_sources_array(self):
@@ -516,9 +610,10 @@ class TestTablePdfLive(unittest.TestCase):
         self.assertEqual(self.artifact.renderer_id, R.RENDERER_TABLE_PDF)
         self.assertEqual(
             self.artifact.renderer_version,
-            "{0}/ocr={1}:{2}+homoglyph-fold={3}".format(
+            "{0}/ocr={1}:{2}+homoglyph-fold={3}+agreement={4}".format(
                 R.DOCLING_IMAGE_TAG, R.DOCLING_OCR_PRESET,
-                ",".join(R.DOCLING_OCR_LANG), R.HOMOGLYPH_FOLD_VERSION))
+                ",".join(R.DOCLING_OCR_LANG), R.HOMOGLYPH_FOLD_VERSION,
+                R.AGREEMENT_CHECK_VERSION))
 
     def test_reproduces_spike_a_tsv_artifact_text(self):
         expected = (FIXTURES / "expected-docling-tsv-mu-fees.txt").read_text()

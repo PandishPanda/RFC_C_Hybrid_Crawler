@@ -16,6 +16,13 @@ services:
       # default) points here and disables runtime downloads, so this
       # volume is the ONLY place new language weights can land.
       - docling-models:/opt/app-root/src/.cache/docling/models
+      # Same reasoning, for Tesseract's own language data (ocr_preset=
+      # "tesseract" -- the cross-engine OCR agreement check, render.py's
+      # OCR_AGREEMENT step): the image ships only eng+osd; without this
+      # volume a seeded bul.traineddata vanishes on the next recreation
+      # exactly like an unmounted docling-models weight would.
+      - docling-tessdata:/usr/share/tesseract/tessdata
 
 volumes:
   docling-models:
+  docling-tessdata:

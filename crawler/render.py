@@ -132,6 +132,15 @@ DOCLING_OCR_LANG = ("bg", "en")
 # changes shape.
 HOMOGLYPH_FOLD_VERSION = "v1"
 
+# The cross-engine OCR agreement check (_docling_convert_with_agreement)
+# is part of renderer identity for the same reason — present in the
+# version string unconditionally, same as OCR preset/lang above, even
+# though the actual second call only fires per-document when Docling
+# reports OCR engaged at all (confidence.ocr_score is not None): the
+# version string names the pinned RENDERING PROCESS, not what happened
+# to fire for one particular document.
+AGREEMENT_CHECK_VERSION = "v1"
+
 _WS_RX = re.compile(r"\s+")
 
 
@@ -747,14 +756,19 @@ def _tsv_lines_from_docling(json_content):
     return lines
 
 
-def _docling_convert(snapshot_bytes, docling_url, backoff_s):
-    # type: (bytes, str, float) -> dict
-    """POST the snapshot to Docling Serve; return the DoclingDocument
-    json_content. v1.28 unified `sources` array (upstream docs show
-    http_sources/file_sources and 422 here — check /openapi.json, not
-    GitHub). One 504 retry with backoff: big PDFs (the 2.2 MB AUBG
-    catalog) time out at the gateway on the first pass while conversion
-    continues server-side."""
+def _docling_convert(snapshot_bytes, docling_url, backoff_s, *,
+                     ocr_preset=None, ocr_lang=None):
+    # type: (bytes, str, float, str, tuple) -> tuple
+    """POST the snapshot to Docling Serve; return (json_content,
+    ocr_score). ocr_score is Docling's own confidence.ocr_score: null
+    when OCR never engaged (a real text layer needs none), a real number
+    when it did — the exact, free signal _docling_convert_with_agreement
+    uses to decide whether a second (Tesseract) call is worth its cost.
+    v1.28 unified `sources` array (upstream docs show http_sources/
+    file_sources and 422 here — check /openapi.json, not GitHub). One
+    504 retry with backoff: big PDFs (the 2.2 MB AUBG catalog) time out
+    at the gateway on the first pass while conversion continues
+    server-side."""
     payload = {
         "sources": [{
             "kind": "file",
@@ -762,8 +776,8 @@ def _docling_convert(snapshot_bytes, docling_url, backoff_s):
             "filename": "snapshot.pdf",
         }],
         "options": {"to_formats": ["json"],
-                   "ocr_preset": DOCLING_OCR_PRESET,
-                   "ocr_lang": list(DOCLING_OCR_LANG)},
+                   "ocr_preset": ocr_preset or DOCLING_OCR_PRESET,
+                   "ocr_lang": list(ocr_lang or DOCLING_OCR_LANG)},
     }
     url = docling_url.rstrip("/") + "/v1/convert/source"
     resp = requests.post(url, json=payload, timeout=DOCLING_TIMEOUT_S)
@@ -785,27 +799,97 @@ def _docling_convert(snapshot_bytes, docling_url, backoff_s):
         raise RenderError(
             "docling conversion failed: status={0!r} errors={1}".format(
                 status, [e for e in errors if e][:3]))
-    return (body.get("document") or {}).get("json_content") or {}
+    json_content = (body.get("document") or {}).get("json_content") or {}
+    ocr_score = (body.get("confidence") or {}).get("ocr_score")
+    return json_content, ocr_score
 
 
-def docling_grids(snapshot_bytes, docling_url=DOCLING_URL,
-                  backoff_s=DOCLING_RETRY_BACKOFF_S):
-    # type: (bytes, str, float) -> tuple
-    """Convert via Docling Serve and return the parsed cell grids
-    (per-table boundaries kept, cells whitespace-normalized) — what the
-    artifact store feeds the column-aware resolver in live table-pdf runs.
-    grid_artifact_text over the result is the canonical artifact text."""
-    json_content = _docling_convert(snapshot_bytes, docling_url, backoff_s)
+def _grid_from_json(json_content):
+    # type: (dict) -> tuple
+    """One Docling response's tables as (per-table boundaries kept)
+    tuples of whitespace-normalized, homoglyph-folded cell strings."""
     return tuple(
         tuple(tuple(_fold_row_homoglyphs([_cell_text(c) for c in row]))
               for row in (table.get("data") or {}).get("grid") or [])
         for table in json_content.get("tables") or [])
 
 
+_TESSERACT_OCR_PRESET = "tesseract"
+_TESSERACT_OCR_LANG = ("bul", "eng")
+
+
+def _reconcile_grids(primary, secondary):
+    # type: (tuple, tuple) -> tuple
+    """Cell-by-cell OCR agreement: a cell ships as the primary (EasyOCR)
+    engine read it ONLY if the secondary (Tesseract) engine, after its
+    own homoglyph fold, read the exact same string — otherwise the cell
+    blanks to "", the same "no value here" signal fee_row_join already
+    treats as an honest miss rather than a guess (RFC v2 Q4's
+    never-take-a-neighbouring-cell's-value rule, one script over).
+    Tables/rows/columns that don't align 1:1 between the two engines'
+    calls can't be reconciled cell-by-cell at all — fall back to the
+    primary table/row untouched rather than guessing an alignment."""
+    if len(primary) != len(secondary):
+        return primary
+    out_tables = []
+    for t_a, t_b in zip(primary, secondary):
+        if len(t_a) != len(t_b):
+            out_tables.append(t_a)
+            continue
+        out_rows = []
+        for r_a, r_b in zip(t_a, t_b):
+            if len(r_a) != len(r_b):
+                out_rows.append(r_a)
+                continue
+            out_rows.append(tuple(a if a == b else ""
+                                  for a, b in zip(r_a, r_b)))
+        out_tables.append(tuple(out_rows))
+    return tuple(out_tables)
+
+
+def _docling_convert_with_agreement(snapshot_bytes, docling_url, backoff_s):
+    # type: (bytes, str, float) -> tuple
+    """The primary (EasyOCR) grid, cross-checked against a second
+    (Tesseract) OCR pass whenever the primary call reports OCR actually
+    engaged (confidence.ocr_score is not None) — a real text layer
+    scores None and this never spends the second call's cost at all.
+    EasyOCR and Tesseract fail in uncorrelated ways (measured
+    2026-08-27), so requiring agreement turns two independently-
+    unreliable readings into one trustworthy one without ever guessing.
+    A failed or malformed second call degrades to the primary grid
+    alone — today's behavior — never a hard failure of the first call's
+    otherwise-good read."""
+    json_content, ocr_score = _docling_convert(
+        snapshot_bytes, docling_url, backoff_s)
+    primary = _grid_from_json(json_content)
+    if ocr_score is None:
+        return primary
+    try:
+        secondary_json, _ = _docling_convert(
+            snapshot_bytes, docling_url, backoff_s,
+            ocr_preset=_TESSERACT_OCR_PRESET, ocr_lang=_TESSERACT_OCR_LANG)
+    except (RenderError, requests.RequestException):
+        return primary
+    return _reconcile_grids(primary, _grid_from_json(secondary_json))
+
+
+def docling_grids(snapshot_bytes, docling_url=DOCLING_URL,
+                  backoff_s=DOCLING_RETRY_BACKOFF_S):
+    # type: (bytes, str, float) -> tuple
+    """Convert via Docling Serve — cross-engine agreement-checked
+    (_docling_convert_with_agreement) — and return the parsed cell grids
+    (per-table boundaries kept) — what the artifact store feeds the
+    column-aware resolver in live table-pdf runs. grid_artifact_text
+    over the result is the canonical artifact text."""
+    return _docling_convert_with_agreement(snapshot_bytes, docling_url,
+                                           backoff_s)
+
+
 def _render_table_pdf(snapshot_bytes, docling_url, backoff_s):
     # type: (bytes, str, float) -> str
-    json_content = _docling_convert(snapshot_bytes, docling_url, backoff_s)
-    return "\n".join(_tsv_lines_from_docling(json_content))
+    grids = _docling_convert_with_agreement(snapshot_bytes, docling_url,
+                                            backoff_s)
+    return grid_artifact_text(grids)
 
 
 # ------------------------------------------------------------------- render
@@ -852,9 +936,11 @@ def render(snapshot_bytes, content_type, route_hint=None, *, ref=None,
     else:
         text = _render_table_pdf(snapshot_bytes, docling_url, backoff_s)
         renderer_id = RENDERER_TABLE_PDF
-        renderer_version = "{0}/ocr={1}:{2}+homoglyph-fold={3}".format(
-            DOCLING_IMAGE_TAG, DOCLING_OCR_PRESET,
-            ",".join(DOCLING_OCR_LANG), HOMOGLYPH_FOLD_VERSION)
+        renderer_version = (
+            "{0}/ocr={1}:{2}+homoglyph-fold={3}+agreement={4}".format(
+                DOCLING_IMAGE_TAG, DOCLING_OCR_PRESET,
+                ",".join(DOCLING_OCR_LANG), HOMOGLYPH_FOLD_VERSION,
+                AGREEMENT_CHECK_VERSION))
 
     return Artifact(text=text, renderer_id=renderer_id,
                     renderer_version=renderer_version, ref=ref)

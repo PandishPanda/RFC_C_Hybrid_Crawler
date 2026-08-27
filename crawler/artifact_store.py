@@ -314,10 +314,16 @@ class ArtifactStore:
             version = "{0}+homoglyph-fold={1}".format(
                 REPLAY_RENDERER_VERSION, _render.HOMOGLYPH_FOLD_VERSION)
         else:
+            # docling_grids is the cross-engine agreement check
+            # (_docling_convert_with_agreement) — record that in
+            # identity too; unconditional, same reasoning as
+            # homoglyph-fold above (the version names the pinned
+            # process, not whether the per-document second call fired).
             grids = _render.docling_grids(snap.read_bytes(),
                                           self.docling_url, self.backoff_s)
-            version = "{0}+homoglyph-fold={1}".format(
-                _render.DOCLING_IMAGE_TAG, _render.HOMOGLYPH_FOLD_VERSION)
+            version = "{0}+homoglyph-fold={1}+agreement={2}".format(
+                _render.DOCLING_IMAGE_TAG, _render.HOMOGLYPH_FOLD_VERSION,
+                _render.AGREEMENT_CHECK_VERSION)
         artifact = Artifact(text=_render.grid_artifact_text(grids),
                             renderer_id=_render.RENDERER_TABLE_PDF,
                             renderer_version=version, ref=ref)
