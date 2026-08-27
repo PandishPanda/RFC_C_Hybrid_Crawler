@@ -307,11 +307,17 @@ class ArtifactStore:
                     "no vendored docling TSV files in {0}".format(tsv_dir))
             grids = _render.table_grids_from_tsv(
                 [p.read_text() for p in paths])
-            version = REPLAY_RENDERER_VERSION
+            # table_grids_from_tsv applies the same homoglyph fold a live
+            # Docling grid gets (crawler/render.py) — record that in
+            # identity too, distinct from prose-pdf's REPLAY_RENDERER_VERSION
+            # use (prose-pdf never touches OCR, so it never folds).
+            version = "{0}+homoglyph-fold={1}".format(
+                REPLAY_RENDERER_VERSION, _render.HOMOGLYPH_FOLD_VERSION)
         else:
             grids = _render.docling_grids(snap.read_bytes(),
                                           self.docling_url, self.backoff_s)
-            version = _render.DOCLING_IMAGE_TAG
+            version = "{0}+homoglyph-fold={1}".format(
+                _render.DOCLING_IMAGE_TAG, _render.HOMOGLYPH_FOLD_VERSION)
         artifact = Artifact(text=_render.grid_artifact_text(grids),
                             renderer_id=_render.RENDERER_TABLE_PDF,
                             renderer_version=version, ref=ref)

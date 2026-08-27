@@ -258,6 +258,91 @@ class TestTsvArtifactText(unittest.TestCase):
         self.assertEqual(out, "a b\nc d")
 
 
+class TestOcrHomoglyphFold(unittest.TestCase):
+    """The table-pdf route is the ONLY OCR-touching route in this fleet
+    (prose-pdf uses pdftotext, no OCR at all) — measured 2026-08-27 via a
+    real EasyOCR/Tesseract head-to-head on two genuinely scanned Bulgarian
+    PDFs: even with Bulgarian OCR configured, the dominant surviving error
+    is a Cyrillic letter silently OCR'd as its pixel-identical Latin
+    lookalike inside an otherwise-correct word ("ce" for "се", "OT" for
+    "от", "MК" for "МК") — invisible on a quick read, but a byte-for-byte
+    different string from what the cascade's Cyrillic-only patterns and
+    ADR-0002's verbatim gate expect, so it silently costs a null instead
+    of shipping a wrong value. Folded back only when the SAME ROW carries
+    independent unambiguous-Cyrillic evidence (a letter with no Latin
+    lookalike at all, e.g. З/Ж/Д/Ц) — table-pdf sources are all Bulgarian
+    fee schedules by fleet convention (render.py's own OCR-default
+    reasoning), so a row that is Cyrillic anywhere is Cyrillic throughout;
+    a token containing a letter that is NEVER a Cyrillic lookalike (S, D,
+    F, ...) is never touched, so real Latin/English content can't be
+    corrupted by this pass."""
+
+    def test_folds_isolated_lookalike_cell_when_row_has_cyrillic_evidence(self):
+        # "ce" (Latin c+e) sits alone in one cell; the row's OTHER cell
+        # carries "ЗДРАВЕ" -- pure unambiguous-Cyrillic letters (З, Д, Ж)
+        # no Latin alphabet has a lookalike for. That's enough context to
+        # know the row is Cyrillic, so "ce" folds to "се".
+        grid = [[{"text": "ОБЩЕСТВЕНО ЗДРАВЕ"}, {"text": "ce"}]]
+        json_content = {"tables": [{"data": {"grid": grid}}]}
+        lines = R._tsv_lines_from_docling(json_content)
+        self.assertEqual(lines, ["ОБЩЕСТВЕНО ЗДРАВЕ се"])
+
+    def test_folds_multiple_lookalike_letters_in_one_token(self):
+        # "MK" -> "МК" (M->М, K->К) once the row is known Cyrillic.
+        grid = [[{"text": "Медицински колеж"}, {"text": "MK"}]]
+        json_content = {"tables": [{"data": {"grid": grid}}]}
+        lines = R._tsv_lines_from_docling(json_content)
+        self.assertEqual(lines, ["Медицински колеж МК"])
+
+    def test_leaves_row_alone_with_no_cyrillic_evidence(self):
+        # No cell in this row carries a letter that ISN'T also a valid
+        # Latin reading -- nothing anchors it as Cyrillic, so nothing
+        # folds. Safe-by-default: an unrecoverable cell stays exactly
+        # what OCR produced (an honest miss upstream), never a guess.
+        grid = [[{"text": "ce"}, {"text": "OT"}]]
+        json_content = {"tables": [{"data": {"grid": grid}}]}
+        lines = R._tsv_lines_from_docling(json_content)
+        self.assertEqual(lines, ["ce OT"])
+
+    def test_never_touches_a_token_with_a_true_latin_only_letter(self):
+        # "USD" contains S -- no Cyrillic letter is ever confused for a
+        # Latin S -- so this token is definitively Latin and must never
+        # be folded, even sitting in an otherwise-Cyrillic row (protects
+        # genuine English/Latin content such as AUBG's English-language
+        # source material from ever being corrupted by this pass).
+        grid = [[{"text": "Такса в ЗДРАВЕ"}, {"text": "USD"}]]
+        json_content = {"tables": [{"data": {"grid": grid}}]}
+        lines = R._tsv_lines_from_docling(json_content)
+        self.assertEqual(lines, ["Такса в ЗДРАВЕ USD"])
+
+    def test_digits_and_punctuation_are_untouched(self):
+        grid = [[{"text": "ЗДРАВЕ"}, {"text": "3700,50 - 4.8%"}]]
+        json_content = {"tables": [{"data": {"grid": grid}}]}
+        lines = R._tsv_lines_from_docling(json_content)
+        self.assertEqual(lines, ["ЗДРАВЕ 3700,50 - 4.8%"])
+
+    def test_grid_and_tsv_file_paths_stay_equivalent_through_the_fold(self):
+        # The tested invariant this whole module relies on (see
+        # test_grid_path_equals_tsv_file_path above) must survive: the
+        # fold has to apply identically whether content arrives as a
+        # live Docling grid or a vendored/replayed .tsv file.
+        grid = [[{"text": "ЗДРАВЕ"}, {"text": "ce"}]]
+        json_content = {"tables": [{"data": {"grid": grid}}]}
+        tsv_file = "ЗДРАВЕ\tce"
+        self.assertEqual(
+            "\n".join(R._tsv_lines_from_docling(json_content)),
+            R.tsv_artifact_text([tsv_file]))
+        self.assertEqual(R.table_grids_from_tsv([tsv_file]),
+                         ((("ЗДРАВЕ", "се"),),))
+
+    def test_renderer_version_names_the_homoglyph_fold(self):
+        with mock.patch.object(R.requests, "post",
+                               return_value=_ok_response()):
+            artifact = R.render(b"%PDF-fake", "application/pdf",
+                                "table-pdf", backoff_s=0)
+        self.assertIn("+homoglyph-fold=v1", artifact.renderer_version)
+
+
 # ------------------------------------------------ docling client (mocked)
 class _Resp(object):
     def __init__(self, status_code, body=None, text=""):
@@ -290,9 +375,11 @@ class TestDoclingClientMocked(unittest.TestCase):
         self.assertIsInstance(art, Artifact)
         self.assertEqual(art.text, "Специалност такса\nМедицина 620")
         self.assertEqual(art.renderer_id, R.RENDERER_TABLE_PDF)
-        self.assertEqual(art.renderer_version, "{0}/ocr={1}:{2}".format(
-            R.DOCLING_IMAGE_TAG, R.DOCLING_OCR_PRESET,
-            ",".join(R.DOCLING_OCR_LANG)))
+        self.assertEqual(
+            art.renderer_version,
+            "{0}/ocr={1}:{2}+homoglyph-fold={3}".format(
+                R.DOCLING_IMAGE_TAG, R.DOCLING_OCR_PRESET,
+                ",".join(R.DOCLING_OCR_LANG), R.HOMOGLYPH_FOLD_VERSION))
         self.assertEqual(post.call_count, 1)
 
     def test_payload_is_unified_sources_array(self):
@@ -427,9 +514,11 @@ class TestTablePdfLive(unittest.TestCase):
 
     def test_renderer_identity(self):
         self.assertEqual(self.artifact.renderer_id, R.RENDERER_TABLE_PDF)
-        self.assertEqual(self.artifact.renderer_version, "{0}/ocr={1}:{2}"
-                         .format(R.DOCLING_IMAGE_TAG, R.DOCLING_OCR_PRESET,
-                                 ",".join(R.DOCLING_OCR_LANG)))
+        self.assertEqual(
+            self.artifact.renderer_version,
+            "{0}/ocr={1}:{2}+homoglyph-fold={3}".format(
+                R.DOCLING_IMAGE_TAG, R.DOCLING_OCR_PRESET,
+                ",".join(R.DOCLING_OCR_LANG), R.HOMOGLYPH_FOLD_VERSION))
 
     def test_reproduces_spike_a_tsv_artifact_text(self):
         expected = (FIXTURES / "expected-docling-tsv-mu-fees.txt").read_text()

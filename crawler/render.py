@@ -125,6 +125,13 @@ DOCLING_RETRY_BACKOFF_S = 30.0
 DOCLING_OCR_PRESET = "easyocr"
 DOCLING_OCR_LANG = ("bg", "en")
 
+# The homoglyph fold (_fold_row_homoglyphs, below) is a deterministic
+# post-OCR text transform, so it is part of renderer identity too — same
+# discipline as the OCR preset/lang above (ADR-0002: renderer identity
+# travels with every Artifact). Bump this string if the fold policy ever
+# changes shape.
+HOMOGLYPH_FOLD_VERSION = "v1"
+
 _WS_RX = re.compile(r"\s+")
 
 
@@ -374,6 +381,70 @@ def _cell_text(cell):
     return " ".join((cell.get("text") or "").split())
 
 
+# ------------------------------------------------ OCR homoglyph fold (v1)
+# table-pdf is the ONLY OCR-touching route in this fleet (prose-pdf uses
+# pdftotext, no OCR at all). Measured 2026-08-27, real EasyOCR/Tesseract
+# runs against two genuinely scanned Bulgarian PDFs: even with Bulgarian
+# OCR configured (render.py's own DOCLING_OCR_LANG default), the dominant
+# surviving error is a Cyrillic letter silently OCR'd as its pixel-
+# identical Latin lookalike inside an otherwise-correct word ("ce" for
+# "се", "OT" for "от", "MК" for "МК") -- invisible on a quick read, but a
+# byte-for-byte different string from what the cascade's Cyrillic-only
+# patterns and ADR-0002's verbatim gate expect. The cascade can't ship a
+# WRONG value from this (norm() never folds homoglyphs either, by
+# design), so the actual cost is silent under-extraction: a pattern that
+# should match, doesn't, and the field falls through to an honest null.
+#
+# Fold policy: a LATIN token folds to its Cyrillic reading only when (a)
+# every one of its letters has a Cyrillic lookalike (a genuinely Latin
+# letter anywhere -- one with NO Cyrillic lookalike at all -- marks the
+# token as real Latin/English content and it is never touched), AND (b)
+# the same ROW carries independent unambiguous-Cyrillic evidence: a
+# letter that is NEVER a Latin lookalike (З, Ж, Д, Ц, ...). table-pdf
+# sources are Bulgarian fee schedules by fleet convention (the same
+# reasoning DOCLING_OCR_LANG's default rests on) -- a row that is
+# Cyrillic anywhere is Cyrillic throughout; a row with no such evidence
+# is left exactly as OCR produced it (safe-by-default: an unrecoverable
+# cell stays an honest miss, never a guess).
+_LATIN_TO_CYRILLIC = {
+    "A": "А", "B": "В", "C": "С", "E": "Е", "H": "Н", "K": "К", "M": "М",
+    "O": "О", "P": "Р", "T": "Т", "X": "Х", "Y": "У",
+    "a": "а", "c": "с", "e": "е", "o": "о", "p": "р", "x": "х", "y": "у",
+}
+# Cyrillic letters no Latin letter is ever mistaken for -- the evidence
+# that anchors a row as genuinely Cyrillic.
+_UNAMBIGUOUS_CYRILLIC = set(
+    "БГДЖЗИЙЛПФЦЧШЩЪЬЭЮЯ" "бгджзийлпфцчшщъьэюя")
+# Latin letters with no Cyrillic lookalike at all -- a token carrying one
+# of these is definitively real Latin/English content, never folded.
+_UNAMBIGUOUS_LATIN = set("DFGIJLNQRSUVWZ" "bdfgijlnqrsuvwz")
+_WORD_RX = re.compile(r"\w+", re.UNICODE)
+
+
+def _row_has_cyrillic_evidence(cells):
+    return any(ch in _UNAMBIGUOUS_CYRILLIC
+              for cell in cells for ch in cell)
+
+
+def _fold_token(token):
+    if any(ch in _UNAMBIGUOUS_LATIN for ch in token):
+        return token
+    if not any(ch in _LATIN_TO_CYRILLIC for ch in token):
+        return token
+    return "".join(_LATIN_TO_CYRILLIC.get(ch, ch) for ch in token)
+
+
+def _fold_row_homoglyphs(cells):
+    # type: (list) -> list
+    """cells: one table row's already whitespace-normalized cell strings.
+    Returns a new list, same shape, with eligible Latin-lookalike tokens
+    folded to Cyrillic when the row itself proves it is Cyrillic."""
+    if not _row_has_cyrillic_evidence(cells):
+        return list(cells)
+    return [_WORD_RX.sub(lambda m: _fold_token(m.group(0)), cell)
+            for cell in cells]
+
+
 def tsv_artifact_text(tsv_texts):
     # type: (list) -> str
     """Port of spike A extract_lib.tsv_artifact_text — the exact rendering
@@ -382,13 +453,18 @@ def tsv_artifact_text(tsv_texts):
     Provenance for joined table values is checked against THIS text (the
     first E3 run checked TSV snippets against the pdftotext rendering —
     every one failed the gate, correctly: same PDF, different artifact).
+    The OCR homoglyph fold (_fold_row_homoglyphs) applies here too, so a
+    vendored/replayed .tsv file gets the same treatment a live Docling
+    grid would — the two surfaces stay equivalent by construction.
 
     tsv_texts: ordered iterable of TSV file contents (tab-separated rows).
     """
     lines = []
     for tsv in tsv_texts:
         for line in tsv.splitlines():
-            lines.append(_norm(" ".join(line.split("\t"))))
+            cells = _fold_row_homoglyphs(
+                [_norm(c) for c in line.split("\t")])
+            lines.append(_norm(" ".join(cells)))
     return "\n".join(lines)
 
 
@@ -400,7 +476,7 @@ def table_grids_from_tsv(tsv_texts):
     the same files — one rendering, two views (text for the gate, grids
     for the column-aware resolver)."""
     return tuple(
-        tuple(tuple(_norm(c) for c in line.split("\t"))
+        tuple(tuple(_fold_row_homoglyphs([_norm(c) for c in line.split("\t")]))
               for line in tsv.splitlines())
         for tsv in tsv_texts)
 
@@ -666,7 +742,8 @@ def _tsv_lines_from_docling(json_content):
     for table in json_content.get("tables") or []:
         grid = (table.get("data") or {}).get("grid") or []
         for row in grid:
-            lines.append(_norm(" ".join(_cell_text(c) for c in row)))
+            cells = _fold_row_homoglyphs([_cell_text(c) for c in row])
+            lines.append(_norm(" ".join(cells)))
     return lines
 
 
@@ -720,7 +797,7 @@ def docling_grids(snapshot_bytes, docling_url=DOCLING_URL,
     grid_artifact_text over the result is the canonical artifact text."""
     json_content = _docling_convert(snapshot_bytes, docling_url, backoff_s)
     return tuple(
-        tuple(tuple(_cell_text(c) for c in row)
+        tuple(tuple(_fold_row_homoglyphs([_cell_text(c) for c in row]))
               for row in (table.get("data") or {}).get("grid") or [])
         for table in json_content.get("tables") or [])
 
@@ -775,9 +852,9 @@ def render(snapshot_bytes, content_type, route_hint=None, *, ref=None,
     else:
         text = _render_table_pdf(snapshot_bytes, docling_url, backoff_s)
         renderer_id = RENDERER_TABLE_PDF
-        renderer_version = "{0}/ocr={1}:{2}".format(
+        renderer_version = "{0}/ocr={1}:{2}+homoglyph-fold={3}".format(
             DOCLING_IMAGE_TAG, DOCLING_OCR_PRESET,
-            ",".join(DOCLING_OCR_LANG))
+            ",".join(DOCLING_OCR_LANG), HOMOGLYPH_FOLD_VERSION)
 
     return Artifact(text=text, renderer_id=renderer_id,
                     renderer_version=renderer_version, ref=ref)
