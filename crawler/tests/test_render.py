@@ -315,6 +315,52 @@ class TestOcrHomoglyphFold(unittest.TestCase):
         lines = R._tsv_lines_from_docling(json_content)
         self.assertEqual(lines, ["Такса в ЗДРАВЕ USD"])
 
+    def test_url_and_email_compounds_are_never_folded(self):
+        # Measured on the real 76-page AMTII KSS (2026-08-28): the fold
+        # corrupted "www.artacademyplovdiv.com" -> ".соm" -- "com" splits
+        # off at the dots, carries only lookalike-ambiguous letters, and
+        # the row's Bulgarian text supplies the Cyrillic evidence. A
+        # token joined to its neighbours by ./@/:/- (a URL, an email, a
+        # hyphen-compound) is structural Latin -- never folded, whatever
+        # the row says.
+        grid = [[{"text": "Контакт в ЗДРАВЕ"},
+                 {"text": "www.artacademyplovdiv.com"},
+                 {"text": "zornica.petrova@artacademyplovdiv.com"}]]
+        json_content = {"tables": [{"data": {"grid": grid}}]}
+        lines = R._tsv_lines_from_docling(json_content)
+        self.assertEqual(lines, [
+            "Контакт в ЗДРАВЕ www.artacademyplovdiv.com "
+            "zornica.petrova@artacademyplovdiv.com"])
+
+    def test_bare_lookalike_token_still_folds(self):
+        # The guard above must not break the original fix: a bare "ce"
+        # (no ./@ neighbours) in a Cyrillic row still folds.
+        grid = [[{"text": "ЗДРАВЕ"}, {"text": "ce"}]]
+        json_content = {"tables": [{"data": {"grid": grid}}]}
+        self.assertEqual(R._tsv_lines_from_docling(json_content),
+                         ["ЗДРАВЕ се"])
+
+    def test_unmappable_latin_letter_marks_whole_token_latin(self):
+        # Measured on the real 76-page AMTII KSS ballet section
+        # (2026-08-28): French terms inline in Bulgarian prose --
+        # "chat" (pas de chat), "The" -- were PARTIALLY folded
+        # ("сhаt", "Тhе") because 'h' has no Cyrillic lookalike and
+        # simply survived while its neighbours converted. A token
+        # containing any letter the fold cannot map is real Latin;
+        # it must be left whole.
+        grid = [[{"text": "стъпката chat в ЗДРАВЕ The урок"}]]
+        json_content = {"tables": [{"data": {"grid": grid}}]}
+        self.assertEqual(R._tsv_lines_from_docling(json_content),
+                         ["стъпката chat в ЗДРАВЕ The урок"])
+
+    def test_mixed_script_token_with_full_mapping_still_folds(self):
+        # "Kонстантин" (Latin K + Cyrillic rest) has a full mapping --
+        # the real fix class the fold exists for -- and must keep working.
+        grid = [[{"text": "проф. Kонстантин от ЗДРАВЕ"}]]
+        json_content = {"tables": [{"data": {"grid": grid}}]}
+        self.assertEqual(R._tsv_lines_from_docling(json_content),
+                         ["проф. Константин от ЗДРАВЕ"])
+
     def test_digits_and_punctuation_are_untouched(self):
         grid = [[{"text": "ЗДРАВЕ"}, {"text": "3700,50 - 4.8%"}]]
         json_content = {"tables": [{"data": {"grid": grid}}]}
@@ -340,7 +386,8 @@ class TestOcrHomoglyphFold(unittest.TestCase):
                                return_value=_ok_response()):
             artifact = R.render(b"%PDF-fake", "application/pdf",
                                 "table-pdf", backoff_s=0)
-        self.assertIn("+homoglyph-fold=v1", artifact.renderer_version)
+        self.assertIn("+homoglyph-fold=" + R.HOMOGLYPH_FOLD_VERSION,
+                      artifact.renderer_version)
 
 
 # ------------------------------------------------ docling client (mocked)

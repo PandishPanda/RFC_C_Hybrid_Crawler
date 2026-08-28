@@ -130,7 +130,7 @@ DOCLING_OCR_LANG = ("bg", "en")
 # discipline as the OCR preset/lang above (ADR-0002: renderer identity
 # travels with every Artifact). Bump this string if the fold policy ever
 # changes shape.
-HOMOGLYPH_FOLD_VERSION = "v1"
+HOMOGLYPH_FOLD_VERSION = "v3"   # v2: URL/email compound guard; v3: unmappable letter = whole token Latin
 
 # The cross-engine OCR agreement check (_docling_convert_with_agreement)
 # is part of renderer identity for the same reason — present in the
@@ -440,7 +440,36 @@ def _fold_token(token):
         return token
     if not any(ch in _LATIN_TO_CYRILLIC for ch in token):
         return token
+    # A token holding ANY alphabetic char the fold cannot map (h, é, w,
+    # q...) is real Latin content, not lookalike-confused Cyrillic --
+    # partially folding it ("chat" -> "сhаt", measured on the AMTII KSS
+    # ballet section's French terminology, 2026-08-28) corrupts a real
+    # word. Fold only tokens the mapping covers COMPLETELY.
+    for ch in token:
+        if (ch.isalpha() and ch not in _LATIN_TO_CYRILLIC
+                and not ("\u0400" <= ch <= "\u04FF")):
+            return token
     return "".join(_LATIN_TO_CYRILLIC.get(ch, ch) for ch in token)
+
+
+_COMPOUND_JOINERS = ".@:/-_"
+
+
+def _in_compound(cell, match):
+    # type: (str, object) -> bool
+    """True when the matched token is glued to a neighbouring word by a
+    URL/email/hyphen joiner (./@/:/-/_) — "com" inside
+    "artacademyplovdiv.com", the mailbox half of an email. Such a token
+    is structural Latin whatever the surrounding row's script is —
+    measured on the real 76-page AMTII KSS (2026-08-28), the fold
+    corrupted three real URLs/emails ("...plovdiv.com" -> "...соm")
+    before this guard existed."""
+    i, j = match.start(), match.end()
+    before_joined = (i >= 2 and cell[i - 1] in _COMPOUND_JOINERS
+                     and not cell[i - 2].isspace())
+    after_joined = (j + 1 < len(cell) and cell[j] in _COMPOUND_JOINERS
+                    and not cell[j + 1].isspace())
+    return before_joined or after_joined
 
 
 def _fold_row_homoglyphs(cells):
@@ -450,7 +479,10 @@ def _fold_row_homoglyphs(cells):
     folded to Cyrillic when the row itself proves it is Cyrillic."""
     if not _row_has_cyrillic_evidence(cells):
         return list(cells)
-    return [_WORD_RX.sub(lambda m: _fold_token(m.group(0)), cell)
+    return [_WORD_RX.sub(
+                lambda m, c=cell: m.group(0) if _in_compound(c, m)
+                else _fold_token(m.group(0)),
+                cell)
             for cell in cells]
 
 
